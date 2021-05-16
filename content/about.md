@@ -7,28 +7,41 @@ menu:
     weight: 1
 
 ---
-<p class="message">
-  Hey there! This page is included as an example. Feel free to customize it for your own use upon downloading. Carry on!
-</p>
 
-In the novel, *The Strange Case of Dr. Jeykll and Mr. Hyde*, Mr. Poole is Dr. Jekyll's virtuous and loyal butler. Similarly, Poole is an upstanding and effective butler that helps you build Jekyll themes. It's made by [@mdo](https://twitter.com/mdo).
+_The views and opinions on this website are my opinions and do not reflect the views of my current or former employers._
 
-There are currently two themes built on Poole:
+## Short biography
 
-* [Hyde](http://hyde.getpoole.com)
-* [Lanyon](http://lanyon.getpoole.com)
+I am a data scientist who is extremely passionate about being able to derive insight from data. I currently work for a leading sports betting company based in Malta, but curious to all fields where data has a huge impact.
 
-Learn more and contribute on [GitHub](https://github.com/poole).
+I have learnt a lot on my journey thus far, topics which include machine learning, deep learning, recommender systems, parallel computing, and high performance computing.
 
-## Setup
+I am constantly setting myself out to learn new things, be it from online articles and discussions, to books and podcasts. Many people do not understand why I do so, especially at late hours of the day, but it is very simple to me as learning new things is something that I find great joy in doing.
 
-Some fun facts about the setup of this project include:
+## Open source projects
 
-* Built for [Jekyll](http://jekyllrb.com)
-* Developed on GitHub and hosted for free on [GitHub Pages](https://pages.github.com)
-* Coded with [Sublime Text 2](http://sublimetext.com), an amazing code editor
-* Designed and developed while listening to music like [Blood Bros Trilogy](https://soundcloud.com/maddecent/sets/blood-bros-series)
+[Predicting market turnover](https://github.com/gabegm/Predict-Market-Turnover)
 
-Have questions or suggestions? Feel free to [open an issue on GitHub](https://github.com/poole/issues/new) or [ask me on Twitter](https://twitter.com/mdo).
+I built a predictive model to forecast the turnover for the Bundesliga season 17/18 for a candidate test.
 
-Thanks for reading!
+[Data Driven Automated Algorithmic Trading](https://github.com/gabegm/Data-Driven-Automated-Algorithmic-Trading)
+
+For my thesis project, I built an automated algorithm to trade the markets.
+
+[Shopping Cart](https://github.com/gabegm/ShoppingCart)
+
+An e-commerce website built on top of ASP.NET 4 MVC5.
+
+## Long form biography
+
+When I was about fourteen-years-old, I used to spend countless of hours playing a game called "Grand Theft Auto: San Andreas". This game had a huge community behind it, many of who dedicated their free time to create modifications which eather changed or extended the game beyond its capabilities. One day I found a modification which implemented online multiplayer features, something which the game lacked and was wished for greatly. I instantly got hooked, as from being used to playing on my own, I was suddenly opened up to thousands of people who I could play with, just thanks to a single modification. But this modification did a lot more than just provide online multiplayer features, it also allowed people to use a scripting language called Lua to change the behaviour of the game. Weather it was simply spawning something out of nowhere, or even created whole new game modes which people could play together, this scripting language could allow anyone to do it all. This amazed me of course, and got me interested in learning the language to be able to do all the cool things these other people were doing. A few months later, this online multiplayer modification went open source, an area completely new to me at the time and got me interested in open and collaborative programming. This is when I realised that programming was what I wanted to do out of college.
+
+In college, I discovered the field of data analytics. I liked the idea of being able to derive insight from raw data. I knew that I would want to get into this field but my bachelor degree did not have any units on data analytics. This is why I set it upon myself to learn to master the field on my own and base my thesis on it. I knew that if I were to do this, I would have something to show for my work. Having found the area of finance to also be interesting to me, I thought it would be a great idea to merge the two fields together. This is when I discovered the field of computational finance, a branch of applied computer science that deals with problems of practical interest in finance.
+
+While researching for a thesis topic, I found a particular field called algorithmic trading, a method of executing a large order using automated pre-programmed trading instructions accounting for variables such as time, price, and volume to send small slices of the order out to the market over time. Being challenged with the fact that I knew very little about finance, I set it upon myself to read heavily on many terms and techniques available to me online, including podcasts which I would listen to on my drive to college. This helped me greatly in getting up to speed on ideas which I could apply towards my thesis. I set out to learn python, which is a common high-level programming language used in this area, and built a fully automated strategy leveraging machine learning models to decide whether to trade certain US equities. Although this strategy did not beat the market having made a profit of over 100%, I was still pleased knowing that my first attempt could yield a profit at all, let one of 83%.
+
+After college, I joined a company as their first HR Data Analyst, a field that was completely new to me but a challenge I did not shy away from. Plagued with HR data not being unified across the departments in the HR group, I was tasked with handling not only the data from my department, but also that belonging to the whole group. I set up data entry standards, tidying checks, reporting, and visualisations, all of which fully automated. I was able to apply what I learnt for my thesis, and build tools which helped the business take back control of their data and understand it more through actionable insights. It was also my duty to handle the GDPR complaince for all HR departments across the group, a tasked which involved a lot of collaboration with various departments across various locations.
+
+### Contact me
+
+[gabriel@gaucimaistre.com](mailto:gabriel@gaucimaistre.com)
