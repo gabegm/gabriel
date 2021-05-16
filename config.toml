@@ -5,6 +5,7 @@ title = "Gabe"
 
 [Menus]
   main = [
+      {Name = "CV", URL = "/pdf/resume-gabriel-gauci-maistre.pdf"},
       {Name = "Github", URL = "https://github.com/gabegm/"},
       {Name = "LinkedIn", URL = "https://www.linkedin.com/in/gabegm/"},
       {Name = "Twitter", URL = "https://twitter.com/itsgabegm/"}
