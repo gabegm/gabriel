@@ -13,12 +13,12 @@ date: 2021-05-16 23:00:00 +0000
 
 ## What is a Data Science competition?
 
-Data Science competitions are becoming extremely popular. They are not only popular on sites such as [Kaggle](https://www.kaggle.com/), a site renown for  bringing data scientists and machine learning practitioners together to enter competitions to solve data science challenge, but also when interviewing with a company for a role on the job market in the form of a candidate test.
+Data Science competitions have become extremely popular. They are not only popular on sites such as [Kaggle](https://www.kaggle.com/), a site renown for bringing Data Scientists and Machine Learning practitioners together to enter competitions to solve Data Science challenges, but also when interviewing with a company for a role on the job market in the form of a candidate test.
 
 ![alt text](/images/titanic-competition.png "Logo Title Text 1")
 *Popular titanic competition*
 
-These competitions/tests normally consist of a time constrained objective where the organiser provides some data, many times a train and test set, dependant variable omitted from the test set of course, and submit the predictions which your model spat out in order to see how well you faired compared to all the other participants. That is, your predictions are compared with those dependant variables which were omitted from the test set. Those yielding the highest accuracy fair much better than the rest. In certain cases your methods may also be questioned, but this is more the case in job interviews rather than online competitions.
+These competitions/tests normally consist of a time constrained objective where the organiser provides some data, many times a train and test set, dependant variable omitted from the test set of course, and submit the predictions which your model spat out in order to see how well you faired compared to all the other participants. That is, your predictions are compared with the dependant variable omitted from the test set. Those yielding the highest accuracy fair much better compared to the rest. In certain cases your methods may also be questioned, but this is more the case in job interviews, although not as often as it should, rather than in online competitions.
 
 Having not only studied data science in university but also practised it in industry, I can definitely say that these are two worlds apart. This is not to say that edication doesn't have its place in the space of Machine Learning. My bachelor thesis revolved around algorithmic trading. I trained a Machine Learning model to pick correlated and inversely correlated stocks from a basket, forecast future price movements in said stocks, and decide on whether to hold, buy, or sell based on those insights without the need of any human input. Although I did learn a lot from this experience, I would definitely not use the model in industry and I would absolutely not let it use real money to invest.
 
@@ -26,7 +26,7 @@ Having not only studied data science in university but also practised it in indu
 
 ## Industry isn't about producing the highest fraction of accuracy
 
-Data sets found in industry are completely different compared to those found in competitions. In fact, I wouldn't even go as far as to call them data sets but a huge database, sometimes multiple if you're not lucky enough to have a centralised data warehouse, where you need to sift through multiple tables looking for the data you need, do some heavy tidying, and checking the data before you can even consider using it in a Machien Learning model. This is completely different to a `.csv` file which you're handed in a competition, a data set where someone has already gone through the work of packaging the data for you. There's a joke that "Data scientists spend 80% of their time cleaning data and the other 20% complaining about it." This is of course an overexaggeration, however it is meant to emphasise how hard it is for a data scientist to get the data they need before they may even begin modelling. This is something which these competitions do not teach you.
+Data sets found in industry are completely different compared to those found in competitions. In fact, I wouldn't even go as far as to call them data sets but a huge database, sometimes multiple if you're not lucky enough to have a centralised data warehouse, where you need to sift through multiple tables looking for the data you need, do some heavy tidying, and checking the data before you can even consider using it in a Machien Learning model. This is completely different to a `.csv` file which you're handed in a competition, a data set where someone has already gone through the work of packaging the data for you. There's a joke that "Data scientists spend 80% of their time cleaning data and the other 20% complaining about it." This is of course an overexaggeration, however it is meant to emphasise how hard it is for a Data Scientist to get the data they need before they may even begin modelling. This is something which these competitions fail to teach you.
 
 ## Competitions do not help you understand your model
 
@@ -38,7 +38,11 @@ If you weren't incentivised enough to produce a black box solution to yield the 
 
 ## You are not required to write good clean code
 
+Data Science isn't just about modelling, but it's also about writing good clean code which others are able to understand and reproduce the results which you obtained with the data. Since Data Science challenges are so focused on model accuracy, you are not being incentivised to properly document your code and the approach you took to reach the conclusions which you presented.
 
+## You are not taught SQL
+
+SQL is one of if not the most important skill to have in Data Science. Without any knowledge of SQL, you will not be able to query the databases where your data lies in order to get the data you need in the format which your model requires.
 
 ## How to improve your Data Science skills
 
