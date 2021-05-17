@@ -28,9 +28,11 @@ Having not only studied data science in university but also practised it in indu
 
 Data sets found in industry are completely different compared to those found in competitions. In fact, I wouldn't even go as far as to call them data sets but a huge database, sometimes multiple if you're not lucky enough to have a centralised data warehouse, where you need to sift through multiple tables looking for the data you need, do some heavy tidying, and checking the data before you can even consider using it in a Machien Learning model. This is completely different to a `.csv` file which you're handed in a competition, a data set where someone has already gone through the work of packaging the data for you. There's a joke that "Data scientists spend 80% of their time cleaning data and the other 20% complaining about it." This is of course an overexaggeration, however it is meant to emphasise how hard it is for a Data Scientist to get the data they need before they may even begin modelling. This is something which these competitions fail to teach you.
 
+![alt text](/images/data-science.jpg "Logo Title Text 1")
+
 ## Competitions do not help you understand your model
 
-The ultimate goal of a competition is to obtain the highest accuracy where even a fraction could make a difference, all under time contrained conditions. This does not encourage you to take the time to understand the data, it's imperfections, and train a model which is robust to adversarial examples. Instead you are incentivised to try anything which will edge you forward even slightly, encouraging the use of black box models, leaving you unable to understand what your model is learning from your data.
+The ultimate goal of a competition is to obtain the highest accuracy where even a fraction could make a difference, all under time contrained conditions. This does not encourage you to take the time to understand the data, it's imperfections, and train a model which is robust to adversarial examples. Instead you are incentivised to try anything which will edge you forward even slightly, not matter the cost. This encourages the use of black box models, leaving you unable to understand what your model is learning from your data.
 
 ## Not all submissions require submitted code
 
