@@ -14,7 +14,7 @@ date: 2021-05-16 23:00:00 +0000
 
 ## What is a Data Science competition?
 
-Data Science competitions have become extremely popular. They are not only popular on sites such as [Kaggle](https://www.kaggle.com/)[0], but also when interviewing with a company for a role on the job market in the form of a candidate test.
+Data Science competitions have become extremely popularover the 5 years. They are not only popular on sites such as [Kaggle](https://www.kaggle.com/)[0], but also when interviewing with companies for a role on the job market in the form of a [candidate test](https://exercism.io/). These tests have turned into a way to judge the performance of a particpant/candidate's submission and determine whether they have succeeded the challenge or not.
 
 ![alt text](/images/titanic-competition.png "Logo Title Text 1")
 *Popular titanic competition*
