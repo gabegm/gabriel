@@ -52,6 +52,8 @@ If you're looking for ways to learn, find a particular industry that interests y
 
 You could definitely find a data set online which will give you this information, however as I explain above these data sets won't hold in real world examples. It would be more realistic if you found a website(s) listing the information you need and build a [scraper](https://scrapy.org/) to collect the data you need and schedule it to run on a regular basis so that you can start to collect historical data over time. In certain cases some websites may even offer an API to make your life a little easier in getting the data which you need.
 
+Simply scraping the data is not enough, since you're going to do this regularly you need to think of an efficient way to store the data and keep track of the historicals. This is where a database would come in. There's no need to go off and set up a distributed database, [SQLite](https://www.sqlite.org/index.html) would suffice for a project like this, saving you the pain of having to setup and maintain a database server, while still providing you a fast SQL query engine you can use to query your data.
+
 You can now start to analyse the data you're collecting over time and understand the features that really matter in evaluating the value of a property along with the events which cause the prices to move over time. Once you have a model you might even want to serve it over an API for others to use, allowing them to input the property features and get back a prediction from your model.
 
 ![alt text](/images/hacker-man.jpg "Logo Title Text 1")
