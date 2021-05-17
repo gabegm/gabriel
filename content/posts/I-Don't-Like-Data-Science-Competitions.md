@@ -19,7 +19,7 @@ Data Science competitions have become extremely popularover the 5 years. They ar
 ![alt text](/images/titanic-competition.png "Logo Title Text 1")
 *Popular titanic competition*
 
-These competitions/tests normally consist of a time constrained objective where the organiser provides some data, many times a train and test set, dependant variable omitted from the test set of course, and submit the predictions which your model spat out in order to see how well you faired compared to all the other participants. That is, your predictions are compared with the dependant variable omitted from the test set. Those yielding the highest accuracy fair much better compared to the rest. In certain cases your methods may also be questioned, but this is more the case in job interviews, although not as often as it should, rather than in online competitions.
+These competitions/tests normally consist of a time constrained objective where the organiser provides some data, many times a train and test set[1], and submit the predictions which your model spat out in order to see how well you faired compared to all the other participants. That is, your predictions are compared with the dependant variable omitted from the test set. Those yielding the highest accuracy fair much better compared to the rest. In certain cases your methods may also be questioned, but this is more the case in job interviews, although not as often as it should, rather than in online competitions.
 
 Having not only studied data science in university but also practised it in industry, I can definitely say that these are two worlds apart. This is not to say that education doesn't have its place in the space of Data Science and Machine Learning.
 
@@ -82,4 +82,5 @@ Good competitions which also include writeups present a great opportunity for kn
 
 ![alt text](/images/sharing-is-caring.jpg "Logo Title Text 1")
 
-* [0] Kaggle is a site renown for bringing Data Scientists and Machine Learning practitioners together to enter competitions to solve Data Science challenges
+* [0] Kaggle is a site renown for bringing Data Scientists and Machine Learning practitioners together to enter competitions to solve Data Science challenges.
+* [1] A test set is a subset of the data used to test the accuracy of your model based on data it has never seen before. In the case of competitions test sets tend to have the dependant variable omitted.
