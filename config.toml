@@ -13,7 +13,7 @@ title = "Gabe"
 
 [params]
   description = "Data Scientist"
-  themeColor = "theme-base-0d"
+  themeColor = "theme-base-0g"
   layoutReverse = false
-  disqusShortname = "gabegm"
+  disqusShortname = ""
   googleAnalytics = ""
