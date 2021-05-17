@@ -12,7 +12,7 @@ _The views and opinions on this website are my opinions and do not reflect the v
 
 ## Short biography
 
-I am a data scientist who is extremely passionate about being able to derive insight from data. I currently work for a leading sports betting company based in Malta, but curious to all fields where data has a huge impact.
+I am a data scientist who is extremely passionate about being able to derive insight from data. I currently work for a leading car rental company in the automotive industry based in Munich, but curious to all fields where data has a huge impact.
 
 I have learnt a lot on my journey thus far, topics which include machine learning, deep learning, recommender systems, parallel computing, and high performance computing.
 
@@ -27,6 +27,9 @@ I built a predictive model to forecast the turnover for the Bundesliga season 17
 [Data Driven Automated Algorithmic Trading](https://github.com/gabegm/Data-Driven-Automated-Algorithmic-Trading)
 
 For my thesis project, I built an automated algorithm to trade the markets.
+
+[Headcount Planning Management System](https://github.com/gabegm/Headcount-Planning-Management-System)
+Create effective hiring plans, identify gaps, and align with financial performance and business goals.
 
 [Shopping Cart](https://github.com/gabegm/ShoppingCart)
 
