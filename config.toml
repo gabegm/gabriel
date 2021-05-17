@@ -12,8 +12,20 @@ title = "Gabe"
   ]
 
 [params]
+  AuthorName = "Gabriel Gauci Maistre"
+  GitHubUser = "gabegm"
   description = "Data Scientist"
   themeColor = "theme-base-0g"
   layoutReverse = false
   disqusShortname = ""
   googleAnalytics = ""
+
+
+[permalinks]
+  posts = "/:year/:month/:title/"
+
+[frontmatter]
+  date = ["date", "publishDate", "lastmod"]
+  expiryDate = ["expiryDate"]
+  lastmod = [":git", "lastmod", "date", "publishDate"]
+  publishDate = ["publishDate", "date"]
