@@ -262,3 +262,12 @@ a.sidebar-nav-item:focus {
 .theme-base-0f .related-posts li a:hover {
   color: #8f5536;
 }
+
+/* Black */
+.theme-base-0g .sidebar {
+  background-color: #202020;
+}
+.theme-base-0g .content a,
+.theme-base-0g .related-posts li a:hover {
+  color: #202020;
+}
