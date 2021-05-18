@@ -1,5 +1,8 @@
 ---
 layout: post
+draft: false
+author: "Gabriel Gauci Maistre"
+tags: ["julia", "programming language"]
 title: 10 Reasons Why You Should Learn Julia
 date: 2018-09-27 23:00:00 +0000
 

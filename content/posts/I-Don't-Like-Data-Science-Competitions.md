@@ -4,10 +4,6 @@ draft: false
 title: I Don't Like Data Science Competitions
 author: "Gabriel Gauci Maistre"
 tags: ["kaggle", "machine learning"]
-summary: "Data Science competitions have become extremely popular in the past 5 years. They are not only popular on sites such as [Kaggle](https://www.kaggle.com/)[0], but also when interviewing with companies for a role on the job market in the form of a [candidate test](https://exercism.io/). These tests have quickly turned into a way to judge the performance of a particpant/candidate's submission and determine whether they have succeeded in the challenge or not."
-header:
-  image: "/images/audience-booing.gif"
-  caption: "Audience booing"
 date: 2021-05-17 23:00:00 +0000
 
 ---
