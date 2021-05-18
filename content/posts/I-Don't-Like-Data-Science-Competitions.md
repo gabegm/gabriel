@@ -14,7 +14,7 @@ date: 2021-05-16 23:00:00 +0000
 
 ## What is a Data Science competition?
 
-Data Science competitions have become extremely popularover the 5 years. They are not only popular on sites such as [Kaggle](https://www.kaggle.com/)[0], but also when interviewing with companies for a role on the job market in the form of a [candidate test](https://exercism.io/). These tests have turned into a way to judge the performance of a particpant/candidate's submission and determine whether they have succeeded the challenge or not.
+Data Science competitions have become extremely popular in the past 5 years. They are not only popular on sites such as [Kaggle](https://www.kaggle.com/)[0], but also when interviewing with companies for a role on the job market in the form of a [candidate test](https://exercism.io/). These tests have quickly turned into a way to judge the performance of a particpant/candidate's submission and determine whether they have succeeded the challenge or not.
 
 ![alt text](/images/titanic-competition.png "Logo Title Text 1")
 *Popular titanic competition*
@@ -29,7 +29,7 @@ My bachelor thesis revolved around algorithmic trading. I trained a Machine Lear
 
 ## Real data doesn't come in a CSV file
 
-Data sets found in industry are completely different compared to those found in competitions. In fact, I wouldn't even go as far as to call them data sets but a huge database, sometimes multiple if you're not lucky enough to have a centralised data warehouse, where you need to sift through multiple tables looking for the data you need, do some heavy tidying, and checking the data before you can even consider using it in a Machien Learning model.
+Data sets found in industry are completely different compared to those found in competitions. In fact, I wouldn't even go as far as to call them data sets but a huge database, sometimes multiple if you're not lucky enough to have a centralised data warehouse. You would need to sift through numerous tables, of which lacking proper documentation, looking for the data you need, only to then do some heavy tidying, and thoroughly checking the data before you can even consider using it in a Machine Learning model.
 
 This is completely different to a `.csv` file which you're handed in a competition, a data set where someone has already gone through the work of packaging the data for you. There's a joke that "Data Scientists spend 80% of their time cleaning data and the other 20% complaining about it." This is of course an overexaggeration, however it is meant to emphasise how hard it is for a Data Scientist to get the data they need before they may even begin modelling. This is something which these competitions fail to teach you.
 
@@ -58,7 +58,9 @@ Data Science isn't just about modelling, it's also about writing good clean code
 
 ## You are not taught SQL
 
-SQL is one of if not the most important skill to have in Data Science. Without any knowledge of SQL, you will not be able to query the databases where your data lies in order to get the data you need in the format which your model requires. Sure you can dump a table to a file and then just use [Pandas](https://pandas.pydata.org/) to do the rest, but that won't get you very far. Databases are far more efficient at processing data than a library like Pandas which is why I always recommend to do as much processing as possible in the database and only extract the data as a last resort once you really need a library like Pandas to continue with your work.
+SQL is one of if not the most important skill to have in Data Science. Without any knowledge of SQL, you will not be able to query the databases where your data lies in order to get the data you need in the format which your model requires. Sure you can dump a table to a file and then just use [Pandas](https://pandas.pydata.org/) to do the rest, but that won't get you very far.
+
+What if your database spans in the hundreds of GBs, if not TBs?. The general rule of thumb is that in Pandas you need ten times the amount of RAM that you do data. This means that for just 1GB of data you'll need 10GB of RAM. Databases are far more efficient at processing data than a library like Pandas which is why I always recommend to do as much processing as possible in the database and only extract the data as a last resort once you really need a library like Pandas to continue with your work. This is not to say that there aren't more efficient libraries than Pandas[2], however there is an efficiency v.s complexity trade-off which you will have to make.
 
 ## How to improve your Data Science skills
 
@@ -82,5 +84,8 @@ Good competitions which also include writeups present a great opportunity for kn
 
 ![alt text](/images/sharing-is-caring.jpg "Logo Title Text 1")
 
+---
+
 * [0] Kaggle is a site renown for bringing Data Scientists and Machine Learning practitioners together to enter competitions to solve Data Science challenges.
 * [1] A test set is a subset of the data used to test the accuracy of your model based on data it has never seen before. In the case of competitions test sets tend to have the dependant variable omitted.
+* [2] [NumPy](https://numpy.org/) is a Python library used to compute mathematical operations on data. It iswritten in C which makes it blazingly flast compared to other libraries.
