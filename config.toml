@@ -2,6 +2,10 @@ baseURL = "https://gabriel.gaucimaistre.com/"
 languageCode = "en-us"
 theme = "hyde"
 title = "Gabe"
+summary = "Gabriel Gauci Maistre"
+
+[header]
+  image = "/images/avatar.jpg"
 
 [Menus]
   main = [
