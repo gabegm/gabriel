@@ -5,7 +5,7 @@ date: 2018-09-27 23:00:00 +0000
 
 ---
 
-Even though it has 1-based indexing
+Even though it has 1-based indexing.
 
 ![alt text](/images/julia-repl.png "Logo Title Text 1")
 
