@@ -29,6 +29,7 @@ I built a predictive model to forecast the turnover for the Bundesliga season 17
 For my thesis project, I built an automated algorithm to trade the markets.
 
 [Headcount Planning Management System](https://github.com/gabegm/Headcount-Planning-Management-System)
+
 Create effective hiring plans, identify gaps, and align with financial performance and business goals.
 
 [Shopping Cart](https://github.com/gabegm/ShoppingCart)
