@@ -47,7 +47,7 @@ In cases of complaince, if a company is ever sued because of the decisions which
 
 ## Competitions do not help you understand your model
 
-The ultimate goal of a competition is to obtain the highest accuracy where even a fraction could make a difference, all under time contrained conditions. This does not encourage you to take the time to understand the data, it is imperfections, and train a model which is robust to adversarial examples. Instead you are incentivised to try anything which will edge you forward even slightly, not matter the cost. This encourages the use of black box models, leaving you unable to understand what your model is learning from your data.
+The ultimate goal of a competition is to obtain the highest accuracy where even a fraction could make a difference, all under time contrained conditions. This does not encourage you to take the time to understand the data, its imperfections, and train a model which is robust to adversarial examples. Instead you are incentivised to try anything which will edge you forward even slightly, not matter the cost. This encourages the use of black box models, leaving you unable to understand what your model is learning from your data.
 
 ![alt text](/images/data-science.jpg "Logo Title Text 1")
 
@@ -77,7 +77,7 @@ You can now start to analyse the data you are collecting over time and understan
 
 ![alt text](/images/hacker-man.jpg "Logo Title Text 1")
 
-Why am I suggesting all of this? Because although it is easy to just find a data set on the internet, this is not how you are going to get your data in industry. And if you have found you are data set online, chances are someone has already done something with it. This might be your chance to try something new.
+Why am I suggesting all of this? Because although it is easy to just find a data set on the internet, this is not how you are going to get your data in industry. And if you have found your data set online, chances are someone has already done something with it. This might be your chance to try something new.
 
 ## What competitions are good for
 
