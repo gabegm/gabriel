@@ -35,7 +35,7 @@ This is completely different to a `.csv` file which you're handed in a competiti
 
 ## Industry isn't about producing the highest fraction of accuracy
 
-When you're dealing with companies and their customers, is it more important to understand how a model is forming its decisions rather than the highest accuracy it can achieve. Ultimately a weak model can hurt a company's business and their image, potentially at a loss of both their customers and money.
+When you're dealing with companies and their customers, it is more important to understand how a model is forming its decisions rather than the highest accuracy it can achieve. Ultimately a weak model can hurt a company's business and their image, potentially at a loss of both their customers and money. A Machine Learning model may achieve excellent results in a test set, however that does not mean that its assumptions will hold once the model is deployed in production and tested against real data. What will your model do when it finds an example which its never come across before? It's also possible that the model has been overfit on the training data, performing excellently in test environments but less so in production.
 
 In cases of complaince, if a company is ever sued because of the decisions which its Machine Learning models were making, the company is liable for damages unless they are able to understand the inner workings of their models and explain such decisions to the public.
 
