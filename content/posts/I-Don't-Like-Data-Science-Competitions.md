@@ -63,13 +63,13 @@ If you were not incentivised enough to produce a black box solution to yield the
 
 ## You are not required to write good clean code
 
-Working as a Data Scientist is not just about modelling, it is also about writing good clean code which others are able to understand and reproduce the results which you obtained with the data. Since Data Science challenges are so focused on model accuracy, you are not being incentivised to properly document your code and the approach you took to reach the conclusions which you presented. This stops others from being able to learn from your methods, and of course stops you from doing the same from others.
+Working as a Data Scientist is not just about modelling, it is also about writing good clean code, in which others are able to understand and reproduce the results which you obtained with the same data. Since Data Science challenges are so focused on model accuracy, you are not being incentivised to properly document your code and the approach you took to reach the conclusions which you presented. This stops others from being able to learn from your methods, and of course stops you from doing the same from others.
 
 ## You are not taught SQL
 
 SQL is one of if not the most important skill to have in Data Science. Without any knowledge of SQL, you will not be able to query the databases where your data lies in order to get the data you need in the format which your model requires. Sure you can dump a table to a file and then just use [Pandas](https://pandas.pydata.org/) to do the rest, but that will not get you very far.
 
-What if your database spans in the hundreds of GBs, if not TBs?. The general rule of thumb is that in Pandas you need ten times the amount of RAM that you do data. This means that for just 1GB of data you will need 10GB of RAM. Databases are far more efficient at processing data than a library like Pandas which is why I always recommend to do as much processing as possible in the database and only extract the data as a last resort once you really need a library like Pandas to continue with your work. This is not to say that there are not more efficient libraries than Pandas[4], however there is an efficiency v.s complexity trade-off which you will have to make.
+What if your database spans in the hundreds of GBs, if not TBs?. The general rule of thumb is that in Pandas you need ten times the amount of RAM that you do data. This means that for just 1GB of data you will need 10GB of RAM. Databases are far more efficient at processing data than a library like Pandas, which is why I always recommend to do as much processing as possible in the database, and only extract the data as a last resort once you really need a library like Pandas to continue with your work. This is not to say that there are not more efficient libraries than Pandas[4], however there is an efficiency v.s complexity trade-off which you will have to make.
 
 ## How to improve your Data Science skills
 
@@ -87,7 +87,7 @@ Why am I suggesting all of this? Because although it is easy to just find a data
 
 ## What competitions are good for
 
-This is not to say that competitions do not have a place at all in Data Science. I do believe that such competitions present an excellent way of bouncing ideas off of each other, assuming the code was submitted, in order for you to try new methods out on your own data.
+This is not to say that competitions do not have a place at all in Data Science. I do believe that such competitions present an excellent way of bouncing off ideas from each other, assuming the code was submitted, in order for you to try new methods out on your own data.
 
 Good competitions which also include writeups present a great opportunity for knowledge sharing within the community, allowing for the community to ask questions about the submitter's approach.
 
@@ -99,4 +99,4 @@ Good competitions which also include writeups present a great opportunity for kn
 * [1] A test set is a subset of the data used to test the accuracy of your model based on data it has never seen before. In the case of competitions test sets tend to have the dependant variable omitted.
 * [2] A dependant variable is the value you're trying to predict which is dependant on the values of other variables.
 * [3] Overfitting is "the production of an analysis that corresponds too closely or exactly to a particular set of data, and may therefore fail to fit additional data or predict future observations reliably".
-* [4] [NumPy](https://numpy.org/) is a Python library used to compute mathematical operations on data. It iswritten in C which makes it blazingly flast compared to other libraries.
+* [4] [NumPy](https://numpy.org/) is a Python library used to compute mathematical operations on data. It is written in C which makes it blazingly fast compared to other libraries.
