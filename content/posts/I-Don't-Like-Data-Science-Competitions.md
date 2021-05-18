@@ -35,12 +35,15 @@ This is completely different to a `.csv` file which you're handed in a competiti
 
 ## Industry isn't about producing the highest fraction of accuracy
 
-When you're dealing with companies and their customers, it is more important to understand how a model is forming its decisions rather than the highest accuracy it can achieve. Ultimately a weak model can hurt a company's business and their image, potentially at a loss of both their customers and money. A Machine Learning model may achieve excellent results in a test set, however that does not mean that its assumptions will hold once the model is deployed in production and tested against real data. What will your model do when it finds an example which its never come across before? It's also possible that the model has been overfit on the training data, performing excellently in test environments but less so in production.
-
-In cases of complaince, if a company is ever sued because of the decisions which its Machine Learning models were making, the company is liable for damages unless they are able to understand the inner workings of their models and explain such decisions to the public.
+When you're dealing with companies and their customers, it is more important to understand how a model is forming its decisions rather than the highest accuracy it can achieve. Ultimately a weak model can hurt a company's business and their image, potentially at a loss of both their customers and money. A Machine Learning model may achieve excellent results in a test set, however that does not mean that its assumptions will hold once the model is deployed in production and tested against real data. What will your model do when it finds an example which its never come across before? It's also possible that the model has been overfit on the training data, performing excellently in test environments but less so in production. Its also possible that the train and test sets included biases caused by humans allowing the Machine Learning model to learn from the same biases and apply them in its decisions.
 
 ![alt text](/images/amazon-ai-scandal.png "Logo Title Text 1")
 *[reuters](https://www.reuters.com/article/us-amazon-com-jobs-automation-insight-idUSKCN1MK08G)*
+
+In cases of complaince, if a company is ever sued because of the decisions which its Machine Learning models were making, the company is liable for damages unless they are able to understand the inner workings of their models and explain such decisions to the public. In order to comply with regulatory frameworks, companies need to be able to explain their processes in order to get regulatory approval. If a company's Anti Money Laundering (AML) processes come into question caused by a particular case falling through the cracks, "Machine Learning" as an excuse will not fly.
+
+![alt text](/images/revolut-aml.png "Logo Title Text 1")
+*[telegraph](https://www.telegraph.co.uk/technology/2019/02/28/revolut-failed-block-suspicious-transactions/)*
 
 ## Competitions do not help you understand your model
 
@@ -54,7 +57,7 @@ If you weren't incentivised enough to produce a black box solution to yield the 
 
 ## You are not required to write good clean code
 
-Data Science isn't just about modelling, it's also about writing good clean code which others are able to understand and reproduce the results which you obtained with the data. Since Data Science challenges are so focused on model accuracy, you are not being incentivised to properly document your code and the approach you took to reach the conclusions which you presented. This stops others from being able to learn from your methods, and of course stops you from doing the same from others.
+Working as a Data Scientist isn't just about modelling, it's also about writing good clean code which others are able to understand and reproduce the results which you obtained with the data. Since Data Science challenges are so focused on model accuracy, you are not being incentivised to properly document your code and the approach you took to reach the conclusions which you presented. This stops others from being able to learn from your methods, and of course stops you from doing the same from others.
 
 ## You are not taught SQL
 
