@@ -97,7 +97,7 @@ Good competitions which also include writeups present a great opportunity for kn
 
 ---
 
-* [0] Kaggle is a site renown for bringing Data Scientists and Machine Learning practitioners together to enter competitions to solve Data Science challenges.
+* [0] Kaggle is a site renowned for bringing Data Scientists and Machine Learning practitioners together to enter competitions to solve Data Science challenges.
 * [1] A test set is a subset of the data used to test the accuracy of your model based on data it has never seen before. In the case of competitions test sets tend to have the dependant variable omitted.
 * [2] A dependant variable is the value you're trying to predict which is dependant on the values of other variables.
 * [3] Overfitting is "the production of an analysis that corresponds too closely or exactly to a particular set of data, and may therefore fail to fit additional data or predict future observations reliably".
