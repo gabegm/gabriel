@@ -36,6 +36,8 @@ Just my glazing over this function definition, we now know that the function exp
 
 ![alt text](/images/i-feel-bad-for-you.png "Audience booing")
 
+You may not care about making your code easier for others to read, but all of the things I mentioned above are supposed to make life easier for you. The larger your codebase grows, the harder it'll be to maintain. Following these principles will make life a little easier. If you need some extra motivation, imagine that the next person to take over your code is a serial murderer who knows where you live, that should do the trick.
+
 ## Consistency
 Blank lines and white spaces help make code more readable. Fixed line lengths ensure that your code is legible on all types of screens. However when they're coupled with inconsistency they make confuse others reading your code, or even yourself. Python has many style guides, I suggest you find one that suits your needs and stick to it whenever you're writing code.
 
@@ -48,19 +50,25 @@ Whether you're developing your own library or importing someone else's, it's ess
 
 If Data Scientists are the head chefs in a restaurant forming new recipes, Machine Learning Engineers (MLEs) are the cooks attempting to recreate the particular dish using the recipe provided to them. If the cooks are to successfully recreate the dish, they're going to need a well detailed recipe which is easy to read and understand.
 
+MLEs are no different to these cooks, if they are to deploy to production a Machine Learning model which a Data Science built, they must be able to understand the code and run it successfully, easily recreate the data that was used, install all the dependencies without running into any issues, and recreate the same results of the model.
+
 ![alt text](/images/how-to-run-this-code.png "Audience booing")
 
-MLEs are no different to these cooks, if they are to deploy to production a Machine Learning model which a Data Science built, they must be able to understand the code and run it successfully, easily recreate the data that was used, install all the dependencies without running into any issues, and recreate the same results of the model. This is no easy task, imagine trying to understand the work that someone else did for months. Now imagine that work did not consist of clean commented code, which is documented thoroughly, virtual environments to execute the code, and the SQL queries to retrieve recreate the data that was used. There's a far greater chance of the results not being recreated as the Data Scientist had in mind, causing problems with the model running in production down the line.
+This is no easy task, imagine trying to understand the work that someone else did for months. Now imagine that work did not consist of clean commented code, which is documented thoroughly, virtual environments to execute the code, and the SQL queries to retrieve recreate the data that was used. There's a far greater chance of the results not being recreated as the Data Scientist had in mind, causing problems with the model running in production down the line.
 
 ## You shouldn't tie your development to a notebook
 
 ![alt text](/images/i-want-you-notebook.png "Audience booing")
 
-The topic of notebooks is so vast I could probably have a whole post dedicated to it, *notes this down for later.* But to keeps things short, although notebooks present a fantastic way of prototyping your code, they lack the features you would normally find in an Integrated Development Environment (IDE). Notebooks don't come with linting out of the box, which makes it hard to identify and correct subtle programming errors or unconventional coding practices that can lead to errors. A linter can tell you that you forgot to pass a variable in your function's argument, or that there's unused variables/functions in your code. All of which can make it even more confusing to understand the code when reading it.
+The topic of notebooks is so vast I could probably have a whole post dedicated to it, *notes this down for later.* But to keeps things short, although notebooks present a fantastic way of prototyping your code, they lack the features you would normally find in an Integrated Development Environment (IDE).
+
+Notebooks don't come with linting out of the box, which makes it hard to identify and correct subtle programming errors or unconventional coding practices that can lead to errors. A linter can tell you that you forgot to pass a variable in your function's argument, or that there's unused variables/functions in your code. All of which can make it even more confusing to understand the code when reading it.
 
 ## A better way to use notebooks
 
-Notebooks are great for prototyping but they don't help in following Software Development principles which hopefully by now I have convinced you that you should use them. Wouldn't it be great if you could have the cake and also eat it? Well in this case it's possible. Here's my approach. Everything I write goes into a function which gets packaged into a library. I develop this code in an IDE which gives me all the benefits of Software Development principles. As I'm doing so, I import my library in a notebook and prototype the code as I'm writing it. Jupyter notebooks also make this easy by allowing me to use magic commands such as `%autoreload` which allows me to automatically reload libraries as I update them within my environment.
+Notebooks are great for prototyping but they don't help in following Software Development principles which hopefully by now I have convinced you that you should use them. Wouldn't it be great if you could have your cake and also eat it? Well in this case it's possible. Here's my approach.
+
+Everything I write goes into a function which gets packaged into a library. I develop this code in an IDE which gives me all the benefits of Software Development principles. As I'm doing so, I import my library in a notebook and prototype the code as I'm writing it. Jupyter notebooks also make this easy by allowing me to use magic commands such as `%autoreload` which allows me to automatically reload libraries as I update them within my environment.
 
 ```python
 [1]: %load_ext autoreload
@@ -72,3 +80,8 @@ Notebooks are great for prototyping but they don't help in following Software De
 ```
 
 ![alt text](/images/data-science-two-buttons.png "Audience booing")
+*Do things the right way or just dump the notebook as code[0]*
+
+---
+
+[0] [nbconvert](https://nbconvert.readthedocs.io/en/latest/) is a tool which lets you convert a notebook into executable code, as brilliant as that can sound, the tool doesn't check for any parts of your code which are not being used or might cause problems. So think of it as a dump from one format to another.
