@@ -28,10 +28,10 @@ There is a common misconception that being a Data Scientist means that you do no
 
 ## Software Development princilpes aren't for Software Developers
 
-Software Development principles might have been curated by Software Developers, but they definitely were not meant just for Software Developers. They were proposed for anyone writing any kind of software, this of course includes Data Scientists. Below are a few which are worth mentioning.
+Software Development principles might have been curated by Software Developers to aid in the creation of software, but they definitely were not meant just for Software Developers. They were proposed for anyone writing any kind of software, this of course includes Data Scientists. Below are a few which are worth mentioning.
 
 ### Linting
-Python is not a compiled language, which means there is no way of knowing whether your code will execute successfully unless you run it and the interpreter finds a problem which halts the execution of your code. This means that it's extremely important to use a linter which is a tool that will help finding bugs and style problems in your code. It's important to note that it's not perfect due to Python's dynamic nature, however spurious warnings should be fairly infrequent.
+Python is not a compiled language, which means there is no way of knowing whether your code will execute successfully unless you attempt to execute it and the interpreter[0] finds a problem which halts the execution of your code. This means that it's extremely important to use a linter which is a tool that will help finding bugs and style problems in your code. It's important to note that it's not perfect due to Python's dynamic nature, however false warnings should be fairly infrequent.
 
 ```sh
 $ pylint my_script.py
@@ -48,6 +48,9 @@ W:150:FormatChecker.process_tokens: Too many branches (13/12)
 ```
 
 ### Documentation
+
+![alt text](/images/i-feel-bad-for-you.png "Audience booing")
+
 Documentation is not needed to develop software, neither are comments and docstrings. All of which take more time to do. However they will save your time in the long run as your codebase grows larger and more people other than yourself will have to look at your code, maintain it, or even extend it.
 
 ```python
@@ -87,9 +90,9 @@ def fib(n: int) -> Iterator[int]:
         a, b = b, a+b
 ```
 
-Just my glazing over this function definition, we now know that the function expects an integer variable, and returns an iterator consisting of integer elements. None of this effects the execution of your code, but it makes it much easier to read Python code since types are not required.
+Just my glazing over this function definition, we now know that the function expects an `integer` variable, and returns an iterator consisting of `integer` elements. None of this effects the execution of your code, but it makes it much easier to read Python code since types are not required.
 
-Static type checkers will also allow you to check your code for type errors making it easier to find bugs with less debugging.
+Static type checkers will also allow you to check your code for type errors making it easier to find bugs with less debugging. In the following example, mypy will find an bug where we tried to pass a `string` as an argument to the `fib` function which was expecting an `integer` instead. If we were to run this code, this bug would cause the execution wto come to a halt.
 
 ```sh
 $ mypy my_script.py
@@ -97,13 +100,33 @@ my_script.py:10: error: Argument "n" to "fib" has incompatible
                         type "str"; expected "int"
 ```
 
-![alt text](/images/i-feel-bad-for-you.png "Audience booing")
-
 You may not care about making your code easier for others to read, but all of the things I mentioned above are supposed to make life easier for you. The larger your codebase grows, the harder it'll be to maintain. Following these principles will make life a little easier. If you need some extra motivation, imagine that the next person to take over your code is a serial murderer who knows where you live, that should do the trick.
 
 ## Consistency
 
-Blank lines and white spaces help make code more readable. Fixed line lengths ensure that your code is legible on all types of screens. However when they're coupled with inconsistency they make confuse others reading your code, or even yourself. Python has many style guides, I suggest you find one that suits your needs and stick to it whenever you're writing code.
+Blank lines and white spaces help make code more readable. Fixed line lengths ensure that your code is legible on all types of screens. However when they're coupled with inconsistency they make confuse others reading your code, or even yourself. Python has many style guides, I suggest you find one that suits your needs and stick to it whenever you're writing code.[1]
+
+```python
+No:
+def to_sql(frame, name: str, con, schema: str | None = None, if_exists: str = "fail", index: bool = True, index_label=None, chunksize: int | None = None, dtype: DtypeArg | None = None, method: str | None = None, engine: str = "auto", **engine_kwargs,) -> None
+
+Yes:
+def to_sql(
+    frame,
+    name: str,
+    con,
+    schema: str | None = None,
+    if_exists: str = "fail",
+    index: bool = True,
+    index_label=None,
+    chunksize: int | None = None,
+    dtype: DtypeArg | None = None,
+    method: str | None = None,
+    engine: str = "auto",
+    **engine_kwargs,
+) -> None
+```
+*An example of fixed line lengths*
 
 ## Naming
 
@@ -111,7 +134,7 @@ Whether you're developing your own library or importing someone else's, it's ess
 
 ![alt text](/images/variable-naming.png "Audience booing")
 
-This also goes for naming your variables and functions. A variabled named `x` isn't going to help anyone understand what `x` is meant to be storing and used for. You can never know when you'll need to look at your own code again down the line and forget what `x` was meant to be for.
+This also goes for naming your variables and functions. A variabled named `x` isn't going to help anyone understand what `x` is meant to be storing and used for. You can never know when you'll need to look at your own code again down the line and forget what `x` was meant to be used for.
 
 ## Dumping your code on a Machine Learning Engineer won't work
 
@@ -135,6 +158,9 @@ Notebooks don't come with linting out of the box, which makes it hard to identif
 
 ## A better way to use notebooks
 
+![alt text](/images/data-science-two-buttons.png "Audience booing")
+*Do things the right way or just dump the notebook as code[2]*
+
 Notebooks are great for prototyping but they don't help in following Software Development principles, which hopefully by now I have convinced you that you should use them. Wouldn't it be great if you could have your cake and also eat it? Well in this case it's possible. Here's my approach.
 
 Everything I write goes into a function which gets packaged into a library. I develop this code in an IDE which gives me all the benefits of Software Development principles. As I'm doing so, I import my library in a notebook and prototype the code as I'm writing it. Jupyter notebooks also make this easy by allowing me to use magic commands such as `%autoreload` which allows me to automatically reload libraries as I update them within my environment without the need to restart the kernel.
@@ -145,12 +171,16 @@ Everything I write goes into a function which gets packaged into a library. I de
 
 [2]: from my_library import func # making our function accessible
 
-[3]: l = func(a=5) # returns a list
+[3]: [print(i) for i in fib(5)]
+0
+1
+1
+2
+3
 ```
-
-![alt text](/images/data-science-two-buttons.png "Audience booing")
-*Do things the right way or just dump the notebook as code[0]*
 
 ---
 
-[0] [nbconvert](https://nbconvert.readthedocs.io/en/latest/) is a tool which lets you convert a notebook into executable code, as brilliant as that can sound, the tool doesn't check for any parts of your code which are not being used or might cause problems. So think of it as a dump from one format to another.
+* [0] An interpreter directly executes code without the need to have been previously compiled into a machine language program.
+* [1] Google have a public [Python style guide](https://google.github.io/styleguide/) which I highly recommend to check out.
+* [2] [nbconvert](https://nbconvert.readthedocs.io/en/latest/) is a tool which lets you convert a notebook into executable code, as brilliant as that can sound, the tool doesn't check for any parts of your code which are not being used or might cause problems. So think of it as a dump from one format to another.
