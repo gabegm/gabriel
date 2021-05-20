@@ -155,20 +155,20 @@ Machine Learning Engineers are no different to these cooks, if they are to deplo
 
 ![alt text](/images/how-to-run-this-code.png "Audience booing")
 
-This is no easy task, imagine trying to understand the work that someone else did for months. Now imagine that work did not consist of clean commented code, which is documented thoroughly, virtual environments to execute the code, and the SQL queries to retrieve recreate the data that was used. There's a far greater chance of the results not being recreated as the Data Scientist had in mind, causing problems with the model running in production down the line.
+This is no easy task, imagine trying peak into someone else's brain and understand the very thing which they've been working on for months. Now imagine that work did not consist of clean commented code, which is documented thoroughly, uses virtual environments to execute the code, and includes SQL queries to retrieve and recreate the data that was used to train the Machine Learning model. There's a far greater chance of the results not being recreated as the Data Scientist had in mind, causing problems with the model running in production down the line.
 
 ## You shouldn't tie your development to a notebook
 
 ![alt text](/images/i-want-you-notebook.png "Audience booing")
 
-The topic of notebooks is so vast I could probably have a whole post dedicated to it, *notes this down for later.* But to keeps things short, although notebooks present a fantastic way of prototyping your code, they lack the features you would normally find in an Integrated Development Environment (IDE)[5].
+The topic of notebooks[5] is so vast I could probably have a whole post dedicated to it, *notes this down for later.* But to keep things short, although notebooks present a fantastic way of prototyping your code, they lack the features you would normally find in an Integrated Development Environment (IDE)[6].
 
-Notebooks don't come with linting out of the box, which makes it hard to identify and correct subtle programming errors or unconventional coding practices that can lead to errors. A linter can tell you that you forgot to pass a variable in your function's argument, or that there's unused variables/functions in your code. All of which can make it even more confusing to understand the code when reading it.
+Notebooks don't come with linting out of the box, which makes it hard to identify and correct subtle programming errors or unconventional coding practices that can lead to errors. A linter can tell you that you forgot to pass a variable in your function's argument, or that there's unused variables/functions in your code. All of which can make it even more confusing to understand the notebook code when reading it.
 
 ## A better way to use notebooks
 
 ![alt text](/images/data-science-two-buttons.png "Audience booing")
-*Do things the right way or just dump the notebook as code[6]*
+*Do things the right way or just dump the notebook as code[7]*
 
 Notebooks are great for prototyping but they don't help in following Software Development principles, which hopefully by now I have convinced you that you should use them. Wouldn't it be great if you could have your cake and also eat it? Well in this case it's possible. Here's my approach.
 
@@ -188,7 +188,7 @@ Everything I write goes into a function which gets packaged into a library. I de
 3
 ```
 
-Whenever I need to change the code behind the function `fib`, all I need to do is simply reinstall it by running `$ pip install .`[7] in my terminal and simply rerunning cell `3` above which will now use the function from my newly updated library.
+Whenever I need to change the code behind the function `fib`, all I need to do is simply reinstall it by running `$ pip install .`[8] in my terminal and simply rerunning cell `3` above which will now use the function from my newly updated library.
 
 ---
 
@@ -197,6 +197,7 @@ Whenever I need to change the code behind the function `fib`, all I need to do i
 * [2] [Pylint](https://pylint.org/) is a source-code, bug and quality checker for the Python programming language.
 * [3] [Mypy](http://mypy-lang.org/) is an optional static type checker for Python that aims to combine the benefits of dynamic (or "duck") typing and static typing.
 * [4] Google have a public [Python style guide](https://google.github.io/styleguide/pyguide.html) which I highly recommend to check out.
-* [5] An IDE normally consists of at least a source code editor, build automation tools, and a debugger.
-* [6] [nbconvert](https://nbconvert.readthedocs.io/en/latest/) is a tool which lets you convert a notebook into executable code, as brilliant as that can sound, the tool doesn't check for any parts of your code which are not being used or might cause problems. So think of it as a dump from one format to another.
-* [7] `.` refers to the current directory which in this case is the one where our library is located.
+* [5] A Jupyter notebook consists of an interactive web tool known as a computational notebook, which researchers can use to combine software code, computational output, explanatory text, and multimedia resources in a single document.
+* [6] An IDE normally consists of at least a source code editor, build automation tools, and a debugger.
+* [7] [nbconvert](https://nbconvert.readthedocs.io/en/latest/) is a tool which lets you convert a notebook into executable code, as brilliant as that can sound, the tool doesn't check for any parts of your code which are not being used or might cause problems. So think of it as a dump from one format to another.
+* [8] `.` refers to the current directory which in this case is the one where our library is located.
