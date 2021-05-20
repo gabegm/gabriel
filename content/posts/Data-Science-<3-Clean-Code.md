@@ -27,13 +27,13 @@ There is a common misconception among people with an academic backgroung that be
 
 ## Software Development princilpes aren't for Software Developers
 
-Software Development principles might have been curated by Software Developers to aid in the creation of software, but they definitely were not meant just for Software Developers. They were proposed for anyone writing any kind of software, this of course includes Data Scientists. Below are a few which are worth mentioning.
+Software Development principles might have been curated by Software Developers to aid in the creation of software, but they definitely were not meant *just* for Software Developers. They were proposed for anyone writing any kind of software, this of course includes Data Scientists. Below are a few which I felt were worth mentioning.
 
 ### Linting
 
-Python is not a compiled language, which means there is no way of knowing whether your code will execute successfully unless you attempt to execute it and the interpreter[0] finds a problem which halts the execution of your code. This means that it's extremely important to use a linter which is a tool that will help finding bugs and style problems in your code. It's important to note that it's not perfect due to Python's dynamic nature, however false warnings should be fairly infrequent.
+Python is not a compiled language, which means there is no way of knowing whether your code will execute successfully unless you attempt to execute it and the interpreter[0] finds a problem which halts the execution of your code. This means that it's extremely important to use a linter which is a tool that will help finding bugs and style problems in your code. It's important to note that it's not perfect due to Python's dynamic nature[1], however false warnings should be fairly infrequent.
 
-In the following example, Pylint[1] will let us know that our script has some issues such as lines being too long, have missing whitespaces and unreachable code.
+In the following example, Pylint[2] will let us know that our script has some issues such as lines being too long, have missing whitespaces and unreachable code.
 
 ```sh
 $ pylint my_script.py
@@ -71,8 +71,9 @@ examples.
   bar = foo.FunctionBar()
 """
 ```
+*Google's [Python style guide](https://google.github.io/styleguide/pyguide.html#381-docstrings)*
 
-Type hinting is also another form of documentation you may add to your code which also has no effect on the execution of your code but is meant to make your code more legible. Introduced in Python 3.6, type hints allow you to annotate your Python code with hints, hence the name, as to what types your function arguments, return values, and variables are using.
+Type hinting is also another form of documentation you may add to your code which also has no effect on its execution but is meant to make it more legible. Specified in [PEP 484](https://www.python.org/dev/peps/pep-0484/) and introduced in [Python 3.5](https://docs.python.org/3.5/whatsnew/3.5.html), type hints allow you to annotate your Python code with hints, hence the name, as to what types your function arguments, return values, and variables are using.
 
 ```python
 def fib(n):
@@ -94,9 +95,9 @@ def fib(n: int) -> Iterator[int]:
         a, b = b, a+b
 ```
 
-Just my glazing over this function definition, we now know that the function expects an `integer` variable, and returns an iterator consisting of `integer` elements. None of this effects the execution of your code, but it makes it much easier to read Python code since types are not required.
+Thanks to the type hints present in this function definition, we now know that the function expects an `integer` variable, and returns an iterator consisting of `integer` elements. None of this effects the execution of your code, but it makes it much easier to read Python code since types are not required.
 
-Static type checkers will also allow you to check your code for type errors making it easier to find bugs with less debugging. In the following example, mypy[2] will find an bug where we tried to pass a `string` as an argument to the `fib` function which was expecting an `integer` instead. If we were to run this code, this bug would cause the execution wto come to a halt.
+Static type checkers will also allow you to check your code for type errors making it easier to find bugs with less debugging. In the following example, mypy[3] will find a bug where we tried to pass a `string` as an argument to the `fib` function which was expecting an `integer` instead. If we were to run this code, this bug would cause the execution to come to a halt.
 
 ```sh
 $ mypy my_script.py
@@ -104,11 +105,13 @@ my_script.py:10: error: Argument "n" to "fib" has incompatible
                         type "str"; expected "int"
 ```
 
-You may not care about making your code easier for others to read, but all of the things I mentioned above are supposed to make life easier for you. The larger your codebase grows, the harder it'll be to maintain. Following these principles will make life a little easier. If you need some extra motivation, imagine that the next person to take over your code is a serial murderer who knows where you live, that should do the trick.
+You may not care about making your code easier for others to read, but all of the things I mentioned above are supposed to make life easier for you. The larger your codebase grows, the harder it'll be to maintain. Following these principles will make life a little easier. If you need some extra motivation, imagine that the next person to end up maintaining your code is a violent psychopath who knows where you live., that should do the trick.
 
 ## Consistency
 
-Blank lines and white spaces help make code more readable. Fixed line lengths ensure that your code is legible on all types of screens. However, even the best of intentions can be wasted by an inconsistent use of lines and white spaces, rendering even the most well-written code to be confusing. The antidote to inconsistency is the same as with any other form of writing: the style guide. Python has many style guides, your place of work might actually have one too. Unfortunately it is common for each team within a company to follow their own style guide which makes it hard to standardise within the company. If your company does not yet have one, I suggest you find one that suits your needs and stick to it whenever you're writing code.[3]
+Blank lines and white spaces help make code more readable. Fixed line lengths ensure that your code is legible on all types of screens. However, even the best of intentions can be wasted by an inconsistent use of lines and white spaces, rendering even the most well-written code to be confusing. The antidote to inconsistency is the same as with any other form of writing: the style guide. Python has many style guides, your place of work might actually have one too.
+
+Unfortunately it is fairly common for each team within a company to follow their own style guide which makes it hard to standardise within a company. If your company does not yet have one, I suggest you find one that suits your needs and stick to it whenever you're writing code.[4]
 
 ```python
 No:
@@ -134,7 +137,9 @@ def to_sql(
 
 ## Naming
 
-Whether you're developing your own library or importing someone else's, it's essential to use conventional and meaningful names. This not only helps to stay consistent with the library's conventions but also to make your code more clear and concise. Library names can also collide if you're not careful so always be weary of what you're importing. Importing `numpy` as `n` rather than `np` which is the preferred alias is not going to help others get up to speed with what you're trying to achieve with your code.
+Whether you're developing your own library or importing someone else's, it's essential to use conventional and meaningful names. This not only helps to stay consistent with the library's conventions but also to make your code more clear and concise. Library names can also collide if you're not careful so always be weary of what you're importing.
+
+Importing `numpy` as `n` rather than `np` which is the preferred alias and used by the community is not going to help others get up to speed with what you're trying to achieve with your code.
 
 ![alt text](/images/variable-naming.png "Audience booing")
 
@@ -156,14 +161,14 @@ This is no easy task, imagine trying to understand the work that someone else di
 
 ![alt text](/images/i-want-you-notebook.png "Audience booing")
 
-The topic of notebooks is so vast I could probably have a whole post dedicated to it, *notes this down for later.* But to keeps things short, although notebooks present a fantastic way of prototyping your code, they lack the features you would normally find in an Integrated Development Environment (IDE).
+The topic of notebooks is so vast I could probably have a whole post dedicated to it, *notes this down for later.* But to keeps things short, although notebooks present a fantastic way of prototyping your code, they lack the features you would normally find in an Integrated Development Environment (IDE)[5].
 
 Notebooks don't come with linting out of the box, which makes it hard to identify and correct subtle programming errors or unconventional coding practices that can lead to errors. A linter can tell you that you forgot to pass a variable in your function's argument, or that there's unused variables/functions in your code. All of which can make it even more confusing to understand the code when reading it.
 
 ## A better way to use notebooks
 
 ![alt text](/images/data-science-two-buttons.png "Audience booing")
-*Do things the right way or just dump the notebook as code[2]*
+*Do things the right way or just dump the notebook as code[6]*
 
 Notebooks are great for prototyping but they don't help in following Software Development principles, which hopefully by now I have convinced you that you should use them. Wouldn't it be great if you could have your cake and also eat it? Well in this case it's possible. Here's my approach.
 
@@ -183,13 +188,15 @@ Everything I write goes into a function which gets packaged into a library. I de
 3
 ```
 
-Whenever I need to change the code behind the function `fib`, all I need to do is simply reinstall it by running `$ pip install .`[5] in my terminal and simply rerunning cell `3` above which will now use the function from my newly updated library.
+Whenever I need to change the code behind the function `fib`, all I need to do is simply reinstall it by running `$ pip install .`[7] in my terminal and simply rerunning cell `3` above which will now use the function from my newly updated library.
 
 ---
 
 * [0] An interpreter directly executes code without the need to have been previously compiled into a machine language program.
-* [1] [Pylint](https://pylint.org/) is a source-code, bug and quality checker for the Python programming language.
-* [2] [Mypy](http://mypy-lang.org/) is an optional static type checker for Python that aims to combine the benefits of dynamic (or "duck") typing and static typing.
-* [3] Google have a public [Python style guide](https://google.github.io/styleguide/) which I highly recommend to check out.
-* [4] [nbconvert](https://nbconvert.readthedocs.io/en/latest/) is a tool which lets you convert a notebook into executable code, as brilliant as that can sound, the tool doesn't check for any parts of your code which are not being used or might cause problems. So think of it as a dump from one format to another.
-* [5] `.` refers to the current directory which in this case is the one where our library is located.
+* [1] Python is dynamically typed, meaning the types of variables are only determined at runtime and do not need to be specified beforehand.
+* [2] [Pylint](https://pylint.org/) is a source-code, bug and quality checker for the Python programming language.
+* [3] [Mypy](http://mypy-lang.org/) is an optional static type checker for Python that aims to combine the benefits of dynamic (or "duck") typing and static typing.
+* [4] Google have a public [Python style guide](https://google.github.io/styleguide/pyguide.html) which I highly recommend to check out.
+* [5] An IDE normally consists of at least a source code editor, build automation tools, and a debugger.
+* [6] [nbconvert](https://nbconvert.readthedocs.io/en/latest/) is a tool which lets you convert a notebook into executable code, as brilliant as that can sound, the tool doesn't check for any parts of your code which are not being used or might cause problems. So think of it as a dump from one format to another.
+* [7] `.` refers to the current directory which in this case is the one where our library is located.
