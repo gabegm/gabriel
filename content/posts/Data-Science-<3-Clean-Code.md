@@ -13,7 +13,7 @@ tags:
 - data science
 - clean code
 - python
-date: 2021-05-18 23:00:00 +0000
+date: 2021-05-19 23:00:00 +0000
 
 ---
 
@@ -24,7 +24,7 @@ date: 2021-05-18 23:00:00 +0000
 ![alt text](/images/data-scientists-should-write-clean-code.png "Audience booing")
 *I'm back with another controversial topic!*
 
-There is a common misconception that being a Data Scientist means that you do not need to care about writing good clean code, because you're not a Software Developer. If you're a firm believer of this, please take some time to hear me out. I hope to have at least gotten you to reconsider by the end of this post.
+There is a common misconception that being a Data Scientist means that you do not need to care about writing good clean code, because you're not a Software Developer or a Machine Learning Engineer. If you're a firm believer of this, please take some time to hear me out. I hope to have at least gotten you to reconsider by the end of this post.
 
 ## Software Development princilpes aren't for Software Developers
 
@@ -32,6 +32,8 @@ Software Development principles might have been curated by Software Developers t
 
 ### Linting
 Python is not a compiled language, which means there is no way of knowing whether your code will execute successfully unless you attempt to execute it and the interpreter[0] finds a problem which halts the execution of your code. This means that it's extremely important to use a linter which is a tool that will help finding bugs and style problems in your code. It's important to note that it's not perfect due to Python's dynamic nature, however false warnings should be fairly infrequent.
+
+In the following example, Pylint[1] will let us know that our script has some issues such as lines being too long, have missing whitespaces, and unreachable code.
 
 ```sh
 $ pylint my_script.py
@@ -92,7 +94,7 @@ def fib(n: int) -> Iterator[int]:
 
 Just my glazing over this function definition, we now know that the function expects an `integer` variable, and returns an iterator consisting of `integer` elements. None of this effects the execution of your code, but it makes it much easier to read Python code since types are not required.
 
-Static type checkers will also allow you to check your code for type errors making it easier to find bugs with less debugging. In the following example, mypy will find an bug where we tried to pass a `string` as an argument to the `fib` function which was expecting an `integer` instead. If we were to run this code, this bug would cause the execution wto come to a halt.
+Static type checkers will also allow you to check your code for type errors making it easier to find bugs with less debugging. In the following example, mypy[2] will find an bug where we tried to pass a `string` as an argument to the `fib` function which was expecting an `integer` instead. If we were to run this code, this bug would cause the execution wto come to a halt.
 
 ```sh
 $ mypy my_script.py
@@ -104,7 +106,7 @@ You may not care about making your code easier for others to read, but all of th
 
 ## Consistency
 
-Blank lines and white spaces help make code more readable. Fixed line lengths ensure that your code is legible on all types of screens. However when they're coupled with inconsistency they make confuse others reading your code, or even yourself. Python has many style guides, I suggest you find one that suits your needs and stick to it whenever you're writing code.[1]
+Blank lines and white spaces help make code more readable. Fixed line lengths ensure that your code is legible on all types of screens. However when they're coupled with inconsistency they make confuse others reading your code, or even yourself. Python has many style guides, I suggest you find one that suits your needs and stick to it whenever you're writing code.[3]
 
 ```python
 No:
@@ -182,5 +184,7 @@ Everything I write goes into a function which gets packaged into a library. I de
 ---
 
 * [0] An interpreter directly executes code without the need to have been previously compiled into a machine language program.
-* [1] Google have a public [Python style guide](https://google.github.io/styleguide/) which I highly recommend to check out.
-* [2] [nbconvert](https://nbconvert.readthedocs.io/en/latest/) is a tool which lets you convert a notebook into executable code, as brilliant as that can sound, the tool doesn't check for any parts of your code which are not being used or might cause problems. So think of it as a dump from one format to another.
+* [1] [Pylint](https://pylint.org/) is a source-code, bug and quality checker for the Python programming language.
+* [2] [Mypy](http://mypy-lang.org/) is an optional static type checker for Python that aims to combine the benefits of dynamic (or "duck") typing and static typing.
+* [3] Google have a public [Python style guide](https://google.github.io/styleguide/) which I highly recommend to check out.
+* [4] [nbconvert](https://nbconvert.readthedocs.io/en/latest/) is a tool which lets you convert a notebook into executable code, as brilliant as that can sound, the tool doesn't check for any parts of your code which are not being used or might cause problems. So think of it as a dump from one format to another.
