@@ -53,7 +53,9 @@ W:150:FormatChecker.process_tokens: Too many branches (13/12)
 
 ![alt text](/images/i-feel-bad-for-you.png "Audience booing")
 
-Documentation is not needed to develop software, neither are comments and docstrings. All of which take more time to do. However they will save your time in the long run as your codebase grows larger and more people other than yourself will have to look at your code, maintain it, or even extend it.
+Documentation is not needed to develop software, neither are comments and docstrings. All of which take more time and effort to do. However they will save your time in the long run as your codebase grows larger and more people other than yourself will have to look at your code, maintain it, or even extend it. It goes without saying that it will also help you maintain your own codebase.
+
+The following is an example of how to write docstrings for your Python functions.
 
 ```python
 """A one line summary of the module or program, terminated by a period.
@@ -70,7 +72,7 @@ examples.
 """
 ```
 
-Type hinting is also another form of documentation you may add to your code which also has no effect on the execution of your code but is meant to make your code more legible. Introduced in Python 3.6, type hints allow you to annotate your python code with hints, hence the name, as to what types your function arguments, return values, and variables are using.
+Type hinting is also another form of documentation you may add to your code which also has no effect on the execution of your code but is meant to make your code more legible. Introduced in Python 3.6, type hints allow you to annotate your Python code with hints, hence the name, as to what types your function arguments, return values, and variables are using.
 
 ```python
 def fib(n):
