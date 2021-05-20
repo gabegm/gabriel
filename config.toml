@@ -4,9 +4,6 @@ theme = "hyde"
 title = "Gabe"
 summary = "Gabriel Gauci Maistre"
 
-[header]
-  image = "/images/avatar.jpg"
-
 [Menus]
   main = [
       {Name = "Github", URL = "https://github.com/gabegm/"},
@@ -18,6 +15,7 @@ summary = "Gabriel Gauci Maistre"
   AuthorName = "Gabriel Gauci Maistre"
   GitHubUser = "gabegm"
   description = "Data Scientist"
+  images = ["/static/images/avatar.jpg"]
   themeColor = "theme-base-0g"
   layoutReverse = false
   disqusShortname = ""
@@ -32,3 +30,6 @@ summary = "Gabriel Gauci Maistre"
   expiryDate = ["expiryDate"]
   lastmod = [":git", "lastmod", "date", "publishDate"]
   publishDate = ["publishDate", "date"]
+
+[taxonomies]
+  series = "series"

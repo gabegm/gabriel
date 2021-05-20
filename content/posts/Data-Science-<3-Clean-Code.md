@@ -3,8 +3,15 @@ layout: post
 draft: true
 title: Data Science <3 Clean Code
 author: "Gabriel Gauci Maistre"
+description: "There is a common misconception that being a Data Scientist means that you do not need to care about writing good clean code, because you're not a Software Developer. If you're a firm believer of this, please take some time to hear me out. I hope to have at least gotten you to reconsider by the end of this post."
+images:
+- /images/data-scientists-should-write-clean-code.png
+audio: []
+series: []
+videos: []
 tags: ["data science", "clean code", "python"]
-date: 2021-05-17 23:00:00 +0000
+date: 2021-05-18 23:00:00 +0000
+
 ---
 
 ***DISCLAIMER***

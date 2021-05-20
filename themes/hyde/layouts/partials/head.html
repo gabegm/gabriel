@@ -31,5 +31,11 @@
     {{ printf `<link href="%s" rel="%s" type="%s" title="%s" />` .Permalink .Rel .MediaType.Type $.Site.Title | safeHTML }}
   {{ end -}}
 
+  <!-- OpenGraph -->
+  {{ template "_internal/opengraph.html" . }}
+
+  <!-- Twitter Cards -->
+  {{ template "_internal/twitter_cards.html" . }}
+
   {{ partial "hook_head_end.html" . }}
 </head>

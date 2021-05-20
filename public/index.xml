@@ -1,71 +1,7 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Gabe</title>
-    <link>www.gabriel.gaucimaistre.com/</link>
-    <description>Recent content on Gabe</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Fri, 22 May 2020 23:00:00 +0000</lastBuildDate><atom:link href="www.gabriel.gaucimaistre.com/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>I Don&#39;t Like Data Science Competitions</title>
-      <link>www.gabriel.gaucimaistre.com/posts/i-dont-like-data-science-competitions/</link>
-      <pubDate>Fri, 22 May 2020 23:00:00 +0000</pubDate>
-      
-      <guid>www.gabriel.gaucimaistre.com/posts/i-dont-like-data-science-competitions/</guid>
-      <description>DISCLAIMER
-The following are simply my views on the matter and in no way reflect the views of the whole industry.
-What&amp;rsquo;s a Data Science competition? Data Science competitions are becoming extremely popular. They are not only popular on sites such as Kaggle[0] but also when interviewing with a company for a role in data. They normally consist of a time constrained objective where the organiser provides some data, many times a train and test set, dependant variable omitted from the test set of course, and submit the predictions which your model spat out in order to see how well you faired compared to all the other participants.</description>
-    </item>
-    
-    <item>
-      <title>10 Reasons Why You Should Learn Julia</title>
-      <link>www.gabriel.gaucimaistre.com/posts/10-reasons-why-you-should-learn-julia/</link>
-      <pubDate>Thu, 27 Sep 2018 23:00:00 +0000</pubDate>
-      
-      <guid>www.gabriel.gaucimaistre.com/posts/10-reasons-why-you-should-learn-julia/</guid>
-      <description>Even though it has 1-based indexing
-What is Julia? Julia is a fairly modern language, developed in 2009 by Jeff Bezanson, Stefan Karpinski, Viral B. Shah, and Alan Edelman who had the idea of designing a language that was free, high-level, and fast. The language was officially unveiled to the world in 2012 when the team launched a website with a blog post explaining the language’s mission. When asked why they named the language “Julia”, Alan Edelman turned down the thought that it was named after the fractal, but claimed that it just came up in a random conversation years ago when someone suggested arbitrarily that “Julia” would be a good name for a programming language.</description>
-    </item>
-    
-    <item>
-      <title>Are You Ready For GDPR?</title>
-      <link>www.gabriel.gaucimaistre.com/posts/are-you-ready-for-gdpr/</link>
-      <pubDate>Sat, 10 Feb 2018 23:00:00 +0000</pubDate>
-      
-      <guid>www.gabriel.gaucimaistre.com/posts/are-you-ready-for-gdpr/</guid>
-      <description>The General Data Protection Regulation (GDPR) will come into effect on the 25th of May, 2018; along with it a number of penalties for companies who fail to abide by these rules. These penalties can be very harsh, up to €20M or 4% of your company’s annual worldwide revenue. The European Commission (EC) has stated that no exceptions will be made after the 25th of May, and failure to comply will result in hefty fines.</description>
-    </item>
-    
-    <item>
-      <title>Blocking Social Media at Work</title>
-      <link>www.gabriel.gaucimaistre.com/posts/blocking-social-media-at-work/</link>
-      <pubDate>Mon, 22 Jan 2018 23:00:00 +0000</pubDate>
-      
-      <guid>www.gabriel.gaucimaistre.com/posts/blocking-social-media-at-work/</guid>
-      <description>Are you tired of your employees accessing social networks at work? Maybe you feel that your employees are spending more time checking their Facbook feed rather than crunching the numbers. Whether it’s Facebook, Twitter, or YouTube, how dare they do something else other than what you’re paying them for? In fact, why don’t you just strip out all the applications from their computers, lock them down, which let’s face it they probably already are, and leave Excel installed and call it ExcelOS, patent pending.</description>
-    </item>
-    
-    <item>
-      <title>The Current State of Job Requirements</title>
-      <link>www.gabriel.gaucimaistre.com/posts/the-current-state-of-job-requirements/</link>
-      <pubDate>Thu, 11 Jan 2018 23:00:00 +0000</pubDate>
-      
-      <guid>www.gabriel.gaucimaistre.com/posts/the-current-state-of-job-requirements/</guid>
-      <description>Have you ever looked at a job ad, skimmed through it, and decided not to apply because you thought that you could not even come close to matching the requirements the ad was asking for? Maybe you were job hunting and felt like you were being flooded with job ads having impossible requirements making you shake your head in disbelief.
- Looking for a Big Data Engineer with an M.Sc or Ph.</description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>www.gabriel.gaucimaistre.com/about/</link>
-      <pubDate>Fri, 31 Dec 2010 23:00:00 +0000</pubDate>
-      
-      <guid>www.gabriel.gaucimaistre.com/about/</guid>
-      <description>The views and opinions on this website are my opinions and do not reflect the views of my current or former employers.
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Gabe</title><link>https://gabriel.gaucimaistre.com/</link><description>Recent content on Gabe</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 18 May 2021 23:00:00 +0000</lastBuildDate><atom:link href="https://gabriel.gaucimaistre.com/index.xml" rel="self" type="application/rss+xml"/><item><title>I Don't Like Data Science Competitions</title><link>https://gabriel.gaucimaistre.com/2021/05/i-dont-like-data-science-competitions/</link><pubDate>Tue, 18 May 2021 23:00:00 +0000</pubDate><guid>https://gabriel.gaucimaistre.com/2021/05/i-dont-like-data-science-competitions/</guid><description>DISCLAIMER
+The following are simply my views and in no way reflect those of the whole industry.
+What is a Data Science competition? Data Science competitions have become extremely popular in the past 5 years. They are not only popular on sites such as Kaggle[0], but also when interviewing with companies for a role on the job market in the form of a candidate test. These tests have quickly turned into a way to judge the performance of a particpant/candidate&amp;rsquo;s submission and determine whether they have succeeded in the challenge or not.</description></item><item><title>10 Reasons Why You Should Learn Julia</title><link>https://gabriel.gaucimaistre.com/2018/09/10-reasons-why-you-should-learn-julia/</link><pubDate>Thu, 27 Sep 2018 23:00:00 +0000</pubDate><guid>https://gabriel.gaucimaistre.com/2018/09/10-reasons-why-you-should-learn-julia/</guid><description>Even though it has 1-based indexing.
+What is Julia? Julia is a fairly modern language, developed in 2009 by Jeff Bezanson, Stefan Karpinski, Viral B. Shah, and Alan Edelman who had the idea of designing a language that was free, high-level, and fast. The language was officially unveiled to the world in 2012 when the team launched a website with a blog post explaining the language’s mission. When asked why they named the language “Julia”, Alan Edelman turned down the thought that it was named after the fractal, but claimed that it just came up in a random conversation years ago when someone suggested arbitrarily that “Julia” would be a good name for a programming language.</description></item><item><title>Are You Ready For GDPR?</title><link>https://gabriel.gaucimaistre.com/2018/02/are-you-ready-for-gdpr/</link><pubDate>Sat, 10 Feb 2018 23:00:00 +0000</pubDate><guid>https://gabriel.gaucimaistre.com/2018/02/are-you-ready-for-gdpr/</guid><description>The General Data Protection Regulation (GDPR) will come into effect on the 25th of May, 2018; along with it a number of penalties for companies who fail to abide by these rules. These penalties can be very harsh, up to €20M or 4% of your company’s annual worldwide revenue. The European Commission (EC) has stated that no exceptions will be made after the 25th of May, and failure to comply will result in hefty fines.</description></item><item><title>Blocking Social Media at Work</title><link>https://gabriel.gaucimaistre.com/2018/01/blocking-social-media-at-work/</link><pubDate>Mon, 22 Jan 2018 23:00:00 +0000</pubDate><guid>https://gabriel.gaucimaistre.com/2018/01/blocking-social-media-at-work/</guid><description>Are you tired of your employees accessing social networks at work? Maybe you feel that your employees are spending more time checking their Facbook feed rather than crunching the numbers. Whether it’s Facebook, Twitter, or YouTube, how dare they do something else other than what you’re paying them for? In fact, why don’t you just strip out all the applications from their computers, lock them down, which let’s face it they probably already are, and leave Excel installed and call it ExcelOS, patent pending.</description></item><item><title>The Current State of Job Requirements</title><link>https://gabriel.gaucimaistre.com/2018/01/the-current-state-of-job-requirements/</link><pubDate>Thu, 11 Jan 2018 23:00:00 +0000</pubDate><guid>https://gabriel.gaucimaistre.com/2018/01/the-current-state-of-job-requirements/</guid><description>Have you ever looked at a job ad, skimmed through it, and decided not to apply because you thought that you could not even come close to matching the requirements the ad was asking for? Maybe you were job hunting and felt like you were being flooded with job ads having impossible requirements making you shake your head in disbelief.
+Looking for a Big Data Engineer with an M.Sc or Ph.</description></item><item><title>About</title><link>https://gabriel.gaucimaistre.com/about/</link><pubDate>Mon, 01 Jan 2018 23:00:00 +0000</pubDate><guid>https://gabriel.gaucimaistre.com/about/</guid><description>The views and opinions on this website are my opinions and do not reflect the views of my current or former employers.
 Short biography I am a data scientist who is extremely passionate about being able to derive insight from data. I currently work for a leading car rental company in the automotive industry based in Munich, but curious to all fields where data has a huge impact.
-I have learnt a lot on my journey thus far, topics which include machine learning, deep learning, recommender systems, parallel computing, and high performance computing.</description>
-    </item>
-    
-  </channel>
-</rss>
+I have learnt a lot on my journey thus far, topics which include machine learning, deep learning, recommender systems, parallel computing, and high performance computing.</description></item></channel></rss>
