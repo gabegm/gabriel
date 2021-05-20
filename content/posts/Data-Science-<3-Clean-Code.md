@@ -28,31 +28,90 @@ There is a common misconception that being a Data Scientist means that you do no
 
 ## Software Development princilpes aren't for Software Developers
 
-Software Development principles might have been curated by Software Developers, but they definitely were not meant just for Software Developers. They were meant for anyone writing software, this of course includes Data Scientists. Below are a few which are worth mentioning.
+Software Development principles might have been curated by Software Developers, but they definitely were not meant just for Software Developers. They were proposed for anyone writing any kind of software, this of course includes Data Scientists. Below are a few which are worth mentioning.
 
 ### Linting
 Python is not a compiled language, which means there is no way of knowing whether your code will execute successfully unless you run it and the interpreter finds a problem which halts the execution of your code. This means that it's extremely important to use a linter which is a tool that will help finding bugs and style problems in your code. It's important to note that it's not perfect due to Python's dynamic nature, however spurious warnings should be fairly infrequent.
 
+```sh
+$ pylint my_script.py
+************* Module pylint.checkers.format
+W: 50: Too long line (86/80)
+W:108: Operator not followed by a space
+     print >>sys.stderr, 'Unable to match %r', line
+            ^
+W:141: Too long line (81/80)
+W: 74:searchall: Unreachable code
+W:171:FormatChecker.process_tokens: Redefining built-in (type)
+W:150:FormatChecker.process_tokens: Too many local variables (20/15)
+W:150:FormatChecker.process_tokens: Too many branches (13/12)
+```
+
 ### Documentation
 Documentation is not needed to develop software, neither are comments and docstrings. All of which take more time to do. However they will save your time in the long run as your codebase grows larger and more people other than yourself will have to look at your code, maintain it, or even extend it.
+
+```python
+"""A one line summary of the module or program, terminated by a period.
+
+Leave one blank line.  The rest of this docstring should contain an
+overall description of the module or program.  Optionally, it may also
+contain a brief description of exported classes and functions and/or usage
+examples.
+
+  Typical usage example:
+
+  foo = ClassFoo()
+  bar = foo.FunctionBar()
+"""
+```
 
 Type hinting is also another form of documentation you may add to your code which also has no effect on the execution of your code but is meant to make your code more legible. Introduced in Python 3.6, type hints allow you to annotate your python code with hints, hence the name, as to what types your function arguments, return values, and variables are using.
 
 ```python
-def func(a: int) -> List[int]:
+def fib(n):
+    a, b = 0, 1
+    while a < n:
+        yield a
+        a, b = b, a+b
 ```
 
-Just my glazing over this function definition, we now know that the function expect an integer variable, and returns a list consisting of integer elements. None of this effects the execution of your code, but it makes it much easier to read Python code since types are not required.
+Just by looking at this code block, it is hard to tell what types the function is expecting unless we run it. For small codebases this might be okay, but as you can imagine it would be quite counterproductive to have to stay running each and every function when we want to get a better idea of which types are required.
+
+```python
+from typing import Iterator
+
+def fib(n: int) -> Iterator[int]:
+    a, b = 0, 1
+    while a < n:
+        yield a
+        a, b = b, a+b
+```
+
+Just my glazing over this function definition, we now know that the function expects an integer variable, and returns an iterator consisting of integer elements. None of this effects the execution of your code, but it makes it much easier to read Python code since types are not required.
+
+Static type checkers will also allow you to check your code for type errors making it easier to find bugs with less debugging.
+
+```sh
+$ mypy my_script.py
+my_script.py:10: error: Argument "n" to "fib" has incompatible
+                        type "str"; expected "int"
+```
 
 ![alt text](/images/i-feel-bad-for-you.png "Audience booing")
 
 You may not care about making your code easier for others to read, but all of the things I mentioned above are supposed to make life easier for you. The larger your codebase grows, the harder it'll be to maintain. Following these principles will make life a little easier. If you need some extra motivation, imagine that the next person to take over your code is a serial murderer who knows where you live, that should do the trick.
 
 ## Consistency
+
 Blank lines and white spaces help make code more readable. Fixed line lengths ensure that your code is legible on all types of screens. However when they're coupled with inconsistency they make confuse others reading your code, or even yourself. Python has many style guides, I suggest you find one that suits your needs and stick to it whenever you're writing code.
 
 ## Naming
-Whether you're developing your own library or importing someone else's, it's essential to use conventional and meaningful names when importing a library. This not only helps to stay consistent with the library's conventions but also to make your code more clear and concise. Library names can also collide if you're not careful so always be weary of what you're importing.
+
+Whether you're developing your own library or importing someone else's, it's essential to use conventional and meaningful names. This not only helps to stay consistent with the library's conventions but also to make your code more clear and concise. Library names can also collide if you're not careful so always be weary of what you're importing. Importing `numpy` as `n` rather than `np` which is the preferred alias is not going to help others get up to speed with what you're trying to achieve with your code.
+
+![alt text](/images/variable-naming.png "Audience booing")
+
+This also goes for naming your variables and functions. A variabled named `x` isn't going to help anyone understand what `x` is meant to be storing and used for. You can never know when you'll need to look at your own code again down the line and forget what `x` was meant to be for.
 
 ## Dumping your code on a Machine Learning Engineer won't work
 
@@ -76,9 +135,9 @@ Notebooks don't come with linting out of the box, which makes it hard to identif
 
 ## A better way to use notebooks
 
-Notebooks are great for prototyping but they don't help in following Software Development principles which hopefully by now I have convinced you that you should use them. Wouldn't it be great if you could have your cake and also eat it? Well in this case it's possible. Here's my approach.
+Notebooks are great for prototyping but they don't help in following Software Development principles, which hopefully by now I have convinced you that you should use them. Wouldn't it be great if you could have your cake and also eat it? Well in this case it's possible. Here's my approach.
 
-Everything I write goes into a function which gets packaged into a library. I develop this code in an IDE which gives me all the benefits of Software Development principles. As I'm doing so, I import my library in a notebook and prototype the code as I'm writing it. Jupyter notebooks also make this easy by allowing me to use magic commands such as `%autoreload` which allows me to automatically reload libraries as I update them within my environment.
+Everything I write goes into a function which gets packaged into a library. I develop this code in an IDE which gives me all the benefits of Software Development principles. As I'm doing so, I import my library in a notebook and prototype the code as I'm writing it. Jupyter notebooks also make this easy by allowing me to use magic commands such as `%autoreload` which allows me to automatically reload libraries as I update them within my environment without the need to restart the kernel.
 
 ```python
 [1]: %load_ext autoreload
