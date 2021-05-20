@@ -144,9 +144,9 @@ This also goes for naming your variables and functions. A variabled named `x` is
 
 ![alt text](/images/dump-truck.png "Audience booing")
 
-If Data Scientists are the head chefs in a restaurant forming new recipes, Machine Learning Engineers (MLEs) are the cooks attempting to recreate the particular dish using the recipe provided to them. If the cooks are to successfully recreate the dish, they're going to need a well detailed recipe which is easy to read and understand.
+If Data Scientists are the head chefs in a restaurant forming new recipes, Machine Learning Engineers are the cooks attempting to recreate the particular dish using the recipe provided to them. If the cooks are to successfully recreate the dish, they're going to need a well detailed recipe which is easy to read and understand.
 
-MLEs are no different to these cooks, if they are to deploy to production a Machine Learning model which a Data Science built, they must be able to understand the code and run it successfully, easily recreate the data that was used, install all the dependencies without running into any issues, and recreate the same results of the model.
+Machine Learning Engineers are no different to these cooks, if they are to deploy to production a Machine Learning model which a Data Science built, they must be able to understand the code and run it successfully, easily recreate the data that was used, install all the dependencies without running into any issues, and recreate the same results of the model.
 
 ![alt text](/images/how-to-run-this-code.png "Audience booing")
 
@@ -173,15 +173,17 @@ Everything I write goes into a function which gets packaged into a library. I de
 [1]: %load_ext autoreload
 %autoreload 2 # tells jupyter to autoreload libraries as they're updated in our environment
 
-[2]: from my_library import func # making our function accessible
+[2]: from my_library import fib # makes our function accessible
 
-[3]: [print(i) for i in fib(5)]
+[3]: [print(i) for i in fib(5)] # executes our function
 0
 1
 1
 2
 3
 ```
+
+Whenever I need to change the code behind the function `fib`, all I need to do is simply reinstall it by running `$ pip install .`[5] in my terminal and simply rerunning cell `3` above which will now use the function from my newly updated library.
 
 ---
 
@@ -190,3 +192,4 @@ Everything I write goes into a function which gets packaged into a library. I de
 * [2] [Mypy](http://mypy-lang.org/) is an optional static type checker for Python that aims to combine the benefits of dynamic (or "duck") typing and static typing.
 * [3] Google have a public [Python style guide](https://google.github.io/styleguide/) which I highly recommend to check out.
 * [4] [nbconvert](https://nbconvert.readthedocs.io/en/latest/) is a tool which lets you convert a notebook into executable code, as brilliant as that can sound, the tool doesn't check for any parts of your code which are not being used or might cause problems. So think of it as a dump from one format to another.
+* [5] `.` refers to the current directory which in this case is the one where our library is located.
