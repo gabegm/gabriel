@@ -1,6 +1,6 @@
 ---
 layout: post
-draft: true
+draft: false
 title: Data Science <3 Clean Code
 author: Gabriel Gauci Maistre
 description: There is a common misconception that being a Data Scientist means that you do not need to care about writing good clean code, because you're not a Software Developer. If you're a firm believer of this, please take some time to hear me out. I hope to have at least gotten you to reconsider by the end of this post.
@@ -13,14 +13,14 @@ tags:
 - data science
 - clean code
 - python
-date: 2021-05-19 23:00:00 +0000
+date: 2021-05-20 23:00:00 +0000
 ---
 
 ***DISCLAIMER***
 
 ***The following are simply my views and in no way reflect those of the whole industry.***
 
-![alt text](/images/data-scientists-should-write-clean-code.png "Audience booing")
+![alt text](/images/data-scientists-should-write-clean-code.png "Data Scientists should write clean code; change my mind.")
 *I'm back with another controversial topic!*
 
 There is a common misconception among people with an academic backgroung that being a Data Scientist means you do not need to care about writing good clean code, because you're not a Software Developer or a Machine Learning Engineer. Data Science is all about running experiments on data and you should not need to spend your precious time worrying about making things look pretty. If you're a firm believer of this, please take some time to hear me out. I hope to have at least gotten you to reconsider by the end of this post.
@@ -51,7 +51,7 @@ W:150:FormatChecker.process_tokens: Too many branches (13/12)
 
 ### Documentation
 
-![alt text](/images/i-feel-bad-for-you.png "Audience booing")
+![alt text](/images/i-feel-bad-for-you.png "Machine Learning Engineers feel bad for Data Scientists but they don't care")
 
 Documentation is not needed to develop software, neither are comments and docstrings. All of which take more time and effort to do. However they will save your time in the long run as your codebase grows larger and more people other than yourself will have to look at your code, maintain it, or even extend it. It goes without saying that it will also help you maintain your own codebase.
 
@@ -141,25 +141,25 @@ Whether you're developing your own library or importing someone else's, it's ess
 
 Importing `numpy` as `n` rather than `np` which is the preferred alias and used by the community is not going to help others get up to speed with what you're trying to achieve with your code.
 
-![alt text](/images/variable-naming.png "Audience booing")
+![alt text](/images/variable-naming.png "Giving a variable a well thought out name, no. Naming it 'x', definitely.")
 
 This also goes for naming your variables and functions. A variabled named `x` isn't going to help anyone understand what `x` is meant to be storing and used for. You can never know when you'll need to look at your own code again down the line and forget what `x` was meant to be used for.
 
 ## Dumping your code on a Machine Learning Engineer won't work
 
-![alt text](/images/dump-truck.png "Audience booing")
+![alt text](/images/dump-truck.png "Data Scientists dumping their code onto Machine Learning Engineers")
 
 If Data Scientists are the head chefs in a restaurant forming new recipes, Machine Learning Engineers are the cooks attempting to recreate the particular dish using the recipe provided to them. If the cooks are to successfully recreate the dish, they're going to need a well detailed recipe which is easy to read and understand.
 
 Machine Learning Engineers are no different to these cooks, if they are to deploy to production a Machine Learning model which a Data Science built, they must be able to understand the code and run it successfully, easily recreate the data that was used, install all the dependencies without running into any issues, and recreate the same results of the model.
 
-![alt text](/images/how-to-run-this-code.png "Audience booing")
+![alt text](/images/how-to-run-this-code.png "Machine Learning Engineers asking Data Scientists how to run their code.")
 
 This is no easy task, imagine trying peak into someone else's brain and understand the very thing which they've been working on for months. Now imagine that work did not consist of clean commented code, which is documented thoroughly, uses virtual environments to execute the code, and includes SQL queries to retrieve and recreate the data that was used to train the Machine Learning model. There's a far greater chance of the results not being recreated as the Data Scientist had in mind, causing problems with the model running in production down the line.
 
 ## You shouldn't tie your development to a notebook
 
-![alt text](/images/i-want-you-notebook.png "Audience booing")
+![alt text](/images/i-want-you-notebook.png "Data Scientists want be with notebooks forever")
 
 The topic of notebooks[5] is so vast I could probably have a whole post dedicated to it, *notes this down for later.* But to keep things short, although notebooks present a fantastic way of prototyping your code, they lack the features you would normally find in an Integrated Development Environment (IDE)[6].
 
@@ -167,8 +167,8 @@ Notebooks don't come with linting out of the box, which makes it hard to identif
 
 ## A better way to use notebooks
 
-![alt text](/images/data-science-two-buttons.png "Audience booing")
-*Do things the right way or just dump the notebook as code[7]*
+![alt text](/images/data-science-two-buttons.png "Use proper software development principles v.s. dumping all code in the notebook to a script.")
+*Use proper software development principles or just dump the notebook as code[7]*
 
 Notebooks are great for prototyping but they don't help in following Software Development principles, which hopefully by now I have convinced you that you should use them. Wouldn't it be great if you could have your cake and also eat it? Well in this case it's possible. Here's my approach.
 
