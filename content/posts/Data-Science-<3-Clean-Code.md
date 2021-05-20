@@ -14,7 +14,6 @@ tags:
 - clean code
 - python
 date: 2021-05-19 23:00:00 +0000
-
 ---
 
 ***DISCLAIMER***
@@ -24,16 +23,17 @@ date: 2021-05-19 23:00:00 +0000
 ![alt text](/images/data-scientists-should-write-clean-code.png "Audience booing")
 *I'm back with another controversial topic!*
 
-There is a common misconception that being a Data Scientist means that you do not need to care about writing good clean code, because you're not a Software Developer or a Machine Learning Engineer. If you're a firm believer of this, please take some time to hear me out. I hope to have at least gotten you to reconsider by the end of this post.
+There is a common misconception among people with an academic backgroung that being a Data Scientist means you do not need to care about writing good clean code, because you're not a Software Developer or a Machine Learning Engineer. Data Science is all about running experiments on data and you should not need to spend your precious time worrying about making things look pretty. If you're a firm believer of this, please take some time to hear me out. I hope to have at least gotten you to reconsider by the end of this post.
 
 ## Software Development princilpes aren't for Software Developers
 
 Software Development principles might have been curated by Software Developers to aid in the creation of software, but they definitely were not meant just for Software Developers. They were proposed for anyone writing any kind of software, this of course includes Data Scientists. Below are a few which are worth mentioning.
 
 ### Linting
+
 Python is not a compiled language, which means there is no way of knowing whether your code will execute successfully unless you attempt to execute it and the interpreter[0] finds a problem which halts the execution of your code. This means that it's extremely important to use a linter which is a tool that will help finding bugs and style problems in your code. It's important to note that it's not perfect due to Python's dynamic nature, however false warnings should be fairly infrequent.
 
-In the following example, Pylint[1] will let us know that our script has some issues such as lines being too long, have missing whitespaces, and unreachable code.
+In the following example, Pylint[1] will let us know that our script has some issues such as lines being too long, have missing whitespaces and unreachable code.
 
 ```sh
 $ pylint my_script.py
@@ -108,7 +108,7 @@ You may not care about making your code easier for others to read, but all of th
 
 ## Consistency
 
-Blank lines and white spaces help make code more readable. Fixed line lengths ensure that your code is legible on all types of screens. However when they're coupled with inconsistency they make confuse others reading your code, or even yourself. Python has many style guides, I suggest you find one that suits your needs and stick to it whenever you're writing code.[3]
+Blank lines and white spaces help make code more readable. Fixed line lengths ensure that your code is legible on all types of screens. However, even the best of intentions can be wasted by an inconsistent use of lines and white spaces, rendering even the most well-written code to be confusing. The antidote to inconsistency is the same as with any other form of writing: the style guide. Python has many style guides, your place of work might actually have one too. Unfortunately it is common for each team within a company to follow their own style guide which makes it hard to standardise within the company. If your company does not yet have one, I suggest you find one that suits your needs and stick to it whenever you're writing code.[3]
 
 ```python
 No:

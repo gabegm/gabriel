@@ -1,8 +1,19 @@
 ---
 layout: post
+draft: false
+author: Gabriel Gauci Maistre
 title: Blocking Social Media at Work
+description: Are you tired of your employees accessing social networks at work? Maybe you feel that your employees are spending more time checking their Facbook feed rather than crunching the numbers. Whether it’s Facebook, Twitter, or YouTube, how dare they do something else other than what you’re paying them for? In fact, why don’t you just strip out all the applications from their computers, lock them down, which let’s face it they probably already are, and leave Excel installed and call it ExcelOS, patent pending.
+images:
+- /images/how-about-no.jpeg
+audio: []
+series: []
+videos: []
+tags:
+- social media
+- censorship
+- office
 date: 2018-01-22 23:00:00 +0000
-
 ---
 
 Are you tired of your employees accessing social networks at work? Maybe you feel that your employees are spending more time checking their Facbook feed rather than crunching the numbers. Whether it’s Facebook, Twitter, or YouTube, how dare they do something else other than what you’re paying them for? In fact, why don’t you just strip out all the applications from their computers, lock them down, which let’s face it they probably already are, and leave Excel installed and call it ExcelOS, _patent pending_.

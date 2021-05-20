@@ -2,10 +2,18 @@
 layout: post
 draft: false
 author: "Gabriel Gauci Maistre"
-tags: ["julia", "programming language"]
 title: 10 Reasons Why You Should Learn Julia
+description: Julia is a fairly modern language, developed in 2009 by Jeff Bezanson, Stefan Karpinski, Viral B. Shah, and Alan Edelman who had the idea of designing a language that was free, high-level, and fast. The language was officially unveiled to the world in 2012 when the team launched a website with a blog post explaining the language’s mission. When asked why they named the language “Julia”, Alan Edelman turned down the thought that it was named after the fractal, but claimed that it just came up in a random conversation years ago when someone suggested arbitrarily that “Julia” would be a good name for a programming language. When asked why they created Julia, they claimed that they came from different programming language backgrounds, and loved them all. But they were greedy, and wanted more.
+images:
+- /images/julia-repl.png
+audio: []
+series: []
+videos: []
+tags:
+- julia
+- python
+- programming
 date: 2018-09-27 23:00:00 +0000
-
 ---
 
 Even though it has 1-based indexing.

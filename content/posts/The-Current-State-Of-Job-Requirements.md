@@ -1,8 +1,18 @@
 ---
 layout: post
+draft: false
 title: The Current State of Job Requirements
 date: 2018-01-11 23:00:00 +0000
-
+author: Gabriel Gauci Maistre
+description: Have you ever looked at a job ad, skimmed through it, and decided not to apply because you thought that you could not even come close to matching the requirements the ad was asking for? Maybe you were job hunting and felt like you were being flooded with job ads having impossible requirements making you shake your head in disbelief.
+images:
+- /images/work-experience.jpeg
+audio: []
+series: []
+videos: []
+tags:
+- job descriptions
+- recruiting
 ---
 
 Have you ever looked at a job ad, skimmed through it, and decided not to apply because you thought that you could not even come close to matching the requirements the ad was asking for? Maybe you were job hunting and felt like you were being flooded with job ads having impossible requirements making you shake your head in disbelief.
