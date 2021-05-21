@@ -165,6 +165,8 @@ The topic of notebooks[5] is so vast I could probably have a whole post dedicate
 
 Notebooks don't come with linting out of the box, which makes it hard to identify and correct subtle programming errors or unconventional coding practices that can lead to errors. A linter can tell you that you forgot to pass a variable in your function's argument, or that there's unused variables/functions in your code. All of which can make it even more confusing to understand the notebook code when reading it.
 
+Now you could make the argument that you could always prototype your code in a quick and dirty way and then rewrite it using the proper principles once you know what it is you want from your code. But you're still going to have to go through your code, figure out what you had in mind at the time when you wrote it, and rewrite it again. It would be a lot easier if you followed the correct principles in the first place and had the proper documentation, such as comments and docstrings, to work off from.
+
 ## A better way to use notebooks
 
 ![alt text](/images/data-science-two-buttons.png "Use proper software development principles v.s. dumping all code in the notebook to a script.")
