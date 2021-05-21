@@ -105,7 +105,7 @@ my_script.py:10: error: Argument "n" to "fib" has incompatible
                         type "str"; expected "int"
 ```
 
-You may not care about making your code easier for others to read, but all of the things I mentioned above are supposed to make life easier for you. The larger your codebase grows, the harder it'll be to maintain. Following these principles will make life a little easier. If you need some extra motivation, imagine that the next person to end up maintaining your code is a violent psychopath who knows where you live., that should do the trick.
+You may not care about making your code easier for others to read, but all of the things I mentioned above are supposed to make life easier for you. The larger your codebase grows, the harder it'll be to maintain. Following these principles will make life a little easier. If you need some extra motivation, imagine that the next person to end up maintaining your code is a violent psychopath who knows where you live, that should do the trick.
 
 ## Consistency
 
