@@ -48,4 +48,4 @@ After college, I joined a company as their first HR Data Analyst, a field that w
 
 ### Contact me
 
-[gabriel@gaucimaistre.com](mailto:gabriel@gaucimaistre.com)
+<span class="e-mail" data-user="leirbag" data-website="moc.ertsiamicuag"></span>
