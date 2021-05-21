@@ -23,7 +23,7 @@ date: 2021-05-20 23:00:00 +0000
 ![alt text](/images/data-scientists-should-write-clean-code.png "Data Scientists should write clean code; change my mind.")
 *I'm back with another controversial topic!*
 
-There is a common misconception among people with an academic backgroung that being a Data Scientist means you do not need to care about writing good clean code, because you're not a Software Developer or a Machine Learning Engineer. Data Science is all about running experiments on data and you should not need to spend your precious time worrying about making things look pretty. If you're a firm believer of this, please take some time to hear me out. I hope to have at least gotten you to reconsider by the end of this post.
+There is a common misconception among people with an academic background that being a Data Scientist means you do not need to care about writing good clean code, because you're not a Software Developer or a Machine Learning Engineer. Data Science is all about running experiments on data and you should not need to spend your precious time worrying about making things look pretty. If you're a firm believer of this, please take some time to hear me out. I hope to have at least gotten you to reconsider by the end of this post.
 
 ## Software Development princilpes aren't for Software Developers
 
