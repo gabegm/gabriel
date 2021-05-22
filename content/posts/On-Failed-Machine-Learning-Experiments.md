@@ -4,7 +4,7 @@ draft: false
 unlisted: true
 title: On Failed Machine Learning Experiments
 author: Gabriel Gauci Maistre
-description: There is a common misconception that being a Data Scientist means that you do not need to care about writing good clean code, because you're not a Software Developer. If you're a firm believer of this, please take some time to hear me out. I hope to have at least gotten you to reconsider by the end of this post.
+description: The "science" in Data Science is supposed to refer to the fact that doing Data Science involves conducting experiments. In any other field failed experiments are accepted, you wouldn't want a drug company to push out a new drug which failed internally, so why is it frowend upon in Data Science? There is the sense in industry that a failed experiment equates to failure, thus Data Scientists are icentivised to not conduct experiments which end up in failure. This results in either Data Scientists not advertising experiments as failures and instead covering them up, or not attempting novel experiments in case they do fail.
 images:
 - /images/i-have-no-idea-what-im-doing.jpg
 audio: []
