@@ -1,6 +1,6 @@
 ---
 layout: post
-draft: true
+draft: false
 unlisted: true
 title: On Failed Machine Learning Experiments
 author: Gabriel Gauci Maistre
@@ -14,7 +14,7 @@ tags:
 - data science
 - machine learning
 - failed experiments
-date: 2021-05-22 23:00:00 +0000
+date: 2021-05-21 23:00:00 +0000
 ---
 
 ***DISCLAIMER***
