@@ -97,6 +97,11 @@ html {
   font-size: 3.25rem;
 }
 
+.description {
+  font-size: .92rem;
+  font-weight: 300;
+}
+
 /* Sidebar nav */
 .sidebar-nav {
   padding-left: 0;
