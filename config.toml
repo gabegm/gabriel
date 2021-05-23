@@ -14,7 +14,7 @@ summary = "Gabriel Gauci Maistre"
 [params]
   AuthorName = "Gabriel Gauci Maistre"
   GitHubUser = "gabegm"
-  description = "Data Scientist"
+  description = "I have opinions and make people read them."
   images = ["/static/images/avatar.jpg"]
   themeColor = "theme-base-0g"
   layoutReverse = false
