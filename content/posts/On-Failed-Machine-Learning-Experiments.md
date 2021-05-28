@@ -47,7 +47,7 @@ At this point the Data Scientist knows that they will not be able reproduce the 
 
 This is where things get ugly. After weeks of hacking away, the Data Scientist finds some black box model that seems to perform what everyone expects. However, the Data Scientist is not able to explain what the model is doing, neither is anyone going to ask because no one wants to see this project fail. The results are presented to the PO or the board and this is when things spiral out of control and the results are publicised in some internal blog about how Artificial Intelligence was applied to a company problem, or some marketing post on LinkedIn.
 
-After a while the Machine Learning model gets deployed to production and suddenly does not perform well because the model was overfit to the training data and is now struggling with all of this out-of-sample data. At this rate either of two things happen. Either the Data Scientist comes under fire for delivering something that does not work, or no one bothers to raise any concerns because again no one wants to call label this a failed project.
+After a while the Machine Learning model gets deployed to production and suddenly does not perform well because the model was overfit to the training data and is now struggling with all of this out-of-sample data. At this rate either of two things happen. Either the Data Scientist comes under fire for delivering something that does not work, or no one bothers to raise any concerns because again no one wants to label this a failed project.
 
 ## Data Scientists are too scared to try novel experiments in case they fail
 
