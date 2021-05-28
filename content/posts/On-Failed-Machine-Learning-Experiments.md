@@ -4,7 +4,7 @@ draft: false
 unlisted: true
 title: On Failed Machine Learning Experiments
 author: Gabriel Gauci Maistre
-description: The “science” in Data Science is supposed to refer to the fact that doing Data Science involves conducting experiments with data In any other field failed experiments are accepted, you wouldn’t want a drug company to push out a new drug which failed internally, so why is it frowend upon in Data Science?
+description: The “science” in Data Science is supposed to refer to the fact that doing Data Science involves conducting experiments with data In any other field failed experiments are accepted, you wouldn’t want a drug company to push out a new drug which failed internally, so why is it frowned upon in Data Science?
 images:
 - /images/i-have-no-idea-what-im-doing.jpg
 audio: []
@@ -27,7 +27,7 @@ The "science" in Data Science is supposed to refer to the fact that doing Data S
 
 There is this sense in industry that a failed experiment equates to a failed project, thus Data Scientists are incentivised to not conduct experiments which end up in failure. This results in either Data Scientists not advertising experiments as failures and instead adding model complexity to cover up the fact that the model was just overfit on in-sample data[1], or not attempting novel experiments in case they do fail. This isn't to say that all Data Science experiments should fail, if that is the case then there is something fundamentally wrong with the type of experiments that are being pursued.
 
-Before we get into failed Machine Learning experiments and how they occur, we first need to cover how such experiments are cenceptualised in the first place. Normally in a data-driven company, either a Product Owner (PO)[2] or a member of the board comes up with an application for Machine Learning within the company. This idea could have either come from having witnessed others applying Machine Learning to the same problem within their own company[3], or a novel idea which they came up with to try[4]. Maybe one of the investors gives the board an objective to implement "Artificial Intelligence" (AI) to some part of the product and it's now the board's job to make that happen. The PO's job is to do some research and find out how others were able to apply this to their product, how to integrate such a feature within the PO's product, and approach a Data Scientist to attempt the same at the company. The PO secures a big budget from the board to deliver this project into production against a specific deadline.
+Before we get into failed Machine Learning experiments and how they occur, we first need to cover how such experiments are conceptualised in the first place. Normally in a data-driven company, either a Product Owner (PO)[2] or a member of the board comes up with an application for Machine Learning within the company. This idea could have either come from having witnessed others applying Machine Learning to the same problem within their own company[3], or a novel idea which they came up with to try[4]. Maybe one of the investors gives the board an objective to implement "Artificial Intelligence" (AI) to some part of the product and it's now the board's job to make that happen. The PO's job is to do some research and find out how others were able to apply this to their product, how to integrate such a feature within the PO's product, and approach a Data Scientist to attempt the same at the company. The PO secures a big budget from the board to deliver this project into production against a specific deadline.
 
 This is where the first issue occurs, the budget was approved without first awaiting the preliminary results from the Data Scientist to see whether there is a Machine Learning application for such such a problem within the company. More importantly, the deadline was set without even discussing the work required with the Data Scientist who is ultimately doing the work. This is at a stage where the Data Scientist has not yet conducted any proper analyses of the data and does not know what to expect.
 
@@ -61,7 +61,7 @@ If management were open to a failed experiment from the start, the Data Scientis
 
 ![alt text](/images/denied-pay-rise.png "Logo Title Text 1")
 
-If Data Scientists are to be allowed to fail at their experiments, their compensation and progression cannot be tied to the success of such experiments. "Deliver 4 models to production in 2021" is the best way to incentivse a Data Scientist to do whatever they can to make sure their experiments do not "fail", whatever the cost.
+If Data Scientists are to be allowed to fail at their experiments, their compensation and progression cannot be tied to the success of such experiments. "Deliver 4 models to production in 2021" is the best way to incentivise a Data Scientist to do whatever they can to make sure their experiments do not "fail", whatever the cost.
 
 Instead, progression should be tied towards the experiments themselves and the quality of their results, whether those results deem the experiment to be successful or not. The essential thing here is that the company learns from its data because the Data Scientist is able to answer the questions which they may have, by conducting the rigorous experiments required, in which the management accepts the results, whether or not they follow their gut feeling.
 
