@@ -1,7 +1,7 @@
 ---
 layout: post
 draft: false
-author: "Gabriel Gauci Maistre"
+author: Gabriel Gauci Maistre
 title: 10 Reasons Why You Should Learn Julia
 description: Even though it has 1-based indexing.
 images:
@@ -36,7 +36,8 @@ Programming languages are used for solving various real world problems, but ther
 *Periodic table of programming languages*
 
 There will never be the perfect language. Programming languages will never be a finished product, as the world evolves and specific needs change, so will programming languages.
-Here are 10 reasons why
+
+## Here are 10 reasons why
 
 ### 1 — It’s blazingly fast right out of the box
 

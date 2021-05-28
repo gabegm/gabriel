@@ -26,14 +26,14 @@ date: 2021-05-18 23:00:00 +0000
 
 ## What is a Data Science competition?
 
-Data Science competitions have become extremely popular in the past 5 years. They are not only popular on sites such as [Kaggle](https://www.kaggle.com/)[0], but also when interviewing with companies for a role on the job market in the form of a [candidate test](https://exercism.io/). These tests have quickly turned into a way to judge the performance of a particpant/candidate's submission and determine whether they have succeeded in the challenge or not.
+Data Science competitions have become extremely popular in the past 5 years. They are not only popular on sites such as [Kaggle](https://www.kaggle.com/)[0], but also when interviewing with companies for a role on the job market in the form of a [candidate test](https://exercism.io/). These tests have quickly turned into a way to judge the performance of a participant/candidate's submission and determine whether they have succeeded in the challenge or not.
 
 ![alt text](/images/titanic-competition.png "Kaggle titanic competition")
 *Popular titanic competition*
 
-These competitions/tests normally consist of a time constrained objective where the organiser provides some data, many times a train and test set[1], and participants submit the predictions which their model spat out in order to see how well they faired compared to all the other participants. That is, the predictions are compared with the dependant variable[2] omitted from the test set. Those yielding the highest accuracy fair much better compared to the rest. In certain cases the participant's methods may also be questioned, but this is more the case in job interviews, although not as often as it should, rather than in online competitions.
+These competitions/tests normally consist of a time constrained objective where the organiser provides some data, many times a train and test set[1], and participants submit the predictions which their model spat out in order to see how well they fared compared to all the other participants. That is, the predictions are compared with the dependant variable[2] omitted from the test set. Those yielding the highest accuracy fair much better compared to the rest. In certain cases the participant's methods may also be questioned, but this is more the case in job interviews, although not as often as it should, rather than in online competitions.
 
-While my introduction to Data Science happened during my studies at university, it practise in the industry that helped me see that these are two worlds apart. This is not to say that education does not have its place in the space of Data Science and Machine Learning.
+While my introduction to Data Science happened during my studies at university, it practice in the industry that helped me see that these are two worlds apart. This is not to say that education does not have its place in the space of Data Science and Machine Learning.
 
 My bachelor thesis revolved around algorithmic trading. I trained a Machine Learning model to pick correlated and inversely correlated stocks from a basket, forecast future price movements in said stocks, and decide on whether to hold, buy, or sell based on those insights without the need of any human input. Although I did learn a lot from this experience, I would definitely not use the model in industry and I would absolutely not let it use real money to invest.
 
@@ -43,7 +43,7 @@ My bachelor thesis revolved around algorithmic trading. I trained a Machine Lear
 
 Data sets found in industry are completely different compared to those found in competitions. In fact, I would not even go as far as to call them data sets but a huge database, sometimes multiple if you are not lucky enough to have a centralised data warehouse. You would need to sift through numerous tables, of which lacking proper documentation, looking for the data you need, only to then do some heavy tidying to structure your data, and thoroughly checking the data before you can even consider using it in a Machine Learning model.
 
-This is completely different to a `.csv` file which you are handed in a competition, a data set where someone has already gone through the work of packaging the data for you. There is a joke that "Data Scientists spend 80% of their time cleaning data and the other 20% complaining about it." This is of course an overexaggeration, however it is meant to emphasise how hard it is for a Data Scientist to get the data they need before they may even begin modelling. This is something which these competitions fail to teach you.
+This is completely different to a `.csv` file which you are handed in a competition, a data set where someone has already gone through the work of packaging the data for you. There is a joke that "Data Scientists spend 80% of their time cleaning data and the other 20% complaining about it." This is of course an over exaggeration, however it is meant to emphasise how hard it is for a Data Scientist to get the data they need before they may even begin modelling. This is something which these competitions fail to teach you.
 
 ## Industry is not about producing the highest fraction of accuracy
 
@@ -63,11 +63,11 @@ In order to comply with regulatory frameworks, companies need to be able to expl
 
 ## Competitions do not help you understand your model
 
-The ultimate goal of a competition is to obtain the highest accuracy where even a fraction could make a difference, all under time contrained conditions. This does not encourage you to take the time to understand the data, its imperfections, and train a model which is robust to adversarial examples. Instead you are incentivised to try anything which will edge you forward even slightly, no matter the cost. This encourages the use of black box models, leaving you unable to understand what your model is learning from your data.
+The ultimate goal of a competition is to obtain the highest accuracy where even a fraction could make a difference, all under time constrained conditions. This does not encourage you to take the time to understand the data, its imperfections, and train a model which is robust to adversarial examples. Instead you are incentivised to try anything which will edge you forward even slightly, no matter the cost. This encourages the use of black box models, leaving you unable to understand what your model is learning from your data.
 
 ![alt text](/images/data-science.jpg "Data Scientist hacking things together")
 
-Competitions tend to use data sets which are less complex in order to lower the barrier of entry and boost participation, apart from the time constraint of course. They also do this because they're not allowed to publically share personally identifiable information (PII) about their customers. Another reason is that a company's data is propriety. There's a reason why data is called ["the new oil."](https://www.forbes.com/sites/forbestechcouncil/2019/11/15/data-is-the-new-oil-and-thats-a-good-thing/) No company is going to willingly give out their secret sauce for others to use for their own businesses. This limits the things you can learn from competing in such competitions.
+Competitions tend to use data sets which are less complex in order to lower the barrier of entry and boost participation, apart from the time constraint of course. They also do this because they're not allowed to publicly share personally identifiable information (PII) about their customers. Another reason is that a company's data is propriety. There's a reason why data is called ["the new oil."](https://www.forbes.com/sites/forbestechcouncil/2019/11/15/data-is-the-new-oil-and-thats-a-good-thing/) No company is going to willingly give out their secret sauce for others to use for their own businesses. This limits the things you can learn from competing in such competitions.
 
 ## Not all submissions require source code
 
@@ -85,7 +85,7 @@ What if your database spans in the hundreds of GBs, if not TBs?. The general rul
 
 ## How to improve your Data Science skills
 
-If you are looking for ways to learn, find a particular industry that interests you and try to apply Machine Learning to it. Let's say you are into real estate and would like to train a model to predict the value of a proprty based on its features. You might even try to forecast the future price increase X years in the future. This could help others looking to buy property and shed a light on the price fluctuations in the property market right now.
+If you are looking for ways to learn, find a particular industry that interests you and try to apply Machine Learning to it. Let's say you are into real estate and would like to train a model to predict the value of a property based on its features. You might even try to forecast the future price increase X years in the future. This could help others looking to buy property and shed a light on the price fluctuations in the property market right now.
 
 You could definitely find a data set online which will give you this information, however as I explained above these data sets will not hold in real world examples. It would be more realistic if you found a website(s) listing the information you need and build a [scraper](https://scrapy.org/) to collect the data you need and schedule it to run on a regular basis so that you can start to collect historical data over time. In certain cases some websites may even offer an API to make your life a little easier in getting the data which you need.
 
@@ -101,7 +101,7 @@ Why am I suggesting all of this? Because although it is easy to just find a data
 
 This is not to say that competitions do not have a place at all in Data Science. I do believe that such competitions present an excellent way of bouncing off ideas from each other, assuming the code was submitted, in order for you to try new methods out on your own data.
 
-Good competitions which also include writeups present a great opportunity for knowledge sharing within the community, allowing for the community to ask questions about the submitter's approach.
+Good competitions which also include write ups present a great opportunity for knowledge sharing within the community, allowing for the community to ask questions about the submitter's approach.
 
 ![alt text](/images/sharing-is-caring.jpg "Sharing is caring")
 

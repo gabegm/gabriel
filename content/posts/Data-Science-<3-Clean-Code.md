@@ -25,7 +25,7 @@ date: 2021-05-20 23:00:00 +0000
 
 There is a common misconception among people with an academic background that being a Data Scientist means you do not need to care about writing good clean code, because you're not a Software Developer or a Machine Learning Engineer. Data Science is all about running experiments on data and you should not need to spend your precious time worrying about making things look pretty. If you're a firm believer of this, please take some time to hear me out. I hope to have at least gotten you to reconsider by the end of this post.
 
-## Software Development princilpes aren't for Software Developers
+## Software Development principles aren't for Software Developers
 
 Software Development principles might have been curated by Software Developers to aid in the creation of software, but they definitely were not meant *just* for Software Developers. They were proposed for anyone writing any kind of software, this of course includes Data Scientists. Below are a few which I felt were worth mentioning.
 
@@ -33,7 +33,7 @@ Software Development principles might have been curated by Software Developers t
 
 Python is not a compiled language, which means there is no way of knowing whether your code will execute successfully unless you attempt to execute it and the interpreter[0] finds a problem which halts the execution of your code. This means that it's extremely important to use a linter which is a tool that will help finding bugs and style problems in your code. It's important to note that it's not perfect due to Python's dynamic nature[1], however false warnings should be fairly infrequent.
 
-In the following example, Pylint[2] will let us know that our script has some issues such as lines being too long, have missing whitespaces and unreachable code.
+In the following example, Pylint[2] will let us know that our script has some issues such as lines being too long, have missing whitespace characterss and unreachable code.
 
 ```sh
 $ pylint my_script.py
@@ -143,7 +143,7 @@ Importing `numpy` as `n` rather than `np` which is the preferred alias and used 
 
 ![alt text](/images/variable-naming.png "Giving a variable a well thought out name, no. Naming it 'x', definitely.")
 
-This also goes for naming your variables and functions. A variabled named `x` isn't going to help anyone understand what `x` is meant to be storing and used for. You can never know when you'll need to look at your own code again down the line and forget what `x` was meant to be used for.
+This also goes for naming your variables and functions. A variable named `x` isn't going to help anyone understand what `x` is meant to be storing and used for. You can never know when you'll need to look at your own code again down the line and forget what `x` was meant to be used for.
 
 ## Dumping your code on a Machine Learning Engineer won't work
 
