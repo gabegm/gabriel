@@ -14,7 +14,7 @@ tags:
 - data science
 - machine learning
 - failed experiments
-date: 2021-05-27 23:00:00 +0000
+date: 2021-05-28 23:00:00 +0000
 ---
 
 ***DISCLAIMER***
@@ -23,13 +23,13 @@ date: 2021-05-27 23:00:00 +0000
 
 ![alt text](/images/i-have-no-idea-what-im-doing.jpg "Logo Title Text 1")
 
-The "science" in Data Science is supposed to refer to the fact that doing Data Science involves conducting experiments with data[0]. In any other field failed experiments are accepted, you wouldn't want a drug company to push out a new drug which failed internal tests, so why is it frowned upon in Data Science?
+The "science" in Data Science is supposed to refer to the fact that doing Data Science involves conducting experiments with data[[0]](#f0). In any other field failed experiments are accepted, you wouldn't want a drug company to push out a new drug which failed internal tests, so why is it frowned upon in Data Science?
 
-There is this sense in industry that a failed experiment equates to a failed project, thus Data Scientists are incentivised to not conduct experiments which end up in failure. This results in either Data Scientists not advertising experiments as failures and instead adding model complexity to cover up the fact that the model was just overfit on in-sample data[1], or not attempting novel experiments in case they do fail. This isn't to say that all Data Science experiments should fail, if that is the case then there is something fundamentally wrong with the type of experiments that are being pursued.
+There is this sense in industry that a failed experiment equates to a failed project, thus Data Scientists are incentivised to not conduct experiments which end up in failure. This results in either Data Scientists not advertising experiments as failures and instead adding model complexity to cover up the fact that the model was just overfit on in-sample data[[1]](#f1), or not attempting novel experiments in case they do fail. This isn't to say that all Data Science experiments should fail, if that is the case then there is something fundamentally wrong with the type of experiments that are being pursued.
 
 ## How Machine Learning experiments are conceptualised
 
-Normally in a data-driven company, either a Product Owner (PO)[2] or a member of the board comes up with an application for Machine Learning within the company. This idea could have either come from having witnessed others applying Machine Learning to the same problem within their own company[3], or a novel idea which they came up with to try[4]. Maybe one of the investors gives the board an objective to implement "Artificial Intelligence" (AI) to some part of the product and it's now the board's job to make that happen. The PO's job is to do some research and find out how others were able to apply this to their product, how to integrate such a feature within the PO's product, and approach a Data Scientist to attempt the same at the company. The PO secures a big budget from the board to deliver this project into production against a specific deadline.
+Normally in a data-driven company, either a Product Owner (PO)[[2]](#f2) or a member of the board comes up with an application for Machine Learning within the company. This idea could have either come from having witnessed others applying Machine Learning to the same problem within their own company[[3]](#f3), or a novel idea which they came up with to try[[4]](#f4). Maybe one of the investors gives the board an objective to implement "Artificial Intelligence" (AI) to some part of the product and it's now the board's job to make that happen. The PO's job is to do some research and find out how others were able to apply this to their product, how to integrate such a feature within the PO's product, and approach a Data Scientist to attempt the same at the company. The PO secures a big budget from the board to deliver this project into production against a specific deadline.
 
 This is where the first issue occurs, the budget was approved without first awaiting the preliminary results from the Data Scientist to see whether there is a Machine Learning application for such such a problem within the company. More importantly, the deadline was set without even discussing the work required with the Data Scientist who is ultimately doing the work. This is at a stage where the Data Scientist has not yet conducted any proper analyses of the data and does not know what to expect.
 
@@ -83,8 +83,8 @@ Successful experiments are not those which prove a hypothesis to be true, but on
 
 ---
 
-* [0] Testing whether it's possible to apply Machine Learning to recommend a clothing brand to a customer using the data available to the Data Scientist.
-* [1] In-sample data refers to the data available used to train and test a Machine Learning model to predict on data not yet observed.
-* [2] The Product Owner, while responsible for maximizing the value of the product and the work of the Development Team, is the sole person responsible for managing the Product Backlog.
-* [3] Commonly witness through conferences, webinars, and articles.
-* [4] "Let's recommend items on the food menu for our customers based on their age!"
+* <a name="f0">[0]</a> Testing whether it's possible to apply Machine Learning to recommend a clothing brand to a customer using the data available to the Data Scientist.
+* <a name="f1">[1]</a> In-sample data refers to the data available used to train and test a Machine Learning model to predict on data not yet observed.
+* <a name="f2">[2]</a> The Product Owner, while responsible for maximizing the value of the product and the work of the Development Team, is the sole person responsible for managing the Product Backlog.
+* <a name="f3">[3]</a> Commonly witness through conferences, webinars, and articles.
+* <a name="f4">[4]</a> "Let's recommend items on the food menu for our customers based on their age!"

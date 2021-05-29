@@ -192,6 +192,14 @@ a.sidebar-nav-item:focus {
   direction: rtl;
 }
 
+/* tags */
+.tags {
+  width: 705px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 0.8rem;
+}
+
 /*
  * Themes
  *
