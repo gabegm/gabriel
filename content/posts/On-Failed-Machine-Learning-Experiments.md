@@ -1,7 +1,7 @@
 ---
 layout: post
 draft: false
-unlisted: true
+unlisted: false
 title: On Failed Machine Learning Experiments
 author: Gabriel Gauci Maistre
 description: The “science” in Data Science is supposed to refer to the fact that doing Data Science involves conducting experiments with data In any other field failed experiments are accepted, you wouldn’t want a drug company to push out a new drug which failed internally, so why is it frowned upon in Data Science?
@@ -14,7 +14,7 @@ tags:
 - data science
 - machine learning
 - failed experiments
-date: 2021-06-02 23:00:00 +0000
+date: 2021-06-06 23:00:00 +0000
 ---
 
 ***DISCLAIMER***
