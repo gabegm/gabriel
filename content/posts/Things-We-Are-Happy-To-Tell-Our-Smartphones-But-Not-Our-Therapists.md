@@ -12,7 +12,7 @@ series: []
 videos: []
 tags:
 - data privacy
-date: 2021-06-05 23:00:00 +0000
+date: 2021-06-25 23:00:00 +0000
 ---
 
 ![alt text](/images/i-have-nothing-to-hide.png "Logo Title Text 1")
