@@ -81,7 +81,7 @@ Data Science projects are different to Software Engineering projects. Machine Le
 
 Successful experiments are not those which prove a hypothesis to be true, but one which is carried out fairly to prove a particular hypothesis to be true or not. Ultimately many lessons are learnt from such experiments which is why it's always a good idea to keep an open mind and to always question things but to never believe something blindly.
 
-I tried my best to keep my examples as vague as possible so that they can be applied to any organisation working with data, no matter the extent of Machine Learning experiments being carried out within the organisation. This should hopefully aid in the self reflection required to see that Machine Learning experiments are done right, rather than fuelling a debate of good v.s. bad Machine Learning experiments. If applied correctly, Machine Learning can provide vast amounts of benefits to an organisation's product(s) and its customers, which is why is always good to have these kinds of discussions of self-reflection.
+I tried my best to keep my examples as vague as possible so that they can be applied to any organisation working with data, no matter the extent of Machine Learning experiments being carried out within the organisation. This should hopefully aid in the self reflection required to see that Machine Learning experiments are done right, rather than fuelling a debate of good v.s. bad Machine Learning experiments. If applied correctly, Machine Learning can provide vast amounts of benefits to an organisation's product(s) and its customers, which is why it's always a good exercise to have these kinds of discussions of self-reflection.
 
 ---
 
