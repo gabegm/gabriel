@@ -11,6 +11,7 @@
     Tags: {{ range .Params.tags -}} {{ " " }} <a href="/tags/{{ . | urlize }}">{{ . }}</a> {{- end }}
   </p>
   {{ end }}
+  <img src="{{ .Params.image }}" />
   {{ .Summary }}
   {{ if .Truncated }}
   <div class="read-more-link">

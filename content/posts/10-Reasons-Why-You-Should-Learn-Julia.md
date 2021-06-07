@@ -7,6 +7,7 @@ description: Even though it has 1-based indexing.
 summary: Even though it has 1-based indexing.
 images:
 - /images/julia-repl.png
+image: /images/julia-repl.png
 audio: []
 series: []
 videos: []

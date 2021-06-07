@@ -12,6 +12,7 @@ description: Data Science competitions have become extremely popular in the past
 summary: Data Science competitions have become extremely popular in the past 5 years. They are not only popular on sites such as Kaggle, but also when interviewing with companies for a role on the job market in the form of a candidate test. These tests have quickly turned into a way to judge the performance of a participant/candidate's submission and determine whether they have succeeded in the challenge or not.
 images:
 - /images/audience-booing.gif
+image: /images/audience-booing.gif
 audio: []
 series: []
 videos: []

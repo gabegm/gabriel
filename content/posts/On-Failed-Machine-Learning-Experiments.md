@@ -8,6 +8,7 @@ description: The "science" in Data Science is supposed to refer to the fact that
 summary: The "science" in Data Science is supposed to refer to the fact that doing Data Science involves conducting experiments with data. In any other field failed experiments are accepted, you wouldn't want a drug company to push out a new drug which failed internal tests, so why is it frowned upon in Data Science?
 images:
 - /images/i-have-no-idea-what-im-doing.jpg
+image: /images/i-have-no-idea-what-im-doing.jpg
 audio: []
 series: []
 videos: []

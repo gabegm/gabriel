@@ -7,6 +7,7 @@ description: Are you tired of your employees accessing social networks at work? 
 summary: Are you tired of your employees accessing social networks at work? Maybe you feel that your employees are spending more time checking their Facbook feed rather than crunching the numbers. Whether it’s Facebook, Twitter, or YouTube, how dare they do something else other than what you’re paying them for? In fact, why don’t you just strip out all the applications from their computers, lock them down, which let’s face it they probably already are, and leave Excel installed and call it ExcelOS, patent pending.
 images:
 - /images/how-about-no.jpeg
+image: /images/how-about-no.jpeg
 audio: []
 series: []
 videos: []
