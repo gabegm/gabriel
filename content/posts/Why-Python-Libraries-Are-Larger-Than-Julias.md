@@ -30,11 +30,15 @@ Every Python developer faces the same dilemma as the codebase for package starts
 
 This means that as a Python developer it is not easy to know at first glance whether other developer's packages are using pure Python or C/C++ underneath the hood. On one hand if they're using pure Python their code might be easy to use however at the cost of performance. On the other if their code is using C/C++ underneath the hood then you need to be extra careful that their code will be compatible with yours.
 
+Python is also not a typed language, making it extremely tricky for developers to reuse someone else's code with their own and expect it to "just work."
+
 ## Julia's high degree of modularity
 
 Because Julia does not share the same performance penalty as Python, Julia packages need not be written in other languages in order to remain performant. This makes it easy for any Julia developer to easily rely on other developer's code knowing in full that their code, also written in Julia, will be as performant as the one they're writing. This in turn makes developers within the Julia community more likely to collaborate between projects as your typical Julia package will be written in Julia.
 
-Julia has built-in multiple dispatch which is central to the language design. This means that the compiler will select which function to use, not just by its name, but also by the types of the arguments which are being passed tp the particular function. This eliminates the need for long `if-then-else` blocks checking for types and executing code specific to the argument types. Multiple dispatch, although not new to Julia,  allows Julia's compiler to deploy the optimisations needed to make the execution of the code more performant, by keeping code execution paths tight and minimal.
+Julia also has built-in multiple dispatch which is central to the language design. This means that the compiler will select which function to use, not just by its name, but also by the types of all the arguments which are being passed to the particular function. This eliminates the need for long `if-then-else` blocks checking for types and executing code specific to the argument types. It also allows you to add functions based on other people's code by simply adding a function accepting the type which you need.
+
+Multiple dispatch, although not new to Julia, allows Julia's compiler to deploy the optimisations needed to make the execution of the code more performant, by keeping code execution paths tight and minimal. This means that the compiler knows exactly which functions are needed by simply checking the types of the arguments which you're using.
 
 All of this makes it extremely easy and advantageous for developers to mix and match code from other packages with their own even though they were never designed to do so in the first place. Developers need not to wrap extra checks around their code for variables types being used to make sure the other developers code works without hiccups.
 
