@@ -38,7 +38,8 @@ connection_string <span style=color:#f92672>=</span> <span style=color:#e6db74>&
 </span><span style=color:#e6db74>AwsRegion=</span><span style=color:#e6db74>$region</span><span style=color:#e6db74>;
 </span><span style=color:#e6db74>S3OutputLocation=</span><span style=color:#e6db74>$s3_location</span><span style=color:#e6db74>;
 </span><span style=color:#e6db74>AuthenticationType=</span><span style=color:#e6db74>$authentication_type</span><span style=color:#e6db74>;
-</span><span style=color:#e6db74>UID=</span><span style=color:#e6db74>$uid</span><span style=color:#e6db74>;PWD=</span><span style=color:#e6db74>$pwd</span><span style=color:#e6db74>;
+</span><span style=color:#e6db74>UID=</span><span style=color:#e6db74>$uid</span><span style=color:#e6db74>;
+</span><span style=color:#e6db74>PWD=</span><span style=color:#e6db74>$pwd</span><span style=color:#e6db74>;
 </span><span style=color:#e6db74>&#34;&#34;&#34;</span>
 </code></pre></div><p>Okay I promise the fun part is coming. Now that we&rsquo;ve finished setting up the boring configurations, we can go ahead and establish a connection and query Athena!</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-julia data-lang=julia>conn <span style=color:#f92672>=</span> DBInterface<span style=color:#f92672>.</span>connect(ODBC<span style=color:#f92672>.</span>Connection, connection_string)
 
