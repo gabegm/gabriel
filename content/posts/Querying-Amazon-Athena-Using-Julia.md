@@ -112,7 +112,8 @@ Driver=$driver;
 AwsRegion=$region;
 S3OutputLocation=$s3_location;
 AuthenticationType=$authentication_type;
-UID=$uid;PWD=$pwd;
+UID=$uid;
+PWD=$pwd;
 """
 ```
 
