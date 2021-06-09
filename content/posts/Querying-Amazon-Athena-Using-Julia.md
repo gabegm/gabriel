@@ -56,7 +56,7 @@ Enough chit-chat. Let's start off by creating a new directory to house our code 
 ~/Athena.jl $ touch configs/config.yml
 ```
 
-Go ahead and open the `Athena.jl` directory in your favourite IDE, mine is Visual Studio Code which is what I used. Open the `configs/default.yml` file so that we can add our configurations. You'll need to add your `s3 location`, `uid`, and `pwd`. If your AWS Cloud infrastructure is set up in a different region, you might also need to change the `region` value. Based on the OS, you might also need to change the path to the database driver. If you're running macOS such as myself, you might not need to change anything, just make sure the file exists in that directory.
+Go ahead and open the `Athena.jl` directory in your favourite IDE, mine is Visual Studio Code[[3]](#f3) which is what I used. Open the `configs/default.yml` file so that we can add our configurations. You'll need to add your `s3 location`, `uid`, and `pwd`. If your AWS Cloud infrastructure is set up in a different region, you might also need to change the `region` value. Based on the OS, you might also need to change the path to the database driver. If you're running macOS such as myself, you might not need to change anything, just make sure the file exists in that directory.
 
 ```yml
 database:
@@ -70,7 +70,7 @@ database:
   pwd: ""
 ```
 
-Add the SQL query you'd like to run in the `query.sql` file in `src/sql` and open the `src/Athena.jl` Julia script to run the following in your REPL[[3]](#f3).
+Add the SQL query you'd like to run in the `query.sql` file in `src/sql` and open the `src/Athena.jl` Julia script to run the following in your REPL[[4]](#f4).
 
 ```julia
 import Pkg
@@ -81,9 +81,9 @@ Pkg.add(["ODBC", "DataFrames", "Configs"])
 using ODBC, DataFrames, Configs
 ```
 
-The first thing you might ask if you're new to Julia is "what's the difference between `import` and `using`?" Well `import` works the same as in Python, `import MyModule` would bring into scope[[4]](#f4) functions which will remain accessible using `MyModule`, such as `MyModule.x` and `MyModule.y`, kind of like using `import numpy` in Python and then running `numpy.array([])`. However, `using` in Julia is equivalent to running `from numpy import *` in Python, which would bring all of Numpy's functions into scope, allowing you to run `array([])` in Python. Should you wish to only import specific functions into scope in Julia, all you need to do is `import MyModule: x, y` which would now make functions `x` and `y` accessible in scope.
+The first thing you might ask if you're new to Julia is "what's the difference between `import` and `using`?" Well `import` works the same as in Python, `import MyModule` would bring into scope[[5]](#f5) functions which will remain accessible using `MyModule`, such as `MyModule.x` and `MyModule.y`, kind of like using `import numpy` in Python and then running `numpy.array([])`. However, `using` in Julia is equivalent to running `from numpy import *` in Python, which would bring all of Numpy's functions into scope, allowing you to run `array([])` in Python. Should you wish to only import specific functions into scope in Julia, all you need to do is `import MyModule: x, y` which would now make functions `x` and `y` accessible in scope.
 
-`Pkg` is the package manager bundled with Julia. We can not only use it to install packages but to also create virtual environments[[5]](#f5) to run our code from. By running `Pkg.activate(".")` we are telling Julia's package manager to activate a new virtual environment in the current directly for us to install our Julia dependencies in. This will automatically create two new files, `project.toml` and `Manifest.toml`, the former will list all our direct dependencies while the latter will list the indirect dependencies which our direct dependencies will rely on. These two files will allow any other developer to recreate the same virtual environment as ours which will be neat for reproducing this example.
+`Pkg` is the package manager bundled with Julia. We can not only use it to install packages but to also create virtual environments[[6]](#f6) to run our code from. By running `Pkg.activate(".")` we are telling Julia's package manager to activate a new virtual environment in the current directly for us to install our Julia dependencies in. This will automatically create two new files, `project.toml` and `Manifest.toml`, the former will list all our direct dependencies while the latter will list the indirect dependencies which our direct dependencies will rely on. These two files will allow any other developer to recreate the same virtual environment as ours which will be neat for reproducing this example.
 
 Next will use the `Pkg.add` function to add a list of Julia packages we'd like to install, and use the `using` command to import them into scope. Now that we've set up our Julia environment with the dependencies we will need to run this example, we can begin loading configurations from our config file using `Configs.jl`'s `getconfig` function. This function returns a `NamedTuple` which is a Julia type that has two parameters: a tuple of symbols giving the field names, and a tuple type giving the field types. This means that we can use the field names from the config file itself to access them directly using the `.` parameter. In the last step we'll read the contents of the SQL script into Julia and parse them as a string for us to use later.
 
@@ -103,7 +103,7 @@ end
 ```
 
 Before we begin querying Athena, `ODBC.jl` requires that we add the Athena driver we installed earlier by passing it the name and path to the driver. We also need to build the connection string which we will use to connect to Athena.
-Julia has native support for string interpolation allowing us to construct strings using any variable(s) which we may need without the need for concatenation[[6]](#f6). The connection string is specific to the database you're using, so if you won't be connecting to Athena you'll have to look up the documentation for the driver you're using to construct the connection string required.
+Julia has native support for string interpolation allowing us to construct strings using any variable(s) which we may need without the need for concatenation[[7]](#f7). The connection string is specific to the database you're using, so if you won't be connecting to Athena you'll have to look up the documentation for the driver you're using to construct the connection string required.
 
 ```julia
 # locate existing ODBC driver shared libraries or download new, then configure
@@ -162,11 +162,11 @@ ODBC.load(df, conn, "table_nme")
 
 Could you have done all of this in Python? Absolutely, in fact there are many posts like these which you can find on how to do that. However, I think Julia is an interesting language, [is worth learning]({{< ref "/content/posts/10-Reasons-Why-You-Should-Learn-Julia.md" >}}), and can provide many benefits over Python.
 
-However, Julia is still a fairly new language, and although it's steadily rising in popularity[[7]]((#f7))[[8]]((#f8)), still lacks the tooling and community support which a more widely used language such as Python provides. Looking at StackOverflow, the number of questions regarding Python dwarf the number of questions on Julia. It might be tempting to chalk this up to Julia being easier to use but — as much as I value Julia over Python — this isn't the case. This is an example of selection bias, where the actual reason that the number of questions on Python versus the number of questions on Julia is significantly higher is simply because there are more people using Python than Julia. This underrepresentation of community questions and resources on StackOverflow actually contributes to Julia's steeper learning curve.
+However, Julia is still a fairly new language, and although it's steadily rising in popularity[[8]]((#f8))[[9]]((#f9)), still lacks the tooling and community support which a more widely used language such as Python provides. Looking at StackOverflow, the number of questions regarding Python dwarf the number of questions on Julia. It might be tempting to chalk this up to Julia being easier to use but — as much as I value Julia over Python — this isn't the case. This is an example of selection bias, where the actual reason that the number of questions on Python versus the number of questions on Julia is significantly higher is simply because there are more people using Python than Julia. This underrepresentation of community questions and resources on StackOverflow actually contributes to Julia's steeper learning curve.
 
 It is not, however, all doom and gloom. I do think that Julia, as a language, is easier to read than Python since most packages Julia are written in pure Julia. As popular as Python may be, it doesn't always mean it's the best tool for everyone or every job. Tooling and community support will, eventually, catch up as Julia's popularity continues to rise and its user base continues to grow. Ultimately, what language best fits your needs is up to you.
 
-If you do however find yourself in the situation wanting to use a Python package not available in Julia, `PyCall.jl` is a great package which provides you with the ability to directly call and fully interoperate[[9]](#f9) with Python from the Julia language. It's as simple as:
+If you do however find yourself in the situation wanting to use a Python package not available in Julia, `PyCall.jl` is a great package which provides you with the ability to directly call and fully interoperate[[10]](#f10) with Python from the Julia language. It's as simple as:
 
 ```julia
 import Pkg
@@ -191,10 +191,11 @@ so.newton(x -> cos(x) - x, 1) # 0.7390851332151607
 
 * <a name="f1">[1]</a> [QuantEcon](https://cheatsheets.quantecon.org/) has a great table comparing MATLAB, Python, and Julia.
 * <a name="f2">[2]</a> [Configs.jl](https://github.com/citkane/Configs) is an open source Julia package maintained by [Michael Jonker](https://github.com/citkane).
-* <a name="f3">[3]</a> A read–eval–print loop (REPL), is a simple interactive environment that takes code input, executes them, and returns the results.
-* <a name="f4">[4]</a> The scope of a variable is the region of code within which a variable is visible. Variable scoping helps avoid variable naming conflicts.
-* <a name="f5">[5]</a> Virtual environments help us ensure our applications and its dependencies remain independent from other applications by avoiding any conflicts in versions which may arise.
-* <a name="f6">[6]</a> In Julia, strings would be concatenated by using the `*` operator: `"Hello " * "world"`
-* <a name="f7">[7]</a> [The accelerating adoption of Julia](https://lwn.net/Articles/834571/)
-* <a name="f8">[8]</a> [Julia Update: Adoption Keeps Climbing; Is It a Python Challenger?](https://www.hpcwire.com/2021/01/13/julia-update-adoption-keeps-climbing-is-it-a-python-challenger/)
-* <a name="f9">[9]</a> Julia has excellent interop with not only Python but a vast amount of [other languages](https://github.com/JuliaInterop).
+* <a name="f3">[3]</a> Visual Studio Code has an excellent [extension](https://www.julia-vscode.org/) to aid you in developing Julia applications maintained by the Julia community.
+* <a name="f4">[4]</a> A read–eval–print loop (REPL), is a simple interactive environment that takes code input, executes them, and returns the results.
+* <a name="f5">[5]</a> The scope of a variable is the region of code within which a variable is visible. Variable scoping helps avoid variable naming conflicts.
+* <a name="f6">[6]</a> Virtual environments help us ensure our applications and its dependencies remain independent from other applications by avoiding any conflicts in versions which may arise.
+* <a name="f7">[7]</a> In Julia, strings would be concatenated by using the `*` operator: `"Hello " * "world"`
+* <a name="f8">[8]</a> [The accelerating adoption of Julia](https://lwn.net/Articles/834571/)
+* <a name="f9">[9]</a> [Julia Update: Adoption Keeps Climbing; Is It a Python Challenger?](https://www.hpcwire.com/2021/01/13/julia-update-adoption-keeps-climbing-is-it-a-python-challenger/)
+* <a name="f10">[10]</a> Julia has excellent interop with not only Python but a vast amount of [other languages](https://github.com/JuliaInterop).
