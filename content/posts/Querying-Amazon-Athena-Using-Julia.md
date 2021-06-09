@@ -4,6 +4,7 @@ draft: false
 unlisted: false
 title: Querying Amazon Athena Using Julia
 author: Gabriel Gauci Maistre
+description: Julia is a fairly modern scientific programming language that is free, high-level, fast, and bundles a bunch of awesome features that makes Julia working with data great again. Amazon Athena is an interactive query service which allows you to easily analyze your data collecting dust in Amazon S3 storage using your good old friend SQL. Julia is great for working with data, Athena is great for querying data, how can we use both together? Rather than manually export CSV files and use `CSV.jl` to load CSV files in Julia, I'll be showing you how to query the data using Athena directly from Julia, loading the resulting set of data into a DataFrame using `DataFrames.jl` for you to work with.
 summary: Julia is a fairly modern scientific programming language that is free, high-level, fast, and bundles a bunch of awesome features that makes Julia working with data great again. Amazon Athena is an interactive query service which allows you to easily analyze your data collecting dust in Amazon S3 storage using your good old friend SQL. Julia is great for working with data, Athena is great for querying data, how can we use both together? Rather than manually export CSV files and use `CSV.jl` to load CSV files in Julia, I'll be showing you how to query the data using Athena directly from Julia, loading the resulting set of data into a DataFrame using `DataFrames.jl` for you to work with.
 images:
 - /images/julia-loves-aws.png
