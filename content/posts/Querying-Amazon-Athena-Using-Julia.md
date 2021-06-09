@@ -100,7 +100,7 @@ sql = "SELECT * FROM table"
 ```
 
 Before we begin querying Athena, `ODBC.jl` requires that we add the Athena driver we installed earlier by passing it the name and path to the driver. We also need to build the connection string which we will use to connect to Athena.
-Julia has native support for string interpolation allowing us to construct strings using any variable(s) which we may need without the need of concatenation. The connection string is specific to the database you're using, so if you won't be connecting to Athena you'll have to look up the documentation for the driver you're using to construct the connection string required.
+Julia has native support for string interpolation allowing us to construct strings using any variable(s) which we may need without the need for concatenation. The connection string is specific to the database you're using, so if you won't be connecting to Athena you'll have to look up the documentation for the driver you're using to construct the connection string required.
 
 ```julia
 # locate existing ODBC driver shared libraries or download new, then configure
@@ -117,7 +117,7 @@ PWD=$pwd;
 """
 ```
 
-Okay I promise the fun part is coming. Now that we've finished setting up the boring configurations, we can go ahead and establish a connection and query Athena!
+Okay, I promise the fun part is coming. Now that we've finished setting up the boring configurations, we can go ahead and establish a connection and query Athena!
 
 ```julia
 conn = DBInterface.connect(ODBC.Connection, connection_string)
@@ -148,7 +148,7 @@ df = DBInterface.execute(
                                 286 rows omitted
 ```
 
-Easy right? Julia was also able to parse the types for our columns in our DataFrame without the need of any headaches. You can now run free plotting using `Plots.jl`, training Machine Learning models using `MLJ.jl`, and storing the transformed data back in Athena.
+Easy right? Julia was also able to parse the types of the columns in our DataFrame without any headaches. You can now run free plotting using `Plots.jl`, train Machine Learning models using `MLJ.jl`, and storing the transformed data back in Athena.
 
 ```julia
 # load data into database table
