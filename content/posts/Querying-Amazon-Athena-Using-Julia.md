@@ -41,7 +41,7 @@ For this example we'll be using `Configs.jl`[[2]](#f2) to load our config file w
 
 ## DataFrames
 
-A DataFrame represents a table of data with rows and columns, just as spreadsheets do. The Julia package `DataFrames.jl` provides an API we can use for working with tabular data in Julia. Similar to Pandas in Python, its design and functionality are quite similar, however thanks to Julia's high degree of modularity, DataFrames in Julia are tightly integrated with a vast range of different packages such as `Plots.jl`, `MLJ.jl`, and many more!
+A DataFrame represents a table of data with rows and columns, just as spreadsheets do. The Julia package `DataFrames.jl` provides an API we can use for working with tabular data in Julia. Similar to Pandas in Python, its design and functionality are quite similar, however thanks to Julia's high degree of modularity, DataFrames in Julia are tightly integrated with a vast range of different packages such as `Plots.jl`, `MLJ.jl`, and [many more](https://dataframes.juliadata.org/stable/#DataFrames.jl-and-the-Julia-Data-Ecosystem)!
 
 ## Athena.jl
 
