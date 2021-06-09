@@ -171,12 +171,15 @@ Pkg.add("PyCall")
 
 using PyCall
 
+# create a variable 'x' of type Float64
 x = 1
 x = Float64(x)
 
+# use Anaconda to install scipy and it's dependencies
 so = pyimport_conda("scipy.optimize", "scipy")
 
-so.newton(x -> cos(x) - x, 1)
+# use scipy's newton function to find a zero of sin(x) given a nearby starting point 1
+so.newton(x -> cos(x) - x, 1) # 0.7390851332151607
 ```
 
 ---
