@@ -37,7 +37,7 @@ AWS offers an ODBC driver for Athena which you may use to access your data. Make
 
 We can use configuration files, or config for short, to configure the parameters and initial settings for our Julia applications. These parameters could range from Machine Learning model parameters to database credentials such as the ones in our example. Config files are widely used across many programming languages and provide a neat way of changing application settings without the need to change any code.
 
-For this example we'll be using `Configs.jl`([2])(#f2) to load our config file which also supports cascading overrides based on the config location, `ENV` variable mapping, and function calls.
+For this example we'll be using `Configs.jl`[[2]](#f2) to load our config file which also supports cascading overrides based on the config location, `ENV` variable mapping, and function calls.
 
 ## DataFrames
 
