@@ -124,7 +124,7 @@ Julia was designed for parallelism from the ground-up, and provides built-in pri
 
 The Julia compiler can also generate native code for various hardware accelerators, such as [GPUs](https://github.com/JuliaGPU/CUDAnative.jl) and Xeon Phis. Packages such as [DistributedArrays.jl](https://github.com/JuliaParallel/DistributedArrays.jl) and [Dagger.jl](https://github.com/JuliaParallel/Dagger.jl) provide higher levels of abstraction for parallelism.
 
-### 6 — It’s codebase is written entirely in Julia
+### 6 — Its codebase is written entirely in Julia
 
 That’s right. This is a feature most significant compared to typical dynamic languages. If you can develop applications in Julia, then you can also contribute to Julia. If you need to peek underneath the hood and see what’s up, you’re not going to find C code as you would with Python.
 

@@ -15,7 +15,7 @@ tags:
 - amazon athena
 - databases
 - julia
-date: 2021-06-07 23:00:00 +0000
+date: 2021-06-08 23:00:00 +0000
 ---
 
 
