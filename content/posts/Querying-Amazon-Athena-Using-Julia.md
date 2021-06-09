@@ -50,7 +50,7 @@ Enough chit-chat. Let's start off by creating a new directory to house our code 
 
 ```sh
 ~ $ mkdir Athena.jl
-~/Athena.jl $ cd Athena.jl
+~ $ cd Athena.jl
 ~/Athena.jl $ mkdir src src/sql configs
 ~/Athena.jl $ touch src/Athena.jl
 ~/Athena.jl $ touch src/sql/query.sql
