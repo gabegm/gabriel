@@ -181,11 +181,11 @@ so.newton(x -> cos(x) - x, 1)
 
 ---
 
-* <a name="f0">[1]</a> [QuantEcon](https://cheatsheets.quantecon.org/) has a great table comparing MATLAB, Python, and Julia.
+* <a name="f1">[1]</a> [QuantEcon](https://cheatsheets.quantecon.org/) has a great table comparing MATLAB, Python, and Julia.
 * <a name="f2">[2]</a> [Configs.jl](https://github.com/citkane/Configs) is an open source Julia package maintained by [Michael Jonker](https://github.com/citkane).
 * <a name="f3">[3]</a> The scope of a variable is the region of code within which a variable is visible. Variable scoping helps avoid variable naming conflicts.
 * <a name="f4">[4]</a> Virtual environments help us ensure our applications and its dependencies remain independent from other applications by avoiding any conflicts in versions which may arise.
 * <a name="f5">[5]</a> In Julia, strings would be concatenated by using the `*` operator: `"Hello " * "world"`
-* <a name="f4">[6]</a> [The accelerating adoption of Julia](https://lwn.net/Articles/834571/)
-* <a name="f5">[7]</a> [Julia Update: Adoption Keeps Climbing; Is It a Python Challenger?](https://www.hpcwire.com/2021/01/13/julia-update-adoption-keeps-climbing-is-it-a-python-challenger/)
-* <a name="f6">[8]</a> Julia has excellent interop with not only Python but a vast amount of [other languages](https://github.com/JuliaInterop).
+* <a name="f6">[6]</a> [The accelerating adoption of Julia](https://lwn.net/Articles/834571/)
+* <a name="f7">[7]</a> [Julia Update: Adoption Keeps Climbing; Is It a Python Challenger?](https://www.hpcwire.com/2021/01/13/julia-update-adoption-keeps-climbing-is-it-a-python-challenger/)
+* <a name="f8">[8]</a> Julia has excellent interop with not only Python but a vast amount of [other languages](https://github.com/JuliaInterop).
