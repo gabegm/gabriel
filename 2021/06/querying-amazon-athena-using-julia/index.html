@@ -76,10 +76,13 @@ Pkg<span style=color:#f92672>.</span>add(<span style=color:#e6db74>&#34;PyCall&#
 
 <span style=color:#66d9ef>using</span> PyCall
 
+<span style=color:#75715e># create a variable &#39;x&#39; of type Float64</span>
 x <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>
 x <span style=color:#f92672>=</span> <span style=color:#66d9ef>Float64</span>(x)
 
+<span style=color:#75715e># use Anaconda to install scipy and it&#39;s dependencies</span>
 so <span style=color:#f92672>=</span> pyimport_conda(<span style=color:#e6db74>&#34;scipy.optimize&#34;</span>, <span style=color:#e6db74>&#34;scipy&#34;</span>)
 
-so<span style=color:#f92672>.</span>newton(x <span style=color:#f92672>-&gt;</span> cos(x) <span style=color:#f92672>-</span> x, <span style=color:#ae81ff>1</span>)
+<span style=color:#75715e># use scipy&#39;s newton function to find a zero of sin(x) given a nearby starting point 1</span>
+so<span style=color:#f92672>.</span>newton(x <span style=color:#f92672>-&gt;</span> cos(x) <span style=color:#f92672>-</span> x, <span style=color:#ae81ff>1</span>) <span style=color:#75715e># 0.7390851332151607</span>
 </code></pre></div><hr><ul><li><a name=f1>[1]</a> <a href=https://cheatsheets.quantecon.org/>QuantEcon</a> has a great table comparing MATLAB, Python, and Julia.</li><li><a name=f2>[2]</a> <a href=https://github.com/citkane/Configs>Configs.jl</a> is an open source Julia package maintained by <a href=https://github.com/citkane>Michael Jonker</a>.</li><li><a name=f3>[3]</a> The scope of a variable is the region of code within which a variable is visible. Variable scoping helps avoid variable naming conflicts.</li><li><a name=f4>[4]</a> Virtual environments help us ensure our applications and its dependencies remain independent from other applications by avoiding any conflicts in versions which may arise.</li><li><a name=f5>[5]</a> In Julia, strings would be concatenated by using the <code>*</code> operator: <code>"Hello " * "world"</code></li><li><a name=f6>[6]</a> <a href=https://lwn.net/Articles/834571/>The accelerating adoption of Julia</a></li><li><a name=f7>[7]</a> <a href=https://www.hpcwire.com/2021/01/13/julia-update-adoption-keeps-climbing-is-it-a-python-challenger/>Julia Update: Adoption Keeps Climbing; Is It a Python Challenger?</a></li><li><a name=f8>[8]</a> Julia has excellent interop with not only Python but a vast amount of <a href=https://github.com/JuliaInterop>other languages</a>.</li></ul></div></main></body></html>
