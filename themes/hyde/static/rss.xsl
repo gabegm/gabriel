@@ -33,7 +33,7 @@
                     </p>
                     <p>
                         <label for="address">RSS address: </label>
-                        <input>
+                        <input size="30">
                             <xsl:attribute name="id">address</xsl:attribute>
                             <xsl:attribute name="spellcheck">false</xsl:attribute>
                             <xsl:attribute name="value">
