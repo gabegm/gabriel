@@ -8,7 +8,8 @@ summary = "Gabriel Gauci Maistre"
   main = [
       {Name = "Github", URL = "https://github.com/gabegm/"},
       {Name = "Twitter", URL = "https://twitter.com/itsgabegm/"},
-      {Name = "LinkedIn", URL = "https://www.linkedin.com/in/gabegm/"}
+      {Name = "LinkedIn", URL = "https://www.linkedin.com/in/gabegm/"},
+      {Name = "RSS", URL = "/index.xml"}
   ]
 
 [params]
