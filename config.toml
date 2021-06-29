@@ -21,6 +21,8 @@ summary = "Gabriel Gauci Maistre"
   layoutReverse = false
   disqusShortname = ""
   googleAnalytics = ""
+  mathjax = true
+  math = true
 
 
 [permalinks]
