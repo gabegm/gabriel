@@ -2,7 +2,7 @@
 layout: post
 draft: false
 unlisted: true
-title: Geospatial Intelligence Recap + Q&A
+title: Geospatial Intelligence Recap
 author: Gabriel Gauci Maistre
 description: I recently had the pleasure of giving a talk on Geospatial Data Science at the Munich Business School (MBS) a few days ago. My talk titled "Geospatial Intelligence" covered a brief introduction into Geospatial data, what it looks like, its challenges, and its use cases. Some students had a few interesting questions which I thought were worth answering in more detail here.
 summary: I recently had the pleasure of giving a talk on Geospatial Data Science at the Munich Business School (MBS) a few days ago. My talk titled "Geospatial Intelligence" covered a brief introduction into Geospatial data, what it looks like, its challenges, and its use cases. Some students had a few interesting questions which I thought were worth answering in more detail here.
