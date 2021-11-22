@@ -4,8 +4,8 @@ draft: false
 unlisted: true
 title: Geospatial Intelligence Recap
 author: Gabriel Gauci Maistre
-description: I recently had the pleasure of giving a talk on Geospatial Data Science at the Munich Business School (MBS) a few days ago. My talk titled "Geospatial Intelligence" covered a brief introduction into Geospatial data, what it looks like, its challenges, and its use cases. Some students had a few interesting questions which I thought were worth answering in more detail here.
-summary: I recently had the pleasure of giving a talk on Geospatial Data Science at the Munich Business School (MBS) a few days ago. My talk titled "Geospatial Intelligence" covered a brief introduction into Geospatial data, what it looks like, its challenges, and its use cases. Some students had a few interesting questions which I thought were worth answering in more detail here.
+description: I recently had the pleasure of giving a talk on Geospatial Data Science at the Munich Business School (MBS). My talk "Geospatial Intelligence" covered a brief introduction into Geospatial data, what it looks like, its challenges, and its use cases. Some students had a few interesting questions which I thought were worth answering in more detail here.
+summary: I recently had the pleasure of giving a talk on Geospatial Data Science at the Munich Business School (MBS). My talk "Geospatial Intelligence" covered a brief introduction into Geospatial data, what it looks like, its challenges, and its use cases. Some students had a few interesting questions which I thought were worth answering in more detail here.
 images:
 - /images/mbs-me-1.jpg
 image: /images/mbs-me-1.jpg
@@ -21,15 +21,15 @@ date: 2021-11-21 23:00:00 +0000
 
 ![alt text](/images/mbs-me-1.jpg "My talk on Geospatial Intelligence at MBS")
 
-I recently had the pleasure of giving a talk on Geospatial Data Science at the Munich Business School (MBS) a few days ago. My talk titled "Geospatial Intelligence" covered a brief introduction into Geospatial data, what it looks like, its challenges, and its use cases.
+I recently had the pleasure of giving a talk on Geospatial Data Science at the Munich Business School (MBS). My talk "Geospatial Intelligence" covered a brief introduction into Geospatial data, what it looks like, its challenges, and its use cases.
 
 Geospatial data is projected onto a flat surface (map) and consists of 3 key components, spatial (where) such as the particular location on the map, attributes (what) such as the name of type of location, and time (when) such as when the data was collected. Such data may be hard and expensive to collect due to its size, however there are many sources providing free data such as [OpenStreetMap](https://openstreetmap.org/) allowing you to extract street networks and building footprints, points of interest, geocoded addresses, and more.
 
-There exist a few challenges when working with Geospatial data that one needs to made aware of before moving forward. Because the earth is not flat, there exist many types of Coordinate Reference Systems (CRS) which are use to project coordinates onto a map. It's important to be aware of this and to ensure that all the coordinates in your data sets are using the same CRS, if not you would just need to reproject the coordinates to a common CRS that you're using. This can lead to many issues as coordinates projected using a differing CRS will not align with each other on a map.
+There exist a few challenges when working with Geospatial data that one needs to made aware of before moving forward. Because the earth is not flat, there exist many types of Coordinate Reference Systems (CRS) which are used to project coordinates onto a map. It's important to be aware of this and to ensure that all the coordinates in your data sets are using the same CRS, if not you would just need to reproject the coordinates to a common CRS that you're using. This can lead to many issues as coordinates projected using a differing CRS will not align with each other on a map.
 
 As Geospatial data is a specialised type of data, it also requires special tools. Popular open source databases such as PostgresSQL allow you to install extensions such as PostGIS allowing you to store Geospatial objects such as points and polygons, and apply spatial transformations such as joins and aggregations based on location. Tools also exist to allow you to visualise Geospatial data on a map such as LeafletJS which is an open source JavaScript library allowing you to layer Geospatial objects on a map in your browser.
 
-It's also important to note that although Geospatial analytics is quite an interesting with many applications, we must ensure that none of the data we collect or the way which we use it, will put anyone's safety at risk. Points on a map may ultimately refer to a real person's movements which may put them in harms way should this data be used incorrectly or fall into the wrong hands. Safety first.
+It's also important to note that although Geospatial analytics is quite an interesting field with many applications, we must ensure that none of the data we collect or the way which we use it, will put anyone's safety at risk. Points on a map may ultimately refer to a real person's movements, which may put them in harms way should this data be used incorrectly or fall into the wrong hands. Safety first.
 
 In the talk I briefly touch on a few use cases that can be applied with Geospatial data which I will summarise below:
 * Competitor tracking
@@ -52,11 +52,11 @@ In the talk I briefly touch on a few use cases that can be applied with Geospati
   * Can I use that to find more potential customers?
   * Where can I find travel hubs?
 
-Some students had a few interesting questions which I thought were worth answering in more detail here.
+Some students had a few interesting questions which I thought were interesting to elaborate further on in more detail here.
 
 ## What are the limitations of Geospatial data when applying it towards business applications?
 
-The world world is fairly large, and since Geospatial data can cover the whole globe, gathering and storing all of this data can be fairly challenging. You will rarely find one data set to cover the whole globe, and if you do it will mostly likely come with a hefty price tag. Having to deal with so many varying data sets all coming from varying sources can be challenging as structure and quality from one data set to another can vary enormously.
+The world is fairly large, and since Geospatial data can cover the whole globe, gathering and storing all of this data can be fairly challenging. You will rarely find one data set to cover the whole globe, and if you do it will mostly likely come with a hefty price tag. Having to deal with so many varying data sets all coming from varying sources can be challenging as structure and quality from one data set to another can vary enormously.
 
 Finding the right data sets is one important step, but finding the right data store is crucial. If done improperly, you will be fairly limited in what you can do with your data. Geospatial data contains "special" objects just as Points, Lines, and Polygons. Many databases will not only be unable to store such objects in their correct format, but will not provide the functionality to apply spatial transformations such as joining data sets together based on their location. It is also important to be aware of the limitations your data store may have in terms of Geospatial data. For optimal speed when applying spatial transformations, databases need to support indexing on geometry to optimise execution based on location.
 
@@ -70,7 +70,7 @@ I have very limited experience with advertising data, so anything I say here cou
 
 This however does not mean that such companies collecting this data do not have access to each user's individual data, and can use this to target you directly with advertisements. However in the case of companies with mobile apps which require a users location data to function, will already have access to such data to provide the customer with its services. So it is important to distinguish data coming from internal sources such as a company's mobile app, and 3rd party sources such as advertising data.
 
-Apple's iOS privacy changes made it harder for companies to track your activity across all mobile apps, they can still see everything you do within their app, but will no longer be able to see what you are also doing in other mobile apps.
+Apple's iOS privacy changes made it harder for companies to track your activity across all apps on your phone, but they can still see everything you do within their app. However they will now no longer be able to see what you are also doing in other mobile apps.
 
 ## Which skills are required to become a Data Scientist?
 
@@ -152,4 +152,17 @@ There exist quite a few of which I'll briefly mention, all of which are open sou
   * Export Geospatial data to share to others using LeafletJS
   * Extend the application with Python scripts
 
-My personal recommendation for a beginner would be to use QGIS as it has an easy to use graphical user interface (GUI) to import, visualise, and export Geospatial data making it extremely easy to share your visualisations with others. The application can run on multiple platforms (Windows/Mac/Linux) and is also quite fairly popular within the Geospatial community so you shouldn't have any difficulty in finding support or [looking up tutorials](https://qgis.org/en/site/forusers/trainingmaterial/index.html).
+My personal recommendation for a beginner would be to use QGIS as it has an easy to use graphical user interface (GUI) to import, visualise, and export Geospatial data making it extremely easy to share your visualisations with others. The application can run on multiple platforms (Windows/Mac/Linux) and is also quite popular within the Geospatial community so you shouldn't have any difficulty in finding support or [looking up tutorials](https://qgis.org/en/site/forusers/trainingmaterial/index.html).
+
+## Conclusion
+
+If you're still interested in finding out more about the field, here's a few books which I can highly recommend:
+* [Weapons of Math Destruction](https://www.goodreads.com/book/show/28186015-weapons-of-math-destruction)
+  * Helps you understand how machines misinterpret data
+  * Talks about real situations where algorithms negatively impacted people's lives
+* [Data Science from Scratch](https://www.oreilly.com/library/view/data-science-from/9781492041122/)
+  * Will give you an introduction to Python and good coding practices
+  * Will teach you how many tools in Data Science work by building them from scratch
+* [Geospatial Data Science with Python](https://geographicdata.science/book/intro.html)
+  * Will give you an brief introduction to Geospatial Analysis
+  * Will teach you some tools and technique for Geospatial Data Science in Python
