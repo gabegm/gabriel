@@ -16,7 +16,7 @@ tags:
 - data science
 - machine learning
 - geospatial
-date: 2021-11-22 23:00:00 +0000
+date: 2021-11-21 23:00:00 +0000
 ---
 
 ![alt text](/images/mbs-me-1.jpg "My talk on Geospatial Intelligence at MBS")
