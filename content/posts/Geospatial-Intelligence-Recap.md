@@ -21,13 +21,13 @@ date: 2021-11-21 23:00:00 +0000
 
 ![alt text](/images/mbs-me-1.jpg "My talk on Geospatial Intelligence at MBS")
 
-I recently had the pleasure of giving a talk on Geospatial Data Science at the Munich Business School (MBS). My talk "Geospatial Intelligence" covered a brief introduction into Geospatial data, what it looks like, its challenges, and its use cases.
+I recently had the pleasure of giving a talk on Geospatial Analytics at the [Munich Business School (MBS)](https://www.munich-business-school.de/en/). My talk "Geospatial Intelligence" covered a brief introduction into Geospatial data, what it looks like, its challenges, and its use cases.
 
 Geospatial data is projected onto a flat surface (map) and consists of 3 key components, spatial (where) such as the particular location on the map, attributes (what) such as the name of type of location, and time (when) such as when the data was collected. Such data may be hard and expensive to collect due to its size, however there are many sources providing free data such as [OpenStreetMap](https://openstreetmap.org/) allowing you to extract street networks and building footprints, points of interest, geocoded addresses, and more.
 
-There exist a few challenges when working with Geospatial data that one needs to made aware of before moving forward. Because the earth is not flat, there exist many types of Coordinate Reference Systems (CRS) which are used to project coordinates onto a map. It's important to be aware of this and to ensure that all the coordinates in your data sets are using the same CRS, if not you would just need to reproject the coordinates to a common CRS that you're using. This can lead to many issues as coordinates projected using a differing CRS will not align with each other on a map.
+There exist a few challenges when working with Geospatial data that one needs to made aware of before moving forward. Because the earth is not flat, there exist many types of Coordinate Reference Systems (CRS)[[0]](#f0) which are used to project coordinates onto a map. It's important to be aware of this and to ensure that all the coordinates in your data sets are using the same CRS. If not, it is essential that you reproject the coordinates to a common CRS that you're using. This can lead to many issues as coordinates projected using a differing CRS will not align with each other on the same map.
 
-As Geospatial data is a specialised type of data, it also requires special tools. Popular open source databases such as PostgresSQL allow you to install extensions such as PostGIS allowing you to store Geospatial objects such as points and polygons, and apply spatial transformations such as joins and aggregations based on location. Tools also exist to allow you to visualise Geospatial data on a map such as LeafletJS which is an open source JavaScript library allowing you to layer Geospatial objects on a map in your browser.
+As Geospatial data is a specialised type of data, it also requires special tools. Popular open source databases such as [PostgresSQL](https://www.postgresql.org/) allow you to install extensions such as [PostGIS](https://postgis.net/) allowing you to store Geospatial objects such as points and polygons, and apply spatial transformations such as joins and aggregations based on location. Tools also exist to allow you to visualise Geospatial data on a map such as [LeafletJS](https://leafletjs.com/) which is an open source JavaScript library allowing you to layer Geospatial objects on a map in your browser.
 
 It's also important to note that although Geospatial analytics is quite an interesting field with many applications, we must ensure that none of the data we collect or the way which we use it, will put anyone's safety at risk. Points on a map may ultimately refer to a real person's movements, which may put them in harms way should this data be used incorrectly or fall into the wrong hands. Safety first.
 
@@ -35,12 +35,12 @@ In the talk I briefly touch on a few use cases that can be applied with Geospati
 * Competitor tracking
   * Where are my competitors?
   * How close are they?
-  * What are their Google ratings compared to mine?
+  * What are their Google ratings[[1]](#f1) compared to mine?
 * Points of interest (POI)
   * Which POIs are important?
   * How close are they to my branches?
   * Which common POIs exist in locations where my customers use my product?
-* Catchment areas
+* Catchment areas[[2]](#f2)
   * How many customers can I reach within X minutes by walk/car?
   * How many can my competition reach?
   * How many potential customers can I reach?
@@ -48,9 +48,9 @@ In the talk I briefly touch on a few use cases that can be applied with Geospati
   * Where are my customers coming from?
   * How close are they to my nearest branch?
   * How close are they to my competitors?
-  * What are the core sociodemographics of my customers?
+  * What are the core sociodemographics[[3]](#f3) of my customers?
   * Can I use that to find more potential customers?
-  * Where can I find travel hubs?
+  * Where can I find travel hubs?[[4]](#f4)
 
 Some students had a few interesting questions which I thought were interesting to elaborate further on in more detail here.
 
@@ -66,11 +66,11 @@ Finally, it's extremely important yet hard to find people, both from technical a
 
 ## Has the latest iOS privacy changes affected business analytics when it comes to Geospatial data provided by customers?
 
-I have very limited experience with advertising data, so anything I say here could be wrong and should most certainly be taken with a grain of salt. Companies tracking your location data, either through your mobile operating system (OS) or directly through their services such as mobile apps, and are in the business of selling such data to others, do not tend to advertise what you are doing and where individually. Such data is normally aggregated and anonymised to protect your privacy before it is shared with other businesses.
+I have very limited experience with advertising data, so anything I say here could be wrong and should most certainly be taken with a grain of salt. Companies tracking your location data, either through your mobile operating system (OS) or directly through their services such as mobile apps, whom are in the business of selling such data to other businesses, do not tend to advertise what you are doing and where individually. Such data is normally aggregated and anonymised to protect your privacy before it is shared with other businesses.
 
 This however does not mean that such companies collecting this data do not have access to each user's individual data, and can use this to target you directly with advertisements. However in the case of companies with mobile apps which require a users location data to function, will already have access to such data to provide the customer with its services. So it is important to distinguish data coming from internal sources such as a company's mobile app, and 3rd party sources such as advertising data.
 
-Apple's iOS privacy changes made it harder for companies to track your activity across all apps on your phone, but they can still see everything you do within their app. However they will now no longer be able to see what you are also doing in other mobile apps.
+Apple's iOS privacy changes made it harder for companies to track your activity across all apps on your phone, but they can still see everything you do within their app. However, they will now no longer be able to see what you are also doing in other mobile apps.
 
 ## Which skills are required to become a Data Scientist?
 
@@ -80,9 +80,11 @@ The skills you will need will ultimately depend on the project you are working o
   * Querying databases to retrieve data
 * Programming
   * R/Python/Julia/etc.
+  * Automating tasks and report
+  * Developing predictive models
 * Profiling
-  * Optimising code and queries to reduce execution times
-  * Knowing how to write good code
+  * Optimising code and SQL queries to reduce execution times
+  * Knowing how to write good and readable code
 * Probability & Statistics
   * Machine Learning
 * Explaining things in a simple way
@@ -152,7 +154,7 @@ There exist quite a few of which I'll briefly mention, all of which are open sou
   * Export Geospatial data to share to others using LeafletJS
   * Extend the application with Python scripts
 
-My personal recommendation for a beginner would be to use QGIS as it has an easy to use graphical user interface (GUI) to import, visualise, and export Geospatial data making it extremely easy to share your visualisations with others. The application can run on multiple platforms (Windows/Mac/Linux) and is also quite popular within the Geospatial community so you shouldn't have any difficulty in finding support or [looking up tutorials](https://qgis.org/en/site/forusers/trainingmaterial/index.html).
+My personal recommendation for a beginner would be to use QGIS as it has an easy to use graphical user interface (GUI) to import, visualise, and export Geospatial data making it extremely easy to share your visualisations with others. The application can run on multiple platforms (Windows/Mac/Linux) and is also quite popular within the Geospatial community, so you shouldn't have any difficulty in finding support or [looking up tutorials](https://qgis.org/en/site/forusers/trainingmaterial/index.html).
 
 ## Conclusion
 
@@ -161,8 +163,16 @@ If you're still interested in finding out more about the field, here's a few boo
   * Helps you understand how machines misinterpret data
   * Talks about real situations where algorithms negatively impacted people's lives
 * [Data Science from Scratch](https://www.oreilly.com/library/view/data-science-from/9781492041122/)
-  * Will give you an introduction to Python and good coding practices
+  * Will give you a quick introduction to Python and good coding practices
   * Will teach you how many tools in Data Science work by building them from scratch
 * [Geospatial Data Science with Python](https://geographicdata.science/book/intro.html)
   * Will give you an brief introduction to Geospatial Analysis
   * Will teach you some tools and technique for Geospatial Data Science in Python
+
+---
+
+* * <a name="f0">[0]</a> Because the Earth is not flat, which I hope you know, there is no perfect way to project it onto a flat surface. Thus, based on the location or who you ask, there are preferred CRSs over others. You can look up different CRSs [here](https://epsg.io/).
+* * <a name="f1">[1]</a> Sociodemographic data can give you a better understanding of the characteristics of a certain population such as population density, age distribution, education level distribution, umemployment rate, and more.
+* * <a name="f2">[2]</a> Catchment areas are calculated by extracting street networks from mapping data and estimating the time it would take for an individual to reach the centre within a certain amount of time. The larger the catchment area, the wider your reach.
+* * <a name="f3">[3]</a> If you run a Business-to-Consumer (B2C) business, you most probably have a Google profile where customers can rate your product and provide feedback. It's critical to be aware of your own ratings, but to also compare them to those of your competitors.
+* * <a name="f4">[4]</a> If your business is heavily dependent on travel, it makes sense to leverage movement data to see where groups of populations are travelling from and to, including the routes which they take.
