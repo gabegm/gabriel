@@ -2,7 +2,7 @@
 layout: post
 draft: false
 unlisted: true
-title: Geospatial Intelligence Recap
+title: "Geospatial Intelligence: Recap"
 author: Gabriel Gauci Maistre
 description: I recently had the pleasure of giving a talk on Geospatial Data Science at the Munich Business School (MBS). My talk "Geospatial Intelligence" covered a brief introduction into Geospatial data, what it looks like, its challenges, and its use cases. Some students had a few interesting questions which I thought were worth answering in more detail here.
 summary: I recently had the pleasure of giving a talk on Geospatial Data Science at the Munich Business School (MBS). My talk "Geospatial Intelligence" covered a brief introduction into Geospatial data, what it looks like, its challenges, and its use cases. Some students had a few interesting questions which I thought were worth answering in more detail here.
@@ -74,7 +74,7 @@ Apple’s iOS privacy changes made it harder for companies to track your activit
 
 ## Which skills are required to become a Data Scientist?
 
-The skills you will need will ultimately depend on the project you are working on, and it is quite normal to learn on the job as you work from one project to another. However there are some core skills required which I will touch on briefly below:
+The skills you will need will ultimately depend on the project you are working on and it is quite normal to learn on the job as you gain skills, knowledge, and from one project to another. However, there are some core skills required which I will touch on briefly below:
 
 * SQL
   * Querying databases to retrieve data
@@ -101,9 +101,12 @@ These are all important skills to have, however you might not necessarily have a
 
 ## What is your general advice for students who'd like to start a career as a Data Scientist?
 
-Do not be disheartened by all the information available, no one knows everything, but you must be open to accepting that you will never need to stop learning. The most important skill for a Data Scientist to have isn't Python, nor is it Machine Learning. SQL is the most critical skill to have when working with data. You will be constantly querying databases on the job and the most common way to do that will be SQL. There is also a lot you can do in SQL to provide the business with insights before needed to look into more technical approaches such as Machine Learning.
+First, an attitude: do not be disheartened by all the information available, no one knows everything, but you must be open to accepting that you will never need to stop learning.
 
-My personal advice would be to understand the various data roles that exist and the differences between them. Data Science gets a lot of hype, but there's a lot of other roles which are just as important. I will try to give my own personal breakdown for each role, however these will differ from one company to another.
+Second, the most important skill for a Data Scientist to have isn’t Python, nor is it Machine Learning. It's SQL. Knowing how to manipulate data through SQL is the most critical skill to have when working with data. You will be constantly querying databases on the job and the most common way to do that will be SQL. There is also a lot you can do in SQL to provide the business with insights before you will even need to think about looking into more technical approaches such as Machine Learning.
+
+My personal advice would be to understand the various data roles that exist and the differences between them. Data Science gets a lot of hype, but there’s a lot of other roles which are just as important. I will try to give my own personal breakdown for each role, however these will differ from one company to another.
+
 
 * Data Engineer
   * Builds and maintains the data platform
@@ -128,11 +131,11 @@ My personal advice would be to understand the various data roles that exist and 
 
 ## Are there any Data Science internships?
 
-Due to the nature of Data Science projects spanning over multiple months, it can be quite hard to find an internship available and is ultimately down to each company. The barrier for entry is also fairly high as many skills required are only learnt on the job, so I would suggest looking for roles such as Data Analyst/Engineer which can teach you a lot of the analytical skills which you will need for Data Science, of which should be easier to find internship roles.
+Due to the long-term nature of Data Science projects, which can span over several months, it can be quite hard to find an internship where you will be assigned to a single project and is ultimately up to the company. The barrier for entry is also fairly high as many skills required are only learnt on the job, so I would suggest looking for roles such as Data Analyst/Engineer which can teach you a lot of the analytical skills which you will need for Data Science, of which should be easier to find internship roles.
 
 ## Which tools can I use to visualise Geospatial data?
 
-There exist quite a few of which I'll briefly mention, all of which are open source:
+There are quite a number of them, out of which I'll mention a few and all of which are open source:
 * [LeafletJS](https://leafletjs.com/)
   * JavaScript (JS) library
   * Requires some very basic JS knowledge to set up
