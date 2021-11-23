@@ -66,9 +66,9 @@ Finally, it's extremely important yet hard to find people, both from technical a
 
 ## Has the latest iOS privacy changes affected business analytics when it comes to Geospatial data provided by customers?
 
-I have very limited experience with advertising data, so anything I say here could be wrong and should most certainly be taken with a grain of salt. Companies tracking your location data, either through your mobile operating system (OS) or directly through their services such as mobile apps, whom are in the business of selling such data to other businesses, do not tend to advertise what you are doing and where individually. Such data is normally aggregated and anonymised to protect your privacy before it is shared with other businesses.
+I have very limited experience with advertising data, so anything I say here could be wrong and should most certainly be taken with a grain of salt. Companies tracking your location data — either through your mobile operating system (OS) or directly through their services such as mobile apps — who are in the business of selling such data to other businesses do not tend to advertise what you are doing and where you are doing it as an individual. Such data is normally aggregated and anonymised to protect your privacy before it is shared with other businesses.
 
-This however does not mean that such companies collecting this data do not have access to each user's individual data, and can use this to target you directly with advertisements. However in the case of companies with mobile apps which require a users location data to function, will already have access to such data to provide the customer with its services. So it is important to distinguish data coming from internal sources such as a company's mobile app, and 3rd party sources such as advertising data.
+This however does not mean that such companies collecting this data do not have access to each user's individual data, and can use this to target you directly with advertisements. However, in the case of companies with mobile apps which require a user's location data to function, will already have access to such data to provide the customer with its services. So it is important to distinguish data coming from internal sources such as a company's mobile app, and 3rd party sources such as advertising data.
 
 Apple's iOS privacy changes made it harder for companies to track your activity across all apps on your phone, but they can still see everything you do within their app. However, they will now no longer be able to see what you are also doing in other mobile apps.
 
@@ -86,7 +86,9 @@ The skills you will need will ultimately depend on the project you are working o
   * Optimising code and SQL queries to reduce execution times
   * Knowing how to write good and readable code
 * Probability & Statistics
+  * Recommender systems[[5]](#f5)
   * Machine Learning
+  * Deep Learning
 * Explaining things in a simple way
   * Ultimately if you do not know how to explain things simply, others will not be able to understand and use your work
   * Presentation skills are very important, both to technical and business oriented audiences
@@ -178,3 +180,4 @@ If you're still interested in finding out more about the field, here's a few boo
 * <a name="f2">[2]</a> Catchment areas are calculated by extracting street networks from mapping data and estimating the time it would take for an individual to reach the centre within a certain amount of time. The larger the catchment area, the wider your reach.
 * <a name="f3">[3]</a> If you run a Business-to-Consumer (B2C) business, you most probably have a Google profile where customers can rate your product and provide feedback. It's critical to be aware of your own ratings, but to also compare them to those of your competitors.
 * <a name="f4">[4]</a> If your business is heavily dependent on travel, it makes sense to leverage movement data to see where groups of populations are travelling from and to, including the routes which they take.
+* <a name="f5">[5]</a> Suggesting personalised recommendations to customers based on their past preferences and what they are most likely going to want.
