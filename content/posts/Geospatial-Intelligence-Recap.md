@@ -171,8 +171,8 @@ If you're still interested in finding out more about the field, here's a few boo
 
 ---
 
-* * <a name="f0">[0]</a> Because the Earth is not flat, which I hope you know, there is no perfect way to project it onto a flat surface. Thus, based on the location or who you ask, there are preferred CRSs over others. You can look up different CRSs [here](https://epsg.io/).
-* * <a name="f1">[1]</a> Sociodemographic data can give you a better understanding of the characteristics of a certain population such as population density, age distribution, education level distribution, umemployment rate, and more.
-* * <a name="f2">[2]</a> Catchment areas are calculated by extracting street networks from mapping data and estimating the time it would take for an individual to reach the centre within a certain amount of time. The larger the catchment area, the wider your reach.
-* * <a name="f3">[3]</a> If you run a Business-to-Consumer (B2C) business, you most probably have a Google profile where customers can rate your product and provide feedback. It's critical to be aware of your own ratings, but to also compare them to those of your competitors.
-* * <a name="f4">[4]</a> If your business is heavily dependent on travel, it makes sense to leverage movement data to see where groups of populations are travelling from and to, including the routes which they take.
+* <a name="f0">[0]</a> Because the Earth is not flat, which I hope you know, there is no perfect way to project it onto a flat surface. Thus, based on the location or who you ask, there are preferred CRSs over others. You can look up different CRSs [here](https://epsg.io/).
+* <a name="f1">[1]</a> Sociodemographic data can give you a better understanding of the characteristics of a certain population such as population density, age distribution, education level distribution, umemployment rate, and more.
+* <a name="f2">[2]</a> Catchment areas are calculated by extracting street networks from mapping data and estimating the time it would take for an individual to reach the centre within a certain amount of time. The larger the catchment area, the wider your reach.
+* <a name="f3">[3]</a> If you run a Business-to-Consumer (B2C) business, you most probably have a Google profile where customers can rate your product and provide feedback. It's critical to be aware of your own ratings, but to also compare them to those of your competitors.
+* <a name="f4">[4]</a> If your business is heavily dependent on travel, it makes sense to leverage movement data to see where groups of populations are travelling from and to, including the routes which they take.
