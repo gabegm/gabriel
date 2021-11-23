@@ -1,7 +1,7 @@
 ---
 layout: post
 draft: false
-unlisted: true
+unlisted: false
 title: "Geospatial Intelligence: Recap"
 author: Gabriel Gauci Maistre
 description: I recently had the pleasure of giving a talk on Geospatial Analytics at the Munich Business School (MBS). My talk "Geospatial Intelligence" covered a brief introduction into Geospatial data, what it looks like, its challenges, and how it can be applied towards business strategies. Some students had a few interesting questions which I thought were interesting to elaborate further on in more detail here.
@@ -59,7 +59,7 @@ The world is fairly large, and since Geospatial data can cover the whole globe, 
 
 Finding the right data sets is one important step, but finding the right data store is crucial. If done improperly, you will be fairly limited in what you can do with your data. Geospatial data contains "special" objects just as Points, Lines, and Polygons. Many databases will not only be unable to store such objects in their correct format, but will not provide the functionality to apply spatial transformations such as joining data sets together based on their location. It is also important to be aware of the limitations your data store may have in terms of Geospatial data. For optimal speed when applying spatial transformations, databases need to support indexing on geometry to optimise execution based on location.
 
-Ultimately collecting and storing data is useless is you're not able to share that with others in the form of visualisations. Unfortunately it is quite hard to find mainstream Business Intelligence (BI) tools that are able to support Geospatial objects out of the box. Most are able to visualise points, but fail to visualise anything further than that. Many also suffer from limitations in terms of how many points can be visualised at the same time on a map, and others fail to correctly visualise point sizes as you zoom in and out of a map.
+Ultimately collecting and storing data is useless if you're not able to share that with others in the form of visualisations. Unfortunately it is quite hard to find mainstream Business Intelligence (BI) tools that are able to support Geospatial objects out of the box. Most are able to visualise points, but fail to visualise anything further than that. Many also suffer from limitations in terms of how many points can be visualised at the same time on a map, and others fail to correctly visualise point sizes as you zoom in and out of a map.
 
 Finally, it's extremely important yet hard to find people, both from technical and business backgrounds, who can truly understand Geospatial data, know its applications and limitations, and how to apply them towards the business' needs.
 
