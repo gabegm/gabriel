@@ -14,7 +14,6 @@ series: []
 videos: []
 tags:
 - data science
-- machine learning
 - geospatial
 date: 2021-11-22 23:00:00 +0000
 ---
@@ -78,6 +77,7 @@ The skills you will need will ultimately depend on the project you are working o
 
 * SQL
   * Querying databases to retrieve data
+  * Analyse data and form insights
 * Programming
   * R/Python/Julia/etc.
   * Automating tasks and report
