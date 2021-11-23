@@ -21,15 +21,15 @@ date: 2021-11-21 23:00:00 +0000
 
 ![alt text](/images/mbs-me-1.jpg "My talk on Geospatial Intelligence at MBS")
 
-I recently had the pleasure of giving a talk on Geospatial Analytics at the [Munich Business School (MBS)](https://www.munich-business-school.de/en/). My talk "Geospatial Intelligence" covered a brief introduction into Geospatial data, what it looks like, its challenges, and its use cases.
+I recently had the pleasure of giving a talk on Geospatial Analytics at the [Munich Business School (MBS)](https://www.munich-business-school.de/en/). My talk "Geospatial Intelligence" covered a brief introduction into Geospatial data, what it looks like, its challenges, and how it can be applied towards business strategies.
 
-Geospatial data is projected onto a flat surface (map) and consists of 3 key components, spatial (where) such as the particular location on the map, attributes (what) such as the name of type of location, and time (when) such as when the data was collected. Such data may be hard and expensive to collect due to its size, however there are many sources providing free data such as [OpenStreetMap](https://openstreetmap.org/) allowing you to extract street networks and building footprints, points of interest, geocoded addresses, and more.
+Geospatial data is projected onto a flat surface (map) and consists of 3 key components, spatial (where) such as the particular location on the map, attributes (what) such as the name or type of location, and time (when) such as when the data was collected. Such data may be hard and expensive to collect due to its size, however there are many sources providing free data such as [OpenStreetMap](https://openstreetmap.org/) allowing you to extract street networks and building footprints, points of interest, geocoded addresses, and more.
 
-There exist a few challenges when working with Geospatial data that one needs to made aware of before moving forward. Because the earth is not flat, there exist many types of Coordinate Reference Systems (CRS)[[0]](#f0) which are used to project coordinates onto a map. It's important to be aware of this and to ensure that all the coordinates in your data sets are using the same CRS. If not, it is essential that you reproject the coordinates to a common CRS that you're using. This can lead to many issues as coordinates projected using a differing CRS will not align with each other on the same map.
+There exist a few challenges when working with Geospatial data that one needs to be made aware of before moving forward. Because the earth is not flat, there exist many types of Coordinate Reference Systems (CRS)[[0]](#f0) which are used to project coordinates onto a map. It's important to be aware of this and to ensure that all the coordinates in your data sets are using the same CRS. If not, it is essential that you reproject the coordinates to a common CRS that you're using. This can lead to many issues as coordinates projected using a differing CRS will not align with each other on the same map.
 
 As Geospatial data is a specialised type of data, it also requires special tools. Popular open source databases such as [PostgresSQL](https://www.postgresql.org/) allow you to install extensions such as [PostGIS](https://postgis.net/) allowing you to store Geospatial objects such as points and polygons, and apply spatial transformations such as joins and aggregations based on location. Tools also exist to allow you to visualise Geospatial data on a map such as [LeafletJS](https://leafletjs.com/) which is an open source JavaScript library allowing you to layer Geospatial objects on a map in your browser.
 
-It's also important to note that although Geospatial analytics is quite an interesting field with many applications, we must ensure that none of the data we collect or the way which we use it, will put anyone's safety at risk. Points on a map may ultimately refer to a real person's movements, which may put them in harms way should this data be used incorrectly or fall into the wrong hands. Safety first.
+It's also important to note that although Geospatial analytics is quite an interesting field with many applications, we must ensure that none of the data we collect or the way we use it will put anyone's safety at risk. Points on a map may ultimately refer to a real person's movements, which may put them in harms way should this data be used incorrectly or fall into the wrong hands. Safety first.
 
 In the talk I briefly touch on a few use cases that can be applied with Geospatial data which I will summarise below:
 * Competitor tracking
@@ -41,7 +41,7 @@ In the talk I briefly touch on a few use cases that can be applied with Geospati
   * How close are they to my branches?
   * Which common POIs exist in locations where my customers use my product?
 * Catchment areas[[2]](#f2)
-  * How many customers can I reach within X minutes by walk/car?
+  * How many customers can I reach within X minutes on foot/by car?
   * How many can my competition reach?
   * How many potential customers can I reach?
 * Customer analyses
@@ -157,6 +157,8 @@ There exist quite a few of which I'll briefly mention, all of which are open sou
 My personal recommendation for a beginner would be to use QGIS as it has an easy to use graphical user interface (GUI) to import, visualise, and export Geospatial data making it extremely easy to share your visualisations with others. The application can run on multiple platforms (Windows/Mac/Linux) and is also quite popular within the Geospatial community, so you shouldn't have any difficulty in finding support or [looking up tutorials](https://qgis.org/en/site/forusers/trainingmaterial/index.html).
 
 ## Conclusion
+
+I'd like to thank MBS for giving me the opportunity to share my thoughts on the area of Geospatial Analytics, and to all the students who attended and listened to me go on for a whole hour, I hope it was worth your time.
 
 If you're still interested in finding out more about the field, here's a few books which I can highly recommend:
 * [Weapons of Math Destruction](https://www.goodreads.com/book/show/28186015-weapons-of-math-destruction)
