@@ -2,10 +2,9 @@
 <head>
 <link href=https://gmpg.org/xfn/11 rel=profile>
 <meta charset=utf-8>
-<meta name=generator content="Hugo 0.92.1">
+<meta name=generator content="Hugo 0.93.1">
 <meta name=viewport content="width=device-width,initial-scale=1">
-<title>Data Science &lt;3 Clean Code &#183; Gabe</title>
-<meta name=description content="There is a common misconception that being a Data Scientist means that you do not need to care about writing good clean code, because you're not a Software Developer. If you're a firm believer of this, please take some time to hear me out. I hope to have at least gotten you to reconsider by the end of this post.">
+<title>Data Science &lt;3 Clean Code &#183; Gabe</title><meta name=description content="There is a common misconception that being a Data Scientist means that you do not need to care about writing good clean code, because you're not a Software Developer. If you're a firm believer of this, please take some time to hear me out. I hope to have at least gotten you to reconsider by the end of this post.">
 <link type=text/css rel=stylesheet href=https://gabriel.gaucimaistre.com/css/print.css media=print>
 <link type=text/css rel=stylesheet href=https://gabriel.gaucimaistre.com/css/poole.css>
 <link type=text/css rel=stylesheet href=https://gabriel.gaucimaistre.com/css/syntax.css>
@@ -23,161 +22,90 @@
 <meta name=twitter:image content="https://gabriel.gaucimaistre.com/images/data-scientists-should-write-clean-code.png">
 <meta name=twitter:title content="Data Science <3 Clean Code">
 <meta name=twitter:description content="There is a common misconception that being a Data Scientist means that you do not need to care about writing good clean code, because you're not a Software Developer. If you're a firm believer of this, please take some time to hear me out. I hope to have at least gotten you to reconsider by the end of this post.">
-</head>
-<body class=theme-base-0g>
+</head><body class=theme-base-0g>
 <aside class=sidebar>
 <div class="container sidebar-sticky">
 <div class=sidebar-about>
 <a href=https://gabriel.gaucimaistre.com/></a><img src=/images/avatar.jpg></a>
-<h1>Gabe</h1>
-<p class=lead>
+<h1>Gabe</h1><p class=lead>
 Data Scientist
-</p>
-<p class=description>
-I have opinions and make people read them.</p>
-</div>
-<nav>
+</p><p class=description>
+I have opinions and make people read them.</p></div><nav>
 <ul class=sidebar-nav>
-<li><a href=https://gabriel.gaucimaistre.com/>Home</a> </li>
-<li><a href=/about/> About </a></li><li><a href=https://github.com/gabegm/> Github </a></li><li><a href=https://www.linkedin.com/in/gabegm/> LinkedIn </a></li><li><a href=/index.xml> RSS </a></li><li><a href=https://twitter.com/itsgabegm/> Twitter </a></li>
-</ul>
-</nav>
-<p>&copy; Gabriel Gauci Maistre 2022. All rights reserved. </p>
-</div>
-</aside>
-<main class="content container">
+<li><a href=https://gabriel.gaucimaistre.com/>Home</a> </li><li><a href=/about/> About </a></li><li><a href=https://github.com/gabegm/> Github </a></li><li><a href=https://www.linkedin.com/in/gabegm/> LinkedIn </a></li><li><a href=/index.xml> RSS </a></li><li><a href=https://twitter.com/itsgabegm/> Twitter </a></li></ul></nav><p>&copy; Gabriel Gauci Maistre 2022. All rights reserved. </p></div></aside><main class="content container">
 <div class=post>
-<h1>Data Science &lt;3 Clean Code</h1>
-<time datetime=2021-05-20T23:00:00Z class=post-date>Thu, May 20, 2021</time>
+<h1>Data Science &lt;3 Clean Code</h1><time datetime=2021-05-20T23:00:00Z class=post-date>Thu, May 20, 2021</time>
 <p class=tags>
 Tags: <a href=/tags/data-science>data science</a> <a href=/tags/clean-code>clean code</a> <a href=/tags/python>python</a>
-</p>
-<p><em><strong>DISCLAIMER</strong></em></p>
-<p><em><strong>The following are simply my views and in no way reflect those of the whole industry.</strong></em></p>
-<p><img src=/images/data-scientists-should-write-clean-code.png alt="alt text" title="Data Scientists should write clean code; change my mind.">
-<em>I&rsquo;m back with another controversial topic!</em></p>
-<p>There is a common misconception among people with an academic background that being a Data Scientist means you do not need to care about writing good clean code, because you&rsquo;re not a Software Developer or a Machine Learning Engineer. Data Science is all about running experiments on data and you should not need to spend your precious time worrying about making things look pretty. If you&rsquo;re a firm believer of this, please take some time to hear me out. I hope to have at least gotten you to reconsider by the end of this post.</p>
-<h2 id=software-development-principles-arent-for-software-developers>Software Development principles aren&rsquo;t for Software Developers</h2>
-<p>Software Development principles might have been curated by Software Developers to aid in the creation of software, but they definitely were not meant <em>just</em> for Software Developers. They were proposed for anyone writing any kind of software, this of course includes Data Scientists. Below are a few which I felt were worth mentioning.</p>
-<h3 id=linting>Linting</h3>
-<p>Python is not a compiled language, which means there is no way of knowing whether your code will execute successfully unless you attempt to execute it and the interpreter[0] finds a problem which halts the execution of your code. This means that it&rsquo;s extremely important to use a linter which is a tool that will help finding bugs and style problems in your code. It&rsquo;s important to note that it&rsquo;s not perfect due to Python&rsquo;s dynamic nature[1], however false warnings should be fairly infrequent.</p>
-<p>In the following example, Pylint[2] will let us know that our script has some issues such as lines being too long, have missing whitespace characterss and unreachable code.</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ pylint my_script.py
-************* Module pylint.checkers.format
-W: 50: Too long line <span style=color:#f92672>(</span>86/80<span style=color:#f92672>)</span>
-W:108: Operator not followed by a space
-     print &gt;&gt;sys.stderr, <span style=color:#e6db74>&#39;Unable to match %r&#39;</span>, line
-            ^
-W:141: Too long line <span style=color:#f92672>(</span>81/80<span style=color:#f92672>)</span>
-W: 74:searchall: Unreachable code
-W:171:FormatChecker.process_tokens: Redefining built-in <span style=color:#f92672>(</span>type<span style=color:#f92672>)</span>
-W:150:FormatChecker.process_tokens: Too many local variables <span style=color:#f92672>(</span>20/15<span style=color:#f92672>)</span>
-W:150:FormatChecker.process_tokens: Too many branches <span style=color:#f92672>(</span>13/12<span style=color:#f92672>)</span>
-</code></pre></div><h3 id=documentation>Documentation</h3>
-<p><img src=/images/i-feel-bad-for-you.png alt="alt text" title="Machine Learning Engineers feel bad for Data Scientists but they don't care"></p>
-<p>Documentation is not needed to develop software, neither are comments and docstrings. All of which take more time and effort to do. However they will save your time in the long run as your codebase grows larger and more people other than yourself will have to look at your code, maintain it, or even extend it. It goes without saying that it will also help you maintain your own codebase.</p>
-<p>The following is an example of how to write docstrings for your Python functions.</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#e6db74>&#34;&#34;&#34;A one line summary of the module or program, terminated by a period.
-</span><span style=color:#e6db74>
-</span><span style=color:#e6db74>Leave one blank line.  The rest of this docstring should contain an
-</span><span style=color:#e6db74>overall description of the module or program.  Optionally, it may also
-</span><span style=color:#e6db74>contain a brief description of exported classes and functions and/or usage
-</span><span style=color:#e6db74>examples.
-</span><span style=color:#e6db74>
-</span><span style=color:#e6db74>  Typical usage example:
-</span><span style=color:#e6db74>
-</span><span style=color:#e6db74>  foo = ClassFoo()
-</span><span style=color:#e6db74>  bar = foo.FunctionBar()
-</span><span style=color:#e6db74>&#34;&#34;&#34;</span>
-</code></pre></div><p><em>Google&rsquo;s <a href=https://google.github.io/styleguide/pyguide.html#381-docstrings>Python style guide</a></em></p>
-<p>Type hinting is also another form of documentation you may add to your code which also has no effect on its execution but is meant to make it more legible. Specified in <a href=https://www.python.org/dev/peps/pep-0484/>PEP 484</a> and introduced in <a href=https://docs.python.org/3.5/whatsnew/3.5.html>Python 3.5</a>, type hints allow you to annotate your Python code with hints, hence the name, as to what types your function arguments, return values, and variables are using.</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>fib</span>(n):
-    a, b <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1</span>
-    <span style=color:#66d9ef>while</span> a <span style=color:#f92672>&lt;</span> n:
-        <span style=color:#66d9ef>yield</span> a
-        a, b <span style=color:#f92672>=</span> b, a<span style=color:#f92672>+</span>b
-</code></pre></div><p>Just by looking at this code block, it is hard to tell what types the function is expecting unless we run it. For small codebases this might be okay, but as you can imagine it would be quite counterproductive to have to stay running each and every function when we want to get a better idea of which types are required.</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#f92672>from</span> typing <span style=color:#f92672>import</span> Iterator
-
-<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>fib</span>(n: int) <span style=color:#f92672>-&gt;</span> Iterator[int]:
-    a, b <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1</span>
-    <span style=color:#66d9ef>while</span> a <span style=color:#f92672>&lt;</span> n:
-        <span style=color:#66d9ef>yield</span> a
-        a, b <span style=color:#f92672>=</span> b, a<span style=color:#f92672>+</span>b
-</code></pre></div><p>Thanks to the type hints present in this function definition, we now know that the function expects an <code>integer</code> variable, and returns an iterator consisting of <code>integer</code> elements. None of this effects the execution of your code, but it makes it much easier to read Python code since types are not required.</p>
-<p>Static type checkers will also allow you to check your code for type errors making it easier to find bugs with less debugging. In the following example, mypy[3] will find a bug where we tried to pass a <code>string</code> as an argument to the <code>fib</code> function which was expecting an <code>integer</code> instead. If we were to run this code, this bug would cause the execution to come to a halt.</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ mypy my_script.py
-my_script.py:10: error: Argument <span style=color:#e6db74>&#34;n&#34;</span> to <span style=color:#e6db74>&#34;fib&#34;</span> has incompatible
-                        type <span style=color:#e6db74>&#34;str&#34;</span>; expected <span style=color:#e6db74>&#34;int&#34;</span>
-</code></pre></div><p>You may not care about making your code easier for others to read, but all of the things I mentioned above are supposed to make life easier for you. The larger your codebase grows, the harder it&rsquo;ll be to maintain. Following these principles will make life a little easier. If you need some extra motivation, imagine that the next person to end up maintaining your code is a violent psychopath who knows where you live, that should do the trick.</p>
-<h2 id=consistency>Consistency</h2>
-<p>Blank lines and white spaces help make code more readable. Fixed line lengths ensure that your code is legible on all types of screens. However, even the best of intentions can be wasted by an inconsistent use of lines and white spaces, rendering even the most well-written code to be confusing. The antidote to inconsistency is the same as with any other form of writing: the style guide. Python has many style guides, your place of work might actually have one too.</p>
-<p>Unfortunately it is fairly common for each team within a company to follow their own style guide which makes it hard to standardise within a company. If your company does not yet have one, I suggest you find one that suits your needs and stick to it whenever you&rsquo;re writing code.[4]</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>No:
-<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>to_sql</span>(frame, name: str, con, schema: str <span style=color:#f92672>|</span> <span style=color:#66d9ef>None</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>None</span>, if_exists: str <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;fail&#34;</span>, index: bool <span style=color:#f92672>=</span> <span style=color:#66d9ef>True</span>, index_label<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>, chunksize: int <span style=color:#f92672>|</span> <span style=color:#66d9ef>None</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>None</span>, dtype: DtypeArg <span style=color:#f92672>|</span> <span style=color:#66d9ef>None</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>None</span>, method: str <span style=color:#f92672>|</span> <span style=color:#66d9ef>None</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>None</span>, engine: str <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;auto&#34;</span>, <span style=color:#f92672>**</span>engine_kwargs,) <span style=color:#f92672>-&gt;</span> <span style=color:#66d9ef>None</span>
-
-Yes:
-<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>to_sql</span>(
-    frame,
-    name: str,
-    con,
-    schema: str <span style=color:#f92672>|</span> <span style=color:#66d9ef>None</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>None</span>,
-    if_exists: str <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;fail&#34;</span>,
-    index: bool <span style=color:#f92672>=</span> <span style=color:#66d9ef>True</span>,
-    index_label<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>,
-    chunksize: int <span style=color:#f92672>|</span> <span style=color:#66d9ef>None</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>None</span>,
-    dtype: DtypeArg <span style=color:#f92672>|</span> <span style=color:#66d9ef>None</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>None</span>,
-    method: str <span style=color:#f92672>|</span> <span style=color:#66d9ef>None</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>None</span>,
-    engine: str <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;auto&#34;</span>,
-    <span style=color:#f92672>**</span>engine_kwargs,
-) <span style=color:#f92672>-&gt;</span> <span style=color:#66d9ef>None</span>
-</code></pre></div><p><em>An example of fixed line lengths</em></p>
-<h2 id=naming>Naming</h2>
-<p>Whether you&rsquo;re developing your own library or importing someone else&rsquo;s, it&rsquo;s essential to use conventional and meaningful names. This not only helps to stay consistent with the library&rsquo;s conventions but also to make your code more clear and concise. Library names can also collide if you&rsquo;re not careful so always be weary of what you&rsquo;re importing.</p>
-<p>Importing <code>numpy</code> as <code>n</code> rather than <code>np</code> which is the preferred alias and used by the community is not going to help others get up to speed with what you&rsquo;re trying to achieve with your code.</p>
-<p><img src=/images/variable-naming.png alt="alt text" title="Giving a variable a well thought out name, no. Naming it 'x', definitely."></p>
-<p>This also goes for naming your variables and functions. A variable named <code>x</code> isn&rsquo;t going to help anyone understand what <code>x</code> is meant to be storing and used for. You can never know when you&rsquo;ll need to look at your own code again down the line and forget what <code>x</code> was meant to be used for.</p>
-<h2 id=dumping-your-code-on-a-machine-learning-engineer-wont-work>Dumping your code on a Machine Learning Engineer won&rsquo;t work</h2>
-<p><img src=/images/dump-truck.png alt="alt text" title="Data Scientists dumping their code onto Machine Learning Engineers"></p>
-<p>If Data Scientists are the head chefs in a restaurant forming new recipes, Machine Learning Engineers are the cooks attempting to recreate the particular dish using the recipe provided to them. If the cooks are to successfully recreate the dish, they&rsquo;re going to need a well detailed recipe which is easy to read and understand.</p>
-<p>Machine Learning Engineers are no different to these cooks, if they are to deploy to production a Machine Learning model which a Data Science built, they must be able to understand the code and run it successfully, easily recreate the data that was used, install all the dependencies without running into any issues, and recreate the same results of the model.</p>
-<p><img src=/images/how-to-run-this-code.png alt="alt text" title="Machine Learning Engineers asking Data Scientists how to run their code."></p>
-<p>This is no easy task, imagine trying peak into someone else&rsquo;s brain and understand the very thing which they&rsquo;ve been working on for months. Now imagine that work did not consist of clean commented code, which is documented thoroughly, uses virtual environments to execute the code, and includes SQL queries to retrieve and recreate the data that was used to train the Machine Learning model. There&rsquo;s a far greater chance of the results not being recreated as the Data Scientist had in mind, causing problems with the model running in production down the line.</p>
-<h2 id=you-shouldnt-tie-your-development-to-a-notebook>You shouldn&rsquo;t tie your development to a notebook</h2>
-<p><img src=/images/i-want-you-notebook.png alt="alt text" title="Data Scientists want be with notebooks forever"></p>
-<p>The topic of notebooks[5] is so vast I could probably have a whole post dedicated to it, <em>notes this down for later.</em> But to keep things short, although notebooks present a fantastic way of prototyping your code, they lack the features you would normally find in an Integrated Development Environment (IDE)[6].</p>
-<p>Notebooks don&rsquo;t come with linting out of the box, which makes it hard to identify and correct subtle programming errors or unconventional coding practices that can lead to errors. A linter can tell you that you forgot to pass a variable in your function&rsquo;s argument, or that there&rsquo;s unused variables/functions in your code. All of which can make it even more confusing to understand the notebook code when reading it.</p>
-<p>Now you could make the argument that you could always prototype your code in a quick and dirty way and then rewrite it using the proper principles once you know what it is you want from your code. But you&rsquo;re still going to have to go through your code, figure out what you had in mind at the time when you wrote it, and rewrite it again. It would be a lot easier if you followed the correct principles in the first place and had the proper documentation, such as comments and docstrings, to work off from.</p>
-<h2 id=a-better-way-to-use-notebooks>A better way to use notebooks</h2>
-<p><img src=/images/data-science-two-buttons.png alt="alt text" title="Use proper software development principles v.s. dumping all code in the notebook to a script.">
-<em>Use proper software development principles or just dump the notebook as code[7]</em></p>
-<p>Notebooks are great for prototyping but they don&rsquo;t help in following Software Development principles, which hopefully by now I have convinced you that you should use them. Wouldn&rsquo;t it be great if you could have your cake and also eat it? Well in this case it&rsquo;s possible. Here&rsquo;s my approach.</p>
-<p>Everything I write goes into a function which gets packaged into a library. I develop this code in an IDE which gives me all the benefits of Software Development principles. As I&rsquo;m doing so, I import my library in a notebook and prototype the code as I&rsquo;m writing it. Jupyter notebooks also make this easy by allowing me to use magic commands such as <code>%autoreload</code> which allows me to automatically reload libraries as I update them within my environment without the need to restart the kernel.</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>[<span style=color:#ae81ff>1</span>]: <span style=color:#f92672>%</span>load_ext autoreload
-<span style=color:#f92672>%</span>autoreload <span style=color:#ae81ff>2</span> <span style=color:#75715e># tells jupyter to autoreload libraries as they&#39;re updated in our environment</span>
-
-[<span style=color:#ae81ff>2</span>]: <span style=color:#f92672>from</span> my_library <span style=color:#f92672>import</span> fib <span style=color:#75715e># makes our function accessible</span>
-
-[<span style=color:#ae81ff>3</span>]: [print(i) <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> fib(<span style=color:#ae81ff>5</span>)] <span style=color:#75715e># executes our function</span>
-<span style=color:#ae81ff>0</span>
-<span style=color:#ae81ff>1</span>
-<span style=color:#ae81ff>1</span>
-<span style=color:#ae81ff>2</span>
-<span style=color:#ae81ff>3</span>
-</code></pre></div><p>Whenever I need to change the code behind the function <code>fib</code>, all I need to do is simply reinstall it by running <code>$ pip install .</code>[8] in my terminal and simply rerunning cell <code>3</code> above which will now use the function from my newly updated library.</p>
-<hr>
+</p><p><em><strong>DISCLAIMER</strong></em></p><p><em><strong>The following are simply my views and in no way reflect those of the whole industry.</strong></em></p><p><img src=/images/data-scientists-should-write-clean-code.png alt="alt text" title="Data Scientists should write clean code; change my mind.">
+<em>I&rsquo;m back with another controversial topic!</em></p><p>There is a common misconception among people with an academic background that being a Data Scientist means you do not need to care about writing good clean code, because you&rsquo;re not a Software Developer or a Machine Learning Engineer. Data Science is all about running experiments on data and you should not need to spend your precious time worrying about making things look pretty. If you&rsquo;re a firm believer of this, please take some time to hear me out. I hope to have at least gotten you to reconsider by the end of this post.</p><h2 id=software-development-principles-arent-for-software-developers>Software Development principles aren&rsquo;t for Software Developers</h2><p>Software Development principles might have been curated by Software Developers to aid in the creation of software, but they definitely were not meant <em>just</em> for Software Developers. They were proposed for anyone writing any kind of software, this of course includes Data Scientists. Below are a few which I felt were worth mentioning.</p><h3 id=linting>Linting</h3><p>Python is not a compiled language, which means there is no way of knowing whether your code will execute successfully unless you attempt to execute it and the interpreter[0] finds a problem which halts the execution of your code. This means that it&rsquo;s extremely important to use a linter which is a tool that will help finding bugs and style problems in your code. It&rsquo;s important to note that it&rsquo;s not perfect due to Python&rsquo;s dynamic nature[1], however false warnings should be fairly infrequent.</p><p>In the following example, Pylint[2] will let us know that our script has some issues such as lines being too long, have missing whitespace characterss and unreachable code.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>$ pylint my_script.py
+</span></span><span style=display:flex><span>************* Module pylint.checkers.format
+</span></span><span style=display:flex><span>W: 50: Too long line <span style=color:#f92672>(</span>86/80<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>W:108: Operator not followed by a space
+</span></span><span style=display:flex><span>     print &gt;&gt;sys.stderr, <span style=color:#e6db74>&#39;Unable to match %r&#39;</span>, line
+</span></span><span style=display:flex><span>            ^
+</span></span><span style=display:flex><span>W:141: Too long line <span style=color:#f92672>(</span>81/80<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>W: 74:searchall: Unreachable code
+</span></span><span style=display:flex><span>W:171:FormatChecker.process_tokens: Redefining built-in <span style=color:#f92672>(</span>type<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>W:150:FormatChecker.process_tokens: Too many local variables <span style=color:#f92672>(</span>20/15<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>W:150:FormatChecker.process_tokens: Too many branches <span style=color:#f92672>(</span>13/12<span style=color:#f92672>)</span>
+</span></span></code></pre></div><h3 id=documentation>Documentation</h3><p><img src=/images/i-feel-bad-for-you.png alt="alt text" title="Machine Learning Engineers feel bad for Data Scientists but they don't care"></p><p>Documentation is not needed to develop software, neither are comments and docstrings. All of which take more time and effort to do. However they will save your time in the long run as your codebase grows larger and more people other than yourself will have to look at your code, maintain it, or even extend it. It goes without saying that it will also help you maintain your own codebase.</p><p>The following is an example of how to write docstrings for your Python functions.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#e6db74>&#34;&#34;&#34;A one line summary of the module or program, terminated by a period.
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>Leave one blank line.  The rest of this docstring should contain an
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>overall description of the module or program.  Optionally, it may also
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>contain a brief description of exported classes and functions and/or usage
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>examples.
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  Typical usage example:
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  foo = ClassFoo()
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  bar = foo.FunctionBar()
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>&#34;&#34;&#34;</span>
+</span></span></code></pre></div><p><em>Google&rsquo;s <a href=https://google.github.io/styleguide/pyguide.html#381-docstrings>Python style guide</a></em></p><p>Type hinting is also another form of documentation you may add to your code which also has no effect on its execution but is meant to make it more legible. Specified in <a href=https://www.python.org/dev/peps/pep-0484/>PEP 484</a> and introduced in <a href=https://docs.python.org/3.5/whatsnew/3.5.html>Python 3.5</a>, type hints allow you to annotate your Python code with hints, hence the name, as to what types your function arguments, return values, and variables are using.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>fib</span>(n):
+</span></span><span style=display:flex><span>    a, b <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>while</span> a <span style=color:#f92672>&lt;</span> n:
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>yield</span> a
+</span></span><span style=display:flex><span>        a, b <span style=color:#f92672>=</span> b, a<span style=color:#f92672>+</span>b
+</span></span></code></pre></div><p>Just by looking at this code block, it is hard to tell what types the function is expecting unless we run it. For small codebases this might be okay, but as you can imagine it would be quite counterproductive to have to stay running each and every function when we want to get a better idea of which types are required.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>from</span> typing <span style=color:#f92672>import</span> Iterator
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>fib</span>(n: int) <span style=color:#f92672>-&gt;</span> Iterator[int]:
+</span></span><span style=display:flex><span>    a, b <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>while</span> a <span style=color:#f92672>&lt;</span> n:
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>yield</span> a
+</span></span><span style=display:flex><span>        a, b <span style=color:#f92672>=</span> b, a<span style=color:#f92672>+</span>b
+</span></span></code></pre></div><p>Thanks to the type hints present in this function definition, we now know that the function expects an <code>integer</code> variable, and returns an iterator consisting of <code>integer</code> elements. None of this effects the execution of your code, but it makes it much easier to read Python code since types are not required.</p><p>Static type checkers will also allow you to check your code for type errors making it easier to find bugs with less debugging. In the following example, mypy[3] will find a bug where we tried to pass a <code>string</code> as an argument to the <code>fib</code> function which was expecting an <code>integer</code> instead. If we were to run this code, this bug would cause the execution to come to a halt.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>$ mypy my_script.py
+</span></span><span style=display:flex><span>my_script.py:10: error: Argument <span style=color:#e6db74>&#34;n&#34;</span> to <span style=color:#e6db74>&#34;fib&#34;</span> has incompatible
+</span></span><span style=display:flex><span>                        type <span style=color:#e6db74>&#34;str&#34;</span>; expected <span style=color:#e6db74>&#34;int&#34;</span>
+</span></span></code></pre></div><p>You may not care about making your code easier for others to read, but all of the things I mentioned above are supposed to make life easier for you. The larger your codebase grows, the harder it&rsquo;ll be to maintain. Following these principles will make life a little easier. If you need some extra motivation, imagine that the next person to end up maintaining your code is a violent psychopath who knows where you live, that should do the trick.</p><h2 id=consistency>Consistency</h2><p>Blank lines and white spaces help make code more readable. Fixed line lengths ensure that your code is legible on all types of screens. However, even the best of intentions can be wasted by an inconsistent use of lines and white spaces, rendering even the most well-written code to be confusing. The antidote to inconsistency is the same as with any other form of writing: the style guide. Python has many style guides, your place of work might actually have one too.</p><p>Unfortunately it is fairly common for each team within a company to follow their own style guide which makes it hard to standardise within a company. If your company does not yet have one, I suggest you find one that suits your needs and stick to it whenever you&rsquo;re writing code.[4]</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>No:
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>to_sql</span>(frame, name: str, con, schema: str <span style=color:#f92672>|</span> <span style=color:#66d9ef>None</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>None</span>, if_exists: str <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;fail&#34;</span>, index: bool <span style=color:#f92672>=</span> <span style=color:#66d9ef>True</span>, index_label<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>, chunksize: int <span style=color:#f92672>|</span> <span style=color:#66d9ef>None</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>None</span>, dtype: DtypeArg <span style=color:#f92672>|</span> <span style=color:#66d9ef>None</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>None</span>, method: str <span style=color:#f92672>|</span> <span style=color:#66d9ef>None</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>None</span>, engine: str <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;auto&#34;</span>, <span style=color:#f92672>**</span>engine_kwargs,) <span style=color:#f92672>-&gt;</span> <span style=color:#66d9ef>None</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Yes:
+</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>to_sql</span>(
+</span></span><span style=display:flex><span>    frame,
+</span></span><span style=display:flex><span>    name: str,
+</span></span><span style=display:flex><span>    con,
+</span></span><span style=display:flex><span>    schema: str <span style=color:#f92672>|</span> <span style=color:#66d9ef>None</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>None</span>,
+</span></span><span style=display:flex><span>    if_exists: str <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;fail&#34;</span>,
+</span></span><span style=display:flex><span>    index: bool <span style=color:#f92672>=</span> <span style=color:#66d9ef>True</span>,
+</span></span><span style=display:flex><span>    index_label<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>,
+</span></span><span style=display:flex><span>    chunksize: int <span style=color:#f92672>|</span> <span style=color:#66d9ef>None</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>None</span>,
+</span></span><span style=display:flex><span>    dtype: DtypeArg <span style=color:#f92672>|</span> <span style=color:#66d9ef>None</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>None</span>,
+</span></span><span style=display:flex><span>    method: str <span style=color:#f92672>|</span> <span style=color:#66d9ef>None</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>None</span>,
+</span></span><span style=display:flex><span>    engine: str <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;auto&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>**</span>engine_kwargs,
+</span></span><span style=display:flex><span>) <span style=color:#f92672>-&gt;</span> <span style=color:#66d9ef>None</span>
+</span></span></code></pre></div><p><em>An example of fixed line lengths</em></p><h2 id=naming>Naming</h2><p>Whether you&rsquo;re developing your own library or importing someone else&rsquo;s, it&rsquo;s essential to use conventional and meaningful names. This not only helps to stay consistent with the library&rsquo;s conventions but also to make your code more clear and concise. Library names can also collide if you&rsquo;re not careful so always be weary of what you&rsquo;re importing.</p><p>Importing <code>numpy</code> as <code>n</code> rather than <code>np</code> which is the preferred alias and used by the community is not going to help others get up to speed with what you&rsquo;re trying to achieve with your code.</p><p><img src=/images/variable-naming.png alt="alt text" title="Giving a variable a well thought out name, no. Naming it 'x', definitely."></p><p>This also goes for naming your variables and functions. A variable named <code>x</code> isn&rsquo;t going to help anyone understand what <code>x</code> is meant to be storing and used for. You can never know when you&rsquo;ll need to look at your own code again down the line and forget what <code>x</code> was meant to be used for.</p><h2 id=dumping-your-code-on-a-machine-learning-engineer-wont-work>Dumping your code on a Machine Learning Engineer won&rsquo;t work</h2><p><img src=/images/dump-truck.png alt="alt text" title="Data Scientists dumping their code onto Machine Learning Engineers"></p><p>If Data Scientists are the head chefs in a restaurant forming new recipes, Machine Learning Engineers are the cooks attempting to recreate the particular dish using the recipe provided to them. If the cooks are to successfully recreate the dish, they&rsquo;re going to need a well detailed recipe which is easy to read and understand.</p><p>Machine Learning Engineers are no different to these cooks, if they are to deploy to production a Machine Learning model which a Data Science built, they must be able to understand the code and run it successfully, easily recreate the data that was used, install all the dependencies without running into any issues, and recreate the same results of the model.</p><p><img src=/images/how-to-run-this-code.png alt="alt text" title="Machine Learning Engineers asking Data Scientists how to run their code."></p><p>This is no easy task, imagine trying peak into someone else&rsquo;s brain and understand the very thing which they&rsquo;ve been working on for months. Now imagine that work did not consist of clean commented code, which is documented thoroughly, uses virtual environments to execute the code, and includes SQL queries to retrieve and recreate the data that was used to train the Machine Learning model. There&rsquo;s a far greater chance of the results not being recreated as the Data Scientist had in mind, causing problems with the model running in production down the line.</p><h2 id=you-shouldnt-tie-your-development-to-a-notebook>You shouldn&rsquo;t tie your development to a notebook</h2><p><img src=/images/i-want-you-notebook.png alt="alt text" title="Data Scientists want be with notebooks forever"></p><p>The topic of notebooks[5] is so vast I could probably have a whole post dedicated to it, <em>notes this down for later.</em> But to keep things short, although notebooks present a fantastic way of prototyping your code, they lack the features you would normally find in an Integrated Development Environment (IDE)[6].</p><p>Notebooks don&rsquo;t come with linting out of the box, which makes it hard to identify and correct subtle programming errors or unconventional coding practices that can lead to errors. A linter can tell you that you forgot to pass a variable in your function&rsquo;s argument, or that there&rsquo;s unused variables/functions in your code. All of which can make it even more confusing to understand the notebook code when reading it.</p><p>Now you could make the argument that you could always prototype your code in a quick and dirty way and then rewrite it using the proper principles once you know what it is you want from your code. But you&rsquo;re still going to have to go through your code, figure out what you had in mind at the time when you wrote it, and rewrite it again. It would be a lot easier if you followed the correct principles in the first place and had the proper documentation, such as comments and docstrings, to work off from.</p><h2 id=a-better-way-to-use-notebooks>A better way to use notebooks</h2><p><img src=/images/data-science-two-buttons.png alt="alt text" title="Use proper software development principles v.s. dumping all code in the notebook to a script.">
+<em>Use proper software development principles or just dump the notebook as code[7]</em></p><p>Notebooks are great for prototyping but they don&rsquo;t help in following Software Development principles, which hopefully by now I have convinced you that you should use them. Wouldn&rsquo;t it be great if you could have your cake and also eat it? Well in this case it&rsquo;s possible. Here&rsquo;s my approach.</p><p>Everything I write goes into a function which gets packaged into a library. I develop this code in an IDE which gives me all the benefits of Software Development principles. As I&rsquo;m doing so, I import my library in a notebook and prototype the code as I&rsquo;m writing it. Jupyter notebooks also make this easy by allowing me to use magic commands such as <code>%autoreload</code> which allows me to automatically reload libraries as I update them within my environment without the need to restart the kernel.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>[<span style=color:#ae81ff>1</span>]: <span style=color:#f92672>%</span>load_ext autoreload
+</span></span><span style=display:flex><span><span style=color:#f92672>%</span>autoreload <span style=color:#ae81ff>2</span> <span style=color:#75715e># tells jupyter to autoreload libraries as they&#39;re updated in our environment</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>[<span style=color:#ae81ff>2</span>]: <span style=color:#f92672>from</span> my_library <span style=color:#f92672>import</span> fib <span style=color:#75715e># makes our function accessible</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>[<span style=color:#ae81ff>3</span>]: [print(i) <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> fib(<span style=color:#ae81ff>5</span>)] <span style=color:#75715e># executes our function</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>2</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>3</span>
+</span></span></code></pre></div><p>Whenever I need to change the code behind the function <code>fib</code>, all I need to do is simply reinstall it by running <code>$ pip install .</code>[8] in my terminal and simply rerunning cell <code>3</code> above which will now use the function from my newly updated library.</p><hr>
 <ul>
-<li>[0] An interpreter directly executes code without the need to have been previously compiled into a machine language program.</li>
-<li>[1] Python is dynamically typed, meaning the types of variables are only determined at runtime and do not need to be specified beforehand.</li>
-<li>[2] <a href=https://pylint.org/>Pylint</a> is a source-code, bug and quality checker for the Python programming language.</li>
-<li>[3] <a href=http://mypy-lang.org/>Mypy</a> is an optional static type checker for Python that aims to combine the benefits of dynamic (or &ldquo;duck&rdquo;) typing and static typing.</li>
-<li>[4] Google have a public <a href=https://google.github.io/styleguide/pyguide.html>Python style guide</a> which I highly recommend to check out.</li>
-<li>[5] A Jupyter notebook consists of an interactive web tool known as a computational notebook, which researchers can use to combine software code, computational output, explanatory text, and multimedia resources in a single document.</li>
-<li>[6] An IDE normally consists of at least a source code editor, build automation tools, and a debugger.</li>
-<li>[7] <a href=https://nbconvert.readthedocs.io/en/latest/>nbconvert</a> is a tool which lets you convert a notebook into executable code, as brilliant as that can sound, the tool doesn&rsquo;t check for any parts of your code which are not being used or might cause problems. So think of it as a dump from one format to another.</li>
-<li>[8] <code>.</code> refers to the current directory which in this case is the one where our library is located.</li>
-</ul>
-</div>
-</main>
-</body>
-</html>
+<li>[0] An interpreter directly executes code without the need to have been previously compiled into a machine language program.</li><li>[1] Python is dynamically typed, meaning the types of variables are only determined at runtime and do not need to be specified beforehand.</li><li>[2] <a href=https://pylint.org/>Pylint</a> is a source-code, bug and quality checker for the Python programming language.</li><li>[3] <a href=http://mypy-lang.org/>Mypy</a> is an optional static type checker for Python that aims to combine the benefits of dynamic (or &ldquo;duck&rdquo;) typing and static typing.</li><li>[4] Google have a public <a href=https://google.github.io/styleguide/pyguide.html>Python style guide</a> which I highly recommend to check out.</li><li>[5] A Jupyter notebook consists of an interactive web tool known as a computational notebook, which researchers can use to combine software code, computational output, explanatory text, and multimedia resources in a single document.</li><li>[6] An IDE normally consists of at least a source code editor, build automation tools, and a debugger.</li><li>[7] <a href=https://nbconvert.readthedocs.io/en/latest/>nbconvert</a> is a tool which lets you convert a notebook into executable code, as brilliant as that can sound, the tool doesn&rsquo;t check for any parts of your code which are not being used or might cause problems. So think of it as a dump from one format to another.</li><li>[8] <code>.</code> refers to the current directory which in this case is the one where our library is located.</li></ul></div></main></body></html>
