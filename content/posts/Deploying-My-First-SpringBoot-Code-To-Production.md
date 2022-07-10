@@ -101,6 +101,7 @@ So I basically needed to grab something from A, put it in B, and put it back in 
 * It's easier to grab someone's attention in the office
 * There's so much infrastructure needed for local development
 * Testing is even harder now with having to mimic all the moving parts in a micro service architecture
+* Having a someone mentor and encourage you really helps
 * I'm ready to work on the next task
 * [Annotations, anotations everywhere](https://www.baeldung.com/spring-boot-annotations)
 
