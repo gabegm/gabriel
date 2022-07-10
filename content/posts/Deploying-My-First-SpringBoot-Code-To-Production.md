@@ -4,8 +4,8 @@ draft: false
 unlisted: true
 title: They Let Me Deploy Spring Boot Code in Production
 author: Gabriel Gauci Maistre
-description: 
-summary: 
+description: I recently got to deploy Java code to a back-end service in production
+summary: I recently got to deploy Java code to a back-end service in production
 images:
 - /images/i-have-no-idea-what-im-doing-2.jpg
 image: /images/i-have-no-idea-what-im-doing-2.jpg
