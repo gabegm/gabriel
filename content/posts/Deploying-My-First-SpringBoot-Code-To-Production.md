@@ -46,7 +46,6 @@ These two disciplines (DS vs. SWE) are quite far from each other, both in knowle
 * RPCs and Protocol Buffers are completely new to me, but I have used REST APIs
 * I consistently choose to spend 6 hours failing to automate something that takes 6 minutes to do by hand
 * Breaking a back end service in production is a lot worse than breaking a DS model
-* I'm not that smart
 
 ## My task
 
@@ -64,7 +63,7 @@ So I basically needed to grab something from A, put it in B, and put it back in 
 
 * My Object Oriented Programming (OOP) principles were way rustier than I first thought
 * I needed to get reaquinted with [IntelliJ IDEA](https://www.jetbrains.com/idea/) after over 5 years
-* It was hard to grab others' attention for help AND understand them
+* Although I got many of my questions answered, it was not always easy to understand them
 * I was overwhelmed with all the things I needed to know
 * Documentation could have been improved
 * Is was hard to find an "easy" ticket for me to work on
@@ -82,7 +81,7 @@ So I basically needed to grab something from A, put it in B, and put it back in 
   * [Inferred types at compile time using the `var` keyword](https://advancedweb.hu/new-language-features-since-java-8-to-18/#local-variable-type-inference)
   * [Arrows `->` made it into Java for switch statements](https://advancedweb.hu/new-language-features-since-java-8-to-18/#switch-expressions)
   * [The compiler got much better at detecting my crappy code thanks to `NullPointerExceptions`](https://advancedweb.hu/new-language-features-since-java-8-to-18/#helpful-nullpointerexceptions)
-  * [Python stlye text blocks are finally here!](https://advancedweb.hu/new-language-features-since-java-8-to-18/#text-blocks)
+  * [Python style text blocks are finally here!](https://advancedweb.hu/new-language-features-since-java-8-to-18/#text-blocks)
   * [The official website was updated]([java.com](https://www.java.com/))
 
 ![alt text](/images/new-javacom.gif "Java.com was updated after an eternity")
@@ -96,14 +95,14 @@ So I basically needed to grab something from A, put it in B, and put it back in 
 
 ![alt text](/images/3-billion-devices-run-java.png "3 Billion Devices Still Run Java")
 
-* It's better to grok Java first and learn Spring Boot and microservices along the way
+* It's better to grasp Java first and learn Spring Boot and microservices along the way
 * You still won't understand much, just take things one step at a time and keep pushing till things start to stick
 * It's easier to grab someone's attention in the office
 * There's so much infrastructure needed for local development
 * Testing is even harder now with having to mimic all the moving parts in a micro service architecture
 * Having a someone mentor and encourage you really helps
 * I'm ready to work on the next task
-* [Annotations, anotations everywhere](https://www.baeldung.com/spring-boot-annotations)
+* [Annotations, annotations everywhere](https://www.baeldung.com/spring-boot-annotations)
 
 
 ![alt text](/images/mason-annotations.png "The annotations Mason, what do they mean?")
@@ -123,7 +122,7 @@ A somewhat ordered list.
 * [Spring Boot Tutorial](https://www.freecodecamp.org/news/spring-boot-tutorial-build-fast-modern-java-app/) (~2 hours)
   * This is a hand-on introduction if you're not afraid of getting your hands dirty
 * [Data Structures](https://www.youtube.com/watch?v=RBSGKlAvoiM) (8 hours) OR [Problem Solving](https://neetcode.io/) (150 problems)
-  * As you start cover all the basics, you'll probaly want to move towards grokking data structures. I recommend following the video course and using the problems for practice.
+  * As you start cover all the basics, you'll probaly want to move towards grasping data structures. I recommend following the video course and using the problem set for practice.
 
 ---
 
