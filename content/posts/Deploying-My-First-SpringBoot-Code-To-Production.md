@@ -22,13 +22,13 @@ date: 2022-07-08 10:00:00 +0000
 ![alt text](/images/i-have-no-idea-what-im-doing-2.jpg "I have no idea what I'm doing")
 *SPOILER ALERT: No I did not break production...I think*
 
-Although I have been working as a DS (Data Scientist) for the past 5 years, DS was actually never part of my university degree. My introduction to DS came when I decided to base my thesis on automated algorithmic trading with applied machine learning. This in fact was what helped me land a job in DS once I graduated.
+Although I have been working as a Data Scientist (henceforth shortened to DS) for the past 5 years, DS was actually never part of my university degree. My introduction to DS came when I decided to base my thesis on automated algorithmic trading with applied machine learning. This in fact was what helped me land a job in DS once I graduated.
 
-The degree itself was very much focused on Software Engineering and Web Development. This meant that I actually never wrote any Python code, being rather unpopular for web development at the time[0], but rather a lot of Java, C#, PHP, and JavaScript. Although I did teach myself Python for my thesis.
+The degree itself was very much focused on Software Engineering and Web Development; this meant that I actually never wrote any Python code, Python being a rather unpopular language for web development at the time[0]. Instead I wrote a lot of Java, C#, PHP, and JavaScript. Although I did teach myself Python for my thesis.
 
-Okay so why am I telling you all of this? Well I recently got to take off my DS hat and play SWE (Software Engineer) for a few days. I have been interested in giving SWE a try for a while now as I've been meaning to improve my engineering skills for deploying DS models in the future. It is also my impression that ML (Machine Learning) is slowly moving towards more engineering heavy roles such as MLE (Machine Learning Engineering) or SWE roles specialised in data.
+Okay. So, why am I telling you all of this? Well I recently got to take off my DS hat and play Software Engineer (henceforth referred to as SWE) for a few days. I have been interested in giving SWE a try for a while now as I've been meaning to improve my engineering skills for the deploying of DS models in the future. It is also my impression that ML (Machine Learning) is slowly moving towards more engineering heavy roles such as MLE (Machine Learning Engineering) or SWE roles specialised in data.
 
-So my reasoning was that it would be a good idea for me to learn how to ship some back-end services in production, and lucky for me was given the opportunity to work on a ticket for my employer. That's right, I found someone crazy enough to let me ship my crappy code in production.
+My reasoning was that it would be a good idea for me to learn how to ship some back-end services in production and, lucky for me, I was given the opportunity to work on a ticket for my employer. That's right, I found someone crazy enough to let me ship my crappy code to production.
 
 ![alt text](/images/walk-into-mordor.jpg "Walking into Mordor")
 
@@ -51,24 +51,24 @@ These two disciplines (DS vs. SWE) are quite far from each other, both in knowle
 
 ![alt text](/images/honest-work.jpg "It's not much but it's honest work")
 
-I needed to add a new field to an existing micro service. This meant that the service, which was already listening to a particular event through Kafka, needed to now grab this new field persist it, should it's value differ from what already exists in the service's database.
+I needed to add a new field to an existing micro service. This meant that the service, which was already listening to a particular event through Kafka, needed to now grab this new field, and persist it should it's value differ from what already exists in the service's database.
 
 The service would also need to republish this new field back to Kafka as part of an existing event, and additionally in an existing RPC endpoint for other services to call directly.
 
 I also needed to update the protobuf files used by Kafka to add the new field for other services to consume.
 
-So I basically needed to grab something from A, put it in B, and put it back in A. Sounds simple right?
+So, I basically needed to grab something from A, put it in B, and put it back in A. Sounds simple right?
 
 ## What went wrong
 
 * My Object Oriented Programming (OOP) principles were way rustier than I first thought
-* I needed to get reaquinted with [IntelliJ IDEA](https://www.jetbrains.com/idea/) after over 5 years
+* I needed to get reacquainted with [IntelliJ IDEA](https://www.jetbrains.com/idea/) after over 5 years
 * Although I got many of my questions answered, it was not always easy to understand them
 * I was overwhelmed with all the things I needed to know
 * Documentation could have been improved
-* Is was hard to find an "easy" ticket for me to work on
+* It was hard to find an "easy" ticket for me to work on
 * I struggled to juggle between my DS tasks and this particular task
-* Setting up a local environment also proved hard to do
+* Setting up a local environment also proved to be hard to do
 * I used the incorrect data structure ([strings vs. enums](https://forums.ni.com/t5/LabVIEW/what-is-the-advantages-disadvantages-of-an-enum-vs-strings-for/td-p/2301458))
 
 ## What I learnt
@@ -89,14 +89,14 @@ So I basically needed to grab something from A, put it in B, and put it back in 
 
 * Spring exploded in popularity for Java back-end development
 * There's now much less boilerplate code needed to be written, but that also makes it a lot harder for a newbie like me to grasp when looking at a new codebase [1]
-* Many class dependencies are automatically generated (e.g. [protobuf](https://developers.google.com/protocol-buffers/docs/reference/java-generated)) which is confusing at times for a newbie sich as myself
+* Many class dependencies are automatically generated (e.g. [protobuf](https://developers.google.com/protocol-buffers/docs/reference/java-generated)) which is confusing at times for a newbie such as myself
 * People are also clueless, just a little less than you
 * 3 billion devices still run Java
 
 ![alt text](/images/3-billion-devices-run-java.png "3 Billion Devices Still Run Java")
 
 * It's better to grasp Java first and learn Spring Boot and microservices along the way
-* You still won't understand much, just take things one step at a time and keep pushing till things start to stick
+* You still won't understand much, just take things one step at a time and keep pushing until things start to stick
 * It's easier to grab someone's attention in the office
 * There's so much infrastructure needed for local development
 * Testing is even harder now with having to mimic all the moving parts in a micro service architecture
@@ -120,7 +120,7 @@ A somewhat ordered list.
 * [Java Microservices: A Practical Guide](https://www.marcobehler.com/guides/java-microservices-a-practical-guide) (~50 minutes)
   * An in-depth guide on building micro services in Java
 * [Spring Boot Tutorial](https://www.freecodecamp.org/news/spring-boot-tutorial-build-fast-modern-java-app/) (~2 hours)
-  * This is a hand-on introduction if you're not afraid of getting your hands dirty
+  * This is a hands-on introduction if you're not afraid of getting your hands dirty
 * [Data Structures](https://www.youtube.com/watch?v=RBSGKlAvoiM) (8 hours) OR [Problem Solving](https://neetcode.io/) (150 problems)
   * As you start cover all the basics, you'll probaly want to move towards grasping data structures. I recommend following the video course and using the problem set for practice.
 
