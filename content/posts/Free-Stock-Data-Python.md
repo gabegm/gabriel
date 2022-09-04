@@ -26,7 +26,7 @@ Which is why I decided to write a script to do this for fun ~~and profit~~.
 
 The first thing that pops up when you search for AAPL on [DuckDuckGo](https://duckduckgo.com/?q=aapl&t=newext&atb=v315-1&ia=stock) is [Yahoo Finance](https://duckduckgo.com/?q=aapl&t=newext&atb=v315-1&ia=stock). Yahoo has been providing stock date for quite a long time now, and used to provide an easy way to retrieve end-of-day data in the past, however since the last few years this has no longer been the case.
 
-Glacing at the network tab in my browser's developer tools, I can see that my browser has made a `GET` request to Yahoo Finance for `AAPL` ticker with a few other options.
+Glancing at the network tab in my browser's developer tools, I can see that my browser has made a `GET` request to Yahoo Finance for `AAPL` ticker with a few other options.
 
 ![alt text](/images/yahoo-finance.png "Yahoo Finance GET request")
 
@@ -38,7 +38,7 @@ And opening the particular request in a new tab allows me to view the full respo
 
 This would of course be quite tedious to do for each symbol we're interested in, for each day. What if we could automate this process and transform the data into a structured format such as a DataFrame for further wrangling?
 
-Navigating to the "Historical Data" tab, the page provides us with a download button. The URL behind this button is as follows:
+Yahoo Finance has a dedicated "Historical Data" tab, navigating to the page provides us with a handy download button. This would hopefully make it somewhat easier to retrieve the full history for one particular symbol. The URL behind this button is as follows:
 
 * https://query1.finance.yahoo.com/v7/finance/download/ -> base URL
 * AAPL -> symbol
@@ -65,6 +65,20 @@ from datetime import datetime, timezone
 
 dt_start = int(datetime(1970, 1, 1, 0, 0, 0, 0, tzinfo=timezone.utc).timestamp())
 dt_end = int(datetime.now().timestamp())
+```
+
+After a quick Google search, I found some [US stock symbols]("https://github.com/rreichel3/US-Stock-Symbols/raw/main/all/all_tickers.txt) that we could use to test this. It's a simple text file with symbols separated by line breaks.
+
+Our plan would be to read the contents of this file and write it to a file on our disk.
+
+```py
+ url = "https://github.com/rreichel3/US-Stock-Symbols/raw/main/all/all_tickers.txt"
+
+tickers = urllib.request.urlopen(url).read().decode("utf-8").split("\n")
+
+with open("data/processed/tickers.csv", 'w', newline='') as f:
+    wr = csv.writer(f)
+    wr.writerow(tickers)
 ```
 
 ## Full source code
