@@ -108,5 +108,18 @@ FROM fraud_samples;
 |  true   |   1    |
 ```
 
+```sql
+pgml.deploy(
+    project_name TEXT -- used to identify machine learning project
+    , strategy TEXT DEFAULT 'best_score' -- 'rollback', 'best_score', or 'most_recent'
+    , algorithm TEXT DEFAULT NULL -- filter candidates to a particular algorithm, NULL = all qualify
+)
+```
+
+```sql
+-- deploy the "best" model for prediction use
+SELECT * FROM pgml.deploy('Handwritten Digits', 'best_score');
+```
+
 Still interested? The PostgresML team have launched an [interactive environment](https://postgresml.org/blog/data-is-living-and-relational/) for anyone to launch a test database and give it a try. There are also a couple of sample notebooks which make use of some sample data bundled with PostgresML to show you the ins and outs of the extension.
 - 
