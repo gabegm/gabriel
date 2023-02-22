@@ -32,7 +32,7 @@ Python may indeed be easy to learn and use, however it is often rarely used in p
 
 Now you probably must be thinking, what's wrong with rewriting such models in another language? Python is great for prototyping as its quick and easy to get started, so why not use a more robust language for porting to production? Let's take a moment to play this scnario out. A Data Scientist is tasked with developing a model to predict a business related KPI. The Data Scientist completes the project and presents it to the business with success. This is where a back-end engineer is tasked with porting this model to deploy on the back-end. If the Data Scientist were proficient in writing good clean code, the engineer should be able to quickly reproduce the work done so far and take over from there.
 
-But this is seldom the case. Data Scientists tend to have academic backgrounds, and finding those with good software engineering skills is extremely hard. Many times such DS models are written in interactive notebooks, having many code cells which are no longer relevant, do not work, were run out of order, or are not able to be reproduced since the engineer did not have the exact dependencies used to run the notebook.
+But this is seldom the case. Data Scientists tend to have stronger mathematical backgrounds, and finding those with good software engineering skills is extremely hard. Many times such DS models are written in interactive notebooks, having many code cells which are no longer relevant, do not work, were run out of order, or are not able to be reproduced since the engineer did not have the exact dependencies used to run the notebook.
 
 However, even if this is not the case and the Data Scientist followed good software engineering practices, the back-end engineer tasked with rewriting the model from one language to another, which in itself is never a simple task due to language differences, is rarely the expert in DS & ML and neither is the Data Scientist in Software Engineering. This tends to increase the risks for communication breakdowns and the end results not reflecting those of the initial DS model.
 
@@ -67,7 +67,7 @@ Since PostgresML only requires SQL, its syntax is fairly easy to use. Just as in
     , search TEXT DEFAULT NULL
     , search_params JSONB DEFAULT '{}'::JSONB
     , search_args JSONB DEFAULT '{}'::JSONB
-    , test_size REAL DEFAULT 0.25 -- the size to reserve for testing 
+    , test_size REAL DEFAULT 0.25 -- the size to reserve for testing
     , test_sampling TEXT DEFAULT 'random' -- whether to take a random sample of a specific order
 );
 
@@ -126,4 +126,3 @@ SELECT * FROM pgml.deploy('Handwritten Digits', 'best_score');
 ```
 
 Still interested? The PostgresML team have launched an [interactive environment](https://postgresml.org/blog/data-is-living-and-relational/) for anyone to launch a test database and give it a try. There are also a couple of sample notebooks which make use of some sample data bundled with PostgresML to show you the ins and outs of the extension.
-- 
