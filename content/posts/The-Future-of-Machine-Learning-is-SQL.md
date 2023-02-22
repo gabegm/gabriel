@@ -52,40 +52,42 @@ PostgresML is an open-source extension developed for the widely popular Postgres
 
 If Python is great for DS & ML because it's so easy to use and learn, SQL should be an even bigger contender as it is easier to pick up being a query language rather than a programming language. There is also more talent with SQL experience than Python as almost all database vendors support SQL. Why not build your DS model in the same place where you query your data? PostgresML is just one example, other cloud vendors also provide the ability to extend their in-house data stores with ML algorithms, however I used PostgresML as an example as it does not introduce vendor lock-in. Also, since PostgresML is open-source, any ML algorithms which have not yet been implemented in the extension, can easily be be requested or added.
 
-## A Peak into PostgresML
+## A Sneak Peak into PostgresML
 
-Since PostgresML only requires SQL, its syntax is fairly easy to use. Just as in ML libraries in Python, we have a train and a predict function to build predictions.
+Since PostgresML only requires SQL, its syntax is fairly easy to use. Just as in ML libraries in Python, we have a train and a predict function to build predictions. Both these functions provide very similar arguments to what's available in their corresponding Python ML libraries.
 
 ```sql
  pgml.train(
-    project_name TEXT,
-    task TEXT DEFAULT NULL,
-    relation_name TEXT DEFAULT NULL,
-    y_column_name TEXT DEFAULT NULL,
-    algorithm TEXT DEFAULT 'linear',
-    hyperparams JSONB DEFAULT '{}'::JSONB,
-    search TEXT DEFAULT NULL,
-    search_params JSONB DEFAULT '{}'::JSONB,
-    search_args JSONB DEFAULT '{}'::JSONB,
-    test_size REAL DEFAULT 0.25,
-    test_sampling TEXT DEFAULT 'random'
+    project_name TEXT -- used to identify this machine learning project
+    , task TEXT DEFAULT NULL -- predict true or false
+    , relation_name TEXT DEFAULT NULL -- the data table
+    , y_column_name TEXT DEFAULT NULL -- the column to predict
+    , algorithm TEXT DEFAULT 'linear' -- the ML algorithm
+    , hyperparams JSONB DEFAULT '{}'::JSONB
+    , search TEXT DEFAULT NULL
+    , search_params JSONB DEFAULT '{}'::JSONB
+    , search_args JSONB DEFAULT '{}'::JSONB
+    , test_size REAL DEFAULT 0.25 -- the size to reserve for testing 
+    , test_sampling TEXT DEFAULT 'random' -- whether to take a random sample of a specific order
 );
 
 pgml.predict (
-    project_name TEXT,
-    features REAL[]
+    project_name TEXT -- the name used to create the machine learning project
+    , features REAL[] -- the columns needed to predict
 );
 ```
 
+Once we have a table prepared for our model, we can use the train function.
+
 ```sql
 SELECT * FROM pgml.train(
-  project_name => 'Fraud Classifier', -- used to identify this machine learning project
-  task => 'classification', -- predict true or false
-  relation_name => 'fraud_samples', -- the data table
-  y_column_name => 'fraudulent', -- the column we're trying to predict
-  algorithm => 'xgboost', -- the ML algorithm
-  test_size => 0.5, -- use half the data for testing rather than the default test size of 25%
-  test_sampling => 'last' -- leave the last half of the data set for testing
+  project_name => 'Fraud Classifier'
+  , task => 'classification'
+  , relation_name => 'fraud_samples'
+  , y_column_name => 'fraudulent'
+  , algorithm => 'xgboost'
+  , test_size => 0.5
+  , test_sampling => 'last'
 );
 
 |     project      |      task      |   algorithm   |   deployed    |
@@ -95,7 +97,7 @@ SELECT * FROM pgml.train(
 
 ```sql
 SELECT
-  perishable_percentage -- the feature
+  perishable_percentage -- feature
   , fraudulent AS y_true -- the true classification
   , pgml.predict('Fraud Classifier', ARRAY[perishable_percentage::real]) AS y_pred -- the predicted classification
 FROM fraud_samples;
@@ -107,6 +109,8 @@ FROM fraud_samples;
 |  false  |   1    |
 |  true   |   1    |
 ```
+
+Once the model is ready to be deployed, we can use the deploy function along with a strategy on how newer versions of the model should be deployed, along with an algorithm or a list of algorithms to be chosen based on their performance.
 
 ```sql
 pgml.deploy(
