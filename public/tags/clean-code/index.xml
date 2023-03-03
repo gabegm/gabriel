@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" media="screen" href="/rss.xsl"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>clean code on Gabe</title>
+    <link>https://gabriel.gaucimaistre.com/tags/clean-code/</link>
+    <description>Recent content in clean code on Gabe</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 20 May 2021 23:00:00 +0000</lastBuildDate><atom:link href="https://gabriel.gaucimaistre.com/tags/clean-code/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Data Science &lt;3 Clean Code</title>
+      <link>https://gabriel.gaucimaistre.com/2021/05/data-science-3-clean-code/</link>
+      <pubDate>Thu, 20 May 2021 23:00:00 +0000</pubDate>
+      
+      <guid>https://gabriel.gaucimaistre.com/2021/05/data-science-3-clean-code/</guid>
+      <description>There is a common misconception that being a Data Scientist means that you do not need to care about writing good clean code, because you&amp;rsquo;re not a Software Developer. If you&amp;rsquo;re a firm believer of this, please take some time to hear me out. I hope to have at least gotten you to reconsider by the end of this post.</description>
+    </item>
+    
+  </channel>
+</rss>

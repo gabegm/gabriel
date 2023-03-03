@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" media="screen" href="/rss.xsl"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>amazon athena on Gabe</title>
+    <link>https://gabriel.gaucimaistre.com/tags/amazon-athena/</link>
+    <description>Recent content in amazon athena on Gabe</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 08 Jun 2021 23:00:00 +0000</lastBuildDate><atom:link href="https://gabriel.gaucimaistre.com/tags/amazon-athena/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Querying Amazon Athena Using Julia</title>
+      <link>https://gabriel.gaucimaistre.com/2021/06/querying-amazon-athena-using-julia/</link>
+      <pubDate>Tue, 08 Jun 2021 23:00:00 +0000</pubDate>
+      
+      <guid>https://gabriel.gaucimaistre.com/2021/06/querying-amazon-athena-using-julia/</guid>
+      <description>Julia is a fairly modern scientific programming language that is free, high-level, fast, and bundles a bunch of awesome features that makes Julia working with data great again. Amazon Athena is an interactive query service which allows you to easily analyze your data collecting dust in Amazon S3 storage using your good old friend SQL. Julia is great for working with data, Athena is great for querying data, how can we use both together? Rather than manually export CSV files and use &lt;code&gt;CSV.jl&lt;/code&gt; to load CSV files in Julia, I&amp;rsquo;ll be showing you how to query the data using Athena directly from Julia, loading the resulting set of data into a DataFrame using &lt;code&gt;DataFrames.jl&lt;/code&gt; for you to work with.</description>
+    </item>
+    
+  </channel>
+</rss>

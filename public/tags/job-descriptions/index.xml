@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" media="screen" href="/rss.xsl"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>job descriptions on Gabe</title>
+    <link>https://gabriel.gaucimaistre.com/tags/job-descriptions/</link>
+    <description>Recent content in job descriptions on Gabe</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 11 Jan 2018 23:00:00 +0000</lastBuildDate><atom:link href="https://gabriel.gaucimaistre.com/tags/job-descriptions/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The Current State of Job Requirements</title>
+      <link>https://gabriel.gaucimaistre.com/2018/01/the-current-state-of-job-requirements/</link>
+      <pubDate>Thu, 11 Jan 2018 23:00:00 +0000</pubDate>
+      
+      <guid>https://gabriel.gaucimaistre.com/2018/01/the-current-state-of-job-requirements/</guid>
+      <description>Have you ever looked at a job ad, skimmed through it, and decided not to apply because you thought that you could not even come close to matching the requirements the ad was asking for? Maybe you were job hunting and felt like you were being flooded with job ads having impossible requirements making you shake your head in disbelief.</description>
+    </item>
+    
+  </channel>
+</rss>
