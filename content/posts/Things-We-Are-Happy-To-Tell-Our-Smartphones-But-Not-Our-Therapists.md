@@ -1,5 +1,4 @@
 ---
-layout: post
 draft: true
 unlisted: false
 title: Things We Are Happy To Tell Our Smartphones But Not Our Therapists
@@ -7,9 +6,6 @@ author: Gabriel Gauci Maistre
 description: When many people hear the term "data privacy", their first counter is that they have nothing to hide. Although this could make sense at face value, once you dive deep into the things which are smartphones are tracking about us, one will quickly jump to the conclusion that this statement does not hold an ounce of water.
 images:
 - /images/i-have-nothing-to-hide.png
-audio: []
-series: []
-videos: []
 tags:
 - data privacy
 date: 2021-06-25 23:00:00 +0000

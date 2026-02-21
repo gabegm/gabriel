@@ -1,5 +1,4 @@
 ---
-layout: post
 draft: false
 author: Gabriel Gauci Maistre
 title: 10 Reasons Why You Should Learn Julia
@@ -8,9 +7,6 @@ summary: Even though it has 1-based indexing.
 images:
 - /images/julia-repl.png
 image: /images/julia-repl.png
-audio: []
-series: []
-videos: []
 tags:
 - julia
 - python

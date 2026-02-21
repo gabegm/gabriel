@@ -1,9 +1,8 @@
-<aside class="sidebar">
+<aside class="sidebar" role="complementary" aria-label="Site navigation">
   <div class="container sidebar-sticky">
     <div class="sidebar-about">
-      <a href="{{ .Site.BaseURL }}"></a><img src="/images/avatar.jpg" /></a>
+      <a href="{{ .Site.BaseURL }}" aria-label="Home"><img src="/images/avatar.jpg" alt="{{ .Site.Title }} - {{ .Site.Params.jobTitle }}" /></a>
       <h1>{{ .Site.Title }}</h1>
-      <!--<a href="{{ .Site.BaseURL }}"><h1>{{ .Site.Title }}</h1></a>-->
       <p class="lead">
         {{ .Site.Params.jobTitle }}
       </p>
@@ -12,7 +11,7 @@
       </p>
     </div>
 
-    <nav>
+    <nav aria-label="Main navigation">
       <ul class="sidebar-nav">
         <li><a href="{{ .Site.BaseURL }}">Home</a> </li>
         {{ range .Site.Menus.main -}}

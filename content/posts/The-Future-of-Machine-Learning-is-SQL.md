@@ -1,5 +1,4 @@
 ---
-layout: post
 draft: false
 unlisted: true
 title: The Future of Machine Learning is not Python, it's SQL
@@ -9,9 +8,6 @@ summary: Python is touted as the language to learn and use for DS and ML thanks 
 images:
 - /images/make-sql-great-again.png
 image: /images/make-sql-great-again.png
-audio: []
-series: []
-videos: []
 tags:
 - python
 - sql

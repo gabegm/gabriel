@@ -1,5 +1,4 @@
 ---
-layout: post
 draft: false
 unlisted: false
 title: Querying Amazon Athena Using Julia
@@ -9,9 +8,6 @@ summary: Julia is a fairly modern scientific programming language that is free, 
 images:
 - /images/julia-loves-aws.png
 image: /images/julia-loves-aws.png
-audio: []
-series: []
-videos: []
 tags:
 - amazon athena
 - databases
@@ -22,7 +18,7 @@ date: 2021-06-08 23:00:00 +0000
 
 ![alt text](/images/julia-loves-aws.png "Logo Title Text 1")
 
-Julia is a fairly modern scientific programming language that is free, high-level, fast, and bundles a bunch of awesome features that makes Julia working with data great again. The language borrows inspiration from languages such as Python, MATLAB and R[[1]](#f1). If you haven't yet read my article on "[10 Reasons Why You Should Learn Julia]({{< ref "/content/posts/10-Reasons-Why-You-Should-Learn-Julia.md" >}})", check it out! Amazon Athena is an interactive query service which allows you to easily analyze your data collecting dust in Amazon S3 storage using your good old friend SQL. Athena is great because it's serverless, meaning there is no infrastructure to manage, and you pay only for the queries that you run.
+Julia is a fairly modern scientific programming language that is free, high-level, fast, and bundles a bunch of awesome features that makes Julia working with data great again. The language borrows inspiration from languages such as Python, MATLAB and R[[1]](#f1). If you haven't yet read my article on "[10 Reasons Why You Should Learn Julia]({{< ref "10-Reasons-Why-You-Should-Learn-Julia.md" >}})", check it out! Amazon Athena is an interactive query service which allows you to easily analyze your data collecting dust in Amazon S3 storage using your good old friend SQL. Athena is great because it's serverless, meaning there is no infrastructure to manage, and you pay only for the queries that you run.
 
 Sounds awesome right? Julia is great for working with data, Athena is great for querying data, how can we use both together? Rather than manually export CSV files and use `CSV.jl` to load CSV files in Julia, I'll be showing you how to query the data using Athena directly from Julia, loading the resulting set of data into a DataFrame using `DataFrames.jl` for you to work with.
 
@@ -161,7 +157,7 @@ ODBC.load(df, conn, "table_nme")
 
 ## Conclusion
 
-Could you have done all of this in Python? Absolutely, in fact there are many posts like these which you can find on how to do that. However, I think Julia is an interesting language, [is worth learning]({{< ref "/content/posts/10-Reasons-Why-You-Should-Learn-Julia.md" >}}), and can provide many benefits over Python.
+Could you have done all of this in Python? Absolutely, in fact there are many posts like these which you can find on how to do that. However, I think Julia is an interesting language, [is worth learning]({{< ref "10-Reasons-Why-You-Should-Learn-Julia.md" >}}), and can provide many benefits over Python.
 
 However, Julia is still a fairly new language, and although it's steadily rising in popularity[[8]]((#f8))[[9]]((#f9)), still lacks the tooling and community support which a more widely used language such as Python provides. Looking at StackOverflow, the number of questions regarding Python dwarf the number of questions on Julia. It might be tempting to chalk this up to Julia being easier to use but — as much as I value Julia over Python — this isn't the case. This is an example of selection bias, where the actual reason that the number of questions on Python versus the number of questions on Julia is significantly higher is simply because there are more people using Python than Julia. This underrepresentation of community questions and resources on StackOverflow actually contributes to Julia's steeper learning curve.
 

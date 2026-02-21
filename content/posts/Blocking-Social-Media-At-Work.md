@@ -1,5 +1,4 @@
 ---
-layout: post
 draft: false
 author: Gabriel Gauci Maistre
 title: Blocking Social Media at Work
@@ -8,9 +7,6 @@ summary: Are you tired of your employees accessing social networks at work? Mayb
 images:
 - /images/how-about-no.jpeg
 image: /images/how-about-no.jpeg
-audio: []
-series: []
-videos: []
 tags:
 - social media
 - censorship

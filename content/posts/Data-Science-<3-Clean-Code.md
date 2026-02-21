@@ -1,5 +1,4 @@
 ---
-layout: post
 draft: false
 title: Data Science <3 Clean Code
 author: Gabriel Gauci Maistre
@@ -8,9 +7,6 @@ summary: There is a common misconception that being a Data Scientist means that 
 images:
 - /images/data-scientists-should-write-clean-code.png
 image: /images/data-scientists-should-write-clean-code.png
-audio: []
-series: []
-videos: []
 tags:
 - data science
 - clean code
