@@ -1,5 +1,4 @@
 ---
-layout: post
 draft: false
 title: I Don't Like Data Science Competitions
 author: Gabriel Gauci Maistre
@@ -13,10 +12,6 @@ summary: Data Science competitions have become extremely popular in the past 5 y
 images:
 - /images/audience-booing.gif
 image: /images/audience-booing.gif
-audio: []
-series: []
-videos: []
-date: 2021-05-18 23:00:00 +0000
 
 ---
 

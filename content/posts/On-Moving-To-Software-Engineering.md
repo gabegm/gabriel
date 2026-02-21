@@ -1,5 +1,4 @@
 ---
-layout: post
 draft: false
 unlisted: true
 title: I have moved to Software Engineering
@@ -9,9 +8,6 @@ summary: I recently got to deploy Java code to a back-end service in production
 images:
 - /images/i-have-no-idea-what-im-doing-2.jpg
 image: /images/i-have-no-idea-what-im-doing-2.jpg
-audio: []
-series: []
-videos: []
 tags:
 - java
 - spring

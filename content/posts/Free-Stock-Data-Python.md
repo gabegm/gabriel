@@ -1,5 +1,4 @@
 ---
-layout: post
 draft: true
 unlisted: false
 title: How To Get Free Historical Stock Data in Python
@@ -9,9 +8,6 @@ summary:
 images:
 - /images/stonks.jpeg
 image: /images/stonks.jpeg
-audio: []
-series: []
-videos: []
 tags:
 - python
 - stocks

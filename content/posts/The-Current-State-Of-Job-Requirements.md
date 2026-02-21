@@ -1,5 +1,4 @@
 ---
-layout: post
 draft: false
 title: The Current State of Job Requirements
 date: 2018-01-11 23:00:00 +0000
@@ -9,9 +8,6 @@ summary: Have you ever looked at a job ad, skimmed through it, and decided not t
 images:
 - /images/work-experience.jpeg
 image: /images/work-experience.jpeg
-audio: []
-series: []
-videos: []
 tags:
 - job descriptions
 - recruiting

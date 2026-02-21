@@ -1,5 +1,4 @@
 ---
-layout: post
 draft: false
 title: Are You Ready For GDPR?
 author: Gabriel Gauci Maistre
@@ -8,9 +7,6 @@ summary: The General Data Protection Regulation (GDPR) will come into effect on 
 images:
 - /images/you-shall-not-violate-my-privacy.jpg
 image: /images/you-shall-not-violate-my-privacy.jpg
-audio: []
-series: []
-videos: []
 tags:
 - gdpr
 - data

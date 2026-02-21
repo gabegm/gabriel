@@ -1,5 +1,4 @@
 ---
-layout: post
 draft: true
 unlisted: false
 title: The Rise of Academic Papers
@@ -7,9 +6,6 @@ author: Gabriel Gauci Maistre
 description: 
 images:
 - /images/research-papers-everywhere.png
-audio: []
-series: []
-videos: []
 tags:
 - academic papers
 - machine learning

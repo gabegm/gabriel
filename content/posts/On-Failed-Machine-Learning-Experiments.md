@@ -1,5 +1,4 @@
 ---
-layout: post
 draft: false
 unlisted: false
 title: On Failed Machine Learning Experiments
@@ -9,9 +8,6 @@ summary: The "science" in Data Science is supposed to refer to the fact that doi
 images:
 - /images/i-have-no-idea-what-im-doing.jpg
 image: /images/i-have-no-idea-what-im-doing.jpg
-audio: []
-series: []
-videos: []
 tags:
 - data science
 - machine learning

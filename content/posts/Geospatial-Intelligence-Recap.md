@@ -1,5 +1,4 @@
 ---
-layout: post
 draft: false
 unlisted: false
 title: "Geospatial Intelligence: Recap"
@@ -9,9 +8,6 @@ summary: I recently had the pleasure of giving a talk on Geospatial Analytics at
 images:
 - /images/mbs-me-1-cropped.jpg
 image: /images/mbs-me-1-cropped.jpg
-audio: []
-series: []
-videos: []
 tags:
 - data science
 - geospatial

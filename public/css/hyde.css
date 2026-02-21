@@ -85,8 +85,8 @@ html {
 /* Sidebar avatar */
 .sidebar img {
   border-radius: 7%;
-  width: 50%;
-  height: 50%;
+  width: 75%;
+  height: 75%;
 }
 
 /* About section */
@@ -95,6 +95,11 @@ html {
   margin-top: 0;
   font-family: "Abril Fatface", serif;
   font-size: 3.25rem;
+}
+
+.description {
+  font-size: .92rem;
+  font-weight: 300;
 }
 
 /* Sidebar nav */
@@ -180,7 +185,19 @@ a.sidebar-nav-item:focus {
   }
 }
 
+/*email*/
+.e-mail:before {
+  content: attr(data-website) "\0040" attr(data-user);
+  unicode-bidi: bidi-override;
+  direction: rtl;
+}
 
+/* tags */
+.tags {
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 0.8rem;
+}
 
 /*
  * Themes
