@@ -24,6 +24,20 @@ I started a simple experiment: run a 32-parameter large language model locally o
 
 Here is the full story, in case you want to save yourself some of the pain.
 
+## Before you start: is this for you?
+
+Local LLMs are not for everyone. Before you follow along, ask yourself these questions:
+
+**Do you have Apple Silicon?** This entire journey is Apple Silicon-specific. MLX, omlx, and unified memory architecture are the reason this works. On an Intel Mac or a PC with a dedicated GPU, the story is different and this article is not your guide.
+
+**Do you have 32GB of RAM or more?** You are not going to run a 32B model on 16GB. The 48GB on my M4 Pro was the floor, not the ceiling. 32GB is the bare minimum for a 32B 4-bit model. If you have less, you will need a smaller model and fewer tokens per second.
+
+**Are you okay with "good enough"?** These models are not GPT-4 or Claude. They will make mistakes. They will hallucinate. They will occasionally shut your laptop off. But for smaller coding tasks, they are genuinely useful. If you need production-grade AI, use an API. If you need a coding buddy on a plane ride, go local.
+
+**Do you value privacy or reliability?** No data leaves your machine. The Anthropic API is down? No problem. Spotty internet? No problem. Your own model, your own rules. If any of that matters to you, local LLMs are worth exploring.
+
+**Are you comfortable with a terminal?** You need to be comfortable running commands, managing files, and troubleshooting. If that scares you, start with ollama and work your way up. It is the easiest on-ramp and you can always go deeper later.
+
 ## The beginning: ollama, qwen3.6, and opencode
 
 My first stop was [ollama](https://ollama.com), because it is the easiest on-ramp to local LLMs. I paired it with [opencode](https://github.com/opencode-ai/opencode) and ran qwen3.6 (32B parameters). It worked, really well, honestly. The model was responsive, the code suggestions were solid, and for a moment I felt like I had cracked the code.
