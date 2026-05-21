@@ -30,6 +30,8 @@ My first stop was [ollama](https://ollama.com), because it is the easiest on-ram
 
 Then the laptop started screaming.
 
+![alt text](/images/this-is-fine.png "This is fine")
+
 The fans kicked in at full speed. The battery drained in about two hours. And memory? A staggering 48GB of RAM plus 12GB of swap was being consumed, and I was getting roughly 25 tokens per second. It was cool that it worked, but it was also an incredibly inefficient way to use a laptop.
 
 ### Why was ollama so inefficient?
@@ -74,6 +76,8 @@ Several strategies can help:
 I went with the simplest fix: disabling the "thinking" mode entirely. It solved the looping, but it also stripped away some of Qwen's depth, which felt like a trade-off I was not always comfortable making.
 
 ## The efficiency leap: llama.cpp and MLX
+
+![alt text](/images/distracted-gabe.png "Distracted Gabe")
 
 I kept digging. Someone mentioned that ollama is not the most efficient backend, and that you could get better performance by going straight to [llama.cpp](https://github.com/ggerganov/llama.cpp). Fair enough. But then I heard about something even more promising: MLX versions of models that leverage Apple's Metal API, which means they actually use your GPU instead of just your CPU.
 
