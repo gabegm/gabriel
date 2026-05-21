@@ -148,6 +148,14 @@ For anyone following along, here is a quick summary of how each toolstack perfor
 
 For anyone who wants to follow the same path on their own Apple Silicon Mac, here are the exact commands and configurations I used.
 
+### Step 0: Downloading the model
+
+Before any of the above, I needed the model on disk. I used `huggingface-cli` to download the 4-bit quantized MLX version:
+
+```
+hf download majentik/Qwen3.6-35B-A3B-TurboQuant-MLX-4bit  --local-dir ~/models/Qwen3.6-35B-A3B-TurboQuant-MLX-4bit
+```
+
 ### Step 1: ollama
 
 Simplest possible setup:
@@ -160,7 +168,7 @@ This pulled the model, loaded it, and started serving. Expect 48GB+ RAM, 12GB sw
 
 ### Step 2: mlx_lm
 
-I downloaded the 4-bit quantized version of the model to `~/models` and started the server:
+With the model already downloaded, I started the server:
 
 ```
 mlx_lm.server \
