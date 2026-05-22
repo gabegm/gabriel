@@ -41,7 +41,7 @@ Create effective hiring plans, identify gaps, and align with financial performan
 
 [Shopping Cart](https://github.com/gabegm/ShoppingCart)
 
-An e-commerce website built on top of ASP.NET 4 MVC5.
+A full-stack e-commerce application migrated from ASP.NET MVC 5 / .NET Framework 4.5 to a modern stack: Spring Boot 3 on the backend and React 18 on the frontend, backed by PostgreSQL.
 
 ## Long form biography
 
