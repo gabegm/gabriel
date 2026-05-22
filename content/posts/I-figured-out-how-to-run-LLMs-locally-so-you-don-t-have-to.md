@@ -5,20 +5,18 @@ author: Gabriel Gauci Maistre
 description: A journey through the local LLM rabbit hole from ollama to pi, and everything in between.
 summary: I spent weeks chasing the perfect local LLM setup on my MacBook. Here is what I learned, what broke, and what actually works.
 images:
-- /images/i-am-once-again-asking-for-more-ram.png
-image: /images/i-am-once-again-asking-for-more-ram.png
+- /images/ai-ai-ai.jpg
+image: /images/ai-ai-ai.jpg
 tags:
 - local-llm
 - machine-learning
-- mac
-- ollama
-- llama.cpp
 - mlx
-- pi
 date: 2026-05-21 10:00:00 +0000
 ---
 
-![alt text](/images/i-am-once-again-asking-for-more-ram.png "I am once again asking for more RAM")
+> **Disclaimer:** You will not find the word "AI" anywhere in this article. You are welcome.
+
+![alt text](/images/ai-ai-ai.jpg "AI AI AI")
 
 I started a simple experiment: run a 32-parameter large language model locally on my MacBook M4 Pro (12-core CPU, 48GB unified memory). What started as a curiosity quickly turned into an obsessive rabbit hole of toolchains, benchmarks, broken processes, and one laptop shutdown that I am still not sure was a hardware fault or just macOS being macOS.
 
@@ -32,7 +30,7 @@ Local LLMs are not for everyone. Before you follow along, ask yourself these que
 
 **Do you have 32GB of RAM or more?** You are not going to run a 32B model on 16GB. The 48GB on my M4 Pro was the floor, not the ceiling. 32GB is the bare minimum for a 32B 4-bit model. If you have less, you will need a smaller model and fewer tokens per second.
 
-**Are you okay with "good enough"?** These models are not GPT-4 or Claude. They will make mistakes. They will hallucinate. They will occasionally shut your laptop off. But for smaller coding tasks, they are genuinely useful. If you need production-grade AI, use an API. If you need a coding buddy on a plane ride, go local.
+**Are you okay with "good enough"?** These models are not GPT-5 or Claude. They will make mistakes. They will hallucinate. They will occasionally shut your laptop off. But for smaller coding tasks, they are genuinely useful. If you need production-grade AI, use an API. If you need a coding buddy on a plane ride, go local.
 
 **Do you value privacy or reliability?** No data leaves your machine. The Anthropic API is down? No problem. Spotty internet? No problem. Your own model, your own rules. If any of that matters to you, local LLMs are worth exploring.
 
@@ -40,15 +38,17 @@ Local LLMs are not for everyone. Before you follow along, ask yourself these que
 
 ## The beginning: ollama, qwen3.6, and opencode
 
+![alt text](/images/this-is-fine.png "This is fine")
+
 My first stop was [ollama](https://ollama.com), because it is the easiest on-ramp to local LLMs. I paired it with [opencode](https://github.com/opencode-ai/opencode) and ran qwen3.6 (32B parameters). It worked, really well, honestly. The model was responsive, the code suggestions were solid, and for a moment I felt like I had cracked the code.
 
 Then the laptop started screaming.
 
-![alt text](/images/this-is-fine.png "This is fine")
-
 The fans kicked in at full speed. The battery drained in about two hours. And memory? A staggering 48GB of RAM plus 12GB of swap was being consumed, and I was getting roughly 25 tokens per second. It was cool that it worked, but it was also an incredibly inefficient way to use a laptop.
 
 ### Why was ollama so inefficient?
+
+![alt text](/images/i-am-once-again-asking-for-more-ram.png "I am once again asking for more RAM")
 
 Under the hood, ollama acts as a Go wrapper that uses llama.cpp as its backend. On Mac machines, llama.cpp compiles down to Metal via a portable framework. But this framework traditionally treated the Mac's unified memory like a standard PC, copying data between system RAM and GPU memory banks.
 
