@@ -277,7 +277,7 @@ Here is where each toolstack landed:
 - **MLX (via mlx_lm)** was a step up. Cooler fans, 35 tokens per second, less swap. But memory management was rough, and macOS would kill the process (or in one extreme case, the kernel would panic and shut the laptop down) under pressure.
 - **omlx** was the breakthrough. 47 tokens per second, under 48GB, no swap, and a laptop that actually stayed cool. It is the sweet spot for anyone serious about local LLMs on Apple Silicon.
 
-The laptop crash that haunted my MLX experiments was a kernel panic triggered by extreme memory pressure. It was fixed by updating macOS and MLX, and by staying within memory headroom. The lesson: always keep some breathing room, and keep your model quantized.
+The laptop crash that haunted my MLX experiments was a kernel panic under extreme memory pressure. I was never able to pin down the exact cause, but I was able to solve it by finding efficiency gains where possible. The lesson: stay within memory headroom, and keep your model quantized.
 
 The future of local inference on Apple Silicon is bright, and I am excited to see where it goes next.
 
