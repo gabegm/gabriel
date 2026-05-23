@@ -41,7 +41,7 @@ Local LLMs are not for everyone. Before you follow along, ask yourself these que
 
 ## The beginning: ollama, qwen3.6, and opencode
 
-My first stop was [ollama](https://ollama.com), because it is the easiest on-ramp to local LLMs. I paired it with [opencode](https://github.com/opencode-ai/opencode) and ran qwen3.6 (32B parameters). It worked, really well, honestly. The model was responsive, the code suggestions were solid, and for a moment I felt like I had cracked the code.
+My first stop was [ollama](https://ollama.com), because it is the easiest on-ramp to local LLMs. I paired it with [opencode](https://github.com/anomalyco/opencode) and ran qwen3.6 (32B parameters). It worked, really well, honestly. The model was responsive, the code suggestions were solid, and for a moment I felt like I had cracked the code.
 
 Then the laptop started screaming.
 
