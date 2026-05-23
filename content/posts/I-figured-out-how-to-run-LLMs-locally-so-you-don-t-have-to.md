@@ -65,7 +65,7 @@ The result: phantom memory copies, latency, and a laptop that sounded like a jet
 
 ## Token-saving tools: rtk-ai
 
-I discovered [rtk-ai](https://github.com/rtk-ai), a tool designed to reduce token usage by being smarter about what gets sent to the model. It was genuinely helpful, with fewer tokens meaning fewer resources. But I ran into another problem: qwen was *overthinking*. It would get stuck in reasoning loops, spinning its wheels instead of producing useful output. Disabling the "thinking" mode helped, but it felt like I was fighting the model rather than working with it.
+I discovered [rtk-ai](https://www.rtk-ai.app/), a tool designed to reduce token usage by being smarter about what gets sent to the model. It was genuinely helpful, with fewer tokens meaning fewer resources. But I ran into another problem: qwen was *overthinking*. It would get stuck in reasoning loops, spinning its wheels instead of producing useful output. Disabling the "thinking" mode helped, but it felt like I was fighting the model rather than working with it.
 
 ### Why does Qwen 3.6 get stuck in reasoning loops?
 
