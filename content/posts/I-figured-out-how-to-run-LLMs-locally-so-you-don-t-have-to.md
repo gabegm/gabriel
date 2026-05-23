@@ -25,6 +25,10 @@ I started a simple experiment: run a 32-billion-parameter large language model[0
 
 Here is the full story, in case you want to save yourself some of the pain.
 
+## Why I went local
+
+I started going local because the cloud alternatives kept letting me down. Anthropic went down. OpenAI hit rate limits. I ran out of tokens mid-project. I was on a flight with no internet and realized I could not work without an API key. The more we come to rely on these services, the less productive we are the moment they go dark. Local models remove that single point of failure.
+
 ## Before you start: is this for you?
 
 Local LLMs are not for everyone. Before you follow along, ask yourself these questions:
@@ -35,7 +39,7 @@ Local LLMs are not for everyone. Before you follow along, ask yourself these que
 
 **Are you okay with "good enough"?** These models are not GPT-5 or Claude. They will make mistakes. They will hallucinate. They will occasionally shut your laptop off. But for smaller coding tasks, they are genuinely useful. If you need a coding buddy on a plane ride, go local.
 
-**Do you value privacy or reliability?** No data leaves your machine. The Anthropic API is down? No problem. Spotty internet? No problem. Your own model, your own rules. If any of that matters to you, local LLMs are worth exploring.
+**Do you value privacy?** No data leaves your machine. Your own model, your own rules. If any of that matters to you, local LLMs are worth exploring.
 
 **Are you comfortable with a terminal?** You need to be comfortable running commands, managing files, and troubleshooting. If that scares you, start with ollama and work your way up. It is the easiest on-ramp and you can always go deeper later.
 
