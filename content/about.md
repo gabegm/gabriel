@@ -27,10 +27,6 @@ I am constantly setting myself out to learn new things, whether from online arti
 
 ## Open source projects
 
-[Predicting market turnover](https://github.com/gabegm/Predict-Market-Turnover)
-
-I built a predictive model to forecast the turnover for the Bundesliga season 17/18 for a candidate test.
-
 [Data Driven Automated Algorithmic Trading](https://github.com/gabegm/Data-Driven-Automated-Algorithmic-Trading)
 
 For my thesis project, I built an automated algorithm to trade the markets.

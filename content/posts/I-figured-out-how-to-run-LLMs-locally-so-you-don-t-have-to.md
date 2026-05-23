@@ -1,5 +1,6 @@
 ---
-draft: true
+draft: false
+unlisted: true
 title: I figured out how to run LLMs locally so you don't have to
 author: Gabriel Gauci Maistre
 description: A journey through the local LLM rabbit hole from ollama to pi, and everything in between.
@@ -18,7 +19,7 @@ date: 2026-05-21 10:00:00 +0000
 
 ![alt text](/images/ai-ai-ai.jpg "AI AI AI")
 
-I started a simple experiment: run a 32-parameter large language model locally on my MacBook M4 Pro (12-core CPU, 48GB unified memory). What started as a curiosity quickly turned into an obsessive rabbit hole of toolchains, benchmarks, broken processes, and one laptop shutdown that I am still not sure was a hardware fault or just macOS being macOS.
+I started a simple experiment: run a 32-billion-parameter large language model locally on my MacBook M4 Pro (12-core CPU, 48GB unified memory). What started as a curiosity quickly turned into an obsessive rabbit hole of toolchains, benchmarks, broken processes, and one laptop shutdown that I eventually traced to a kernel panic under extreme memory pressure.
 
 Here is the full story, in case you want to save yourself some of the pain.
 
@@ -28,9 +29,9 @@ Local LLMs are not for everyone. Before you follow along, ask yourself these que
 
 **Do you have Apple Silicon?** This entire journey is Apple Silicon-specific. MLX, omlx, and unified memory architecture are the reason this works. On an Intel Mac or a PC with a dedicated GPU, the story is different and this article is not your guide.
 
-**Do you have 32GB of RAM or more?** You are not going to run a 32B model on 16GB. The 48GB on my M4 Pro was the floor, not the ceiling. 32GB is the bare minimum for a 32B 4-bit model. If you have less, you will need a smaller model and fewer tokens per second.
+**Do you have 32GB of RAM or more?** You are not going to run a 32B model on 16GB. The 48GB on my M4 Pro was the floor, not the ceiling. 32GB can run a 32B 4-bit model, but it leaves limited overhead for anything else. Browsing, terminal, or background processes will compete for memory, so 48GB is the practical sweet spot. If you have less, you will need a smaller model and fewer tokens per second.
 
-**Are you okay with "good enough"?** These models are not GPT-5 or Claude. They will make mistakes. They will hallucinate. They will occasionally shut your laptop off. But for smaller coding tasks, they are genuinely useful. If you need production-grade AI, use an API. If you need a coding buddy on a plane ride, go local.
+**Are you okay with "good enough"?** These models are not GPT-5 or Claude. They will make mistakes. They will hallucinate. They will occasionally shut your laptop off. But for smaller coding tasks, they are genuinely useful. If you need a coding buddy on a plane ride, go local.
 
 **Do you value privacy or reliability?** No data leaves your machine. The Anthropic API is down? No problem. Spotty internet? No problem. Your own model, your own rules. If any of that matters to you, local LLMs are worth exploring.
 
@@ -38,11 +39,11 @@ Local LLMs are not for everyone. Before you follow along, ask yourself these que
 
 ## The beginning: ollama, qwen3.6, and opencode
 
-![alt text](/images/this-is-fine.png "This is fine")
-
 My first stop was [ollama](https://ollama.com), because it is the easiest on-ramp to local LLMs. I paired it with [opencode](https://github.com/opencode-ai/opencode) and ran qwen3.6 (32B parameters). It worked, really well, honestly. The model was responsive, the code suggestions were solid, and for a moment I felt like I had cracked the code.
 
 Then the laptop started screaming.
+
+![alt text](/images/im-tired-boss.png "I'm tired boss")
 
 The fans kicked in at full speed. The battery drained in about two hours. And memory? A staggering 48GB of RAM plus 12GB of swap was being consumed, and I was getting roughly 25 tokens per second. It was cool that it worked, but it was also an incredibly inefficient way to use a laptop.
 
@@ -95,7 +96,7 @@ I went with the simplest fix: disabling the "thinking" mode entirely. It solved 
 
 I kept digging. Someone mentioned that ollama is not the most efficient backend, and that you could get better performance by going straight to [llama.cpp](https://github.com/ggerganov/llama.cpp). Fair enough. But then I heard about something even more promising: MLX versions of models that leverage Apple's Metal API, which means they actually use your GPU instead of just your CPU.
 
-I tried [mlx_lm](https://github.com/ml-explore/mlx-lm) and the difference was noticeable. The laptop was cooler and the battery lasted longer. I was getting around 35 tokens per second with 48GB RAM plus 2GB swap. But memory was still a problem. macOS kept aggressively ejecting the process when it tried to allocate too much memory. At one point, my laptop actually shut off completely. Not a graceful exit.
+I tried [mlx_lm](https://github.com/ml-explore/mlx-lm) and the difference was noticeable. The laptop was cooler and the battery lasted longer. I was getting around 35 tokens per second with 48GB RAM plus 2GB swap. But memory was still a problem. macOS kept aggressively ejecting the process when it tried to allocate too much memory. At one point, my laptop actually shut off completely. Not a graceful exit. Turns out, when MLX tried to allocate more memory than macOS would allow, the OS sent a SIGKILL to the process. Under enough pressure, the kernel panicked the whole system. It was a hardware-level crash, not a software crash. I later updated to the latest macOS and MLX, and the crash never happened again. The fix was simply staying within memory headroom and keeping the model quantized at 4-bit.
 
 ### Why does MLX use the GPU instead of the CPU?
 
@@ -260,12 +261,16 @@ To use the MLX-powered model inside OpenCode, I added this to my config:
 
 The key insight: OpenCode uses the `@ai-sdk/openai-compatible` npm package to talk to local MLX servers over HTTP, treating them like any OpenAI-compatible API. Just point `baseURL` to your omlx server and you are good to go.
 
-## Why this matters
+## Conclusion
 
-I am genuinely excited about the local LLM scene. The idea that you can run these models locally, without being tied to an API, is powerful. Especially when you are on spotty internet, or when the Anthropic API goes down again, as it so often seems to.
+This was a long journey, but the takeaway is clear: running a 32-billion-parameter model locally on Apple Silicon is absolutely feasible.
 
-I am not saying these local models are *better* than what Anthropic, OpenAI, or others offer. They are not. But for smaller coding tasks, they are genuinely useful. They are free as in beer. And they are getting better every day.
+Here is where each toolstack landed:
 
-I definitely see a future where these models become both more efficient and more intelligent at the same time. The trajectory is there.
+- **Ollama** is the easiest on-ramp. It works out of the box, but at the cost of efficiency. 48GB RAM, 12GB swap, noisy fans, and 25 tokens per second. Great for getting started, not for serious work.
+- **MLX (via mlx_lm)** was a step up. Cooler fans, 35 tokens per second, less swap. But memory management was rough, and macOS would kill the process (or in one extreme case, the kernel would panic and shut the laptop down) under pressure.
+- **omlx** was the breakthrough. 47 tokens per second, under 48GB, no swap, and a laptop that actually stayed cool. It is the sweet spot for anyone serious about local LLMs on Apple Silicon.
 
-The future is exciting.
+The laptop crash that haunted my MLX experiments was a kernel panic triggered by extreme memory pressure. It was fixed by updating macOS and MLX, and by staying within memory headroom. The lesson: always keep some breathing room, and keep your model quantized.
+
+The future of local inference on Apple Silicon is bright, and I am excited to see where it goes next.

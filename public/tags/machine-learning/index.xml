@@ -7,7 +7,16 @@
     <description>Recent content in Machine Learning on Gabe</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 19 Feb 2023 10:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 21 May 2026 10:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>I figured out how to run LLMs locally so you don&#39;t have to</title>
+      <link>http://localhost:1313/2026/05/i-figured-out-how-to-run-llms-locally-so-you-dont-have-to/</link>
+      <pubDate>Thu, 21 May 2026 10:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2026/05/i-figured-out-how-to-run-llms-locally-so-you-dont-have-to/</guid>
+      <description>I spent weeks chasing the perfect local LLM setup on my MacBook. Here is what I learned, what broke, and what actually works.</description>
+    </item>
+    
     <item>
       <title>The Future of Machine Learning is not Python, it&#39;s SQL</title>
       <link>http://localhost:1313/2023/02/the-future-of-machine-learning-is-not-python-its-sql/</link>
@@ -15,6 +24,25 @@
       
       <guid>http://localhost:1313/2023/02/the-future-of-machine-learning-is-not-python-its-sql/</guid>
       <description>Python is touted as the language to learn and use for DS and ML thanks to its easy to understand syntax making it quick to write, free and open-source for simple adoption, vast DS &amp;amp; ML toolset making you spoilt for choice, and large community ready to help. However, there are many cracks which start to show when using Python in production.</description>
+    </item>
+    
+    <item>
+      <title>The Rise of Academic Papers</title>
+      <link>http://localhost:1313/2021/06/the-rise-of-academic-papers/</link>
+      <pubDate>Wed, 30 Jun 2021 23:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2021/06/the-rise-of-academic-papers/</guid>
+      <description>&lt;p&gt;&lt;em&gt;&lt;strong&gt;DISCLAIMER&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;The following are simply my views and in no way reflect those of the whole industry.&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/research-papers-everywhere.png&#34; alt=&#34;alt text&#34; title=&#34;Logo Title Text 1&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;papers without code&lt;/li&gt;
+&lt;li&gt;papers with code&lt;/li&gt;
+&lt;li&gt;unsuccessful papers not considered&lt;/li&gt;
+&lt;li&gt;quantity over quality&lt;/li&gt;
+&lt;li&gt;FAANG&lt;/li&gt;
+&lt;li&gt;Advisors can&amp;rsquo;t commit to checking student&amp;rsquo;s code&lt;/li&gt;
+&lt;/ul&gt;</description>
     </item>
     
     <item>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.161.1">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Why are Python Packages Much Larger Compared to Julia&#39;s? &middot; Gabe</title>
+  <meta name="description" content="Julia has a number of features which make it favourable for developers to resuse code written by others when developing their own Julia packages. This high degree of modularity found in Julia allows packages to remain fairly small in size compared those found in Python. Let&#39;s explore why that may be." />
+
+  
+  <link type="text/css" rel="stylesheet" href="http://localhost:1313/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="http://localhost:1313/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="http://localhost:1313/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="http://localhost:1313/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  
+  <meta property="og:url" content="http://localhost:1313/2021/06/why-are-python-packages-much-larger-compared-to-julias/">
+  <meta property="og:site_name" content="Gabe">
+  <meta property="og:title" content="Why are Python Packages Much Larger Compared to Julia&#39;s?">
+  <meta property="og:description" content="Julia has a number of features which make it favourable for developers to resuse code written by others when developing their own Julia packages. This high degree of modularity found in Julia allows packages to remain fairly small in size compared those found in Python. Let&#39;s explore why that may be.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2021-06-15T23:00:00+00:00">
+    <meta property="article:modified_time" content="2021-06-15T23:00:00+00:00">
+    <meta property="article:tag" content="Julia">
+    <meta property="article:tag" content="Python">
+    <meta property="article:tag" content="Package Development">
+    <meta property="og:image" content="http://localhost:1313/images/julia-packages.jpg">
+
+
+  
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/images/julia-packages.jpg">
+  <meta name="twitter:title" content="Why are Python Packages Much Larger Compared to Julia&#39;s?">
+  <meta name="twitter:description" content="Julia has a number of features which make it favourable for developers to resuse code written by others when developing their own Julia packages. This high degree of modularity found in Julia allows packages to remain fairly small in size compared those found in Python. Let&#39;s explore why that may be.">
+
+
+  
+</head>
+
+  <body class="theme-base-0g ">
+  <aside class="sidebar" role="complementary" aria-label="Site navigation">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="http://localhost:1313/" aria-label="Home"><img src="/images/avatar.jpg" alt="Gabe - Software Engineer" /></a>
+      <h1>Gabe</h1>
+      <p class="lead">
+        Software Engineer
+      </p>
+      <p class="description">
+        I have opinions and make people read them.</p>
+    </div>
+
+    <nav aria-label="Main navigation">
+      <ul class="sidebar-nav">
+        <li><a href="http://localhost:1313/">Home</a> </li>
+        <li><a href="/about/"> About </a></li><li><a href="https://bsky.app/profile/gabegm.bsky.social/"> Blue Sky </a></li><li><a href="https://github.com/gabegm/"> Github </a></li><li><a href="https://www.linkedin.com/in/gabegm/"> LinkedIn </a></li><li><a href="/index.xml"> RSS </a></li>
+      </ul>
+    </nav>
+
+    <p>&copy; Gabriel Gauci Maistre 2026. All rights reserved. </p>
+  </div>
+</aside>
+
+    <main class="content container" role="main" aria-label="Main content">
+    <div class="post">
+  <h1>Why are Python Packages Much Larger Compared to Julia&#39;s?</h1>
+  <time datetime=2021-06-15T23:00:00Z class="post-date">Tue, Jun 15, 2021</time>
+  
+  <p class="tags">
+    Tags:   <a href="/tags/julia">julia</a>  <a href="/tags/python">python</a>  <a href="/tags/package-development">package development</a>
+  </p>
+  
+  <p><img src="/images/julia-package.png" alt="alt text" title="Logo Title Text 1">
+<em>A very bad Julia package logo made by yours truly</em></p>
+<p>Julia has a number of features which make it favourable for developers to resuse code written by others when developing their own Julia packages[0]. This high degree of modularity[1] found in Julia allows packages to remain fairly small in size compared those found in Python. Let&rsquo;s explore why that may be.</p>
+<h2 id="python-packages">Python Packages</h2>
+<p>Not all Python packages are overly large in size. In fact all the Python packages I have ever written were all small, both in size and scope, and probably yours were too. But these aren&rsquo;t the packages I would like discuss today. The packages I have in mind are the ones used by most Python developers on a daily basis. Packages such as Pandas and Numpy which are fairly large and depended on by most Python developers when developing their own packages.</p>
+<p>Every Python developer faces the same dilemma as the codebase for package starts to grow. &ldquo;Implement things from scratch or make use of someone else&rsquo;s code?&rdquo; This question is not that easy to answer in Python. Python as language is quite easy to get started with but is quite slow in terms of performance. Many developers must resolve to implementing the heaving parts of their code in C/C++ and writing Python wrappers to be able to do that same thing in Python without losing any speed.</p>
+<p>This means that as a Python developer it is not easy to know at first glance whether other developer&rsquo;s packages are using pure Python or C/C++ underneath the hood. On one hand if they&rsquo;re using pure Python their code might be easy to use however at the cost of performance. On the other if their code is using C/C++ underneath the hood then you need to be extra careful that their code will be compatible with yours.</p>
+<p>Python is also not a typed language, making it extremely tricky for developers to reuse someone else&rsquo;s code with their own and expect it to &ldquo;just work.&rdquo;</p>
+<h2 id="julias-high-degree-of-modularity">Julia&rsquo;s high degree of modularity</h2>
+<p>Because Julia does not share the same performance penalty as Python, Julia packages need not be written in other languages in order to remain performant. This makes it easy for any Julia developer to easily rely on other developer&rsquo;s code knowing in full that their code, also written in Julia, will be as performant as the one they&rsquo;re writing. This in turn makes developers within the Julia community more likely to collaborate between projects as your typical Julia package will be written in Julia.</p>
+<p>Julia also has built-in multiple dispatch which is central to the language design. This means that the compiler will select which function to use, not just by its name, but also by the types of all the arguments which are being passed to the particular function. This eliminates the need for long <code>if-then-else</code> blocks checking for types and executing code specific to the argument types. It also allows you to add functions based on other people&rsquo;s code by simply adding a function accepting the type which you need.</p>
+<p>Multiple dispatch, although not new to Julia, allows Julia&rsquo;s compiler to deploy the optimisations needed to make the execution of the code more performant, by keeping code execution paths tight and minimal. This means that the compiler knows exactly which functions are needed by simply checking the types of the arguments which you&rsquo;re using.</p>
+<p>All of this makes it extremely easy and advantageous for developers to mix and match code from other packages with their own even though they were never designed to do so in the first place. Developers need not to wrap extra checks around their code for variables types being used to make sure the other developers code works without hiccups.</p>
+<h2 id="dataframesjl">DataFrames.jl</h2>
+<p>I think it&rsquo;s fair to say that <code>DataFrames.jl</code> is Julia&rsquo;s Python <code>Pandas</code> equivalent. Just by quickly glancing the source code on <a href="https://github.com/JuliaData/DataFrames.jl/tree/main/src">GitHub</a> you can conclude that the codebase is fairly small. The package includes the core &ldquo;module&rdquo; for a DataFrame and some functions for <code>joins</code> and <code>grouping</code>. The package does not even implement a CSV parser, in fact the official docs recommend you to make use of the <code>CSV.jl</code> Julia package whose sole purpose is to load CSV files into Julia.</p>
+<p>Although a fairly simple example, there are many more of these instances happening in the Julia community. Compare that to <code>Pandas</code> where a lot of its functionality is implemented in-house rather than making use of other Python packages due to the many issues which would arise from making use of other&rsquo;s code in Python.</p>
+<hr>
+<ul>
+<li>[0] Julia packages are simply git repositories, clonable via any of the protocols that git supports, and containing Julia code that follows certain layout conventions.</li>
+<li>[1] Broadly speaking, modularity is the degree to which a system&rsquo;s components may be separated and recombined, often with the benefit of flexibility and variety in use.</li>
+</ul>
+
+</div>
+
+
+    </main>
+
+    
+  </body>
+</html>
