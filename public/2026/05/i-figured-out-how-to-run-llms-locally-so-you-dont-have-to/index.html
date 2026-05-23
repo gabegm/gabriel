@@ -92,7 +92,7 @@
 <p>I started a simple experiment: run a 32-billion-parameter large language model[0] locally on my MacBook M4 Pro (12-core CPU, 48GB unified memory). What started as a curiosity quickly turned into an obsessive rabbit hole of toolchains, benchmarks, broken processes, and one laptop shutdown that I eventually traced to a kernel panic under extreme memory pressure.</p>
 <p>Here is the full story, in case you want to save yourself some of the pain.</p>
 <h2 id="why-i-went-local">Why I went local</h2>
-<p>I started going local because the cloud alternatives kept letting me down. Anthropic went down. OpenAI hit rate limits. I ran out of tokens mid-project. I was on a flight with no internet and realized I could not work without an API key. The more we come to rely on these services, the less productive we are the moment they go dark. Local models remove that single point of failure.</p>
+<p>I started going local because the cloud alternatives kept letting me down. APIs went down. I ran out of tokens mid-project. I was on a flight with no internet and realized I could not work without a connection. The more we come to rely on these services, the less productive we are the moment they go dark. Local models remove that single point of failure.</p>
 <h2 id="before-you-start-is-this-for-you">Before you start: is this for you?</h2>
 <p>Local LLMs are not for everyone. Before you follow along, ask yourself these questions:</p>
 <p><strong>Do you have Apple Silicon?</strong> This entire journey is Apple Silicon-specific. MLX, omlx, and unified memory architecture are the reason this works. On an Intel Mac or a PC with a dedicated GPU, the story is different and this article is not your guide.</p>

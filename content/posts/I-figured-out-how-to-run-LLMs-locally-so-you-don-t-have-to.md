@@ -27,7 +27,7 @@ Here is the full story, in case you want to save yourself some of the pain.
 
 ## Why I went local
 
-I started going local because the cloud alternatives kept letting me down. Anthropic went down. OpenAI hit rate limits. I ran out of tokens mid-project. I was on a flight with no internet and realized I could not work without an API key. The more we come to rely on these services, the less productive we are the moment they go dark. Local models remove that single point of failure.
+I started going local because the cloud alternatives kept letting me down. APIs went down. I ran out of tokens mid-project. I was on a flight with no internet and realized I could not work without a connection. The more we come to rely on these services, the less productive we are the moment they go dark. Local models remove that single point of failure.
 
 ## Before you start: is this for you?
 
