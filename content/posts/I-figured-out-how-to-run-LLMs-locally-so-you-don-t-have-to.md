@@ -27,7 +27,7 @@ Here is the full story, in case you want to save yourself some of the pain.
 
 ## Why I went local
 
-Two weeks ago I was on a plane from Munich to London for Devoxx. No internet. No cloud API. Just a blank editor and a 32B model I did not yet know how to run. That was the moment I realized: the more we outsource intelligence to APIs, the less productive we are the moment they go dark. Local models remove that single point of failure.
+The cloud alternatives kept letting me down. APIs went down. I ran out of tokens mid-project. I was on a flight from Munich to London for Devoxx with no internet and realized I could not work without a connection. I was also wishing I could use LLMs on that flight, but I could not, which sucked. The more we come to rely on these services, the less productive we are the moment they go dark. Local models remove that single point of failure.
 
 ## Before you start: is this for you?
 
