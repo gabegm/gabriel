@@ -108,7 +108,7 @@ I tried [mlx_lm](https://github.com/ml-explore/mlx-lm) and the difference was no
 
 ### Why does MLX use the GPU instead of the CPU?
 
-The answer lies in Apple Silicon's Unified Memory Architecture (UMA)[1]. The CPU, GPU, and Neural Engine all share exactly the same physical pool of RAM.
+The answer lies in Apple Silicon's Unified Memory Architecture (UMA)[[1]](#f1). The CPU, GPU, and Neural Engine all share exactly the same physical pool of RAM.
 
 Traditional GPU programming involves copying tensors from system RAM into dedicated VRAM. MLX eliminates this step entirely. The GPU handles compute-heavy matrix multiplications without moving memory around, because there is no memory to move. Zero physical data transfers, zero copy penalty.
 
