@@ -146,7 +146,7 @@ But here is where I hit a wall, two walls actually:
 
 1. **No rtk-ai hook for pi.** There is an open issue on GitHub, but it is not being prioritized. So I am stuck between token-saving and not having that integration.
 
-2. **little-coder does not play nice with omlx.** I wanted to use [little-coder](https://github.com/little-coder/little-coder), which is built on top of pi, but I could not figure out how to get it to work with omlx. So for now, I am sticking with bare pi.
+2. **little-coder does not play nice with omlx.** I wanted to use [little-coder](https://github.com/itayinbarr/little-coder), which is built on top of pi, but I could not figure out how to get it to work with omlx. So for now, I am sticking with bare pi.
 
 If anyone has cracked either of these, I would love to hear how.
 
