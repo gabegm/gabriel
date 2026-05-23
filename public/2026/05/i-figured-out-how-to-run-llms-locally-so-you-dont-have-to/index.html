@@ -147,7 +147,7 @@
 <h2 id="going-deeper-the-pi-agent">Going deeper: the pi agent</h2>
 <p><img src="/images/we-need-to-go-deeper.png" alt="alt text" title="We need to go deeper"></p>
 <p>But I had already come this far. Why stop?</p>
-<p>I discovered the <a href="https://github.com/pi-agent/pi">pi agent</a>, a barebones way of interacting with LLMs that saves a massive amount of tokens by cutting out all the bloat. The speed difference was incredible.</p>
+<p>I discovered the <a href="https://pi.dev/">pi agent</a>, a barebones way of interacting with LLMs that saves a massive amount of tokens by cutting out all the bloat. The speed difference was incredible.</p>
 <h3 id="why-does-pi-save-tokens">Why does Pi save tokens?</h3>
 <p>The mechanism is called <strong>Prefix Caching</strong>.</p>
 <p>Here is how it works: the LLM serving framework chops your prompt into blocks and hashes them. If you send long system instructions or extensive project references, the Key-Value (KV) tensors for those initial prompt blocks are stored and locked in memory.</p>

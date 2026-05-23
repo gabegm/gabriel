@@ -130,7 +130,7 @@ The laptop was cooler, battery life improved, and I was achieving roughly **47 t
 
 But I had already come this far. Why stop?
 
-I discovered the [pi agent](https://github.com/pi-agent/pi), a barebones way of interacting with LLMs that saves a massive amount of tokens by cutting out all the bloat. The speed difference was incredible.
+I discovered the [pi agent](https://pi.dev/), a barebones way of interacting with LLMs that saves a massive amount of tokens by cutting out all the bloat. The speed difference was incredible.
 
 ### Why does Pi save tokens?
 
