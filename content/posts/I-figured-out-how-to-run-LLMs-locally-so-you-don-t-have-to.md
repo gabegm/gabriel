@@ -27,7 +27,7 @@ Here is the full story, in case you want to save yourself some of the pain.
 
 ## Why I went local
 
-The cloud alternatives kept letting me down. APIs went down. I ran out of tokens mid-project. I was on a flight with no internet and realized I could not work without a connection. The more we come to rely on these services, the less productive we are the moment they go dark. Local models remove that single point of failure.
+Two weeks ago I was on a plane from Munich to London for Devoxx. No internet. No cloud API. Just a blank editor and a 32B model I did not yet know how to run. That was the moment I realized: the more we outsource intelligence to APIs, the less productive we are the moment they go dark. Local models remove that single point of failure.
 
 ## Before you start: is this for you?
 
@@ -174,7 +174,7 @@ For anyone who wants to follow the same path on their own Apple Silicon Mac, her
 Before any of the above, I needed the model on disk. I used `huggingface-cli` to download the 4-bit quantized MLX version:
 
 ```
-hf download majentik/Qwen3.6-35B-A3B-TurboQuant-MLX-4bit  --local-dir ~/models/Qwen3.6-35B-A3B-TurboQuant-MLX-4bit
+hf download majentik/Qwen3.6-35B-A3B-TurboQuant-MLX-4bit --local-dir ~/models/Qwen3.6-35B-A3B-TurboQuant-MLX-4bit
 ```
 
 ### Step 1: ollama
