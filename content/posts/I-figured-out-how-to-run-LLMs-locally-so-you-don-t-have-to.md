@@ -21,7 +21,7 @@ date: 2026-05-21 10:00:00 +0000
 
 Local LLMs are open-weight language models you run on your own hardware instead of sending your prompts to a cloud API. No data leaves your machine, no monthly subscription, and no rate limits. The trade-off is that you need serious hardware, and getting it to work smoothly is harder than it should be.
 
-I started a simple experiment: run a 32-billion-parameter large language model locally on my MacBook M4 Pro (12-core CPU, 48GB unified memory). What started as a curiosity quickly turned into an obsessive rabbit hole of toolchains, benchmarks, broken processes, and one laptop shutdown that I eventually traced to a kernel panic under extreme memory pressure.
+I started a simple experiment: run a 32-billion-parameter large language model[0] locally on my MacBook M4 Pro (12-core CPU, 48GB unified memory). What started as a curiosity quickly turned into an obsessive rabbit hole of toolchains, benchmarks, broken processes, and one laptop shutdown that I eventually traced to a kernel panic under extreme memory pressure.
 
 Here is the full story, in case you want to save yourself some of the pain.
 
@@ -47,7 +47,7 @@ Then the laptop started screaming.
 
 ![alt text](/images/im-tired-boss.png "I'm tired boss")
 
-The fans kicked in at full speed. The battery drained in about two hours. And memory? A staggering 48GB of RAM plus 12GB of swap was being consumed, and I was getting roughly 25 tokens per second. It was cool that it worked, but it was also an incredibly inefficient way to use a laptop.
+The fans kicked in at full speed. The battery drained in about two hours. And memory? A staggering 48GB of RAM plus 12GB of swap[1] was being consumed, and I was getting roughly 25 tokens per second. It was cool that it worked, but it was also an incredibly inefficient way to use a laptop.
 
 ### Why was ollama so inefficient?
 
@@ -276,3 +276,8 @@ Here is where each toolstack landed:
 The laptop crash that haunted my MLX experiments was a kernel panic triggered by extreme memory pressure. It was fixed by updating macOS and MLX, and by staying within memory headroom. The lesson: always keep some breathing room, and keep your model quantized.
 
 The future of local inference on Apple Silicon is bright, and I am excited to see where it goes next.
+
+---
+
+* [0] Parameters are the adjustable weights inside a neural network that determine how it processes input. A 32B model has 32 billion of them. More parameters generally mean the model can represent more complex patterns, but they also require more memory to load and run.
+* [1] Swap is when macOS runs out of physical RAM and starts using your SSD as scratch space. It is orders of magnitude slower than RAM, which is why your tokens-per-second drops through the floor when swap kicks in.

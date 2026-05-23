@@ -89,7 +89,7 @@
 </blockquote>
 <p><img src="/images/ai-ai-ai.jpg" alt="alt text" title="AI AI AI"></p>
 <p>Local LLMs are open-weight language models you run on your own hardware instead of sending your prompts to a cloud API. No data leaves your machine, no monthly subscription, and no rate limits. The trade-off is that you need serious hardware, and getting it to work smoothly is harder than it should be.</p>
-<p>I started a simple experiment: run a 32-billion-parameter large language model locally on my MacBook M4 Pro (12-core CPU, 48GB unified memory). What started as a curiosity quickly turned into an obsessive rabbit hole of toolchains, benchmarks, broken processes, and one laptop shutdown that I eventually traced to a kernel panic under extreme memory pressure.</p>
+<p>I started a simple experiment: run a 32-billion-parameter large language model[0] locally on my MacBook M4 Pro (12-core CPU, 48GB unified memory). What started as a curiosity quickly turned into an obsessive rabbit hole of toolchains, benchmarks, broken processes, and one laptop shutdown that I eventually traced to a kernel panic under extreme memory pressure.</p>
 <p>Here is the full story, in case you want to save yourself some of the pain.</p>
 <h2 id="before-you-start-is-this-for-you">Before you start: is this for you?</h2>
 <p>Local LLMs are not for everyone. Before you follow along, ask yourself these questions:</p>
@@ -102,7 +102,7 @@
 <p>My first stop was <a href="https://ollama.com">ollama</a>, because it is the easiest on-ramp to local LLMs. I paired it with <a href="https://opencode.ai/">opencode</a> and ran qwen3.6 (32B parameters). It worked, really well, honestly. The model was responsive, the code suggestions were solid, and for a moment I felt like I had cracked the code.</p>
 <p>Then the laptop started screaming.</p>
 <p><img src="/images/im-tired-boss.png" alt="alt text" title="I'm tired boss"></p>
-<p>The fans kicked in at full speed. The battery drained in about two hours. And memory? A staggering 48GB of RAM plus 12GB of swap was being consumed, and I was getting roughly 25 tokens per second. It was cool that it worked, but it was also an incredibly inefficient way to use a laptop.</p>
+<p>The fans kicked in at full speed. The battery drained in about two hours. And memory? A staggering 48GB of RAM plus 12GB of swap[1] was being consumed, and I was getting roughly 25 tokens per second. It was cool that it worked, but it was also an incredibly inefficient way to use a laptop.</p>
 <h3 id="why-was-ollama-so-inefficient">Why was ollama so inefficient?</h3>
 <p><img src="/images/i-am-once-again-asking-for-more-ram.png" alt="alt text" title="I am once again asking for more RAM"></p>
 <p>Under the hood, ollama acts as a Go wrapper that uses llama.cpp as its backend. On Mac machines, llama.cpp compiles down to Metal via a portable framework. But this framework traditionally treated the Mac&rsquo;s unified memory like a standard PC, copying data between system RAM and GPU memory banks.</p>
@@ -321,6 +321,11 @@
 </ul>
 <p>The laptop crash that haunted my MLX experiments was a kernel panic triggered by extreme memory pressure. It was fixed by updating macOS and MLX, and by staying within memory headroom. The lesson: always keep some breathing room, and keep your model quantized.</p>
 <p>The future of local inference on Apple Silicon is bright, and I am excited to see where it goes next.</p>
+<hr>
+<ul>
+<li>[0] Parameters are the adjustable weights inside a neural network that determine how it processes input. A 32B model has 32 billion of them. More parameters generally mean the model can represent more complex patterns, but they also require more memory to load and run.</li>
+<li>[1] Swap is when macOS runs out of physical RAM and starts using your SSD as scratch space. It is orders of magnitude slower than RAM, which is why your tokens-per-second drops through the floor when swap kicks in.</li>
+</ul>
 
 </div>
 
