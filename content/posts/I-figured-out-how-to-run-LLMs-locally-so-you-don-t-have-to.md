@@ -21,13 +21,15 @@ date: 2026-05-21 10:00:00 +0000
 
 Local LLMs are open-weight language models you run on your own hardware instead of sending your prompts to a cloud API. The trade-off is that you need serious hardware, and getting it to work smoothly is harder than it should be.
 
-I started a simple experiment: run a 32-billion-parameter large language model[0] locally on my MacBook M4 Pro (12-core CPU, 48GB unified memory[1]). What started as a curiosity quickly turned into an obsessive rabbit hole of toolchains, benchmarks, broken processes, and one laptop shutdown that I eventually traced to a kernel panic under extreme memory pressure.
+The landscape has shifted dramatically in the past couple of years. While cloud-hosted APIs from OpenAI, Anthropic, Google, and others dominate the conversation, many companies are now releasing open-weight versions of their models under permissive licenses, Meta with Llama, Mistral, Qwen, and others, allowing anyone to download and run them on their own hardware. This has created a thriving local LLM ecosystem that was simply not possible a few years ago.
+
+I started a simple experiment: run a 32-billion-parameter large language model[[0]](#f0) locally on my MacBook M4 Pro (12-core CPU, 48GB unified memory[[1]](#f1)). What started as a curiosity quickly turned into an obsessive rabbit hole of toolchains, benchmarks, broken processes, and one laptop shutdown that I eventually traced to a kernel panic under extreme memory pressure.
 
 Here is the full story, in case you want to save yourself some of the pain.
 
 ## Why I went local
 
-The cloud alternatives kept letting me down. APIs went down. I ran out of tokens mid-project. I was on a flight from Munich to London for Devoxx with no internet and realized I could not work without a connection. I was also wishing I could use LLMs on that flight, but I could not, which sucked. The more we come to rely on these services, the less productive we are the moment they go dark. Local models remove that single point of failure.
+The cloud alternatives kept letting me down. APIs went down. I ran out of tokens mid-project. I was on a flight from Munich to London for Devoxx with no internet and realised I could not work without a connection. I was also wishing I could use LLMs on that flight, but I could not, which sucked. The more we come to rely on these services, the less productive we are the moment they go dark. Local models remove that single point of failure.
 
 ## Before you start: is this for you?
 
@@ -51,13 +53,13 @@ Then the laptop started screaming.
 
 ![alt text](/images/im-tired-boss.png "I'm tired boss")
 
-The fans kicked in at full speed. The battery drained in about two hours. And memory? A staggering 48GB of RAM plus 12GB of swap[2] was being consumed, and I was getting roughly 25 tokens per second[3]. It was cool that it worked, but it was also an incredibly inefficient way to use a laptop.
+The fans kicked in at full speed. The battery drained in about two hours. And memory? A staggering 48GB of RAM plus 12GB of swap[[2]](#f2) was being consumed, and I was getting roughly 25 tokens per second[[3]](#f3). It was cool that it worked, but it was also an incredibly inefficient way to use a laptop.
 
 ### Why was ollama so inefficient?
 
 ![alt text](/images/i-am-once-again-asking-for-more-ram.png "I am once again asking for more RAM")
 
-Under the hood, ollama acts as a Go wrapper that uses llama.cpp as its backend. On Mac machines, llama.cpp compiles down to Metal[4] via a portable framework. But this framework traditionally treated the Mac's unified memory like a standard PC, copying data between system RAM and GPU memory banks.
+Under the hood, ollama acts as a Go wrapper that uses llama.cpp as its backend. On Mac machines, llama.cpp compiles down to Metal[[4]](#f4) via a portable framework. But this framework traditionally treated the Mac's unified memory like a standard PC, copying data between system RAM and GPU memory banks.
 
 This created two problems:
 
@@ -69,11 +71,11 @@ The result: phantom memory copies, latency, and a laptop that sounded like a jet
 
 ## Token-saving tools: rtk-ai
 
-I discovered [rtk-ai](https://www.rtk-ai.app/), a tool designed to reduce token usage by being smarter about what gets sent to the model. It was genuinely helpful, with fewer tokens meaning fewer resources. But I ran into another problem: qwen was *overthinking*. It would get stuck in reasoning loops, spinning its wheels instead of producing useful output. Disabling the "thinking" mode helped, but it felt like I was fighting the model rather than working with it.
+I discovered [rtk-ai](https://www.rtk-ai.app/), a tool designed to reduce token usage by being smarter about what gets sent to the model. It was genuinely helpful, with fewer tokens meaning fewer resources. But I ran into another problem. Qwen was *overthinking*. It would get stuck in reasoning loops, spinning its wheels instead of producing useful output. Disabling the "thinking" mode helped, but it felt like I was fighting the model rather than working with it.
 
 ### Why does Qwen 3.6 get stuck in reasoning loops?
 
-Qwen 3.6 has a well-documented tendency to get stuck in reasoning loops. It endlessly second-guesses answers, repeats circular logic, or endlessly retries tool calls. This is not a bug in my setup, it is a property of the model interacting with certain environments.
+Qwen 3.6 has a well-documented tendency to get stuck in reasoning loops. It endlessly second-guesses answers, repeats circular logic, or endlessly retries tool calls. This is not a bug in my setup. It is a property of the model interacting with certain environments.
 
 Four primary drivers were identified:
 
@@ -83,7 +85,7 @@ Four primary drivers were identified:
 
 **Over-restricted sampling.** Setting temperatures too low (e.g., 0.1 to 0.5) limits the model's exploratory generation. Without a higher temperature, the model struggles to break out of its own logical ruts.
 
-**Context window fatigue.** Exhausting or maximizing the context window[9] degrades the model's internal attention mechanism, making it much more likely to hallucinate the initial prompt and restart its reasoning cycles.
+**Context window fatigue.** Exhausting or maximizing the context window[[9]](#f9) degrades the model's internal attention mechanism, making it much more likely to hallucinate the initial prompt and restart its reasoning cycles.
 
 ### How to mitigate the looping
 
@@ -102,7 +104,7 @@ I went with the simplest fix: disabling the "thinking" mode entirely. It solved 
 
 I kept digging. Someone mentioned that ollama is not the most efficient backend, and that you could get better performance by going straight to [llama.cpp](https://github.com/ggerganov/llama.cpp). Fair enough. But then I heard about something even more promising: MLX versions of models that leverage Apple's Metal API, which means they actually use your GPU instead of just your CPU.
 
-I tried [mlx_lm](https://github.com/ml-explore/mlx-lm) and the difference was noticeable. The laptop was cooler and the battery lasted longer. I was getting around 35 tokens per second with 48GB RAM plus 2GB swap. But memory was still a problem. macOS kept aggressively ejecting the process when it tried to allocate too much memory. At one point, my laptop actually shut off completely. Not a graceful exit. Turns out, when MLX tried to allocate more memory than macOS would allow, the OS sent a SIGKILL to the process. Under enough pressure, the kernel panicked the whole system. It was a hardware-level crash, not a software crash. I later updated to the latest macOS and MLX, and the crash never happened again. The fix was simply staying within memory headroom and keeping the model quantized at 4-bit[5].
+I tried [mlx_lm](https://github.com/ml-explore/mlx-lm) and the difference was noticeable. The laptop was cooler and the battery lasted longer. I was getting around 35 tokens per second with 48GB RAM plus 2GB swap. But memory was still a problem. macOS kept aggressively ejecting the process when it tried to allocate too much memory. At one point, my laptop actually shut off completely. Not a graceful exit. Turns out, when MLX tried to allocate more memory than macOS would allow, the OS sent a SIGKILL to the process. Under enough pressure, the kernel panicked the whole system. It was a hardware-level crash, not a software crash. I later updated to the latest macOS and MLX, and the crash never happened again. The fix was simply staying within memory headroom and keeping the model quantized at 4-bit[[5]](#f5).
 
 ### Why does MLX use the GPU instead of the CPU?
 
@@ -118,7 +120,7 @@ The technical difference is in how they manage memory:
 
 **mlx_lm** frequently fails to deduplicate arrays, often duplicating entire transformer weights in memory when instantiating new models. This causes memory to swell during large generation tasks.
 
-**omlx** uses advanced caching mechanisms, including a two-tier Key-Value cache[6], and continuous batching[7]. It avoids loading redundant tensors and actively offloads cold cache blocks to your SSD when memory constraints are tight.
+**omlx** uses advanced caching mechanisms, including a two-tier Key-Value cache[[6]](#f6), and continuous batching[[7]](#f7). It avoids loading redundant tensors and actively offloads cold cache blocks to your SSD when memory constraints are tight.
 
 The result: mlx_lm sees memory swell and crash. omlx keeps things tight.
 
@@ -209,7 +211,7 @@ This served on `localhost:8080` by default. Roughly 35 tokens per second, 48GB R
 omlx serve --host 0.0.0.0 --port 8080 --model-dir ~/models
 ```
 
-No extra flags needed. omlx handled the model loading, memory management, and KV caching automatically. This is where things got interesting: under 48GB RAM, no swap, and 47 tokens per second.
+No extra flags needed. Omlx handled the model loading, memory management, and KV caching automatically. This is where things got interesting: under 48GB RAM, no swap, and 47 tokens per second.
 
 ### Step 4: pi via omlx
 
@@ -227,13 +229,13 @@ For both mlx_lm and omlx, these are the parameters I settled on:
 
 | Parameter | Value | Purpose |
 |---|---|---|
-| ctx_window | 262144 | Context window size[9] |
+| ctx_window | 262144 | Context window size[[9]](#f9) |
 | max_tokens | 32768 | Maximum output tokens |
-| temp | 0.7 | Temperature (balances creativity vs. focus)[10] |
-| top_p | 0.85 | Nucleus sampling threshold[11] |
+| temp | 0.7 | Temperature (balances creativity vs. focus)[[10]](#f10) |
+| top_p | 0.85 | Nucleus sampling threshold[[11]](#f11) |
 | top_k | 0 | No top-k filtering |
 | min_p | 0.05 | Minimum probability threshold |
-| rep_penalty | 1 | Repetition penalty[12] |
+| rep_penalty | 1 | Repetition penalty[[12]](#f12) |
 | presence_penalty | -0.85 | Penalizes repeating previous tokens |
 | enable_thinking | false | Disables reasoning loops |
 
@@ -283,16 +285,16 @@ The future of local inference on Apple Silicon is bright, and I am excited to se
 
 ---
 
-* <a id="fn0"></a>[0] <a href="#fn0">Parameters</a> are the adjustable weights inside a neural network that determine how it processes input. A 32B model has 32 billion of them. More parameters generally mean the model can represent more complex patterns, but they also require more memory to load and run.
-* <a id="fn1"></a>[1] <a href="#fn1">Unified memory</a> (or unified memory architecture, UMA) is Apple Silicon's approach of giving the CPU, GPU, and Neural Engine access to the same pool of physical RAM, instead of separate memory banks. This eliminates the need to copy data between CPU and GPU memory, which is the single biggest performance advantage for running LLMs locally.
-* <a id="fn2"></a>[2] <a href="#fn2">Swap</a> is when macOS runs out of physical RAM and starts using your SSD as scratch space. It is orders of magnitude slower than RAM, which is why your tokens-per-second drops through the floor when swap kicks in.
-* <a id="fn3"></a>[3] <a href="#fn3">Tokens</a> are the basic units of text that an LLM processes. Roughly a word, or a fraction of a word. A 1,000-word article is roughly 1,300 to 1,500 tokens. When you see "32,768 tokens" in a config, that is the maximum output the model will generate in a single response.
-* <a id="fn4"></a>[4] <a href="#fn4">Metal</a> is Apple's low-level graphics API, similar to OpenGL or Vulkan, that gives programs direct access to the GPU. On Apple Silicon, Metal is the bridge that lets MLX-based tools actually use your GPU for compute instead of just your CPU.
-* <a id="fn5"></a>[5] <a href="#fn5">4-bit quantization</a> is a compression technique that reduces the precision of a model's weights from 16 bits (standard) down to 4 bits. A 32B 4-bit model takes roughly 18GB of RAM instead of 64GB. The quality loss is small enough that most people cannot tell the difference.
-* <a id="fn6"></a>[6] <a href="#fn6">Key-Value (KV) cache</a> stores the attention tensors from previous tokens so the model does not need to recompute them on every new token. Without a KV cache, every new token requires re-reading the entire conversation history. With one, the model only computes the new token.
-* <a id="fn7"></a>[7] <a href="#fn7">Continuous batching</a> is a serving technique where multiple user requests are processed together in a single forward pass, rather than one at a time. This dramatically improves throughput when multiple people are using the same model server.
-* <a id="fn8"></a>[8] <a href="#fn8">Prefix caching</a> works by chopping your prompt into blocks, hashing them, and storing the resulting KV tensors in memory. On follow-up queries that reuse the same system prompt or project context, the model skips the heavy computation and reuses the cached blocks. The more context you feed the model, the more value you get from caching.
-* <a id="fn9"></a>[9] <a href="#fn9">Context window</a> is the maximum amount of text (in tokens) the model can "remember" at once. That includes both the input you send and the output it generates. A 262,144 context window is roughly 200,000 words, which is larger than most novels.
-* <a id="fn10"></a>[10] <a href="#fn10">Temperature</a> controls how random the model's output is. A temperature of 0.0 always picks the most likely next token (deterministic). A temperature of 1.0 samples from the full probability distribution (creative). 0.7 is a common middle ground.
-* <a id="fn11"></a>[11] <a href="#fn11">Nucleus sampling (top_p)</a> is another randomness control. Instead of fixing temperature, it restricts the model to the smallest set of tokens whose combined probability exceeds the threshold. top_p of 0.85 means the model picks from the smallest group of tokens that together cover 85% of the probability mass.
-* <a id="fn12"></a>[12] <a href="#fn12">Repetition penalty</a> discourages the model from repeating the same tokens or phrases. A penalty of 1.0 means no penalty. Values above 1.0 actively discourage repetition. Values below 1.0 encourage it.
+* <a name="f0">[0]</a> Parameters are the adjustable weights inside a neural network that determine how it processes input. A 32B model has 32 billion of them. More parameters generally mean the model can represent more complex patterns, but they also require more memory to load and run.
+* <a name="f1">[1]</a> Unified memory (or unified memory architecture, UMA) is Apple Silicon's approach of giving the CPU, GPU, and Neural Engine access to the same pool of physical RAM, instead of separate memory banks. This eliminates the need to copy data between CPU and GPU memory, which is the single biggest performance advantage for running LLMs locally.
+* <a name="f2">[2]</a> Swap is when macOS runs out of physical RAM and starts using your SSD as scratch space. It is orders of magnitude slower than RAM, which is why your tokens-per-second drops through the floor when swap kicks in.
+* <a name="f3">[3]</a> Tokens are the basic units of text that an LLM processes. Roughly a word, or a fraction of a word. A 1,000-word article is roughly 1,300 to 1,500 tokens. When you see "32,768 tokens" in a config, that is the maximum output the model will generate in a single response.
+* <a name="f4">[4]</a> Metal is Apple's low-level graphics API, similar to OpenGL or Vulkan, that gives programs direct access to the GPU. On Apple Silicon, Metal is the bridge that lets MLX-based tools actually use your GPU for compute instead of just your CPU.
+* <a name="f5">[5]</a> 4-bit quantization is a compression technique that reduces the precision of a model's weights from 16 bits (standard) down to 4 bits. A 32B 4-bit model takes roughly 18GB of RAM instead of 64GB. The quality loss is small enough that most people cannot tell the difference.
+* <a name="f6">[6]</a> Key-Value (KV) cache stores the attention tensors from previous tokens so the model does not need to recompute them on every new token. Without a KV cache, every new token requires re-reading the entire conversation history. With one, the model only computes the new token.
+* <a name="f7">[7]</a> Continuous batching is a serving technique where multiple user requests are processed together in a single forward pass, rather than one at a time. This dramatically improves throughput when multiple people are using the same model server.
+* <a name="f8">[8]</a> Prefix caching works by chopping your prompt into blocks, hashing them, and storing the resulting KV tensors in memory. On follow-up queries that reuse the same system prompt or project context, the model skips the heavy computation and reuses the cached blocks. The more context you feed the model, the more value you get from caching.
+* <a name="f9">[9]</a> Context window is the maximum amount of text (in tokens) the model can "remember" at once. That includes both the input you send and the output it generates. A 262,144 context window is roughly 200,000 words, which is larger than most novels.
+* <a name="f10">[10]</a> Temperature controls how random the model's output is. A temperature of 0.0 always picks the most likely next token (deterministic). A temperature of 1.0 samples from the full probability distribution (creative). 0.7 is a common middle ground.
+* <a name="f11">[11]</a> Nucleus sampling (top_p) is another randomness control. Instead of fixing temperature, it restricts the model to the smallest set of tokens whose combined probability exceeds the threshold. top_p of 0.85 means the model picks from the smallest group of tokens that together cover 85% of the probability mass.
+* <a name="f12">[12]</a> Repetition penalty discourages the model from repeating the same tokens or phrases. A penalty of 1.0 means no penalty. Values above 1.0 actively discourage repetition. Values below 1.0 encourage it.
