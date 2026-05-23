@@ -7,7 +7,7 @@ summary = "Gabriel Gauci Maistre"
 [Menus]
   main = [
       {Name = "Github", URL = "https://github.com/gabegm/"},
-      {Name = "Twitter", URL = "https://twitter.com/itsgabegm/"},
+      {Name = "Blue Sky", URL = "https://bsky.app/profile/gabegm.bsky.social/"},
       {Name = "LinkedIn", URL = "https://www.linkedin.com/in/gabegm/"},
       {Name = "RSS", URL = "/index.xml"}
   ]
@@ -16,7 +16,7 @@ summary = "Gabriel Gauci Maistre"
   AuthorName = "Gabriel Gauci Maistre"
   GitHubUser = "gabegm"
   description = "I have opinions and make people read them."
-  jobTitle = "Data Scientist"
+  jobTitle = "Software Engineer"
   images = ["/images/avatar.jpg"]
   themeColor = "theme-base-0g"
   layoutReverse = false

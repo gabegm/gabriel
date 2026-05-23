@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" media="screen" href="/rss.xsl"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Stocks on Gabe</title>
+    <link>http://localhost:1313/tags/stocks/</link>
+    <description>Recent content in Stocks on Gabe</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 08 Jul 2022 10:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/stocks/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How To Get Free Historical Stock Data in Python</title>
+      <link>http://localhost:1313/2022/07/how-to-get-free-historical-stock-data-in-python/</link>
+      <pubDate>Fri, 08 Jul 2022 10:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2022/07/how-to-get-free-historical-stock-data-in-python/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/stonks.jpeg&#34; alt=&#34;alt text&#34; title=&#34;I have no idea what I&#39;m doing&#34;&gt;&lt;/p&gt;
+&lt;p&gt;It&amp;rsquo;s recently become apparent to me that collecting somewhat good quality end-of-day stock price data has turned into a real pain, with &lt;a href=&#34;https://fxgears.com/index.php?threads/how-to-acquire-free-historical-tick-and-bar-data-for-algo-trading-and-backtesting-in-2020-stocks-forex-and-crypto-currency.1229/#post-19298&#34;&gt;today&amp;rsquo;s listed alternatives&lt;/a&gt; alternatives being somewhat lacking compared to what I had used a few years ago for my bachelor thesis project on algorithmic trading.&lt;/p&gt;
+&lt;p&gt;Which is why I decided to write a script to do this for fun &lt;del&gt;and profit&lt;/del&gt;.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

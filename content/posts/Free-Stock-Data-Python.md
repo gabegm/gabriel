@@ -1,10 +1,10 @@
 ---
-draft: true
+draft: false
 unlisted: false
 title: How To Get Free Historical Stock Data in Python
 author: Gabriel Gauci Maistre
-description: 
-summary: 
+description: A step-by-step guide to scraping free historical stock data from Yahoo Finance using Python, complete with working source code.
+summary: A step-by-step guide to scraping free historical stock data from Yahoo Finance using Python, complete with working source code.
 images:
 - /images/stonks.jpeg
 image: /images/stonks.jpeg
@@ -18,7 +18,7 @@ date: 2022-07-08 10:00:00 +0000
 
 It's recently become apparent to me that collecting somewhat good quality end-of-day stock price data has turned into a real pain, with [today's listed alternatives](https://fxgears.com/index.php?threads/how-to-acquire-free-historical-tick-and-bar-data-for-algo-trading-and-backtesting-in-2020-stocks-forex-and-crypto-currency.1229/#post-19298) alternatives being somewhat lacking compared to what I had used a few years ago for my bachelor thesis project on algorithmic trading.
 
-Which is why I decided to write a script to do this for fun ~~and profit~~.
+Which is why I decided to write a script to do this for fun ~~and profit~~. Here is what I learned along the way.
 
 The first thing that pops up when you search for AAPL on [DuckDuckGo](https://duckduckgo.com/?q=aapl&t=newext&atb=v315-1&ia=stock) is [Yahoo Finance](https://duckduckgo.com/?q=aapl&t=newext&atb=v315-1&ia=stock). Yahoo has been providing stock date for quite a long time now, and used to provide an easy way to retrieve end-of-day data in the past, however since the last few years this has no longer been the case.
 
@@ -63,7 +63,7 @@ dt_start = int(datetime(1970, 1, 1, 0, 0, 0, 0, tzinfo=timezone.utc).timestamp()
 dt_end = int(datetime.now().timestamp())
 ```
 
-After a quick Google search, I found some [US stock symbols]("https://github.com/rreichel3/US-Stock-Symbols/raw/main/all/all_tickers.txt) that we could use to test this. It's a simple text file with symbols separated by line breaks.
+After a quick Google search, I found some [US stock symbols](https://github.com/rreichel3/US-Stock-Symbols/raw/main/all/all_tickers.txt) that we could use to test this. It's a simple text file with symbols separated by line breaks.
 
 Our plan would be to read the contents of this file and write it to a file on our disk.
 
@@ -87,11 +87,18 @@ import logging
 import time
 import random
 import csv
+import os
 
-logger = logging.getLogger()
-logger.setLevel(logging.DEBUG)
+# Set up logging so you can see what is happening
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    handlers=[logging.FileHandler("stock_data.log"), logging.StreamHandler()]
+)
+logger = logging.getLogger(__name__)
 
-class ticker:
+
+class StockTicker:
     def __init__(self, symbol: str, start: int, end: int, interval: str, events: str, adjust_close: bool) -> None:
         self.base = "https://query1.finance.yahoo.com/v7/finance/download/"
         self.symbol = symbol
@@ -101,6 +108,7 @@ class ticker:
         self.events = events
         self.adjust_close = adjust_close
         self.url = self._url_builder()
+        self.file = None
 
     def _url_builder(self):
         return (
@@ -113,55 +121,86 @@ class ticker:
             f"includeAdjustedClose={self.adjust_close}"
         )
 
-    def save(self) -> tuple:
-        self.file, self.headers = urllib.request.urlretrieve(self.url, f"data/raw/{self.symbol}.csv")
-
+    def save(self) -> 'StockTicker':
+        os.makedirs("data/raw", exist_ok=True)
+        self.file, self.headers = urllib.request.urlretrieve(
+            self.url, f"data/raw/{self.symbol}.csv"
+        )
         return self
 
     def read(self) -> pd.DataFrame:
         df = pd.read_csv(self.file, parse_dates=["Date"])
         df.columns = [s.lower().replace(' ', '_') for s in df.columns]
         df["symbol"] = self.symbol
-
         return df
+
 
 def get_tickers():
     url = "https://github.com/rreichel3/US-Stock-Symbols/raw/main/all/all_tickers.txt"
-
     tickers = urllib.request.urlopen(url).read().decode("utf-8").split("\n")
+    tickers = [t.strip() for t in tickers if t.strip()]
 
+    os.makedirs("data/processed", exist_ok=True)
     with open("data/processed/tickers.csv", 'w', newline='') as f:
         wr = csv.writer(f)
         wr.writerow(tickers)
 
     return tickers
 
+
+# Date range: from the beginning of time (well, 1970) to now
 dt_start = int(datetime(1970, 1, 1, 0, 0, 0, 0, tzinfo=timezone.utc).timestamp())
 dt_end = int(datetime.now().timestamp())
 
-df_tickers = pd.DataFrame({})
 tickers = get_tickers()
+all_data = []
 
 for symbol in tickers:
     try:
-        logging.info(symbol)
+        logger.info(f"Processing {symbol}")
 
-        df = ticker(
-                symbol = symbol,
-                start = dt_start,
-                end = dt_end,
-                interval = "1d",
-                events = "history",
-                adjust_close = True
-            ).save().read()
+        df = StockTicker(
+            symbol=symbol,
+            start=dt_start,
+            end=dt_end,
+            interval="1d",
+            events="history",
+            adjust_close=True
+        ).save().read()
 
-        logging.info(f"{len(df)} rows")
-
-        df_tickers = pd.concat([df_tickers, df], ignore_index=True)
+        logger.info(f"  -> {len(df)} rows")
+        all_data.append(df)
     except Exception as e:
-        logging.error(f"Unable to retrieve {symbol}")
+        logger.error(f"  -> Unable to retrieve {symbol}: {e}")
 
+    # Be polite to Yahoo. Rate limit between requests.
     time.sleep(random.uniform(1, 3))
 
+# Concatenate all DataFrames at once (much faster than repeated concat)
+df_tickers = pd.concat(all_data, ignore_index=True)
 df_tickers.to_csv(f"data/processed/tickers-{dt_end}.csv", index=False)
+logger.info(f"Done! Saved {len(df_tickers)} rows for {len(tickers)} tickers.")
 ```
+
+## Caveats
+
+A few things to keep in mind before you run this:
+
+**Yahoo's API is unofficial and can break.** The `v7/finance/download/` endpoint is not a public API. Yahoo has changed it before and could change it again. If your script stops working, check whether the endpoint has moved. There are also paid alternatives like Alpha Vantage or Polygon, but they come with rate limits and costs.
+
+**This takes a while.** You are downloading data for thousands of tickers, each with years of daily data. The script includes a random sleep between 1 and 3 seconds between requests to be polite to Yahoo's servers. On my machine it took about 4 hours. If you need all the data, you might want to run it overnight.
+
+**Not all tickers are valid.** The US stock symbols file includes delisted companies, symbols with special characters, and some edge cases that Yahoo will reject. The script handles failures gracefully, but expect some errors in the logs.
+
+**Adjusted close matters.** I set `adjust_close=True` because it accounts for stock splits and dividends, giving you a more accurate picture of historical returns. If you are doing backtesting, this is essential.
+
+## What next?
+
+Once you have this data, you can do all sorts of interesting things:
+
+- **Backtest trading strategies.** Pair this with backtrader or zipline for backtesting.
+- **Visualize price movements.** Use matplotlib or plotly to chart price trends.
+- **Build a portfolio tracker.** Combine multiple tickers and track performance.
+- **Calculate correlations.** See how different stocks move in relation to each other.
+
+The data is free. The rest is up to you.
