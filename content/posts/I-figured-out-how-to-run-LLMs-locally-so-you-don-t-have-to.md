@@ -19,7 +19,7 @@ date: 2026-05-21 10:00:00 +0000
 
 ![alt text](/images/ai-ai-ai.jpg "AI AI AI")
 
-Local LLMs are open-weight language models you run on your own hardware instead of sending your prompts to a cloud API. No data leaves your machine, no monthly subscription, and no rate limits. The trade-off is that you need serious hardware, and getting it to work smoothly is harder than it should be.
+Local LLMs are open-weight language models you run on your own hardware instead of sending your prompts to a cloud API. The trade-off is that you need serious hardware, and getting it to work smoothly is harder than it should be.
 
 I started a simple experiment: run a 32-billion-parameter large language model[0] locally on my MacBook M4 Pro (12-core CPU, 48GB unified memory). What started as a curiosity quickly turned into an obsessive rabbit hole of toolchains, benchmarks, broken processes, and one laptop shutdown that I eventually traced to a kernel panic under extreme memory pressure.
 
@@ -27,7 +27,7 @@ Here is the full story, in case you want to save yourself some of the pain.
 
 ## Why I went local
 
-I started going local because the cloud alternatives kept letting me down. APIs went down. I ran out of tokens mid-project. I was on a flight with no internet and realized I could not work without a connection. The more we come to rely on these services, the less productive we are the moment they go dark. Local models remove that single point of failure.
+The cloud alternatives kept letting me down. APIs went down. I ran out of tokens mid-project. I was on a flight with no internet and realized I could not work without a connection. The more we come to rely on these services, the less productive we are the moment they go dark. Local models remove that single point of failure.
 
 ## Before you start: is this for you?
 
