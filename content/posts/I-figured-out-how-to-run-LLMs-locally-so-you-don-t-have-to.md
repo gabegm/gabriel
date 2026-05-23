@@ -120,7 +120,7 @@ The result: mlx_lm sees memory swell and crash. omlx keeps things tight.
 
 ## The breakthrough: omlx
 
-Then I found [omlx](https://github.com/omlx/omlx). I gave it a shot, and suddenly I was not even using the full 48GB anymore.
+Then I found [omlx](https://omlx.ai/). I gave it a shot, and suddenly I was not even using the full 48GB anymore.
 
 The laptop was cooler, battery life improved, and I was achieving roughly **47 tokens per second**. This was the sweet spot I had been searching for.
 
