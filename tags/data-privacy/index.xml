@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" media="screen" href="/rss.xsl"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Data Privacy on Gabe</title>
+    <link>http://localhost:1313/tags/data-privacy/</link>
+    <description>Recent content in Data Privacy on Gabe</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 25 Jun 2021 23:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/data-privacy/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Things We Are Happy To Tell Our Smartphones But Not Our Therapists</title>
+      <link>http://localhost:1313/2021/06/things-we-are-happy-to-tell-our-smartphones-but-not-our-therapists/</link>
+      <pubDate>Fri, 25 Jun 2021 23:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2021/06/things-we-are-happy-to-tell-our-smartphones-but-not-our-therapists/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/i-have-nothing-to-hide.png&#34; alt=&#34;alt text&#34; title=&#34;Logo Title Text 1&#34;&gt;&lt;/p&gt;
+&lt;p&gt;When many people hear the term &amp;ldquo;data privacy&amp;rdquo;, their first counter is that they have nothing to hide. Although this could make sense at face value, once you dive deep into the things which are smartphones are tracking about us, one will quickly jump to the conclusion that this statement does not hold an ounce of water.&lt;/p&gt;
+&lt;p&gt;No one sane would ever want their relatives, friends, work colleagues, and neighbors to be able to know (quoting from the OP):&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
