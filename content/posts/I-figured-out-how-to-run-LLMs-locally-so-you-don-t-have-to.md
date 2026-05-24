@@ -19,14 +19,11 @@ I wanted a coding model that worked on a flight without destroying my laptop bat
 
 What I got was a weeks-long rabbit hole through toolchains, benchmarks, broken processes, and one laptop shutdown that I eventually traced to a kernel panic under extreme memory pressure. Here is the full story, in case you want to save yourself some of the pain.
 
-## TL;DR
+## The flight that started it all
 
-On my M4 Pro (12-core CPU, 48GB unified memory), running a Qwen3.6-35B-A3B model (35B total parameters, 3B active per token) locally:
+After enough API outages, token limits, and one offline flight from Munich to London for Devoxx, I realised I could not work without a connection. The more we come to rely on cloud models, the less productive we are the moment they go dark. I wanted a coding assistant that would work offline, without turning my MacBook into a space heater.
 
-- **Ollama** was the easiest but least efficient: ~25 tokens/sec, 48GB RAM + 12GB swap, fans at max.
-- **MLX (mlx_lm)** was a step up: ~35 tokens/sec, 48GB RAM + 2GB swap, but macOS killed the process under memory pressure.
-- **omlx** was the first setup I could imagine using regularly: ~47 tokens/sec, under 48GB RAM, no swap, cool laptop.
-- **pi** via omlx (with recent optimizations): ~70 tokens/sec, under 48GB RAM, no swap, cool laptop (see below for what I changed).
+What followed was a weeks-long journey through Ollama, MLX, oMLX, and pi, with kernel panics, reasoning loops, and one unexpected speed boost that I still cannot fully explain.
 
 ## Hardware and model tested
 
@@ -34,34 +31,26 @@ On my M4 Pro (12-core CPU, 48GB unified memory), running a Qwen3.6-35B-A3B model
 - **Model**: Qwen3.6-35B-A3B-TurboQuant-MLX-4bit (35B total parameters, 3B active per token, a Mixture-of-Experts model)
 - **macOS**: Tahoe 26.5 (updated during experiments)
 - **Model format**: 4-bit quantized MLX, downloaded via `huggingface-cli`
-- **Companion model** (for speculative decoding): Qwen3.5-0.8B, 4-bit quantized (mlx-community variant)
 
-## Benchmark table
+## Benchmark results
 
-| Toolstack | Memory (RAM + Swap) | Tokens/sec | Notes |
+These numbers are decode tokens per second, measured on a single continuous generation of roughly 2,000 tokens, with a short system prompt (~500 tokens). Benchmarks were taken on macOS Tahoe 26.5 with the laptop plugged in, on performance power mode. They are anecdotal. Your mileage will vary based on model quant, context length, prompt size, and what else is running on your machine.
+
+### Baseline comparison (no speculative decoding)
+
+| My setup | Memory (RAM + Swap) | Tokens/sec | Notes |
 |---|---|---|---|
-| ollama | 48GB + 12GB | ~25 | Fans at max, battery dies fast |
-| mlx_lm | 48GB + 2GB | ~35 | Cooler, but macOS killed the process |
-| omlx | < 48GB (no swap) | ~47 | Sweet spot (initial config) |
-| pi (optimized) | < 48GB (no swap) | ~70 | Recent optimizations (see below) |
+| Ollama (qwen3.6, default settings) | 48GB + 12GB | ~25 | Fans at max, battery drains in ~2 hours |
+| MLX (mlx_lm, default settings) | 48GB + 2GB | ~35 | Cooler, but macOS killed the process under memory pressure |
+| oMLX (default settings) | < 48GB (no swap) | ~47 | The first setup I could imagine using regularly |
 
-**Methodology notes**: These numbers are decode tokens per second, measured on a single continuous generation of roughly 2,000 tokens, with a short system prompt (~500 tokens). Benchmarks were taken on macOS Tahoe 26.5 with the laptop plugged in, on performance power mode. They are anecdotal. Your mileage will vary based on model quant, context length, prompt size, and what else is running on your machine.
+### Optimized experiment (pi + oMLX admin tweaks)
 
-## What worked and what failed
+| My setup | Memory (RAM + Swap) | Tokens/sec | Notes |
+|---|---|---|---|
+| pi via oMLX (DFlash + 8-bit KV cache + custom template) | < 48GB (no swap) | ~70 | Experimental; see caveats below |
 
-### What worked
-
-- Running a 35B-parameter MoE model locally on 48GB RAM
-- omlx delivering ~47 tokens/sec with no swap usage (initial config)
-- pi reaching ~70 tokens/sec after recent oMLX admin optimizations
-- Prefix caching in pi saving recomputation on follow-up turns
-
-### What failed
-
-- Ollama was the easiest but least efficient path. I do not want to overstate the root cause: Ollama, llama.cpp, MLX, quantization format, cache behavior, and context length all affect performance. What I can say confidently is that, on this MacBook and this model, the MLX/oMLX path used less swap and produced more tokens per second.
-- mlx_lm crashed under memory pressure. macOS sent a SIGKILL to the process, and under enough pressure, the kernel panicked the whole system. I suspect memory pressure contributed, but I did not prove the root cause. Updating to the latest macOS and MLX seemed to fix it.
-- No rtk-ai integration with pi (open GitHub issue, not prioritized)
-- little-coder does not work with omlx
+**Important**: The optimized row is not apples-to-apples with the baseline. It includes speculative decoding (DFlash), 8-bit KV cache, a custom Jinja template, and several admin-level oMLX changes. The baseline rows used default configurations. I present them separately because combining them obscures what each contributed.
 
 ## How to replicate this
 
@@ -75,7 +64,7 @@ Before any of the above, I needed the model on disk. I used `huggingface-cli` to
 hf download majentik/Qwen3.6-35B-A3B-TurboQuant-MLX-4bit --local-dir ~/models/Qwen3.6-35B-A3B-TurboQuant-MLX-4bit
 ```
 
-### Step 1: ollama
+### Step 1: Ollama (my setup)
 
 Simplest possible setup:
 
@@ -85,7 +74,9 @@ ollama run qwen3.6
 
 This pulled the model, loaded it, and started serving. Expect 48GB+ RAM, 12GB swap, and roughly 25 tokens per second. Your laptop will get loud.
 
-### Step 2: mlx_lm
+Note: I cannot claim this is "Ollama vs MLX" in general. The Ollama model, the MLX model, the quantization, the context settings, and the cache behavior were all different. What I can say is that *my Ollama setup* used more swap and produced fewer tokens per second than *my MLX setup* on this specific machine and model.
+
+### Step 2: MLX (mlx_lm)
 
 With the model already downloaded, I started the server:
 
@@ -99,19 +90,19 @@ Key flags:
 - `--model`: path to the local 4-bit quantized MLX model
 - `--chat-template-args`: disables the thinking/reasoning mode to avoid the looping problem
 
-This served on `localhost:8080` by default. Roughly 35 tokens per second, 48GB RAM + 2GB swap. Cooler fans, but macOS still killed the process under memory pressure. At this stage, thinking mode was disabled via `--chat-template-args`.
+This served on `localhost:8080` by default. Roughly 35 tokens per second, 48GB RAM + 2GB swap. Cooler fans, but macOS still killed the process under memory pressure.
 
-### Step 3: omlx
+### Step 3: oMLX (baseline)
 
 ```
 omlx serve --host 0.0.0.0 --port 8080 --model-dir ~/models
 ```
 
-No extra flags needed. Omlx handled the model loading, memory management, and KV caching automatically. I watched Activity Monitor and saw swap drop to zero, RAM settle around 42GB, and the fans finally stop screaming. 47 tokens per second.
+No extra flags needed. oMLX handled the model loading, memory management, and KV caching automatically. I watched Activity Monitor and saw swap drop to zero, RAM settle around 42GB, and the fans finally stop screaming. 47 tokens per second.
 
-### Step 4: pi via omlx
+### Step 4: pi via oMLX (optimized)
 
-To connect pi to omlx, I launched pi directly through omlx:
+To connect pi to oMLX, I launched pi directly through oMLX:
 
 ```
 omlx launch pi \
@@ -119,21 +110,24 @@ omlx launch pi \
   --api-key 'omlx-<your-key>'
 ```
 
-### Later oMLX optimizations
+### The oMLX admin tweaks
 
 Since writing the original version of this post, I made several adjustments in the oMLX Web Admin that pushed pi past 70 tokens/sec. I do not know the exact technical reason each change helped, but here is what I changed and what I observed:
 
-- **SpecPrefill: OFF.** I noticed the engine was cutting markdown files and codebases in half, which caused text-corruption looping errors. Turning this off stopped the corruption.
+- **SpecPrefill: OFF.** I noticed the engine was cutting markdown files and codebases in half, which caused text-corruption in the output. Specifically, code blocks would end mid-function with unclosed braces, and the model would then enter a loop trying to "fix" the truncated code. Turning this off stopped the corruption.
 - **TurboQuant KV Cache: 8-bit.** I forced 8-bit cache structures to maintain stability at the full 262K context window. The default 4-bit MoE cache had what looked like a slowdown bug in my setup[[14]](#f14).
-- **DFlash speculative decoding.** I downloaded a companion model using `hf download mlx-community/Qwen3.5-0.8B-MLX-4bit --local-dir ~/models/Qwen3.5-0.8B-MLX-4bit`, and hooked it up as a lightweight Qwen3.5-0.8B companion model (4-bit quantized) to boost generation speed via speculative decoding[[13]](#f13). I observed roughly 2x speed on longer outputs without degrading accuracy.
+- **DFlash speculative decoding.** I downloaded a companion model using `hf download mlx-community/Qwen3.5-0.8B-MLX-4bit --local-dir ~/models/Qwen3.5-0.8B-MLX-4bit`, and hooked it up as a lightweight companion model (4-bit quantized) to boost generation speed via speculative decoding[[13]](#f13). I observed roughly 2x speed on longer outputs without degrading accuracy.
+
+  **Caveat**: oMLX's own DFlash integration docs note that DFlash has a default context threshold of 4096 tokens and falls back for longer prompts, does not use oMLX paged/SSD cache, and does full prefill from scratch for DFlash requests. I am not certain whether the ~70 tok/s result came from short-context DFlash acceleration, fallback engine behavior, or a combination. I have not profiled this carefully enough to say.
+
 - **froggeric v19 Jinja template.** I replaced the official Qwen template with a C++ native .jinja variant ([froggeric v19 on GitHub](https://github.com/froggeric/qwen3-jinja/blob/main/qwen3.jinja))[[15]](#f15). I observed fewer empty thinking stalls and better KV cache hit rates.
 - **tool_format: json.** I configured the chat template kwargs to return standard JSON data payloads, aligning the model's tool outputs with pi's CLI parser.
 
-These are my observations from my setup. Your mileage may vary, and I have not profiled each change individually. Note: the pi (optimized) row in the benchmark table is not apples-to-apples with the earlier rows because it includes speculative decoding and several admin-level oMLX changes. The earlier rows used a baseline configuration without those optimizations.
+These are my observations from my setup. Your mileage may vary, and I have not profiled each change individually.
 
 ### Configuration
 
-For both mlx_lm and omlx, these are the parameters I settled on:
+For both mlx_lm and oMLX, these are the parameters I settled on:
 
 | Parameter | Value | Purpose |
 |---|---|---|
@@ -176,39 +170,21 @@ To use the MLX-powered model inside OpenCode, I added this to my config:
 }
 ```
 
-The key insight: OpenCode uses the `@ai-sdk/openai-compatible` npm package to talk to local MLX servers over HTTP, treating them like any OpenAI-compatible API. Just point `baseURL` to your omlx server and you are good to go.
+The key insight: OpenCode uses the `@ai-sdk/openai-compatible` npm package to talk to local MLX servers over HTTP, treating them like any OpenAI-compatible API. Just point `baseURL` to your oMLX server and you are good to go.
 
-## Technical notes and caveats
+## Lessons learned
 
-### Why I went local
+### Memory headroom matters more than you think
 
-The cloud alternatives kept letting me down. APIs went down. I ran out of tokens mid-project. I was on a flight from Munich to London for Devoxx with no internet and realised I could not work without a connection. The more we come to rely on these services, the less productive we are the moment they go dark. Local models remove that single point of failure.
+When MLX tried to allocate more memory than macOS would allow, the OS sent a SIGKILL to the process. Under enough pressure, the kernel panicked the whole system. It was a kernel panic, not a hardware-level crash. I later updated to the latest macOS and MLX, and the crash never happened again. The fix was simply staying within memory headroom and keeping the model quantized at 4-bit[[5]](#f5).
 
-### Is this for you?
+The answer lies in Apple Silicon's Unified Memory Architecture (UMA)[[1]](#f1). The CPU and GPU share exactly the same physical pool of RAM, which eliminates the need to copy tensors between separate memory banks. This is the single biggest performance advantage for running LLMs locally. But unified memory does not eliminate all overhead: memory bandwidth, cache movement, allocation behavior, and GPU scheduling still matter, and my workload was almost certainly GPU/Metal rather than Neural Engine.
 
-Local LLMs are not for everyone. Before you follow along, ask yourself these questions:
+### Context size and the KV cache
 
-**Do you have Apple Silicon?** This entire journey is Apple Silicon-specific. MLX, omlx, and unified memory architecture[[1]](#f1) are the reason this works. On an Intel Mac or a PC with a dedicated GPU, the story is different and this article is not your guide.
+At 262K context, the KV cache dominates memory usage. Using 8-bit for the KV cache (not the model weights) avoided what looked like a slowdown bug in oMLX's 4-bit MoE cache handling at large context windows. Prefix caching happens in the serving backend, not in pi itself. It chops your prompt into blocks, hashes them, and stores the resulting KV tensors in memory. On follow-up queries that reuse the same system prompt or project context, the model skips the heavy computation and reuses the cached blocks. The more context you feed the model, the more value you get from caching.
 
-**Do you have 32GB of RAM or more?** You are not going to run a 35B model on 16GB. The 48GB on my M4 Pro was the floor, not the ceiling. 32GB can run a 35B 4-bit model, but it leaves limited overhead for anything else. Browsing, terminal, or background processes will compete for memory, so 48GB is the practical sweet spot. If you have less, you will need a smaller model and fewer tokens per second.
-
-**Are you okay with "good enough"?** These models are not GPT-5 or Claude. They will make mistakes. They will hallucinate. My setup once triggered a kernel panic under memory pressure. But for smaller coding tasks, they are genuinely useful. If you need a coding buddy on a plane ride, go local.
-
-**Do you value privacy?** No data leaves your machine. Your own model, your own rules. If any of that matters to you, local LLMs are worth exploring.
-
-**Are you comfortable with a terminal?** You need to be comfortable running commands, managing files, and troubleshooting. If that scares you, start with ollama and work your way up. It is the easiest on-ramp and you can always go deeper later.
-
-### My journey through the toolchains
-
-My first stop was [ollama](https://ollama.com), because it is the easiest on-ramp to local LLMs. I paired it with [opencode](https://opencode.ai/) and ran qwen3.6 (35B parameters, 3B active per token). It worked, really well, honestly. The model was responsive, the code suggestions were solid, and for a moment I felt like I had cracked the code.
-
-Then the laptop started screaming. The fans kicked in at full speed. The battery drained in about two hours. And memory? A staggering 48GB of RAM plus 12GB of swap[[2]](#f2) was being consumed, and I was getting roughly 25 tokens per second[[3]](#f3). It was cool that it worked, but it was also an incredibly inefficient way to use a laptop.
-
-I do not know the exact cause of the inefficiency, but on this MacBook and this model, the Ollama setup used more swap and produced fewer tokens per second than the MLX/oMLX path. Ollama, llama.cpp, MLX, quantization format, cache behavior, and context length all affect performance. I can only report what I observed.
-
-I discovered [rtk-ai](https://www.rtk-ai.app/), a tool designed to reduce token usage by being smarter about what gets sent to the model. It was genuinely helpful, with fewer tokens meaning fewer resources. But I ran into another problem. Qwen was *overthinking*. It would get stuck in reasoning loops, spinning its wheels instead of producing useful output.
-
-### Why does Qwen 3.6 get stuck in reasoning loops?
+### Why Qwen 3.6 gets stuck in reasoning loops
 
 From my own experience, I observed Qwen 3.6 getting stuck in reasoning loops under certain conditions. It endlessly second-guesses answers, repeats circular logic, or endlessly retries tool calls. This is not necessarily a bug in my setup. It seems to be a property of the model interacting with certain environments.
 
@@ -222,7 +198,7 @@ From what I could piece together, a few factors seem to contribute:
 
 **Context window fatigue.** Exhausting or maximizing the context window[[9]](#f9) degrades the model's internal attention mechanism, making it much more likely to hallucinate the initial prompt and restart its reasoning cycles.
 
-### How to mitigate the looping
+### How I mitigated the looping
 
 Several strategies helped in my testing:
 
@@ -231,70 +207,51 @@ Several strategies helped in my testing:
 - **Tweak penalties.** Use a light presence penalty (e.g., 0.1 to 0.2) to deter the repetition of previous tokens.
 - **Hard inference caps.** If using local inference engines like llama.cpp, configure explicit reasoning budget cut-offs to force the model to output its answer if the loop continues past a safe limit.
 
-I went with the simplest fix: disabling the "thinking" mode entirely (via `--chat-template-args`). It solved the looping, but it also stripped away some of Qwen's depth, which felt like a trade-off I was not always comfortable making.
+I went with the simplest fix: disabling the "thinking" mode entirely (via `--chat-template-args`). It stopped the looping, but it also stripped away some of Qwen's depth, which felt like a trade-off I was not always comfortable making.
 
-Later, after the pi optimizations, I re-enabled thinking mode by updating the pi config to use the froggeric v19 template and adjusting the tool format. The template changes resolved the looping issues, so thinking mode could be safely turned back on.
+Later, after the pi optimizations, I re-enabled thinking mode by updating the pi config to use the froggeric v19 template and adjusting the tool format. The template changes stopped the looping in my test cases, so thinking mode could be safely turned back on.
 
-### The efficiency leap: MLX and omlx
+## What I would recommend
 
-I kept digging. Someone mentioned that ollama is not the most efficient backend, and that you could get better performance by going straight to [llama.cpp](https://github.com/ggerganov/llama.cpp). Fair enough. But then I heard about MLX versions of models that leverage Apple's Metal API.
+- **Easiest: Ollama.** Works out of the box. 48GB RAM, 12GB swap, noisy fans, and 25 tokens per second. Great for getting started, not the setup I would use for long coding sessions on battery.
+- **Best baseline on my machine: oMLX.** 47 tokens per second, under 48GB, no swap, and a laptop that actually stayed cool. This was the first setup I could imagine using regularly.
+- **Fastest but experimental: pi + oMLX tweaks.** ~70 tokens per second, under 48GB, no swap, cool laptop. This required speculative decoding, 8-bit KV cache, a custom Jinja template, and several admin-level oMLX changes. Not apples-to-apples with the baseline, and I have not fully profiled why it works.
 
-I tried [mlx_lm](https://github.com/ml-explore/mlx-lm) and the difference was noticeable. The laptop was cooler and the battery lasted longer. I was getting around 35 tokens per second with 48GB RAM plus 2GB swap. But memory was still a problem. macOS kept aggressively ejecting the process when it tried to allocate too much memory. At one point, my laptop actually shut off completely. Not a graceful exit.
+## Caveats and open problems
 
-In my case, when MLX tried to allocate more memory than macOS would allow, the OS sent a SIGKILL to the process. Under enough pressure, the kernel panicked the whole system. It was a kernel panic, not a hardware-level crash. I later updated to the latest macOS and MLX, and the crash never happened again. The fix was simply staying within memory headroom and keeping the model quantized at 4-bit[[5]](#f5).
+1. **RTK support for pi was initially missing, but has since been added via [PR #1741](https://github.com/rtk-ai/rtk/pull/1741).** I had written in the original draft that RTK was incompatible with pi, but coincidentally the GitHub issue was picked up and Pi support was added. I have not yet tested it end-to-end with oMLX, but the integration path now exists.
 
-The answer lies in Apple Silicon's Unified Memory Architecture (UMA)[[1]](#f1). The CPU, GPU, and Neural Engine all share exactly the same physical pool of RAM.
+2. **little-coder does not play nice with oMLX.** I wanted to use [little-coder](https://github.com/itayinbarr/little-coder), which is built on top of pi, but I could not figure out how to get it to work with oMLX. So for now, I am sticking with bare pi.
 
-Traditional GPU programming involves copying tensors from system RAM into dedicated VRAM. MLX eliminates this step entirely. The GPU handles compute-heavy matrix multiplications without moving memory around, because there is no memory to move. Zero physical data transfers, zero copy penalty.
+3. **DFlash context behavior is unclear.** As noted above, oMLX's DFlash has a default context threshold of 4096 tokens and falls back for longer prompts. I am not certain whether the speed boost came from DFlash acceleration on short contexts, fallback behavior on long contexts, or both. If you are benchmarking with long prompts, the DFlash speedup may not apply.
 
-### Why omlx behaved better than mlx_lm
+4. **Quantization quality is subjective.** For my coding workflow, the quality trade-off of 4-bit quantization was acceptable. Whether that holds for your use case is another question.
 
-Then I found [omlx](https://omlx.ai/). I gave it a shot, and suddenly I was not even using the full 48GB anymore.
+## Is this for you?
 
-I watched Activity Monitor: RAM settled around 42GB, swap hit zero, and the fans stopped their constant high-RPM whine. I was achieving roughly **47 tokens per second** (initial config). This was the first setup I could imagine using regularly.
+Local LLMs are not for everyone. Before you follow along, ask yourself these questions:
 
-### Why pi is efficient
+**Do you have Apple Silicon?** This entire journey is Apple Silicon-specific. MLX, oMLX, and unified memory architecture[[1]](#f1) are the reason this works. On an Intel Mac or a PC with a dedicated GPU, the story is different and this article is not your guide.
 
-I discovered the [pi agent](https://pi.dev/), which sends leaner prompts than OpenCode because it does not wrap every interaction in tool-calling boilerplate. The speed difference was noticeable right away.
+**Do you have 48GB of RAM?** The 48GB on my M4 Pro was where this became usable for me. At 262K context, the KV cache can dominate memory, so 32GB may load some 35B 4-bit variants at shorter context, but it leaves limited overhead for anything else. Browsing, terminal, or background processes will compete for memory. If you have less, you will need a smaller model and fewer tokens per second.
 
-It also benefits from **Prefix Caching** in the underlying MLX serving framework: the framework chops your prompt into blocks, hashes them, and stores the resulting Key-Value (KV) tensors in memory. On subsequent turns that reuse the same system prompt or project context, the model skips the heavy computation and reuses the cached blocks. This saves recomputation, reduces time-to-first-token, and lowers latency.
+**Are you okay with "good enough"?** These models are not GPT-5 or Claude. They will make mistakes. They will hallucinate. My setup once triggered a kernel panic under memory pressure. But for smaller coding tasks, they are genuinely useful. If you need a coding buddy on a plane ride, go local.
 
-With the recent oMLX optimizations (speculative decoding, 8-bit KV cache, froggeric template), pi pushed past 70 tokens/sec, roughly double the initial omlx number. I did not expect that jump.
+**Do you value privacy?** Inference can happen without sending prompts to a cloud model. Your own model, your own rules. If any of that matters to you, local LLMs are worth exploring.
 
-## Open problems
-
-But here is where I hit a wall, two walls actually:
-
-1. **No rtk-ai hook for pi.** There is an open issue on GitHub, but it is not being prioritized. So I am stuck between token-saving and not having that integration.
-
-2. **little-coder does not play nice with omlx.** I wanted to use [little-coder](https://github.com/itayinbarr/little-coder), which is built on top of pi, but I could not figure out how to get it to work with omlx. So for now, I am sticking with bare pi.
-
-If anyone has cracked either of these, I would love to hear how.
-
-## Conclusion
-
-I started this because I wanted a coding assistant on a plane. I ended up with one, but it took more yak-shaving than I expected.
-
-Here is where each toolstack landed:
-
-- **Ollama** works out of the box. 48GB RAM, 12GB swap, noisy fans, and 25 tokens per second. Great for getting started, not for serious work.
-- **MLX (via mlx_lm)** was a step up. Cooler fans, 35 tokens per second, less swap. But memory management was rough, and macOS would kill the process (or in one extreme case, the kernel would panic and shut the laptop down) under pressure.
-- **omlx** got me to 47 tokens per second (initial config), under 48GB, no swap, and a laptop that actually stayed cool.
-- **pi (optimized)** got me to ~70 tokens per second, under 48GB, no swap, cool laptop. This required several oMLX admin tweaks: speculative decoding, 8-bit KV cache, a custom Jinja template. Note: this row is not apples-to-apples with the earlier rows because it includes speculative decoding and admin-level changes.
-
-The laptop crash that haunted my MLX experiments was a kernel panic under extreme memory pressure. I was never able to pin down the exact cause, but I was able to solve it by finding efficiency gains where possible. The lesson: stay within memory headroom, keep your model quantized, and do not be afraid to tweak the oMLX admin settings.
+**Are you comfortable with a terminal?** You need to be comfortable running commands, managing files, and troubleshooting. If that scares you, start with Ollama and work your way up. It is the easiest on-ramp and you can always go deeper later.
 
 ---
 
 * <a name="f0">[0]</a> Parameters are the adjustable weights inside a neural network that determine how it processes input. A 35B model (like Qwen3.6-35B-A3B) has 35 billion total parameters, but because it is a Mixture-of-Experts model, only about 3 billion are active per token. This is what makes it possible to run on 48GB of RAM.
-* <a name="f1">[1]</a> Unified memory (or unified memory architecture, UMA) is Apple Silicon's approach of giving the CPU, GPU, and Neural Engine access to the same pool of physical RAM, instead of separate memory banks. This eliminates the need to copy data between CPU and GPU memory, which is the single biggest performance advantage for running LLMs locally.
+* <a name="f1">[1]</a> Unified memory (or unified memory architecture, UMA) is Apple Silicon's approach of giving the CPU and GPU access to the same pool of physical RAM, instead of separate memory banks. This eliminates the need to copy data between CPU and GPU memory, which is the single biggest performance advantage for running LLMs locally. But unified memory does not eliminate all overhead: memory bandwidth, cache movement, allocation behavior, and GPU scheduling still matter.
 * <a name="f2">[2]</a> Swap is when macOS runs out of physical RAM and starts using your SSD as scratch space. It is orders of magnitude slower than RAM, which is why your tokens-per-second drops through the floor when swap kicks in.
 * <a name="f3">[3]</a> Tokens are the basic units of text that an LLM processes. Roughly a word, or a fraction of a word. A 1,000-word article is roughly 1,300 to 1,500 tokens. When you see "32,768 tokens" in a config, that is the maximum output the model will generate in a single response.
 * <a name="f4">[4]</a> Metal is Apple's low-level graphics API, similar to OpenGL or Vulkan, that gives programs direct access to the GPU. On Apple Silicon, Metal is the bridge that lets MLX-based tools actually use your GPU for compute instead of just your CPU.
-* <a name="f5">[5]</a> 4-bit quantization is a compression technique that reduces the precision of a model's weights from 16 bits (standard) down to 4 bits. A 35B 4-bit model takes roughly 18GB of RAM instead of 64GB. The quality loss is small enough that most people cannot tell the difference.
+* <a name="f5">[5]</a> 4-bit quantization is a compression technique that reduces the precision of a model's weights from 16 bits (standard) down to 4 bits. A 35B 4-bit model takes roughly 18GB of RAM instead of 64GB. For my coding workflow, the quality trade-off was acceptable.
 * <a name="f6">[6]</a> Key-Value (KV) cache stores the attention tensors from previous tokens so the model does not need to recompute them on every new token. Without a KV cache, every new token requires re-reading the entire conversation history. With one, the model only computes the new token.
 * <a name="f7">[7]</a> Continuous batching is a serving technique where multiple user requests are processed together in a single forward pass, rather than one at a time. This dramatically improves throughput when multiple people are using the same model server.
-* <a name="f8">[8]</a> Prefix caching works by chopping your prompt into blocks, hashing them, and storing the resulting KV tensors in memory. On follow-up queries that reuse the same system prompt or project context, the model skips the heavy computation and reuses the cached blocks. The more context you feed the model, the more value you get from caching.
+* <a name="f8">[8]</a> Prefix caching in the serving backend works by chopping your prompt into blocks, hashing them, and storing the resulting KV tensors in memory. On follow-up queries that reuse the same system prompt or project context, the model skips the heavy computation and reuses the cached blocks. The more context you feed the model, the more value you get from caching.
 * <a name="f9">[9]</a> Context window is the maximum amount of text (in tokens) the model can "remember" at once. That includes both the input you send and the output it generates. A 262,144 context window is roughly 200,000 words, which is larger than most novels.
 * <a name="f10">[10]</a> Temperature controls how random the model's output is. A temperature of 0.0 always picks the most likely next token (deterministic). A temperature of 1.0 samples from the full probability distribution (creative). 0.7 is a common middle ground.
 * <a name="f11">[11]</a> Nucleus sampling (top_p) is another randomness control. Instead of fixing temperature, it restricts the model to the smallest set of tokens whose combined probability exceeds the threshold. top_p of 0.85 means the model picks from the smallest group of tokens that together cover 85% of the probability mass.
