@@ -119,7 +119,7 @@ Pi is more efficient than OpenCode because of its minimalist architecture and lo
 
 ![alt text](/images/distracted-gabe.png "Distracted Gabe")
 
-Since writing the original version of this post, I made several adjustments in the oMLX Web Admin that pushed pi past 70 tokens/sec. I haven't profiled each change individually, so I can't isolate which contributed what — but here's what I changed and what I observed:
+Since writing the original version of this post, I made several adjustments in the oMLX Web Admin that pushed pi past 70 tokens/sec. I haven't profiled each change individually, so I can't isolate which contributed what. Here's what I changed and what I observed:
 
 - **SpecPrefill: OFF.** I noticed the engine was cutting markdown files and codebases in half, which caused text-corruption in the output. Specifically, code blocks would end mid-function with unclosed braces, and the model would then enter a loop trying to "fix" the truncated code. Turning this off stopped the corruption.
 - **TurboQuant KV Cache: 8-bit.** I forced 8-bit cache structures to maintain stability at the full 262K context window. The default 4-bit MoE cache had what looked like a slowdown bug in my setup[[13]](#f13).
