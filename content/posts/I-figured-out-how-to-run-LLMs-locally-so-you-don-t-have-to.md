@@ -174,7 +174,7 @@ The key insight: OpenCode uses the `@ai-sdk/openai-compatible` npm package to ta
 
 ### Memory headroom matters more than you think
 
-When MLX tried to allocate more memory than macOS would allow, the OS sent a SIGKILL to the process. Under enough pressure, the kernel panicked the whole system. It was a kernel panic, not a hardware-level crash. I later updated to the latest macOS and MLX, and the crash never happened again. The fix was simply staying within memory headroom and keeping the model quantized at 4-bit[[5]](#f5).
+When MLX tried to allocate more memory than macOS would allow, the OS sent a SIGKILL to the process. Under enough pressure, the kernel panicked the whole system. It was a kernel panic, not a hardware-level crash. I never updated macOS or MLX to "fix" it — what stopped the crashes was simply moving to lighter setups like oMLX, which reduced the memory pressure enough that the SIGKILL and kernel panic never happened again. The lesson: staying within memory headroom and keeping the model quantized at 4-bit[[5]](#f5) matters more than any software update.
 
 The answer lies in Apple Silicon's Unified Memory Architecture (UMA)[[1]](#f1). The CPU and GPU share exactly the same physical pool of RAM, which eliminates the need to copy tensors between separate memory banks. This is the single biggest performance advantage for running LLMs locally. But unified memory does not eliminate all overhead: memory bandwidth, cache movement, allocation behavior, and GPU scheduling still matter, and my workload was almost certainly GPU/Metal rather than Neural Engine.
 
