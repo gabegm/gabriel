@@ -1,6 +1,5 @@
 ---
 draft: false
-unlisted: true
 title: I figured out how to run LLMs locally so you don't have to
 author: Gabriel Gauci Maistre
 description: A journey through the local LLM rabbit hole from ollama to pi, and everything in between.
@@ -46,7 +45,7 @@ These numbers are decode tokens per second[[3]](#f3), measured on a single conti
 | MLX (mlx_lm, default settings) | 48GB + 2GB swap[[2]](#f2) | ~35 | Cooler, but macOS killed the process under memory pressure |
 | oMLX (default settings) | < 48GB (no swap)[[2]](#f2) | ~47 | The first setup I could imagine using regularly |
 
-### Optimized experiment (pi + oMLX admin tweaks)
+### Optimised experiment (pi + oMLX admin tweaks)
 
 | My setup | Memory (RAM + Swap) | Tokens/sec | Notes |
 |---|---|---|---|
@@ -104,7 +103,7 @@ $ omlx serve --host 0.0.0.0 --port 8080 --model-dir ~/models
 
 No extra flags needed. oMLX handled the model loading, memory management, and KV caching automatically. I watched Activity Monitor and saw swap drop to zero, RAM settle around 42GB, and the fans finally stop screaming. 47 tokens per second.
 
-### Step 4: pi via oMLX (optimized)
+### Step 4: pi via oMLX (optimised)
 
 To connect the [pi agent](https://pi.dev/) to oMLX, I launched pi directly through oMLX:
 
@@ -147,7 +146,7 @@ These are the parameters I used for the final pi/oMLX setup. The earlier mlx_lm 
 | min_p | 0.05 | Minimum probability threshold |
 | rep_penalty | 1 | Repetition penalty[[12]](#f12) |
 | presence_penalty | 0.1 | Light penalty on repeating tokens |
-| enable_thinking | true | Re-activated CoT tracking (after the pi optimizations) |
+| enable_thinking | true | Re-activated CoT tracking (after the pi optimisations) |
 | tool_format | json | Forces JSON tool output payloads |
 
 ### OpenCode configuration
@@ -208,7 +207,7 @@ From what I could piece together, a few factors seem to contribute:
 
 **Over-restricted sampling.** Setting temperatures too low (e.g., 0.1 to 0.5) limits the model's exploratory generation. Without a higher temperature, the model struggles to break out of its own logical ruts.
 
-**Context window fatigue.** Exhausting or maximizing the context window[[8]](#f8) degrades the model's internal attention mechanism, making it much more likely to hallucinate the initial prompt and restart its reasoning cycles.
+**Context window fatigue.** Exhausting or maximising the context window[[8]](#f8) degrades the model's internal attention mechanism, making it much more likely to hallucinate the initial prompt and restart its reasoning cycles.
 
 Note: 0.4 was my normal coding setting; 0.7 to 0.85 helped as a recovery tactic when the model looped.
 
@@ -239,7 +238,7 @@ Later, after the pi optimisations, I re-enabled thinking mode by updating the pi
 
 3. **DFlash context behavior is unclear.** As noted above, oMLX's DFlash has a default context threshold of 4096 tokens and falls back for longer prompts. I am not certain whether the speed boost came from DFlash acceleration on short contexts, fallback behaviour on long contexts, or both. If you are benchmarking with long prompts, the DFlash speedup may not apply.
 
-4. **Quantization quality is subjective.** For my coding workflow, the quality trade-off of 4-bit quantisation was acceptable. Whether that holds for your use case is another question.
+4. **Quantisation quality is subjective.** For my coding workflow, the quality trade-off of 4-bit quantisation was acceptable. Whether that holds for your use case is another question.
 
 ## Is this for you?
 

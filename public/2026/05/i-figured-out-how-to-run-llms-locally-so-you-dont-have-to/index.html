@@ -130,7 +130,7 @@
       </tr>
   </tbody>
 </table>
-<h3 id="optimized-experiment-pi--omlx-admin-tweaks">Optimized experiment (pi + oMLX admin tweaks)</h3>
+<h3 id="optimised-experiment-pi--omlx-admin-tweaks">Optimised experiment (pi + oMLX admin tweaks)</h3>
 <table>
   <thead>
       <tr>
@@ -175,7 +175,7 @@
 <p>I then tried <a href="https://omlx.ai/">oMLX</a>, which handles model loading, memory management, and KV caching automatically:</p>
 <pre tabindex="0"><code>$ omlx serve --host 0.0.0.0 --port 8080 --model-dir ~/models
 </code></pre><p>No extra flags needed. oMLX handled the model loading, memory management, and KV caching automatically. I watched Activity Monitor and saw swap drop to zero, RAM settle around 42GB, and the fans finally stop screaming. 47 tokens per second.</p>
-<h3 id="step-4-pi-via-omlx-optimized">Step 4: pi via oMLX (optimized)</h3>
+<h3 id="step-4-pi-via-omlx-optimised">Step 4: pi via oMLX (optimised)</h3>
 <p>To connect the <a href="https://pi.dev/">pi agent</a> to oMLX, I launched pi directly through oMLX:</p>
 <pre tabindex="0"><code>$ omlx launch pi \
   --model &#39;Qwen3.6-35B-A3B-TurboQuant-MLX-4bit&#39; \
@@ -257,7 +257,7 @@
       <tr>
           <td>enable_thinking</td>
           <td>true</td>
-          <td>Re-activated CoT tracking (after the pi optimizations)</td>
+          <td>Re-activated CoT tracking (after the pi optimisations)</td>
       </tr>
       <tr>
           <td>tool_format</td>
@@ -304,7 +304,7 @@
 <p><strong>Incompatible agent/tool frameworks.</strong> Using agent environments (like OpenCode) with Qwen can cause instability. If a tool reports an error but fails to explain why, Qwen gets confused and attempts to trigger the same tool repeatedly without altering its inputs.</p>
 <p><strong>Tool calling inside reasoning blocks.</strong> Qwen models sometimes attempt to execute tool calls natively inside their hidden <code>&lt;think&gt;</code> blocks. Reasoning parsers may drop this section, causing the tool call to fail and prompting the model to re-initiate the entire thought process.</p>
 <p><strong>Over-restricted sampling.</strong> Setting temperatures too low (e.g., 0.1 to 0.5) limits the model&rsquo;s exploratory generation. Without a higher temperature, the model struggles to break out of its own logical ruts.</p>
-<p><strong>Context window fatigue.</strong> Exhausting or maximizing the context window<a href="#f8">[8]</a> degrades the model&rsquo;s internal attention mechanism, making it much more likely to hallucinate the initial prompt and restart its reasoning cycles.</p>
+<p><strong>Context window fatigue.</strong> Exhausting or maximising the context window<a href="#f8">[8]</a> degrades the model&rsquo;s internal attention mechanism, making it much more likely to hallucinate the initial prompt and restart its reasoning cycles.</p>
 <p>Note: 0.4 was my normal coding setting; 0.7 to 0.85 helped as a recovery tactic when the model looped.</p>
 <h3 id="how-i-mitigated-the-looping">How I mitigated the looping</h3>
 <p>Several strategies helped in my testing:</p>
@@ -334,7 +334,7 @@
 <p><strong>DFlash context behavior is unclear.</strong> As noted above, oMLX&rsquo;s DFlash has a default context threshold of 4096 tokens and falls back for longer prompts. I am not certain whether the speed boost came from DFlash acceleration on short contexts, fallback behaviour on long contexts, or both. If you are benchmarking with long prompts, the DFlash speedup may not apply.</p>
 </li>
 <li>
-<p><strong>Quantization quality is subjective.</strong> For my coding workflow, the quality trade-off of 4-bit quantisation was acceptable. Whether that holds for your use case is another question.</p>
+<p><strong>Quantisation quality is subjective.</strong> For my coding workflow, the quality trade-off of 4-bit quantisation was acceptable. Whether that holds for your use case is another question.</p>
 </li>
 </ol>
 <h2 id="is-this-for-you">Is this for you?</h2>
