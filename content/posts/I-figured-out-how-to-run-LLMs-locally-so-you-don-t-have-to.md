@@ -6,14 +6,16 @@ author: Gabriel Gauci Maistre
 description: A journey through the local LLM rabbit hole from ollama to pi, and everything in between.
 summary: I spent weeks chasing the perfect local LLM setup on my MacBook. Here is what I learned, what broke, and what actually works.
 images:
-- /images/ai-ai-ai.jpg
-image: /images/ai-ai-ai.jpg
+- /images/the-power-of-the-sun.png
+image: /images/the-power-of-the-sun.png
 tags:
 - local-llm
 - machine-learning
 - mlx
 date: 2026-05-21 10:00:00 +0000
 ---
+
+![alt text](/images/the-power-of-the-sun.png "The power of the sun sitting on my lap")
 
 I wanted a coding model that worked on a flight without destroying my laptop battery.
 
@@ -58,7 +60,7 @@ For anyone who wants to follow the same path on their own Apple Silicon Mac, her
 
 ### Step 1: Ollama (my setup)
 
-Simplest possible setup:
+I started with [Ollama](https://ollama.com), the easiest on-ramp to local LLMs. Simplest possible setup:
 
 ```
 $ ollama
@@ -66,11 +68,13 @@ $ ollama
 
 This prompted me to pick a model (I chose qwen3.6) and then which agent (I chose opencode). It pulled the model, loaded it, and started serving. Expect 48GB+ RAM, 12GB swap, and roughly 25 tokens per second. Your laptop will get loud.
 
+![alt text](/images/i-am-once-again-asking-for-more-ram.png "I am once again asking for more RAM")
+
 Note: I cannot claim this is "Ollama vs MLX" in general. The Ollama model, the MLX model, the quantization, the context settings, and the cache behavior were all different. What I can say is that *my Ollama setup* used more swap and produced fewer tokens per second than *my MLX setup* on this specific machine and model.
 
 ### Step 2: MLX (mlx_lm)
 
-After trying Ollama, I discovered MLX and wanted to try the same model in its native format. I downloaded the 4-bit quantized MLX variant using `huggingface-cli`:
+After trying Ollama, I discovered MLX and wanted to try the same model in its native format. I used [mlx_lm](https://github.com/ml-explore/mlx-lm), the MLX-based inference library. I downloaded the 4-bit quantized MLX variant using `huggingface-cli`:
 
 ```
 $ hf download majentik/Qwen3.6-35B-A3B-TurboQuant-MLX-4bit --local-dir ~/models/Qwen3.6-35B-A3B-TurboQuant-MLX-4bit
@@ -92,6 +96,8 @@ This served on `localhost:8080` by default. Roughly 35 tokens per second, 48GB R
 
 ### Step 3: oMLX (baseline)
 
+I then tried [oMLX](https://omlx.ai/), which handles model loading, memory management, and KV caching automatically:
+
 ```
 $ omlx serve --host 0.0.0.0 --port 8080 --model-dir ~/models
 ```
@@ -100,7 +106,7 @@ No extra flags needed. oMLX handled the model loading, memory management, and KV
 
 ### Step 4: pi via oMLX (optimized)
 
-To connect pi to oMLX, I launched pi directly through oMLX:
+To connect the [pi agent](https://pi.dev/) to oMLX, I launched pi directly through oMLX:
 
 ```
 $ omlx launch pi \
@@ -109,6 +115,8 @@ $ omlx launch pi \
 ```
 
 ### The oMLX admin tweaks
+
+![alt text](/images/distracted-gabe.png "Distracted Gabe")
 
 Since writing the original version of this post, I made several adjustments in the oMLX Web Admin that pushed pi past 70 tokens/sec. I do not know the exact technical reason each change helped, but here is what I changed and what I observed:
 
@@ -176,6 +184,8 @@ The key insight: OpenCode uses the `@ai-sdk/openai-compatible` npm package to ta
 
 When MLX tried to allocate more memory than macOS would allow, the OS sent a SIGKILL to the process. Under enough pressure, the kernel panicked the whole system. It was a kernel panic, not a hardware-level crash. The macOS update was not what fixed it. What stopped the crashes was simply moving to lighter setups like oMLX, which reduced the memory pressure enough that the SIGKILL and kernel panic never happened again. The lesson: staying within memory headroom and keeping the model quantized at 4-bit[[5]](#f5) matters more than any software update.
 
+![alt text](/images/this-is-fine.png "This is fine")
+
 The answer lies in Apple Silicon's UMA[[1]](#f1). The CPU and GPU share exactly the same physical pool of RAM, which eliminates the need to copy tensors between separate memory banks. This is the single biggest performance advantage for running LLMs locally. But unified memory does not eliminate all overhead: memory bandwidth, cache movement, allocation behavior, and GPU scheduling still matter, and my workload was almost certainly GPU/Metal[[4]](#f4) rather than Neural Engine.
 
 ### Context size and the KV cache
@@ -183,6 +193,8 @@ The answer lies in Apple Silicon's UMA[[1]](#f1). The CPU and GPU share exactly 
 At 262K context, the KV cache[[6]](#f6) dominates memory usage. Using 8-bit for the KV cache (not the model weights) avoided what looked like a slowdown bug in oMLX's 4-bit MoE cache handling at large context windows. Prefix caching[[8]](#f8) happens in the serving backend, not in pi itself. It chops your prompt into blocks, hashes them, and stores the resulting KV tensors in memory. On follow-up queries that reuse the same system prompt or project context, the model skips the heavy computation and reuses the cached blocks. The more context you feed the model, the more value you get from caching.
 
 ### Why Qwen 3.6 gets stuck in reasoning loops
+
+![alt text](/images/opencode-throws-qwen.png "OpenCode throws Qwen")
 
 From my own experience, I observed Qwen 3.6 getting stuck in reasoning loops under certain conditions. It endlessly second-guesses answers, repeats circular logic, or endlessly retries tool calls. This is not necessarily a bug in my setup. It seems to be a property of the model interacting with certain environments.
 
@@ -205,7 +217,7 @@ Several strategies helped in my testing:
 - **Adjust temperature.** Increase to around 0.7 to 0.85 to encourage the model to explore new paths when it gets stuck.
 - **Anti-looping prompts.** Add explicit rules to your system prompt telling the model to commit to its best guess after one pass instead of second-guessing itself.
 - **Tweak penalties.** Use a light presence penalty (e.g., 0.1 to 0.2) to deter the repetition of previous tokens.
-- **Hard inference caps.** If using local inference engines like llama.cpp, configure explicit reasoning budget cut-offs to force the model to output its answer if the loop continues past a safe limit.
+- **Hard inference caps.** If using local inference engines like [llama.cpp](https://github.com/ggerganov/llama.cpp), configure explicit reasoning budget cut-offs to force the model to output its answer if the loop continues past a safe limit.
 
 I went with the simplest fix: disabling the "thinking" mode entirely (via `--chat-template-args`). It stopped the looping, but it also stripped away some of Qwen's depth, which felt like a trade-off I was not always comfortable making.
 
@@ -219,7 +231,7 @@ Later, after the pi optimizations, I re-enabled thinking mode by updating the pi
 
 ## Caveats and open problems
 
-1. **RTK support for pi was initially missing, but has since been added via [PR #1741](https://github.com/rtk-ai/rtk/pull/1741).** I had written in the original draft that RTK was incompatible with pi, but coincidentally the GitHub issue was picked up and Pi support was added. I have not yet tested it end-to-end with oMLX, but the integration path now exists.
+1. **RTK support for pi was initially missing, but has since been added via [PR #1741](https://github.com/rtk-ai/rtk/pull/1741).** I had written in the original draft that [RTK](https://www.rtk-ai.app/) was incompatible with pi, but coincidentally the GitHub issue was picked up and Pi support was added. I have not yet tested it end-to-end with oMLX, but the integration path now exists.
 
 2. **little-coder does not play nice with oMLX.** I wanted to use [little-coder](https://github.com/itayinbarr/little-coder), which is built on top of pi, but I could not figure out how to get it to work with oMLX. So for now, I am sticking with bare pi.
 

@@ -37,13 +37,13 @@
     <meta property="article:tag" content="Local-Llm">
     <meta property="article:tag" content="Machine Learning">
     <meta property="article:tag" content="Mlx">
-    <meta property="og:image" content="http://localhost:1313/images/ai-ai-ai.jpg">
+    <meta property="og:image" content="http://localhost:1313/images/the-power-of-the-sun.png">
 
 
   
   
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="http://localhost:1313/images/ai-ai-ai.jpg">
+  <meta name="twitter:image" content="http://localhost:1313/images/the-power-of-the-sun.png">
   <meta name="twitter:title" content="I figured out how to run LLMs locally so you don&#39;t have to">
   <meta name="twitter:description" content="A journey through the local LLM rabbit hole from ollama to pi, and everything in between.">
 
@@ -84,7 +84,8 @@
     Tags:   <a href="/tags/local-llm">local-llm</a>  <a href="/tags/machine-learning">machine-learning</a>  <a href="/tags/mlx">mlx</a>
   </p>
   
-  <p>I wanted a coding model that worked on a flight without destroying my laptop battery.</p>
+  <p><img src="/images/the-power-of-the-sun.png" alt="alt text" title="The power of the sun sitting on my lap"></p>
+<p>I wanted a coding model that worked on a flight without destroying my laptop battery.</p>
 <p>What I got was a weeks-long rabbit hole through toolchains, benchmarks, broken processes, and one laptop shutdown that I eventually traced to a kernel panic under extreme memory pressure. Here is the full story, in case you want to save yourself some of the pain.</p>
 <h2 id="the-flight-that-started-it-all">The flight that started it all</h2>
 <p>After enough API outages, token limits, and one offline flight from Munich to London for Devoxx, I realised I could not work without a connection. The more we come to rely on cloud models, the less productive we are the moment they go dark. I wanted a coding assistant that would work offline, without turning my MacBook into a space heater.</p>
@@ -152,12 +153,13 @@
 <h2 id="how-to-replicate-this">How to replicate this</h2>
 <p>For anyone who wants to follow the same path on their own Apple Silicon Mac, here are the exact commands and configurations I used.</p>
 <h3 id="step-1-ollama-my-setup">Step 1: Ollama (my setup)</h3>
-<p>Simplest possible setup:</p>
+<p>I started with <a href="https://ollama.com">Ollama</a>, the easiest on-ramp to local LLMs. Simplest possible setup:</p>
 <pre tabindex="0"><code>$ ollama
 </code></pre><p>This prompted me to pick a model (I chose qwen3.6) and then which agent (I chose opencode). It pulled the model, loaded it, and started serving. Expect 48GB+ RAM, 12GB swap, and roughly 25 tokens per second. Your laptop will get loud.</p>
+<p><img src="/images/i-am-once-again-asking-for-more-ram.png" alt="alt text" title="I am once again asking for more RAM"></p>
 <p>Note: I cannot claim this is &ldquo;Ollama vs MLX&rdquo; in general. The Ollama model, the MLX model, the quantization, the context settings, and the cache behavior were all different. What I can say is that <em>my Ollama setup</em> used more swap and produced fewer tokens per second than <em>my MLX setup</em> on this specific machine and model.</p>
 <h3 id="step-2-mlx-mlx_lm">Step 2: MLX (mlx_lm)</h3>
-<p>After trying Ollama, I discovered MLX and wanted to try the same model in its native format. I downloaded the 4-bit quantized MLX variant using <code>huggingface-cli</code>:</p>
+<p>After trying Ollama, I discovered MLX and wanted to try the same model in its native format. I used <a href="https://github.com/ml-explore/mlx-lm">mlx_lm</a>, the MLX-based inference library. I downloaded the 4-bit quantized MLX variant using <code>huggingface-cli</code>:</p>
 <pre tabindex="0"><code>$ hf download majentik/Qwen3.6-35B-A3B-TurboQuant-MLX-4bit --local-dir ~/models/Qwen3.6-35B-A3B-TurboQuant-MLX-4bit
 </code></pre><p>Then I started the server:</p>
 <pre tabindex="0"><code>$ mlx_lm.server \
@@ -170,14 +172,16 @@
 </ul>
 <p>This served on <code>localhost:8080</code> by default. Roughly 35 tokens per second, 48GB RAM + 2GB swap. Cooler fans, but macOS still killed the process under memory pressure.</p>
 <h3 id="step-3-omlx-baseline">Step 3: oMLX (baseline)</h3>
+<p>I then tried <a href="https://omlx.ai/">oMLX</a>, which handles model loading, memory management, and KV caching automatically:</p>
 <pre tabindex="0"><code>$ omlx serve --host 0.0.0.0 --port 8080 --model-dir ~/models
 </code></pre><p>No extra flags needed. oMLX handled the model loading, memory management, and KV caching automatically. I watched Activity Monitor and saw swap drop to zero, RAM settle around 42GB, and the fans finally stop screaming. 47 tokens per second.</p>
 <h3 id="step-4-pi-via-omlx-optimized">Step 4: pi via oMLX (optimized)</h3>
-<p>To connect pi to oMLX, I launched pi directly through oMLX:</p>
+<p>To connect the <a href="https://pi.dev/">pi agent</a> to oMLX, I launched pi directly through oMLX:</p>
 <pre tabindex="0"><code>$ omlx launch pi \
   --model &#39;Qwen3.6-35B-A3B-TurboQuant-MLX-4bit&#39; \
   --api-key &#39;omlx-&lt;your-key&gt;&#39;
 </code></pre><h3 id="the-omlx-admin-tweaks">The oMLX admin tweaks</h3>
+<p><img src="/images/distracted-gabe.png" alt="alt text" title="Distracted Gabe"></p>
 <p>Since writing the original version of this post, I made several adjustments in the oMLX Web Admin that pushed pi past 70 tokens/sec. I do not know the exact technical reason each change helped, but here is what I changed and what I observed:</p>
 <ul>
 <li>
@@ -288,10 +292,12 @@
 <h2 id="lessons-learned">Lessons learned</h2>
 <h3 id="memory-headroom-matters-more-than-you-think">Memory headroom matters more than you think</h3>
 <p>When MLX tried to allocate more memory than macOS would allow, the OS sent a SIGKILL to the process. Under enough pressure, the kernel panicked the whole system. It was a kernel panic, not a hardware-level crash. The macOS update was not what fixed it. What stopped the crashes was simply moving to lighter setups like oMLX, which reduced the memory pressure enough that the SIGKILL and kernel panic never happened again. The lesson: staying within memory headroom and keeping the model quantized at 4-bit<a href="#f5">[5]</a> matters more than any software update.</p>
+<p><img src="/images/this-is-fine.png" alt="alt text" title="This is fine"></p>
 <p>The answer lies in Apple Silicon&rsquo;s UMA<a href="#f1">[1]</a>. The CPU and GPU share exactly the same physical pool of RAM, which eliminates the need to copy tensors between separate memory banks. This is the single biggest performance advantage for running LLMs locally. But unified memory does not eliminate all overhead: memory bandwidth, cache movement, allocation behavior, and GPU scheduling still matter, and my workload was almost certainly GPU/Metal<a href="#f4">[4]</a> rather than Neural Engine.</p>
 <h3 id="context-size-and-the-kv-cache">Context size and the KV cache</h3>
 <p>At 262K context, the KV cache<a href="#f6">[6]</a> dominates memory usage. Using 8-bit for the KV cache (not the model weights) avoided what looked like a slowdown bug in oMLX&rsquo;s 4-bit MoE cache handling at large context windows. Prefix caching<a href="#f8">[8]</a> happens in the serving backend, not in pi itself. It chops your prompt into blocks, hashes them, and stores the resulting KV tensors in memory. On follow-up queries that reuse the same system prompt or project context, the model skips the heavy computation and reuses the cached blocks. The more context you feed the model, the more value you get from caching.</p>
 <h3 id="why-qwen-36-gets-stuck-in-reasoning-loops">Why Qwen 3.6 gets stuck in reasoning loops</h3>
+<p><img src="/images/opencode-throws-qwen.png" alt="alt text" title="OpenCode throws Qwen"></p>
 <p>From my own experience, I observed Qwen 3.6 getting stuck in reasoning loops under certain conditions. It endlessly second-guesses answers, repeats circular logic, or endlessly retries tool calls. This is not necessarily a bug in my setup. It seems to be a property of the model interacting with certain environments.</p>
 <p>From what I could piece together, a few factors seem to contribute:</p>
 <p><strong>Incompatible agent/tool frameworks.</strong> Using agent environments (like OpenCode) with Qwen can cause instability. If a tool reports an error but fails to explain why, Qwen gets confused and attempts to trigger the same tool repeatedly without altering its inputs.</p>
@@ -305,7 +311,7 @@
 <li><strong>Adjust temperature.</strong> Increase to around 0.7 to 0.85 to encourage the model to explore new paths when it gets stuck.</li>
 <li><strong>Anti-looping prompts.</strong> Add explicit rules to your system prompt telling the model to commit to its best guess after one pass instead of second-guessing itself.</li>
 <li><strong>Tweak penalties.</strong> Use a light presence penalty (e.g., 0.1 to 0.2) to deter the repetition of previous tokens.</li>
-<li><strong>Hard inference caps.</strong> If using local inference engines like llama.cpp, configure explicit reasoning budget cut-offs to force the model to output its answer if the loop continues past a safe limit.</li>
+<li><strong>Hard inference caps.</strong> If using local inference engines like <a href="https://github.com/ggerganov/llama.cpp">llama.cpp</a>, configure explicit reasoning budget cut-offs to force the model to output its answer if the loop continues past a safe limit.</li>
 </ul>
 <p>I went with the simplest fix: disabling the &ldquo;thinking&rdquo; mode entirely (via <code>--chat-template-args</code>). It stopped the looping, but it also stripped away some of Qwen&rsquo;s depth, which felt like a trade-off I was not always comfortable making.</p>
 <p>Later, after the pi optimizations, I re-enabled thinking mode by updating the pi config to use the froggeric v19 template and adjusting the tool format. The template changes stopped the looping in my test cases, so thinking mode could be safely turned back on.</p>
@@ -318,7 +324,7 @@
 <h2 id="caveats-and-open-problems">Caveats and open problems</h2>
 <ol>
 <li>
-<p><strong>RTK support for pi was initially missing, but has since been added via <a href="https://github.com/rtk-ai/rtk/pull/1741">PR #1741</a>.</strong> I had written in the original draft that RTK was incompatible with pi, but coincidentally the GitHub issue was picked up and Pi support was added. I have not yet tested it end-to-end with oMLX, but the integration path now exists.</p>
+<p><strong>RTK support for pi was initially missing, but has since been added via <a href="https://github.com/rtk-ai/rtk/pull/1741">PR #1741</a>.</strong> I had written in the original draft that <a href="https://www.rtk-ai.app/">RTK</a> was incompatible with pi, but coincidentally the GitHub issue was picked up and Pi support was added. I have not yet tested it end-to-end with oMLX, but the integration path now exists.</p>
 </li>
 <li>
 <p><strong>little-coder does not play nice with oMLX.</strong> I wanted to use <a href="https://github.com/itayinbarr/little-coder">little-coder</a>, which is built on top of pi, but I could not figure out how to get it to work with oMLX. So for now, I am sticking with bare pi.</p>
