@@ -3,44 +3,63 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Machine-Learning on Gabe</title>
-    <link>https://gabriel.gaucimaistre.com/tags/machine-learning/</link>
+    <link>http://localhost:1313/tags/machine-learning/</link>
     <description>Recent content in Machine-Learning on Gabe</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 21 May 2026 10:00:00 +0000</lastBuildDate><atom:link href="https://gabriel.gaucimaistre.com/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 21 May 2026 10:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>I figured out how to run LLMs locally so you don&#39;t have to</title>
-      <link>https://gabriel.gaucimaistre.com/2026/05/i-figured-out-how-to-run-llms-locally-so-you-dont-have-to/</link>
+      <link>http://localhost:1313/2026/05/i-figured-out-how-to-run-llms-locally-so-you-dont-have-to/</link>
       <pubDate>Thu, 21 May 2026 10:00:00 +0000</pubDate>
       
-      <guid>https://gabriel.gaucimaistre.com/2026/05/i-figured-out-how-to-run-llms-locally-so-you-dont-have-to/</guid>
+      <guid>http://localhost:1313/2026/05/i-figured-out-how-to-run-llms-locally-so-you-dont-have-to/</guid>
       <description>I spent weeks chasing the perfect local LLM setup on my MacBook. Here is what I learned, what broke, and what actually works.</description>
     </item>
     
     <item>
       <title>The Future of Machine Learning is not Python, it&#39;s SQL</title>
-      <link>https://gabriel.gaucimaistre.com/2023/02/the-future-of-machine-learning-is-not-python-its-sql/</link>
+      <link>http://localhost:1313/2023/02/the-future-of-machine-learning-is-not-python-its-sql/</link>
       <pubDate>Sun, 19 Feb 2023 10:00:00 +0000</pubDate>
       
-      <guid>https://gabriel.gaucimaistre.com/2023/02/the-future-of-machine-learning-is-not-python-its-sql/</guid>
+      <guid>http://localhost:1313/2023/02/the-future-of-machine-learning-is-not-python-its-sql/</guid>
       <description>Python is touted as the language to learn and use for DS and ML thanks to its easy to understand syntax making it quick to write, free and open-source for simple adoption, vast DS &amp;amp; ML toolset making you spoilt for choice, and large community ready to help. However, there are many cracks which start to show when using Python in production.</description>
     </item>
     
     <item>
+      <title>The Rise of Academic Papers</title>
+      <link>http://localhost:1313/2021/06/the-rise-of-academic-papers/</link>
+      <pubDate>Wed, 30 Jun 2021 23:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2021/06/the-rise-of-academic-papers/</guid>
+      <description>&lt;p&gt;&lt;em&gt;&lt;strong&gt;DISCLAIMER&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;The following are simply my views and in no way reflect those of the whole industry.&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/research-papers-everywhere.png&#34; alt=&#34;alt text&#34; title=&#34;Logo Title Text 1&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;papers without code&lt;/li&gt;
+&lt;li&gt;papers with code&lt;/li&gt;
+&lt;li&gt;unsuccessful papers not considered&lt;/li&gt;
+&lt;li&gt;quantity over quality&lt;/li&gt;
+&lt;li&gt;FAANG&lt;/li&gt;
+&lt;li&gt;Advisors can&amp;rsquo;t commit to checking student&amp;rsquo;s code&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
       <title>On Failed Machine Learning Experiments</title>
-      <link>https://gabriel.gaucimaistre.com/2021/06/on-failed-machine-learning-experiments/</link>
+      <link>http://localhost:1313/2021/06/on-failed-machine-learning-experiments/</link>
       <pubDate>Sun, 06 Jun 2021 23:00:00 +0000</pubDate>
       
-      <guid>https://gabriel.gaucimaistre.com/2021/06/on-failed-machine-learning-experiments/</guid>
+      <guid>http://localhost:1313/2021/06/on-failed-machine-learning-experiments/</guid>
       <description>The &amp;ldquo;science&amp;rdquo; in Data Science is supposed to refer to the fact that doing Data Science involves conducting experiments with data. In any other field failed experiments are accepted, you wouldn&amp;rsquo;t want a drug company to push out a new drug which failed internal tests, so why is it frowned upon in Data Science?</description>
     </item>
     
     <item>
       <title>I Don&#39;t Like Data Science Competitions</title>
-      <link>https://gabriel.gaucimaistre.com/2021/05/i-dont-like-data-science-competitions/</link>
+      <link>http://localhost:1313/2021/05/i-dont-like-data-science-competitions/</link>
       <pubDate>Mon, 17 May 2021 23:00:00 +0000</pubDate>
       
-      <guid>https://gabriel.gaucimaistre.com/2021/05/i-dont-like-data-science-competitions/</guid>
+      <guid>http://localhost:1313/2021/05/i-dont-like-data-science-competitions/</guid>
       <description>Data Science competitions have become extremely popular in the past 5 years. They are not only popular on sites such as Kaggle, but also when interviewing with companies for a role on the job market in the form of a candidate test. These tests have quickly turned into a way to judge the performance of a participant/candidate&amp;rsquo;s submission and determine whether they have succeeded in the challenge or not.</description>
     </item>
     

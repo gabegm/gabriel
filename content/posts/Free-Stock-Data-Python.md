@@ -40,7 +40,7 @@ Yahoo Finance has a dedicated "Historical Data" tab, navigating to the page prov
 * AAPL -> symbol
 * ?period1=1630328849 -> period start
 * &period2=1661864849 -> period end
-* &interval=1 -> frequecncy of data
+* &interval=1 -> frequency of data
 * d&events=history -> type of Yahoo Finance event
 * &includeAdjustedClose=true -> whether to include adjusted close figures
 
@@ -199,7 +199,7 @@ A few things to keep in mind before you run this:
 Once you have this data, you can do all sorts of interesting things:
 
 - **Backtest trading strategies.** Pair this with backtrader or zipline for backtesting.
-- **Visualize price movements.** Use matplotlib or plotly to chart price trends.
+- **Visualise price movements.** Use matplotlib or plotly to chart price trends.
 - **Build a portfolio tracker.** Combine multiple tickers and track performance.
 - **Calculate correlations.** See how different stocks move in relation to each other.
 

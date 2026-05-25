@@ -25,18 +25,18 @@ What I got was a weeks-long rabbit hole through toolchains, benchmarks, broken p
 
 After enough API outages, token limits, and one offline flight from Munich to London for Devoxx, I realised I could not work without a connection. The more we come to rely on cloud models, the less productive we are the moment they go dark. I wanted a coding assistant that would work offline, without turning my MacBook into a space heater.
 
-What followed was a sequence of experiments through Ollama, MLX, oMLX, and pi, each revealing new trade-offs around memory, speed, and model behavior.
+What followed was a sequence of experiments through Ollama, MLX, oMLX, and pi, each revealing new trade-offs around memory, speed, and model behaviour.
 
 ## Hardware and model tested
 
 - **MacBook**: M4 Pro, 12-core CPU, 48GB unified memory
 - **Model**: Qwen3.6-35B-A3B-TurboQuant-MLX-4bit (35B total parameters, 3B active per token, a Mixture-of-Experts model)[[0]](#f0)
 - **macOS**: Tahoe 26.5 (updated during experiments)
-- **Model format**: 4-bit quantized MLX, downloaded via `huggingface-cli`
+- **Model format**: 4-bit quantised MLX, downloaded via `huggingface-cli`
 
 ## Benchmark results
 
-These numbers are decode tokens per second[[3]](#f3), measured on a single continuous generation of roughly 2,000 tokens, with a short system prompt (~500 tokens). Benchmarks were taken on macOS Tahoe 26.5 with the laptop plugged in, on performance power mode. They are anecdotal. Your mileage will vary based on model quant, context length, prompt size, and what else is running on your machine.
+These numbers are decode tokens per second[[3]](#f3), measured on a single continuous generation of roughly 2,000 tokens, with a short system prompt (~500 tokens). Benchmarks were taken on macOS Tahoe 26.5 with the laptop plugged in, on performance power mode. They are anecdotal. Your mileage will vary based on model quantisation, context length, prompt size, and what else is running on your machine.
 
 ### Baseline comparison (no speculative decoding)
 
@@ -52,7 +52,7 @@ These numbers are decode tokens per second[[3]](#f3), measured on a single conti
 |---|---|---|---|
 | pi via oMLX (DFlash + 8-bit KV cache + custom template) | < 48GB (no swap)[[2]](#f2) | ~70 | Experimental; see caveats below |
 
-**Important**: The optimized row is not apples-to-apples with the baseline. It includes speculative decoding (DFlash), 8-bit KV cache, a custom Jinja template, and several admin-level oMLX changes. The baseline rows used default configurations. I present them separately because combining them obscures what each contributed.
+**Important**: The optimised row is not apples-to-apples with the baseline. It includes speculative decoding (DFlash), 8-bit KV cache, a custom Jinja template, and several admin-level oMLX changes. The baseline rows used default configurations. I present them separately because combining them obscures what each contributed.
 
 ## How to replicate this
 
@@ -70,11 +70,11 @@ This prompted me to pick a model (I chose qwen3.6) and then which agent (I chose
 
 ![alt text](/images/i-am-once-again-asking-for-more-ram.png "I am once again asking for more RAM")
 
-Note: I cannot claim this is "Ollama vs MLX" in general. The Ollama model, the MLX model, the quantization, the context settings, and the cache behavior were all different. What I can say is that *my Ollama setup* used more swap and produced fewer tokens per second than *my MLX setup* on this specific machine and model.
+Note: I cannot claim this is "Ollama vs MLX" in general. The Ollama model, the MLX model, the quantisation, the context settings, and the cache behaviour were all different. What I can say is that *my Ollama setup* used more swap and produced fewer tokens per second than *my MLX setup* on this specific machine and model.
 
 ### Step 2: MLX (mlx_lm)
 
-After trying Ollama, I discovered MLX and wanted to try the same model in its native format. I used [mlx_lm](https://github.com/ml-explore/mlx-lm), the MLX-based inference library. I downloaded the 4-bit quantized MLX variant using `huggingface-cli`:
+After trying Ollama, I discovered MLX and wanted to try the same model in its native format. I used [mlx_lm](https://github.com/ml-explore/mlx-lm), the MLX-based inference library. I downloaded the 4-bit quantised MLX variant using `huggingface-cli`:
 
 ```
 $ hf download majentik/Qwen3.6-35B-A3B-TurboQuant-MLX-4bit --local-dir ~/models/Qwen3.6-35B-A3B-TurboQuant-MLX-4bit
@@ -89,7 +89,7 @@ $ mlx_lm.server \
 ```
 
 Key flags:
-- `--model`: path to the local 4-bit quantized MLX model
+- `--model`: path to the local 4-bit quantised MLX model
 - `--chat-template-args`: disables the thinking/reasoning mode to avoid the looping problem
 
 This served on `localhost:8080` by default. Roughly 35 tokens per second, 48GB RAM + 2GB swap. Cooler fans, but macOS still killed the process under memory pressure.
@@ -121,12 +121,12 @@ $ omlx launch pi \
 Since writing the original version of this post, I made several adjustments in the oMLX Web Admin that pushed pi past 70 tokens/sec. I do not know the exact technical reason each change helped, but here is what I changed and what I observed:
 
 - **SpecPrefill: OFF.** I noticed the engine was cutting markdown files and codebases in half, which caused text-corruption in the output. Specifically, code blocks would end mid-function with unclosed braces, and the model would then enter a loop trying to "fix" the truncated code. Turning this off stopped the corruption.
-- **TurboQuant KV Cache: 8-bit.** I forced 8-bit cache structures to maintain stability at the full 262K context window. The default 4-bit MoE cache had what looked like a slowdown bug in my setup[[14]](#f14).
-- **DFlash speculative decoding.** I downloaded a companion model using `hf download mlx-community/Qwen3.5-0.8B-MLX-4bit --local-dir ~/models/Qwen3.5-0.8B-MLX-4bit`, and hooked it up as a lightweight companion model (4-bit quantized) to boost generation speed via speculative decoding[[13]](#f13). I observed roughly 2x speed on longer generations from short prompts without degrading accuracy.
+- **TurboQuant KV Cache: 8-bit.** I forced 8-bit cache structures to maintain stability at the full 262K context window. The default 4-bit MoE cache had what looked like a slowdown bug in my setup[[13]](#f13).
+- **DFlash speculative decoding.** I downloaded a companion model using `hf download mlx-community/Qwen3.5-0.8B-MLX-4bit --local-dir ~/models/Qwen3.5-0.8B-MLX-4bit`, and hooked it up as a lightweight companion model (4-bit quantised) to boost generation speed via speculative decoding[[12]](#f12). I observed roughly 2x speed on longer generations from short prompts without degrading accuracy.
 
-  **Caveat**: oMLX's own DFlash integration docs note that DFlash has a default context threshold of 4096 tokens and falls back for longer prompts, does not use oMLX paged/SSD cache, and does full prefill from scratch for DFlash requests. I am not certain whether the ~70 tok/s result came from short-context DFlash acceleration, fallback engine behavior, or a combination. I have not profiled this carefully enough to say.
+  **Caveat**: oMLX's own DFlash integration docs note that DFlash has a default context threshold of 4096 tokens and falls back for longer prompts, does not use oMLX paged/SSD cache, and does full prefill from scratch for DFlash requests. I am not certain whether the ~70 tok/s result came from short-context DFlash acceleration, fallback engine behaviour, or a combination. I have not profiled this carefully enough to say.
 
-- **froggeric v19 Jinja template.** I replaced the official Qwen template with a Qwen fixed Jinja template variant ([froggeric v19 on GitHub](https://github.com/froggeric/qwen3-jinja/blob/main/qwen3.jinja))[[15]](#f15). I observed fewer empty thinking stalls and better KV cache hit rates.
+- **froggeric v19 Jinja template.** I replaced the official Qwen template with a Qwen fixed Jinja template variant ([froggeric v19 on GitHub](https://github.com/froggeric/qwen3-jinja/blob/main/qwen3.jinja))[[14]](#f14). I observed fewer empty thinking stalls and better KV cache hit rates.
 - **tool_format: json.** I configured the chat template kwargs to return standard JSON data payloads, aligning the model's tool outputs with pi's CLI parser.
 
 These are my observations from my setup. Your mileage may vary, and I have not profiled each change individually.
@@ -182,11 +182,11 @@ The key insight: OpenCode uses the `@ai-sdk/openai-compatible` npm package to ta
 
 ### Memory headroom matters more than you think
 
-When MLX tried to allocate more memory than macOS would allow, the OS sent a SIGKILL to the process. Under enough pressure, the kernel panicked the whole system. It was a kernel panic, not a hardware-level crash. The macOS update was not what fixed it. What stopped the crashes was simply moving to lighter setups like oMLX, which reduced the memory pressure enough that the SIGKILL and kernel panic never happened again. Staying within memory headroom and keeping the model quantized at 4-bit[[5]](#f5) was critical in avoiding the situation.
+When MLX tried to allocate more memory than macOS would allow, the OS sent a SIGKILL to the process. Under enough pressure, the kernel panicked the whole system. What stopped the crashes was simply moving to lighter setups like oMLX, which reduced the memory pressure enough that the SIGKILL and kernel panic never happened again. Staying within memory headroom and keeping the model quantised at 4-bit[[5]](#f5) was critical in avoiding the situation.
 
 ![alt text](/images/this-is-fine.png "This is fine")
 
-The answer lies in Apple Silicon's UMA[[1]](#f1). The CPU and GPU share exactly the same physical pool of RAM, which eliminates the need to copy tensors between separate memory banks. This is the single biggest performance advantage for running LLMs locally. But unified memory does not eliminate all overhead: memory bandwidth, cache movement, allocation behavior, and GPU scheduling still matter, and my workload was almost certainly GPU/Metal[[4]](#f4) rather than Neural Engine.
+The answer lies in Apple Silicon's UMA[[1]](#f1). The CPU and GPU share exactly the same physical pool of RAM, which eliminates the need to copy tensors between separate memory banks. This is the single biggest performance advantage for running LLMs locally. But unified memory does not eliminate all overhead: memory bandwidth, cache movement, allocation behaviour, and GPU scheduling still matter, and my workload was almost certainly GPU/Metal[[4]](#f4) rather than Neural Engine.
 
 ### Context size and the KV cache
 
@@ -206,7 +206,7 @@ From what I could piece together, a few factors seem to contribute:
 
 **Over-restricted sampling.** Setting temperatures too low (e.g., 0.1 to 0.5) limits the model's exploratory generation. Without a higher temperature, the model struggles to break out of its own logical ruts.
 
-**Context window fatigue.** Exhausting or maximizing the context window[[9]](#f9) degrades the model's internal attention mechanism, making it much more likely to hallucinate the initial prompt and restart its reasoning cycles.
+**Context window fatigue.** Exhausting or maximizing the context window[[8]](#f8) degrades the model's internal attention mechanism, making it much more likely to hallucinate the initial prompt and restart its reasoning cycles.
 
 Note: 0.4 was my normal coding setting; 0.7 to 0.85 helped as a recovery tactic when the model looped.
 
@@ -221,7 +221,7 @@ Several strategies helped in my testing:
 
 I went with the simplest fix: disabling the "thinking" mode entirely (via `--chat-template-args`). It stopped the looping, but it also stripped away some of Qwen's depth, which felt like a trade-off I was not always comfortable making.
 
-Later, after the pi optimizations, I re-enabled thinking mode by updating the pi config to use the froggeric v19 template and adjusting the tool format. The template changes stopped the looping in my test cases, so thinking mode could be safely turned back on.
+Later, after the pi optimisations, I re-enabled thinking mode by updating the pi config to use the froggeric v19 template and adjusting the tool format. The template changes stopped the looping in my test cases, so thinking mode could be safely turned back on.
 
 ## What I would recommend
 
@@ -235,9 +235,9 @@ Later, after the pi optimizations, I re-enabled thinking mode by updating the pi
 
 2. **little-coder does not play nice with oMLX.** I wanted to use [little-coder](https://github.com/itayinbarr/little-coder), which is built on top of pi, but I could not figure out how to get it to work with oMLX. So for now, I am sticking with bare pi.
 
-3. **DFlash context behavior is unclear.** As noted above, oMLX's DFlash has a default context threshold of 4096 tokens and falls back for longer prompts. I am not certain whether the speed boost came from DFlash acceleration on short contexts, fallback behavior on long contexts, or both. If you are benchmarking with long prompts, the DFlash speedup may not apply.
+3. **DFlash context behavior is unclear.** As noted above, oMLX's DFlash has a default context threshold of 4096 tokens and falls back for longer prompts. I am not certain whether the speed boost came from DFlash acceleration on short contexts, fallback behaviour on long contexts, or both. If you are benchmarking with long prompts, the DFlash speedup may not apply.
 
-4. **Quantization quality is subjective.** For my coding workflow, the quality trade-off of 4-bit quantization was acceptable. Whether that holds for your use case is another question.
+4. **Quantization quality is subjective.** For my coding workflow, the quality trade-off of 4-bit quantisation was acceptable. Whether that holds for your use case is another question.
 
 ## Is this for you?
 
@@ -260,14 +260,13 @@ Local LLMs are not for everyone. Before you follow along, ask yourself these que
 * <a name="f2">[2]</a> Swap: macOS using SSD as scratch space when physical RAM is exhausted.
 * <a name="f3">[3]</a> Tokens: Basic units of text an LLM processes. Roughly a word or fraction thereof.
 * <a name="f4">[4]</a> Metal: Apple's low-level graphics API that lets MLX-based tools use the GPU for compute.
-* <a name="f5">[5]</a> 4-bit quantization: Compression technique reducing weight precision from 16 bits to 4 bits, cutting model weight storage by roughly 4x before overhead.
-* <a name="f6">[6]</a> KV (Key-Value) cache: Stores attention tensors from previous tokens to avoid recomputation.
-* <a name="f7">[7]</a> Continuous batching: Processing multiple user requests together in a single forward pass.
-* <a name="f8">[8]</a> Prefix caching: Hashing prompt blocks and storing resulting KV tensors for reuse on follow-up queries.
-* <a name="f9">[9]</a> Context window: Maximum tokens the model can process at once, including input and output.
-* <a name="f10">[10]</a> Temperature: Controls randomness in model output. 0.0 is deterministic; 1.0 is fully creative.
-* <a name="f11">[11]</a> Nucleus sampling (top_p): Restricts the model to the smallest set of tokens whose combined probability exceeds the threshold.
-* <a name="f12">[12]</a> Repetition penalty: Penalizes the model for repeating tokens. 1.0 means no penalty.
-* <a name="f13">[13]</a> Speculative decoding: A smaller "companion" model generates draft tokens quickly, and a larger model verifies them in parallel. DFlash is oMLX's implementation.
-* <a name="f14">[14]</a> 8-bit KV cache: Using 8-bit precision for cache structures as a middle ground between 16-bit and 4-bit.
-* <a name="f15">[15]</a> Jinja template: Defines how a model formats its input, including system prompts, messages, tool definitions, and thinking blocks. The froggeric v19 variant addresses known issues with the official Qwen template.
+* <a name="f5">[5]</a> 4-bit quantisation: Compression technique reducing weight precision from 16 bits to 4 bits, cutting model weight storage by roughly 4x before overhead.
+* <a name="f6">[6]</a> KV (Key-Value) cache: Stores attention tensors from previous tokens to avoid re-computation.
+* <a name="f7">[7]</a> Prefix caching: Hashing prompt blocks and storing resulting KV tensors for reuse on follow-up queries.
+* <a name="f8">[8]</a> Context window: Maximum tokens the model can process at once, including input and output.
+* <a name="f9">[9]</a> Temperature: Controls randomness in model output. 0.0 is deterministic; 1.0 is fully creative.
+* <a name="f10">[10]</a> Nucleus sampling (top_p): Restricts the model to the smallest set of tokens whose combined probability exceeds the threshold.
+* <a name="f11">[11]</a> Repetition penalty: Penalises the model for repeating tokens. 1.0 means no penalty.
+* <a name="f12">[12]</a> Speculative decoding: A smaller "companion" model generates draft tokens quickly, and a larger model verifies them in parallel. DFlash is oMLX's implementation.
+* <a name="f13">[13]</a> 8-bit KV cache: Using 8-bit precision for cache structures as a middle ground between 16-bit and 4-bit.
+* <a name="f14">[14]</a> Jinja template: Defines how a model formats its input, including system prompts, messages, tool definitions, and thinking blocks. The froggeric v19 variant addresses known issues with the official Qwen template.

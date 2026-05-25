@@ -3,17 +3,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Stocks on Gabe</title>
-    <link>https://gabriel.gaucimaistre.com/tags/stocks/</link>
+    <link>http://localhost:1313/tags/stocks/</link>
     <description>Recent content in Stocks on Gabe</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 08 Jul 2022 10:00:00 +0000</lastBuildDate><atom:link href="https://gabriel.gaucimaistre.com/tags/stocks/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 08 Jul 2022 10:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/stocks/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How To Get Free Historical Stock Data in Python</title>
-      <link>https://gabriel.gaucimaistre.com/2022/07/how-to-get-free-historical-stock-data-in-python/</link>
+      <link>http://localhost:1313/2022/07/how-to-get-free-historical-stock-data-in-python/</link>
       <pubDate>Fri, 08 Jul 2022 10:00:00 +0000</pubDate>
       
-      <guid>https://gabriel.gaucimaistre.com/2022/07/how-to-get-free-historical-stock-data-in-python/</guid>
+      <guid>http://localhost:1313/2022/07/how-to-get-free-historical-stock-data-in-python/</guid>
       <description>A step-by-step guide to scraping free historical stock data from Yahoo Finance using Python, complete with working source code.</description>
     </item>
     
