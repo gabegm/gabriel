@@ -114,24 +114,24 @@ Since writing the original version of this post, I made several adjustments in t
 
 - **SpecPrefill: OFF.** I noticed the engine was cutting markdown files and codebases in half, which caused text-corruption in the output. Specifically, code blocks would end mid-function with unclosed braces, and the model would then enter a loop trying to "fix" the truncated code. Turning this off stopped the corruption.
 - **TurboQuant KV Cache: 8-bit.** I forced 8-bit cache structures to maintain stability at the full 262K context window. The default 4-bit MoE cache had what looked like a slowdown bug in my setup[[14]](#f14).
-- **DFlash speculative decoding.** I downloaded a companion model using `hf download mlx-community/Qwen3.5-0.8B-MLX-4bit --local-dir ~/models/Qwen3.5-0.8B-MLX-4bit`, and hooked it up as a lightweight companion model (4-bit quantized) to boost generation speed via speculative decoding[[13]](#f13). I observed roughly 2x speed on longer outputs without degrading accuracy.
+- **DFlash speculative decoding.** I downloaded a companion model using `hf download mlx-community/Qwen3.5-0.8B-MLX-4bit --local-dir ~/models/Qwen3.5-0.8B-MLX-4bit`, and hooked it up as a lightweight companion model (4-bit quantized) to boost generation speed via speculative decoding[[13]](#f13). I observed roughly 2x speed on longer generations from short prompts without degrading accuracy.
 
   **Caveat**: oMLX's own DFlash integration docs note that DFlash has a default context threshold of 4096 tokens and falls back for longer prompts, does not use oMLX paged/SSD cache, and does full prefill from scratch for DFlash requests. I am not certain whether the ~70 tok/s result came from short-context DFlash acceleration, fallback engine behavior, or a combination. I have not profiled this carefully enough to say.
 
-- **froggeric v19 Jinja template.** I replaced the official Qwen template with a C++ native .jinja variant ([froggeric v19 on GitHub](https://github.com/froggeric/qwen3-jinja/blob/main/qwen3.jinja))[[15]](#f15). I observed fewer empty thinking stalls and better KV cache hit rates.
+- **froggeric v19 Jinja template.** I replaced the official Qwen template with a Qwen fixed Jinja template variant ([froggeric v19 on GitHub](https://github.com/froggeric/qwen3-jinja/blob/main/qwen3.jinja))[[15]](#f15). I observed fewer empty thinking stalls and better KV cache hit rates.
 - **tool_format: json.** I configured the chat template kwargs to return standard JSON data payloads, aligning the model's tool outputs with pi's CLI parser.
 
 These are my observations from my setup. Your mileage may vary, and I have not profiled each change individually.
 
 ### Configuration
 
-For both mlx_lm and oMLX, these are the parameters I settled on:
+These are the parameters I used for the final pi/oMLX setup. The earlier mlx_lm config used `enable_thinking: false` and no `tool_format` setting.
 
 | Parameter | Value | Purpose |
 |---|---|---|
 | ctx_window | 262144 | Context window size[[9]](#f9) |
 | max_tokens | 32768 | Maximum output tokens |
-| temp | 0.4 | Temperature (lower for coding precision)[[10]](#f10) |
+| temp | 0.4 | Temperature (normal coding setting)[[10]](#f10) |
 | top_p | 0.9 | Nucleus sampling threshold[[11]](#f11) |
 | top_k | 0 | No top-k filtering |
 | min_p | 0.05 | Minimum probability threshold |
@@ -174,9 +174,9 @@ The key insight: OpenCode uses the `@ai-sdk/openai-compatible` npm package to ta
 
 ### Memory headroom matters more than you think
 
-When MLX tried to allocate more memory than macOS would allow, the OS sent a SIGKILL to the process. Under enough pressure, the kernel panicked the whole system. It was a kernel panic, not a hardware-level crash. I never updated macOS or MLX to "fix" it. What stopped the crashes was simply moving to lighter setups like oMLX, which reduced the memory pressure enough that the SIGKILL and kernel panic never happened again. The lesson: staying within memory headroom and keeping the model quantized at 4-bit[[5]](#f5) matters more than any software update.
+When MLX tried to allocate more memory than macOS would allow, the OS sent a SIGKILL to the process. Under enough pressure, the kernel panicked the whole system. It was a kernel panic, not a hardware-level crash. The macOS update was not what fixed it. What stopped the crashes was simply moving to lighter setups like oMLX, which reduced the memory pressure enough that the SIGKILL and kernel panic never happened again. The lesson: staying within memory headroom and keeping the model quantized at 4-bit[[5]](#f5) matters more than any software update.
 
-The answer lies in Apple Silicon's Unified Memory Architecture (UMA)[[1]](#f1). The CPU and GPU share exactly the same physical pool of RAM, which eliminates the need to copy tensors between separate memory banks. This is the single biggest performance advantage for running LLMs locally. But unified memory does not eliminate all overhead: memory bandwidth, cache movement, allocation behavior, and GPU scheduling still matter, and my workload was almost certainly GPU/Metal rather than Neural Engine.
+The answer lies in Apple Silicon's UMA. The CPU and GPU share exactly the same physical pool of RAM, which eliminates the need to copy tensors between separate memory banks. This is the single biggest performance advantage for running LLMs locally. But unified memory does not eliminate all overhead: memory bandwidth, cache movement, allocation behavior, and GPU scheduling still matter, and my workload was almost certainly GPU/Metal rather than Neural Engine.
 
 ### Context size and the KV cache
 
@@ -192,7 +192,7 @@ From what I could piece together, a few factors seem to contribute:
 
 **Tool calling inside reasoning blocks.** Qwen models sometimes attempt to execute tool calls natively inside their hidden `<think>` blocks. Reasoning parsers may drop this section, causing the tool call to fail and prompting the model to re-initiate the entire thought process.
 
-**Over-restricted sampling.** Setting temperatures too low (e.g., 0.1 to 0.5) limits the model's exploratory generation. Without a higher temperature, the model struggles to break out of its own logical ruts.
+**Over-restricted sampling.** Setting temperatures too low (e.g., 0.1 to 0.5) limits the model's exploratory generation. Without a higher temperature, the model struggles to break out of its own logical ruts. Note: 0.4 was my normal coding setting; 0.7 to 0.85 helped as a recovery tactic when the model looped.
 
 **Context window fatigue.** Exhausting or maximizing the context window[[9]](#f9) degrades the model's internal attention mechanism, making it much more likely to hallucinate the initial prompt and restart its reasoning cycles.
 
@@ -229,7 +229,7 @@ Later, after the pi optimizations, I re-enabled thinking mode by updating the pi
 
 Local LLMs are not for everyone. Before you follow along, ask yourself these questions:
 
-**Do you have Apple Silicon?** This entire journey is Apple Silicon-specific. MLX, oMLX, and unified memory architecture[[1]](#f1) are the reason this works. On an Intel Mac or a PC with a dedicated GPU, the story is different and this article is not your guide.
+**Do you have Apple Silicon?** This entire journey is Apple Silicon-specific. MLX, oMLX, and unified memory architecture (UMA)[[1]](#f1) are the reason this works. On an Intel Mac or a PC with a dedicated GPU, the story is different and this article is not your guide.
 
 **Do you have 48GB of RAM?** The 48GB on my M4 Pro was where this became usable for me. At 262K context, the KV cache can dominate memory, so 32GB may load some 35B 4-bit variants at shorter context, but it leaves limited overhead for anything else. Browsing, terminal, or background processes will compete for memory. If you have less, you will need a smaller model and fewer tokens per second.
 
@@ -241,19 +241,19 @@ Local LLMs are not for everyone. Before you follow along, ask yourself these que
 
 ---
 
-* <a name="f0">[0]</a> Parameters are the adjustable weights inside a neural network that determine how it processes input. A 35B model (like Qwen3.6-35B-A3B) has 35 billion total parameters, but because it is a Mixture-of-Experts model, only about 3 billion are active per token. This is what makes it possible to run on 48GB of RAM.
-* <a name="f1">[1]</a> Unified memory (or unified memory architecture, UMA) is Apple Silicon's approach of giving the CPU and GPU access to the same pool of physical RAM, instead of separate memory banks. This eliminates the need to copy data between CPU and GPU memory, which is the single biggest performance advantage for running LLMs locally. But unified memory does not eliminate all overhead: memory bandwidth, cache movement, allocation behavior, and GPU scheduling still matter.
-* <a name="f2">[2]</a> Swap is when macOS runs out of physical RAM and starts using your SSD as scratch space. It is orders of magnitude slower than RAM, which is why your tokens-per-second drops through the floor when swap kicks in.
-* <a name="f3">[3]</a> Tokens are the basic units of text that an LLM processes. Roughly a word, or a fraction of a word. A 1,000-word article is roughly 1,300 to 1,500 tokens. When you see "32,768 tokens" in a config, that is the maximum output the model will generate in a single response.
-* <a name="f4">[4]</a> Metal is Apple's low-level graphics API, similar to OpenGL or Vulkan, that gives programs direct access to the GPU. On Apple Silicon, Metal is the bridge that lets MLX-based tools actually use your GPU for compute instead of just your CPU.
-* <a name="f5">[5]</a> 4-bit quantization is a compression technique that reduces the precision of a model's weights from 16 bits (standard) down to 4 bits. A 35B 4-bit model takes roughly 18GB of RAM instead of 64GB. For my coding workflow, the quality trade-off was acceptable.
-* <a name="f6">[6]</a> Key-Value (KV) cache stores the attention tensors from previous tokens so the model does not need to recompute them on every new token. Without a KV cache, every new token requires re-reading the entire conversation history. With one, the model only computes the new token.
-* <a name="f7">[7]</a> Continuous batching is a serving technique where multiple user requests are processed together in a single forward pass, rather than one at a time. This dramatically improves throughput when multiple people are using the same model server.
-* <a name="f8">[8]</a> Prefix caching in the serving backend works by chopping your prompt into blocks, hashing them, and storing the resulting KV tensors in memory. On follow-up queries that reuse the same system prompt or project context, the model skips the heavy computation and reuses the cached blocks. The more context you feed the model, the more value you get from caching.
-* <a name="f9">[9]</a> Context window is the maximum amount of text (in tokens) the model can "remember" at once. That includes both the input you send and the output it generates. A 262,144 context window is roughly 200,000 words, which is larger than most novels.
-* <a name="f10">[10]</a> Temperature controls how random the model's output is. A temperature of 0.0 always picks the most likely next token (deterministic). A temperature of 1.0 samples from the full probability distribution (creative). 0.7 is a common middle ground.
-* <a name="f11">[11]</a> Nucleus sampling (top_p) is another randomness control. Instead of fixing temperature, it restricts the model to the smallest set of tokens whose combined probability exceeds the threshold. top_p of 0.85 means the model picks from the smallest group of tokens that together cover 85% of the probability mass.
-* <a name="f12">[12]</a> Repetition penalty discourages the model from repeating the same tokens or phrases. A penalty of 1.0 means no penalty. Values above 1.0 actively discourage repetition. Values below 1.0 encourage it.
-* <a name="f13">[13]</a> Speculative decoding is a technique where a smaller "companion" model generates draft tokens quickly, and a larger model verifies them in parallel. The idea is that the small model is fast enough to produce plausible next tokens, and the large model checks them all at once, saving the large model from doing one token at a time. DFlash is oMLX's implementation of this idea.
-* <a name="f14">[14]</a> 8-bit quantization reduces weight precision from 16 bits down to 8 bits. It is a middle ground between standard 16-bit and aggressive 4-bit compression. In my case, using 8-bit for the KV cache (not the model weights) avoided what looked like a slowdown bug in oMLX's 4-bit MoE cache handling at large context windows.
-* <a name="f15">[15]</a> Jinja templates define how a model formats its input, including system prompts, messages, tool definitions, and thinking blocks. The official Qwen template has known issues with empty thinking stalls. The froggeric v19 template is a C++ native variant that avoids those stalls and improves KV cache hit rates.
+* <a name="f0">[0]</a> MoE (Mixture-of-Experts): A model architecture where only a subset of parameters is active per token, enabling larger models to run on less memory.
+* <a name="f1">[1]</a> UMA (Unified Memory Architecture): Apple Silicon's approach of giving the CPU and GPU access to the same pool of physical RAM.
+* <a name="f2">[2]</a> Swap: macOS using SSD as scratch space when physical RAM is exhausted.
+* <a name="f3">[3]</a> Tokens: Basic units of text an LLM processes. Roughly a word or fraction thereof.
+* <a name="f4">[4]</a> Metal: Apple's low-level graphics API that lets MLX-based tools use the GPU for compute.
+* <a name="f5">[5]</a> 4-bit quantization: Compression technique reducing weight precision from 16 bits to 4 bits, roughly halving RAM usage.
+* <a name="f6">[6]</a> KV (Key-Value) cache: Stores attention tensors from previous tokens to avoid recomputation.
+* <a name="f7">[7]</a> Continuous batching: Processing multiple user requests together in a single forward pass.
+* <a name="f8">[8]</a> Prefix caching: Hashing prompt blocks and storing resulting KV tensors for reuse on follow-up queries.
+* <a name="f9">[9]</a> Context window: Maximum tokens the model can process at once, including input and output.
+* <a name="f10">[10]</a> Temperature: Controls randomness in model output. 0.0 is deterministic; 1.0 is fully creative.
+* <a name="f11">[11]</a> Nucleus sampling (top_p): Restricts the model to the smallest set of tokens whose combined probability exceeds the threshold.
+* <a name="f12">[12]</a> Repetition penalty: Penalizes the model for repeating tokens. 1.0 means no penalty.
+* <a name="f13">[13]</a> Speculative decoding: A smaller "companion" model generates draft tokens quickly, and a larger model verifies them in parallel. DFlash is oMLX's implementation.
+* <a name="f14">[14]</a> 8-bit KV cache: Using 8-bit precision for cache structures as a middle ground between 16-bit and 4-bit.
+* <a name="f15">[15]</a> Jinja template: Defines how a model formats its input, including system prompts, messages, tool definitions, and thinking blocks. The froggeric v19 variant addresses known issues with the official Qwen template.
