@@ -195,9 +195,9 @@ At 262K context, the KV cache[[6]](#f6) dominates memory usage. Using 8-bit for 
 
 ### Why Qwen 3.6 gets stuck in reasoning loops
 
-![alt text](/images/opencode-throws-qwen.png "OpenCode throws Qwen")
-
 From my own experience, I observed Qwen 3.6 getting stuck in reasoning loops under certain conditions. It endlessly second-guesses answers, repeats circular logic, or endlessly retries tool calls. This is not necessarily a bug in my setup. It seems to be a property of the model interacting with certain environments.
+
+![alt text](/images/opencode-throws-qwen.png "OpenCode throws Qwen")
 
 From what I could piece together, a few factors seem to contribute:
 
