@@ -180,7 +180,8 @@
 <pre tabindex="0"><code>$ omlx launch pi \
   --model &#39;Qwen3.6-35B-A3B-TurboQuant-MLX-4bit&#39; \
   --api-key &#39;omlx-&lt;your-key&gt;&#39;
-</code></pre><h3 id="the-omlx-admin-tweaks">The oMLX admin tweaks</h3>
+</code></pre><p>Pi is more efficient than OpenCode because of its minimalist architecture and lower context overhead. While OpenCode comes pre-loaded with heavy built-in tools, LSP support, and comprehensive UI features, Pi strips these away to give developers total control and significantly reduce token waste.</p>
+<h3 id="the-omlx-admin-tweaks">The oMLX admin tweaks</h3>
 <p><img src="/images/distracted-gabe.png" alt="alt text" title="Distracted Gabe"></p>
 <p>Since writing the original version of this post, I made several adjustments in the oMLX Web Admin that pushed pi past 70 tokens/sec. I do not know the exact technical reason each change helped, but here is what I changed and what I observed:</p>
 <ul>

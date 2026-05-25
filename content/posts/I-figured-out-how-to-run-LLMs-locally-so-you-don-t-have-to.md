@@ -114,6 +114,8 @@ $ omlx launch pi \
   --api-key 'omlx-<your-key>'
 ```
 
+Pi is more efficient than OpenCode because of its minimalist architecture and lower context overhead. While OpenCode comes pre-loaded with heavy built-in tools, LSP support, and comprehensive UI features, Pi strips these away to give developers total control and significantly reduce token waste.
+
 ### The oMLX admin tweaks
 
 ![alt text](/images/distracted-gabe.png "Distracted Gabe")
