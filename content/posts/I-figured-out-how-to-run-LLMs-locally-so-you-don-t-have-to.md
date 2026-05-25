@@ -25,7 +25,7 @@ What I got was a weeks-long rabbit hole through toolchains, benchmarks, broken p
 
 After enough API outages, token limits, and one offline flight from Munich to London for Devoxx, I realised I could not work without a connection. The more we come to rely on cloud models, the less productive we are the moment they go dark. I wanted a coding assistant that would work offline, without turning my MacBook into a space heater.
 
-What followed was a weeks-long journey through Ollama, MLX, oMLX, and pi, with kernel panics, reasoning loops, and one unexpected speed boost that I still cannot fully explain.
+What followed was a sequence of experiments through Ollama, MLX, oMLX, and pi, each revealing new trade-offs around memory, speed, and model behavior.
 
 ## Hardware and model tested
 
