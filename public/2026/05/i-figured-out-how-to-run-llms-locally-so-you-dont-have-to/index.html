@@ -92,12 +92,12 @@
 <h2 id="hardware-and-model-tested">Hardware and model tested</h2>
 <ul>
 <li><strong>MacBook</strong>: M4 Pro, 12-core CPU, 48GB unified memory</li>
-<li><strong>Model</strong>: Qwen3.6-35B-A3B-TurboQuant-MLX-4bit (35B total parameters, 3B active per token, a Mixture-of-Experts model)</li>
+<li><strong>Model</strong>: Qwen3.6-35B-A3B-TurboQuant-MLX-4bit (35B total parameters, 3B active per token, a Mixture-of-Experts model)<a href="#f0">[0]</a></li>
 <li><strong>macOS</strong>: Tahoe 26.5 (updated during experiments)</li>
 <li><strong>Model format</strong>: 4-bit quantized MLX, downloaded via <code>huggingface-cli</code></li>
 </ul>
 <h2 id="benchmark-results">Benchmark results</h2>
-<p>These numbers are decode tokens per second, measured on a single continuous generation of roughly 2,000 tokens, with a short system prompt (~500 tokens). Benchmarks were taken on macOS Tahoe 26.5 with the laptop plugged in, on performance power mode. They are anecdotal. Your mileage will vary based on model quant, context length, prompt size, and what else is running on your machine.</p>
+<p>These numbers are decode tokens per second<a href="#f3">[3]</a>, measured on a single continuous generation of roughly 2,000 tokens, with a short system prompt (~500 tokens). Benchmarks were taken on macOS Tahoe 26.5 with the laptop plugged in, on performance power mode. They are anecdotal. Your mileage will vary based on model quant, context length, prompt size, and what else is running on your machine.</p>
 <h3 id="baseline-comparison-no-speculative-decoding">Baseline comparison (no speculative decoding)</h3>
 <table>
   <thead>
@@ -111,19 +111,19 @@
   <tbody>
       <tr>
           <td>Ollama (qwen3.6, default settings)</td>
-          <td>48GB + 12GB</td>
+          <td>48GB + 12GB swap<a href="#f2">[2]</a></td>
           <td>~25</td>
           <td>Fans at max, battery drains in ~2 hours</td>
       </tr>
       <tr>
           <td>MLX (mlx_lm, default settings)</td>
-          <td>48GB + 2GB</td>
+          <td>48GB + 2GB swap<a href="#f2">[2]</a></td>
           <td>~35</td>
           <td>Cooler, but macOS killed the process under memory pressure</td>
       </tr>
       <tr>
           <td>oMLX (default settings)</td>
-          <td>&lt; 48GB (no swap)</td>
+          <td>&lt; 48GB (no swap)<a href="#f2">[2]</a></td>
           <td>~47</td>
           <td>The first setup I could imagine using regularly</td>
       </tr>
@@ -142,7 +142,7 @@
   <tbody>
       <tr>
           <td>pi via oMLX (DFlash + 8-bit KV cache + custom template)</td>
-          <td>&lt; 48GB (no swap)</td>
+          <td>&lt; 48GB (no swap)<a href="#f2">[2]</a></td>
           <td>~70</td>
           <td>Experimental; see caveats below</td>
       </tr>
@@ -288,16 +288,17 @@
 <h2 id="lessons-learned">Lessons learned</h2>
 <h3 id="memory-headroom-matters-more-than-you-think">Memory headroom matters more than you think</h3>
 <p>When MLX tried to allocate more memory than macOS would allow, the OS sent a SIGKILL to the process. Under enough pressure, the kernel panicked the whole system. It was a kernel panic, not a hardware-level crash. The macOS update was not what fixed it. What stopped the crashes was simply moving to lighter setups like oMLX, which reduced the memory pressure enough that the SIGKILL and kernel panic never happened again. The lesson: staying within memory headroom and keeping the model quantized at 4-bit<a href="#f5">[5]</a> matters more than any software update.</p>
-<p>The answer lies in Apple Silicon&rsquo;s UMA. The CPU and GPU share exactly the same physical pool of RAM, which eliminates the need to copy tensors between separate memory banks. This is the single biggest performance advantage for running LLMs locally. But unified memory does not eliminate all overhead: memory bandwidth, cache movement, allocation behavior, and GPU scheduling still matter, and my workload was almost certainly GPU/Metal rather than Neural Engine.</p>
+<p>The answer lies in Apple Silicon&rsquo;s UMA<a href="#f1">[1]</a>. The CPU and GPU share exactly the same physical pool of RAM, which eliminates the need to copy tensors between separate memory banks. This is the single biggest performance advantage for running LLMs locally. But unified memory does not eliminate all overhead: memory bandwidth, cache movement, allocation behavior, and GPU scheduling still matter, and my workload was almost certainly GPU/Metal<a href="#f4">[4]</a> rather than Neural Engine.</p>
 <h3 id="context-size-and-the-kv-cache">Context size and the KV cache</h3>
-<p>At 262K context, the KV cache dominates memory usage. Using 8-bit for the KV cache (not the model weights) avoided what looked like a slowdown bug in oMLX&rsquo;s 4-bit MoE cache handling at large context windows. Prefix caching happens in the serving backend, not in pi itself. It chops your prompt into blocks, hashes them, and stores the resulting KV tensors in memory. On follow-up queries that reuse the same system prompt or project context, the model skips the heavy computation and reuses the cached blocks. The more context you feed the model, the more value you get from caching.</p>
+<p>At 262K context, the KV cache<a href="#f6">[6]</a> dominates memory usage. Using 8-bit for the KV cache (not the model weights) avoided what looked like a slowdown bug in oMLX&rsquo;s 4-bit MoE cache handling at large context windows. Prefix caching<a href="#f8">[8]</a> happens in the serving backend, not in pi itself. It chops your prompt into blocks, hashes them, and stores the resulting KV tensors in memory. On follow-up queries that reuse the same system prompt or project context, the model skips the heavy computation and reuses the cached blocks. The more context you feed the model, the more value you get from caching.</p>
 <h3 id="why-qwen-36-gets-stuck-in-reasoning-loops">Why Qwen 3.6 gets stuck in reasoning loops</h3>
 <p>From my own experience, I observed Qwen 3.6 getting stuck in reasoning loops under certain conditions. It endlessly second-guesses answers, repeats circular logic, or endlessly retries tool calls. This is not necessarily a bug in my setup. It seems to be a property of the model interacting with certain environments.</p>
 <p>From what I could piece together, a few factors seem to contribute:</p>
 <p><strong>Incompatible agent/tool frameworks.</strong> Using agent environments (like OpenCode) with Qwen can cause instability. If a tool reports an error but fails to explain why, Qwen gets confused and attempts to trigger the same tool repeatedly without altering its inputs.</p>
 <p><strong>Tool calling inside reasoning blocks.</strong> Qwen models sometimes attempt to execute tool calls natively inside their hidden <code>&lt;think&gt;</code> blocks. Reasoning parsers may drop this section, causing the tool call to fail and prompting the model to re-initiate the entire thought process.</p>
-<p><strong>Over-restricted sampling.</strong> Setting temperatures too low (e.g., 0.1 to 0.5) limits the model&rsquo;s exploratory generation. Without a higher temperature, the model struggles to break out of its own logical ruts. Note: 0.4 was my normal coding setting; 0.7 to 0.85 helped as a recovery tactic when the model looped.</p>
+<p><strong>Over-restricted sampling.</strong> Setting temperatures too low (e.g., 0.1 to 0.5) limits the model&rsquo;s exploratory generation. Without a higher temperature, the model struggles to break out of its own logical ruts.</p>
 <p><strong>Context window fatigue.</strong> Exhausting or maximizing the context window<a href="#f9">[9]</a> degrades the model&rsquo;s internal attention mechanism, making it much more likely to hallucinate the initial prompt and restart its reasoning cycles.</p>
+<p>Note: 0.4 was my normal coding setting; 0.7 to 0.85 helped as a recovery tactic when the model looped.</p>
 <h3 id="how-i-mitigated-the-looping">How I mitigated the looping</h3>
 <p>Several strategies helped in my testing:</p>
 <ul>
@@ -343,7 +344,7 @@
 <li><a name="f2">[2]</a> Swap: macOS using SSD as scratch space when physical RAM is exhausted.</li>
 <li><a name="f3">[3]</a> Tokens: Basic units of text an LLM processes. Roughly a word or fraction thereof.</li>
 <li><a name="f4">[4]</a> Metal: Apple&rsquo;s low-level graphics API that lets MLX-based tools use the GPU for compute.</li>
-<li><a name="f5">[5]</a> 4-bit quantization: Compression technique reducing weight precision from 16 bits to 4 bits, roughly halving RAM usage.</li>
+<li><a name="f5">[5]</a> 4-bit quantization: Compression technique reducing weight precision from 16 bits to 4 bits, cutting model weight storage by roughly 4x before overhead.</li>
 <li><a name="f6">[6]</a> KV (Key-Value) cache: Stores attention tensors from previous tokens to avoid recomputation.</li>
 <li><a name="f7">[7]</a> Continuous batching: Processing multiple user requests together in a single forward pass.</li>
 <li><a name="f8">[8]</a> Prefix caching: Hashing prompt blocks and storing resulting KV tensors for reuse on follow-up queries.</li>
