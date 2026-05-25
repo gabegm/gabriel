@@ -56,14 +56,6 @@ These numbers are decode tokens per second, measured on a single continuous gene
 
 For anyone who wants to follow the same path on their own Apple Silicon Mac, here are the exact commands and configurations I used.
 
-### Step 0: Downloading the model
-
-Before any of the above, I needed the model on disk. I used `huggingface-cli` to download the 4-bit quantized MLX version:
-
-```
-hf download majentik/Qwen3.6-35B-A3B-TurboQuant-MLX-4bit --local-dir ~/models/Qwen3.6-35B-A3B-TurboQuant-MLX-4bit
-```
-
 ### Step 1: Ollama (my setup)
 
 Simplest possible setup:
@@ -78,7 +70,13 @@ Note: I cannot claim this is "Ollama vs MLX" in general. The Ollama model, the M
 
 ### Step 2: MLX (mlx_lm)
 
-With the model already downloaded, I started the server:
+After trying Ollama, I discovered MLX and wanted to try the same model in its native format. I downloaded the 4-bit quantized MLX variant using `huggingface-cli`:
+
+```
+hf download majentik/Qwen3.6-35B-A3B-TurboQuant-MLX-4bit --local-dir ~/models/Qwen3.6-35B-A3B-TurboQuant-MLX-4bit
+```
+
+Then I started the server:
 
 ```
 mlx_lm.server \

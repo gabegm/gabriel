@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="generator" content="Hugo 0.161.1">
@@ -12,10 +12,10 @@
   <meta name="description" content="A journey through the local LLM rabbit hole from ollama to pi, and everything in between." />
 
   
-  <link type="text/css" rel="stylesheet" href="https://gabriel.gaucimaistre.com/css/print.css" media="print">
-  <link type="text/css" rel="stylesheet" href="https://gabriel.gaucimaistre.com/css/poole.css">
-  <link type="text/css" rel="stylesheet" href="https://gabriel.gaucimaistre.com/css/syntax.css">
-  <link type="text/css" rel="stylesheet" href="https://gabriel.gaucimaistre.com/css/hyde.css">
+  <link type="text/css" rel="stylesheet" href="http://localhost:1313/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="http://localhost:1313/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="http://localhost:1313/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="http://localhost:1313/css/hyde.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
 
 
@@ -25,7 +25,7 @@
 
   
   
-  <meta property="og:url" content="https://gabriel.gaucimaistre.com/2026/05/i-figured-out-how-to-run-llms-locally-so-you-dont-have-to/">
+  <meta property="og:url" content="http://localhost:1313/2026/05/i-figured-out-how-to-run-llms-locally-so-you-dont-have-to/">
   <meta property="og:site_name" content="Gabe">
   <meta property="og:title" content="I figured out how to run LLMs locally so you don&#39;t have to">
   <meta property="og:description" content="A journey through the local LLM rabbit hole from ollama to pi, and everything in between.">
@@ -35,15 +35,15 @@
     <meta property="article:published_time" content="2026-05-21T10:00:00+00:00">
     <meta property="article:modified_time" content="2026-05-21T10:00:00+00:00">
     <meta property="article:tag" content="Local-Llm">
-    <meta property="article:tag" content="Machine-Learning">
+    <meta property="article:tag" content="Machine Learning">
     <meta property="article:tag" content="Mlx">
-    <meta property="og:image" content="https://gabriel.gaucimaistre.com/images/ai-ai-ai.jpg">
+    <meta property="og:image" content="http://localhost:1313/images/ai-ai-ai.jpg">
 
 
   
   
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://gabriel.gaucimaistre.com/images/ai-ai-ai.jpg">
+  <meta name="twitter:image" content="http://localhost:1313/images/ai-ai-ai.jpg">
   <meta name="twitter:title" content="I figured out how to run LLMs locally so you don&#39;t have to">
   <meta name="twitter:description" content="A journey through the local LLM rabbit hole from ollama to pi, and everything in between.">
 
@@ -55,7 +55,7 @@
   <aside class="sidebar" role="complementary" aria-label="Site navigation">
   <div class="container sidebar-sticky">
     <div class="sidebar-about">
-      <a href="https://gabriel.gaucimaistre.com/" aria-label="Home"><img src="/images/avatar.jpg" alt="Gabe - Software Engineer" /></a>
+      <a href="http://localhost:1313/" aria-label="Home"><img src="/images/avatar.jpg" alt="Gabe - Software Engineer" /></a>
       <h1>Gabe</h1>
       <p class="lead">
         Software Engineer
@@ -66,7 +66,7 @@
 
     <nav aria-label="Main navigation">
       <ul class="sidebar-nav">
-        <li><a href="https://gabriel.gaucimaistre.com/">Home</a> </li>
+        <li><a href="http://localhost:1313/">Home</a> </li>
         <li><a href="/about/"> About </a></li><li><a href="https://bsky.app/profile/gabegm.bsky.social/"> Blue Sky </a></li><li><a href="https://github.com/gabegm/"> Github </a></li><li><a href="https://www.linkedin.com/in/gabegm/"> LinkedIn </a></li><li><a href="/index.xml"> RSS </a></li>
       </ul>
     </nav>
@@ -151,16 +151,15 @@
 <p><strong>Important</strong>: The optimized row is not apples-to-apples with the baseline. It includes speculative decoding (DFlash), 8-bit KV cache, a custom Jinja template, and several admin-level oMLX changes. The baseline rows used default configurations. I present them separately because combining them obscures what each contributed.</p>
 <h2 id="how-to-replicate-this">How to replicate this</h2>
 <p>For anyone who wants to follow the same path on their own Apple Silicon Mac, here are the exact commands and configurations I used.</p>
-<h3 id="step-0-downloading-the-model">Step 0: Downloading the model</h3>
-<p>Before any of the above, I needed the model on disk. I used <code>huggingface-cli</code> to download the 4-bit quantized MLX version:</p>
-<pre tabindex="0"><code>hf download majentik/Qwen3.6-35B-A3B-TurboQuant-MLX-4bit --local-dir ~/models/Qwen3.6-35B-A3B-TurboQuant-MLX-4bit
-</code></pre><h3 id="step-1-ollama-my-setup">Step 1: Ollama (my setup)</h3>
+<h3 id="step-1-ollama-my-setup">Step 1: Ollama (my setup)</h3>
 <p>Simplest possible setup:</p>
 <pre tabindex="0"><code>ollama run qwen3.6
 </code></pre><p>This pulled the model, loaded it, and started serving. Expect 48GB+ RAM, 12GB swap, and roughly 25 tokens per second. Your laptop will get loud.</p>
 <p>Note: I cannot claim this is &ldquo;Ollama vs MLX&rdquo; in general. The Ollama model, the MLX model, the quantization, the context settings, and the cache behavior were all different. What I can say is that <em>my Ollama setup</em> used more swap and produced fewer tokens per second than <em>my MLX setup</em> on this specific machine and model.</p>
 <h3 id="step-2-mlx-mlx_lm">Step 2: MLX (mlx_lm)</h3>
-<p>With the model already downloaded, I started the server:</p>
+<p>After trying Ollama, I discovered MLX and wanted to try the same model in its native format. I downloaded the 4-bit quantized MLX variant using <code>huggingface-cli</code>:</p>
+<pre tabindex="0"><code>hf download majentik/Qwen3.6-35B-A3B-TurboQuant-MLX-4bit --local-dir ~/models/Qwen3.6-35B-A3B-TurboQuant-MLX-4bit
+</code></pre><p>Then I started the server:</p>
 <pre tabindex="0"><code>mlx_lm.server \
   --model /Users/gabegm/models/Qwen3.6-35B-A3B-TurboQuant-MLX-4bit \
   --chat-template-args &#39;{&#34;enable_thinking&#34;: false}&#39;
@@ -362,8 +361,6 @@
 
     </main>
 
-    
-      
     
   </body>
 </html>
