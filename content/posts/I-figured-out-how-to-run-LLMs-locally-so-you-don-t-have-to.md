@@ -61,10 +61,10 @@ For anyone who wants to follow the same path on their own Apple Silicon Mac, her
 Simplest possible setup:
 
 ```
-ollama run qwen3.6
+$ ollama
 ```
 
-This pulled the model, loaded it, and started serving. Expect 48GB+ RAM, 12GB swap, and roughly 25 tokens per second. Your laptop will get loud.
+This prompted me to pick a model (I chose qwen3.6) and then which agent (I chose opencode). It pulled the model, loaded it, and started serving. Expect 48GB+ RAM, 12GB swap, and roughly 25 tokens per second. Your laptop will get loud.
 
 Note: I cannot claim this is "Ollama vs MLX" in general. The Ollama model, the MLX model, the quantization, the context settings, and the cache behavior were all different. What I can say is that *my Ollama setup* used more swap and produced fewer tokens per second than *my MLX setup* on this specific machine and model.
 
@@ -73,13 +73,13 @@ Note: I cannot claim this is "Ollama vs MLX" in general. The Ollama model, the M
 After trying Ollama, I discovered MLX and wanted to try the same model in its native format. I downloaded the 4-bit quantized MLX variant using `huggingface-cli`:
 
 ```
-hf download majentik/Qwen3.6-35B-A3B-TurboQuant-MLX-4bit --local-dir ~/models/Qwen3.6-35B-A3B-TurboQuant-MLX-4bit
+$ hf download majentik/Qwen3.6-35B-A3B-TurboQuant-MLX-4bit --local-dir ~/models/Qwen3.6-35B-A3B-TurboQuant-MLX-4bit
 ```
 
 Then I started the server:
 
 ```
-mlx_lm.server \
+$ mlx_lm.server \
   --model /Users/gabegm/models/Qwen3.6-35B-A3B-TurboQuant-MLX-4bit \
   --chat-template-args '{"enable_thinking": false}'
 ```
@@ -93,7 +93,7 @@ This served on `localhost:8080` by default. Roughly 35 tokens per second, 48GB R
 ### Step 3: oMLX (baseline)
 
 ```
-omlx serve --host 0.0.0.0 --port 8080 --model-dir ~/models
+$ omlx serve --host 0.0.0.0 --port 8080 --model-dir ~/models
 ```
 
 No extra flags needed. oMLX handled the model loading, memory management, and KV caching automatically. I watched Activity Monitor and saw swap drop to zero, RAM settle around 42GB, and the fans finally stop screaming. 47 tokens per second.
@@ -103,7 +103,7 @@ No extra flags needed. oMLX handled the model loading, memory management, and KV
 To connect pi to oMLX, I launched pi directly through oMLX:
 
 ```
-omlx launch pi \
+$ omlx launch pi \
   --model 'Qwen3.6-35B-A3B-TurboQuant-MLX-4bit' \
   --api-key 'omlx-<your-key>'
 ```
