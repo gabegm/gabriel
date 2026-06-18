@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.161.1">
+  <meta name="generator" content="Hugo 0.162.1">
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,10 +12,10 @@
   <meta name="description" content="Julia is a fairly modern scientific programming language that is free, high-level, fast, and bundles a bunch of awesome features that makes Julia working with data great again. Amazon Athena is an interactive query service which allows you to easily analyze your data collecting dust in Amazon S3 storage using your good old friend SQL. Julia is great for working with data, Athena is great for querying data, how can we use both together? Rather than manually export CSV files and use `CSV.jl` to load CSV files in Julia, I&#39;ll be showing you how to query the data using Athena directly from Julia, loading the resulting set of data into a DataFrame using `DataFrames.jl` for you to work with." />
 
   
-  <link type="text/css" rel="stylesheet" href="http://localhost:1313/css/print.css" media="print">
-  <link type="text/css" rel="stylesheet" href="http://localhost:1313/css/poole.css">
-  <link type="text/css" rel="stylesheet" href="http://localhost:1313/css/syntax.css">
-  <link type="text/css" rel="stylesheet" href="http://localhost:1313/css/hyde.css">
+  <link type="text/css" rel="stylesheet" href="https://gabriel.gaucimaistre.com/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="https://gabriel.gaucimaistre.com/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="https://gabriel.gaucimaistre.com/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="https://gabriel.gaucimaistre.com/css/hyde.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
 
 
@@ -25,27 +25,27 @@
 
   
   
-  <meta property="og:url" content="http://localhost:1313/2021/06/querying-amazon-athena-using-julia/">
-  <meta property="og:site_name" content="Gabe">
-  <meta property="og:title" content="Querying Amazon Athena Using Julia">
-  <meta property="og:description" content="Julia is a fairly modern scientific programming language that is free, high-level, fast, and bundles a bunch of awesome features that makes Julia working with data great again. Amazon Athena is an interactive query service which allows you to easily analyze your data collecting dust in Amazon S3 storage using your good old friend SQL. Julia is great for working with data, Athena is great for querying data, how can we use both together? Rather than manually export CSV files and use `CSV.jl` to load CSV files in Julia, I&#39;ll be showing you how to query the data using Athena directly from Julia, loading the resulting set of data into a DataFrame using `DataFrames.jl` for you to work with.">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2021-06-08T23:00:00+00:00">
-    <meta property="article:modified_time" content="2021-06-08T23:00:00+00:00">
-    <meta property="article:tag" content="Amazon Athena">
-    <meta property="article:tag" content="Databases">
-    <meta property="article:tag" content="Julia">
-    <meta property="og:image" content="http://localhost:1313/images/julia-loves-aws.png">
+  <meta property="og:url" content="https://gabriel.gaucimaistre.com/2021/06/querying-amazon-athena-using-julia/">
+	<meta property="og:site_name" content="Gabe">
+	<meta property="og:title" content="Querying Amazon Athena Using Julia">
+	<meta property="og:description" content="Julia is a fairly modern scientific programming language that is free, high-level, fast, and bundles a bunch of awesome features that makes Julia working with data great again. Amazon Athena is an interactive query service which allows you to easily analyze your data collecting dust in Amazon S3 storage using your good old friend SQL. Julia is great for working with data, Athena is great for querying data, how can we use both together? Rather than manually export CSV files and use `CSV.jl` to load CSV files in Julia, I&#39;ll be showing you how to query the data using Athena directly from Julia, loading the resulting set of data into a DataFrame using `DataFrames.jl` for you to work with.">
+	<meta property="og:locale" content="en_us">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="posts">
+		<meta property="article:published_time" content="2021-06-08T23:00:00+00:00">
+		<meta property="article:modified_time" content="2021-06-08T23:00:00+00:00">
+		<meta property="article:tag" content="Amazon Athena">
+		<meta property="article:tag" content="Databases">
+		<meta property="article:tag" content="Julia">
+		<meta property="og:image" content="https://gabriel.gaucimaistre.com/images/julia-loves-aws.png">
 
 
   
   
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="http://localhost:1313/images/julia-loves-aws.png">
-  <meta name="twitter:title" content="Querying Amazon Athena Using Julia">
-  <meta name="twitter:description" content="Julia is a fairly modern scientific programming language that is free, high-level, fast, and bundles a bunch of awesome features that makes Julia working with data great again. Amazon Athena is an interactive query service which allows you to easily analyze your data collecting dust in Amazon S3 storage using your good old friend SQL. Julia is great for working with data, Athena is great for querying data, how can we use both together? Rather than manually export CSV files and use `CSV.jl` to load CSV files in Julia, I&#39;ll be showing you how to query the data using Athena directly from Julia, loading the resulting set of data into a DataFrame using `DataFrames.jl` for you to work with.">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:image" content="https://gabriel.gaucimaistre.com/images/julia-loves-aws.png">
+	<meta name="twitter:title" content="Querying Amazon Athena Using Julia">
+	<meta name="twitter:description" content="Julia is a fairly modern scientific programming language that is free, high-level, fast, and bundles a bunch of awesome features that makes Julia working with data great again. Amazon Athena is an interactive query service which allows you to easily analyze your data collecting dust in Amazon S3 storage using your good old friend SQL. Julia is great for working with data, Athena is great for querying data, how can we use both together? Rather than manually export CSV files and use `CSV.jl` to load CSV files in Julia, I&#39;ll be showing you how to query the data using Athena directly from Julia, loading the resulting set of data into a DataFrame using `DataFrames.jl` for you to work with.">
 
 
   
@@ -55,7 +55,7 @@
   <aside class="sidebar" role="complementary" aria-label="Site navigation">
   <div class="container sidebar-sticky">
     <div class="sidebar-about">
-      <a href="http://localhost:1313/" aria-label="Home"><img src="/images/avatar.jpg" alt="Gabe - Software Engineer" /></a>
+      <a href="https://gabriel.gaucimaistre.com/" aria-label="Home"><img src="/images/avatar.jpg" alt="Gabe - Software Engineer" /></a>
       <h1>Gabe</h1>
       <p class="lead">
         Software Engineer
@@ -66,7 +66,7 @@
 
     <nav aria-label="Main navigation">
       <ul class="sidebar-nav">
-        <li><a href="http://localhost:1313/">Home</a> </li>
+        <li><a href="https://gabriel.gaucimaistre.com/">Home</a> </li>
         <li><a href="/about/"> About </a></li><li><a href="https://bsky.app/profile/gabegm.bsky.social/"> Blue Sky </a></li><li><a href="https://github.com/gabegm/"> Github </a></li><li><a href="https://www.linkedin.com/in/gabegm/"> LinkedIn </a></li><li><a href="/index.xml"> RSS </a></li>
       </ul>
     </nav>
@@ -85,7 +85,7 @@
   </p>
   
   <p><img src="/images/julia-loves-aws.png" alt="alt text" title="Logo Title Text 1"></p>
-<p>Julia is a fairly modern scientific programming language that is free, high-level, fast, and bundles a bunch of awesome features that makes Julia working with data great again. The language borrows inspiration from languages such as Python, MATLAB and R<a href="#f1">[1]</a>. If you haven&rsquo;t yet read my article on &ldquo;<a href="http://localhost:1313/2018/09/10-reasons-why-you-should-learn-julia/">10 Reasons Why You Should Learn Julia</a>&rdquo;, check it out! Amazon Athena is an interactive query service which allows you to easily analyze your data collecting dust in Amazon S3 storage using your good old friend SQL. Athena is great because it&rsquo;s serverless, meaning there is no infrastructure to manage, and you pay only for the queries that you run.</p>
+<p>Julia is a fairly modern scientific programming language that is free, high-level, fast, and bundles a bunch of awesome features that makes Julia working with data great again. The language borrows inspiration from languages such as Python, MATLAB and R<a href="#f1">[1]</a>. If you haven&rsquo;t yet read my article on &ldquo;<a href="https://gabriel.gaucimaistre.com/2018/09/10-reasons-why-you-should-learn-julia/">10 Reasons Why You Should Learn Julia</a>&rdquo;, check it out! Amazon Athena is an interactive query service which allows you to easily analyze your data collecting dust in Amazon S3 storage using your good old friend SQL. Athena is great because it&rsquo;s serverless, meaning there is no infrastructure to manage, and you pay only for the queries that you run.</p>
 <p>Sounds awesome right? Julia is great for working with data, Athena is great for querying data, how can we use both together? Rather than manually export CSV files and use <code>CSV.jl</code> to load CSV files in Julia, I&rsquo;ll be showing you how to query the data using Athena directly from Julia, loading the resulting set of data into a DataFrame using <code>DataFrames.jl</code> for you to work with.</p>
 <p>New to Julia? Go ahead and grab the official binaries for your particular Operating System (OS) from the Julia site <a href="https://julialang.org/downloads/#current_stable_release">here</a>. If you&rsquo;re not interested in a detailed write-up but just want to see the intact code solution, check out <a href="https://gist.github.com/gabegm/458288fa55437314b7b41b63a53a13a1">this</a> GitHub gist.</p>
 <h2 id="odbc">ODBC</h2>
@@ -181,7 +181,7 @@ Julia has native support for string interpolation allowing us to construct strin
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-julia" data-lang="julia"><span style="display:flex;"><span><span style="color:#75715e"># load data into database table</span>
 </span></span><span style="display:flex;"><span>ODBC<span style="color:#f92672">.</span>load(df, conn, <span style="color:#e6db74">&#34;table_nme&#34;</span>)
 </span></span></code></pre></div><h2 id="conclusion">Conclusion</h2>
-<p>Could you have done all of this in Python? Absolutely, in fact there are many posts like these which you can find on how to do that. However, I think Julia is an interesting language, <a href="http://localhost:1313/2018/09/10-reasons-why-you-should-learn-julia/">is worth learning</a>, and can provide many benefits over Python.</p>
+<p>Could you have done all of this in Python? Absolutely, in fact there are many posts like these which you can find on how to do that. However, I think Julia is an interesting language, <a href="https://gabriel.gaucimaistre.com/2018/09/10-reasons-why-you-should-learn-julia/">is worth learning</a>, and can provide many benefits over Python.</p>
 <p>However, Julia is still a fairly new language, and although it&rsquo;s steadily rising in popularity<a href="(#f8)">[8]</a><a href="(#f9)">[9]</a>, still lacks the tooling and community support which a more widely used language such as Python provides. Looking at StackOverflow, the number of questions regarding Python dwarf the number of questions on Julia. It might be tempting to chalk this up to Julia being easier to use but — as much as I value Julia over Python — this isn&rsquo;t the case. This is an example of selection bias, where the actual reason that the number of questions on Python versus the number of questions on Julia is significantly higher is simply because there are more people using Python than Julia. This underrepresentation of community questions and resources on StackOverflow actually contributes to Julia&rsquo;s steeper learning curve.</p>
 <p>It is not, however, all doom and gloom. I do think that Julia, as a language, is easier to read than Python since most packages Julia are written in pure Julia. As popular as Python may be, it doesn&rsquo;t always mean it&rsquo;s the best tool for everyone or every job. Tooling and community support will, eventually, catch up as Julia&rsquo;s popularity continues to rise and its user base continues to grow. Ultimately, what language best fits your needs is up to you.</p>
 <p>If you do however find yourself in the situation wanting to use a Python package not available in Julia, <code>PyCall.jl</code> is a great package which provides you with the ability to directly call and fully interoperate<a href="#f10">[10]</a> with Python from the Julia language. It&rsquo;s as simple as:</p>
@@ -220,6 +220,8 @@ Julia has native support for string interpolation allowing us to construct strin
 
     </main>
 
+    
+      
     
   </body>
 </html>

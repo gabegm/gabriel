@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.161.1">
+  <meta name="generator" content="Hugo 0.162.1">
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,10 +12,10 @@
   <meta name="description" content="A journey through the local LLM rabbit hole from ollama to pi, and everything in between." />
 
   
-  <link type="text/css" rel="stylesheet" href="http://localhost:1313/css/print.css" media="print">
-  <link type="text/css" rel="stylesheet" href="http://localhost:1313/css/poole.css">
-  <link type="text/css" rel="stylesheet" href="http://localhost:1313/css/syntax.css">
-  <link type="text/css" rel="stylesheet" href="http://localhost:1313/css/hyde.css">
+  <link type="text/css" rel="stylesheet" href="https://gabriel.gaucimaistre.com/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="https://gabriel.gaucimaistre.com/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="https://gabriel.gaucimaistre.com/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="https://gabriel.gaucimaistre.com/css/hyde.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
 
 
@@ -25,27 +25,27 @@
 
   
   
-  <meta property="og:url" content="http://localhost:1313/2026/05/i-figured-out-how-to-run-llms-locally-so-you-dont-have-to/">
-  <meta property="og:site_name" content="Gabe">
-  <meta property="og:title" content="I figured out how to run LLMs locally so you don&#39;t have to">
-  <meta property="og:description" content="A journey through the local LLM rabbit hole from ollama to pi, and everything in between.">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2026-05-21T10:00:00+00:00">
-    <meta property="article:modified_time" content="2026-05-21T10:00:00+00:00">
-    <meta property="article:tag" content="Local-Llm">
-    <meta property="article:tag" content="Machine-Learning">
-    <meta property="article:tag" content="Mlx">
-    <meta property="og:image" content="http://localhost:1313/images/the-power-of-the-sun.png">
+  <meta property="og:url" content="https://gabriel.gaucimaistre.com/2026/05/i-figured-out-how-to-run-llms-locally-so-you-dont-have-to/">
+	<meta property="og:site_name" content="Gabe">
+	<meta property="og:title" content="I figured out how to run LLMs locally so you don&#39;t have to">
+	<meta property="og:description" content="A journey through the local LLM rabbit hole from ollama to pi, and everything in between.">
+	<meta property="og:locale" content="en_us">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="posts">
+		<meta property="article:published_time" content="2026-05-21T10:00:00+00:00">
+		<meta property="article:modified_time" content="2026-05-21T10:00:00+00:00">
+		<meta property="article:tag" content="Local-Llm">
+		<meta property="article:tag" content="Machine Learning">
+		<meta property="article:tag" content="Mlx">
+		<meta property="og:image" content="https://gabriel.gaucimaistre.com/images/the-power-of-the-sun.png">
 
 
   
   
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="http://localhost:1313/images/the-power-of-the-sun.png">
-  <meta name="twitter:title" content="I figured out how to run LLMs locally so you don&#39;t have to">
-  <meta name="twitter:description" content="A journey through the local LLM rabbit hole from ollama to pi, and everything in between.">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:image" content="https://gabriel.gaucimaistre.com/images/the-power-of-the-sun.png">
+	<meta name="twitter:title" content="I figured out how to run LLMs locally so you don&#39;t have to">
+	<meta name="twitter:description" content="A journey through the local LLM rabbit hole from ollama to pi, and everything in between.">
 
 
   
@@ -55,7 +55,7 @@
   <aside class="sidebar" role="complementary" aria-label="Site navigation">
   <div class="container sidebar-sticky">
     <div class="sidebar-about">
-      <a href="http://localhost:1313/" aria-label="Home"><img src="/images/avatar.jpg" alt="Gabe - Software Engineer" /></a>
+      <a href="https://gabriel.gaucimaistre.com/" aria-label="Home"><img src="/images/avatar.jpg" alt="Gabe - Software Engineer" /></a>
       <h1>Gabe</h1>
       <p class="lead">
         Software Engineer
@@ -66,7 +66,7 @@
 
     <nav aria-label="Main navigation">
       <ul class="sidebar-nav">
-        <li><a href="http://localhost:1313/">Home</a> </li>
+        <li><a href="https://gabriel.gaucimaistre.com/">Home</a> </li>
         <li><a href="/about/"> About </a></li><li><a href="https://bsky.app/profile/gabegm.bsky.social/"> Blue Sky </a></li><li><a href="https://github.com/gabegm/"> Github </a></li><li><a href="https://www.linkedin.com/in/gabegm/"> LinkedIn </a></li><li><a href="/index.xml"> RSS </a></li>
       </ul>
     </nav>
@@ -101,53 +101,53 @@
 <p>These numbers are decode tokens per second<a href="#f3">[3]</a>, measured on a single continuous generation of roughly 2,000 tokens, with a short system prompt (~500 tokens). Benchmarks were taken on macOS Tahoe 26.5 with the laptop plugged in, on performance power mode. They are anecdotal. Your mileage will vary based on model quantisation, context length, prompt size, and what else is running on your machine.</p>
 <h3 id="baseline-comparison-no-speculative-decoding">Baseline comparison (no speculative decoding)</h3>
 <table>
-  <thead>
-      <tr>
-          <th>My setup</th>
-          <th>Memory (RAM + Swap)</th>
-          <th>Tokens/sec</th>
-          <th>Notes</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Ollama (qwen3.6, default settings)</td>
-          <td>48GB + 12GB swap<a href="#f2">[2]</a></td>
-          <td>~25</td>
-          <td>Fans at max, battery drains in ~2 hours</td>
-      </tr>
-      <tr>
-          <td>MLX (mlx_lm, default settings)</td>
-          <td>48GB + 2GB swap<a href="#f2">[2]</a></td>
-          <td>~35</td>
-          <td>Cooler, but macOS killed the process under memory pressure</td>
-      </tr>
-      <tr>
-          <td>oMLX (default settings)</td>
-          <td>&lt; 48GB (no swap)<a href="#f2">[2]</a></td>
-          <td>~47</td>
-          <td>The first setup I could imagine using regularly</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>My setup</th>
+					<th>Memory (RAM + Swap)</th>
+					<th>Tokens/sec</th>
+					<th>Notes</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Ollama (qwen3.6, default settings)</td>
+					<td>48GB + 12GB swap<a href="#f2">[2]</a></td>
+					<td>~25</td>
+					<td>Fans at max, battery drains in ~2 hours</td>
+			</tr>
+			<tr>
+					<td>MLX (mlx_lm, default settings)</td>
+					<td>48GB + 2GB swap<a href="#f2">[2]</a></td>
+					<td>~35</td>
+					<td>Cooler, but macOS killed the process under memory pressure</td>
+			</tr>
+			<tr>
+					<td>oMLX (default settings)</td>
+					<td>&lt; 48GB (no swap)<a href="#f2">[2]</a></td>
+					<td>~47</td>
+					<td>The first setup I could imagine using regularly</td>
+			</tr>
+	</tbody>
 </table>
 <h3 id="optimised-experiment-pi--omlx-admin-tweaks">Optimised experiment (pi + oMLX admin tweaks)</h3>
 <table>
-  <thead>
-      <tr>
-          <th>My setup</th>
-          <th>Memory (RAM + Swap)</th>
-          <th>Tokens/sec</th>
-          <th>Notes</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>pi via oMLX (DFlash + 8-bit KV cache + custom template)</td>
-          <td>&lt; 48GB (no swap)<a href="#f2">[2]</a></td>
-          <td>~70</td>
-          <td>Experimental; see caveats below</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>My setup</th>
+					<th>Memory (RAM + Swap)</th>
+					<th>Tokens/sec</th>
+					<th>Notes</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>pi via oMLX (DFlash + 8-bit KV cache + custom template)</td>
+					<td>&lt; 48GB (no swap)<a href="#f2">[2]</a></td>
+					<td>~70</td>
+					<td>Experimental; see caveats below</td>
+			</tr>
+	</tbody>
 </table>
 <p><strong>Important</strong>: The optimised row is not apples-to-apples with the baseline. It includes speculative decoding (DFlash), 8-bit KV cache, a custom Jinja template, and several admin-level oMLX changes. The baseline rows used default configurations. I present them separately because combining them obscures what each contributed.</p>
 <h2 id="how-to-replicate-this">How to replicate this</h2>
@@ -183,7 +183,7 @@
 </code></pre><p>Pi is more efficient than OpenCode because of its minimalist architecture and lower context overhead. While OpenCode comes pre-loaded with heavy built-in tools, language server protocol (LSP) support, and comprehensive UI features, Pi strips these away to give developers total control and significantly reduce token waste.</p>
 <h3 id="the-omlx-admin-tweaks">The oMLX admin tweaks</h3>
 <p><img src="/images/distracted-gabe.png" alt="alt text" title="Distracted Gabe"></p>
-<p>Since writing the original version of this post, I made several adjustments in the oMLX Web Admin that pushed pi past 70 tokens/sec. I do not know the exact technical reason each change helped, but here is what I changed and what I observed:</p>
+<p>Since writing the original version of this post, I made several adjustments in the oMLX Web Admin that pushed pi past 70 tokens/sec. I haven&rsquo;t profiled each change individually, so I can&rsquo;t isolate which contributed what. Here&rsquo;s what I changed and what I observed:</p>
 <ul>
 <li>
 <p><strong>SpecPrefill: OFF.</strong> I noticed the engine was cutting markdown files and codebases in half, which caused text-corruption in the output. Specifically, code blocks would end mid-function with unclosed braces, and the model would then enter a loop trying to &ldquo;fix&rdquo; the truncated code. Turning this off stopped the corruption.</p>
@@ -206,65 +206,65 @@
 <h3 id="configuration">Configuration</h3>
 <p>These are the parameters I used for the final pi/oMLX setup. The earlier mlx_lm config used <code>enable_thinking: false</code> and no <code>tool_format</code> setting.</p>
 <table>
-  <thead>
-      <tr>
-          <th>Parameter</th>
-          <th>Value</th>
-          <th>Purpose</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>ctx_window</td>
-          <td>262144</td>
-          <td>Context window size<a href="#f9">[9]</a></td>
-      </tr>
-      <tr>
-          <td>max_tokens</td>
-          <td>32768</td>
-          <td>Maximum output tokens</td>
-      </tr>
-      <tr>
-          <td>temp</td>
-          <td>0.4</td>
-          <td>Temperature (normal coding setting)<a href="#f10">[10]</a></td>
-      </tr>
-      <tr>
-          <td>top_p</td>
-          <td>0.9</td>
-          <td>Nucleus sampling threshold<a href="#f11">[11]</a></td>
-      </tr>
-      <tr>
-          <td>top_k</td>
-          <td>0</td>
-          <td>No top-k filtering</td>
-      </tr>
-      <tr>
-          <td>min_p</td>
-          <td>0.05</td>
-          <td>Minimum probability threshold</td>
-      </tr>
-      <tr>
-          <td>rep_penalty</td>
-          <td>1</td>
-          <td>Repetition penalty<a href="#f12">[12]</a></td>
-      </tr>
-      <tr>
-          <td>presence_penalty</td>
-          <td>0.1</td>
-          <td>Light penalty on repeating tokens</td>
-      </tr>
-      <tr>
-          <td>enable_thinking</td>
-          <td>true</td>
-          <td>Re-activated CoT tracking (after the pi optimisations)</td>
-      </tr>
-      <tr>
-          <td>tool_format</td>
-          <td>json</td>
-          <td>Forces JSON tool output payloads</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>Parameter</th>
+					<th>Value</th>
+					<th>Purpose</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>ctx_window</td>
+					<td>262144</td>
+					<td>Context window size<a href="#f9">[9]</a></td>
+			</tr>
+			<tr>
+					<td>max_tokens</td>
+					<td>32768</td>
+					<td>Maximum output tokens</td>
+			</tr>
+			<tr>
+					<td>temp</td>
+					<td>0.4</td>
+					<td>Temperature (normal coding setting)<a href="#f10">[10]</a></td>
+			</tr>
+			<tr>
+					<td>top_p</td>
+					<td>0.9</td>
+					<td>Nucleus sampling threshold<a href="#f11">[11]</a></td>
+			</tr>
+			<tr>
+					<td>top_k</td>
+					<td>0</td>
+					<td>No top-k filtering</td>
+			</tr>
+			<tr>
+					<td>min_p</td>
+					<td>0.05</td>
+					<td>Minimum probability threshold</td>
+			</tr>
+			<tr>
+					<td>rep_penalty</td>
+					<td>1</td>
+					<td>Repetition penalty<a href="#f12">[12]</a></td>
+			</tr>
+			<tr>
+					<td>presence_penalty</td>
+					<td>0.1</td>
+					<td>Light penalty on repeating tokens</td>
+			</tr>
+			<tr>
+					<td>enable_thinking</td>
+					<td>true</td>
+					<td>Re-activated CoT tracking (after the pi optimisations)</td>
+			</tr>
+			<tr>
+					<td>tool_format</td>
+					<td>json</td>
+					<td>Forces JSON tool output payloads</td>
+			</tr>
+	</tbody>
 </table>
 <h3 id="opencode-configuration">OpenCode configuration</h3>
 <p>To use the MLX-powered model inside OpenCode, I added this to my config:</p>
@@ -368,6 +368,8 @@
 
     </main>
 
+    
+      
     
   </body>
 </html>

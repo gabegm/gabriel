@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" media="screen" href="/rss.xsl"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Svelte on Gabe</title>
+    <link>https://gabriel.gaucimaistre.com/tags/svelte/</link>
+    <description>Recent content in Svelte on Gabe</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 16 Jun 2026 10:00:00 +0000</lastBuildDate><atom:link href="https://gabriel.gaucimaistre.com/tags/svelte/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Job Grader: a tool for companies that don&#39;t have one</title>
+      <link>https://gabriel.gaucimaistre.com/2026/06/job-grader-a-tool-for-companies-that-dont-have-one/</link>
+      <pubDate>Tue, 16 Jun 2026 10:00:00 +0000</pubDate>
+      
+      <guid>https://gabriel.gaucimaistre.com/2026/06/job-grader-a-tool-for-companies-that-dont-have-one/</guid>
+      <description>Sales managers demand higher pay than support. Executives overpay favorites. Titles get inflated. After acquisitions, people do the same work but earn different amounts. This tool implements the Point-Factor Method to grade every role with an explicit rubric. Free, open-source, runs in the browser.</description>
+    </item>
+    
+  </channel>
+</rss>
