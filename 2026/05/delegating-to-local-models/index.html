@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.162.1">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Delegating To Local Models &middot; Gabe</title>
+  <meta name="description" content="I am experimenting with a small CLI that lets a strong cloud agent delegate bounded leaf tasks to a local OpenAI-compatible model." />
+
+  
+  <link type="text/css" rel="stylesheet" href="http://localhost:1313/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="http://localhost:1313/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="http://localhost:1313/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="http://localhost:1313/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  
+  <meta property="og:url" content="http://localhost:1313/2026/05/delegating-to-local-models/">
+	<meta property="og:site_name" content="Gabe">
+	<meta property="og:title" content="Delegating To Local Models">
+	<meta property="og:description" content="I am experimenting with a small CLI that lets a strong cloud agent delegate bounded leaf tasks to a local OpenAI-compatible model.">
+	<meta property="og:locale" content="en_us">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="posts">
+		<meta property="article:published_time" content="2026-05-26T10:00:00+00:00">
+		<meta property="article:modified_time" content="2026-05-26T10:00:00+00:00">
+		<meta property="article:tag" content="Local-Llm">
+		<meta property="article:tag" content="Agents">
+		<meta property="article:tag" content="Machine-Learning">
+		<meta property="article:tag" content="Developer-Tools">
+		<meta property="og:image" content="http://localhost:1313/images/avatar.jpg">
+
+
+  
+  
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:image" content="http://localhost:1313/images/avatar.jpg">
+	<meta name="twitter:title" content="Delegating To Local Models">
+	<meta name="twitter:description" content="I am experimenting with a small CLI that lets a strong cloud agent delegate bounded leaf tasks to a local OpenAI-compatible model.">
+
+
+  
+</head>
+
+  <body class="theme-base-0g ">
+  <aside class="sidebar" role="complementary" aria-label="Site navigation">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="http://localhost:1313/" aria-label="Home"><img src="/images/avatar.jpg" alt="Gabe - Software Engineer" /></a>
+      <h1>Gabe</h1>
+      <p class="lead">
+        Software Engineer
+      </p>
+      <p class="description">
+        I have opinions and make people read them.</p>
+    </div>
+
+    <nav aria-label="Main navigation">
+      <ul class="sidebar-nav">
+        <li><a href="http://localhost:1313/">Home</a> </li>
+        <li><a href="/about/"> About </a></li><li><a href="https://bsky.app/profile/gabegm.bsky.social/"> Blue Sky </a></li><li><a href="https://github.com/gabegm/"> Github </a></li><li><a href="https://www.linkedin.com/in/gabegm/"> LinkedIn </a></li><li><a href="/index.xml"> RSS </a></li>
+      </ul>
+    </nav>
+
+    <p>&copy; Gabriel Gauci Maistre 2026. All rights reserved. </p>
+  </div>
+</aside>
+
+    <main class="content container" role="main" aria-label="Main content">
+    <div class="post">
+  <h1>Delegating To Local Models</h1>
+  <time datetime=2026-05-26T10:00:00Z class="post-date">Tue, May 26, 2026</time>
+  
+  <p class="tags">
+    Tags:   <a href="/tags/local-llm">local-llm</a>  <a href="/tags/agents">agents</a>  <a href="/tags/machine-learning">machine-learning</a>  <a href="/tags/developer-tools">developer-tools</a>
+  </p>
+  
+  <p>I have been experimenting with a small idea: what if a strong cloud agent could delegate the boring parts of its work to a local model?</p>
+<p>Not the important parts. Not the planning. Not the judgment. Not the part where the agent decides whether a change is safe, whether a test failure matters, or whether a user request is underspecified.</p>
+<p>I mean the leaf tasks.</p>
+<p>Summarise this one large file. Classify these five search results. Draft a commit message from this diff. Answer this narrow repository question using only the context I have already supplied.</p>
+<p>That is the idea behind <code>local-agent-delegate</code>, or <code>lad</code>, a small experimental CLI I have been building for connecting a supervising agent like Codex, GPT, or Claude to a local OpenAI-compatible model.</p>
+<p>The cloud agent remains the adult in the room. The local model gets handed a small job, returns a small answer, and the cloud agent checks whether that answer is useful.</p>
+<h2 id="why-bother">Why bother?</h2>
+<p>After getting local LLMs running properly on my MacBook, I kept running into the same awkward question:</p>
+<p>What are these models actually good for in my day-to-day workflow?</p>
+<p>It is tempting to imagine the local model replacing everything. Fully offline coding. No API calls. No cloud dependency. No cost. No latency. The laptop becomes the whole development environment.</p>
+<p>That sounds lovely, but it is not where I am today.</p>
+<p>The strongest cloud models are still much better at the parts of software work that require broad context, careful planning, and taste. They are better at noticing when a request is not actually the right request. They are better at holding a complicated refactor in their head. They are better at deciding when not to touch code.</p>
+<p>Local models, especially the smaller ones that run comfortably on consumer hardware, are more uneven. They can be useful, but they can also be confidently wrong in ways that are annoying to detect if you give them too much responsibility.</p>
+<p>So I started thinking about the problem differently.</p>
+<p>Maybe the right question is not, &ldquo;Can a local model replace the cloud agent?&rdquo;</p>
+<p>Maybe it is, &ldquo;What work can a local model do where mistakes are cheap to catch?&rdquo;</p>
+<p>That leads to a very different design.</p>
+<h2 id="the-local-model-should-not-be-the-planner">The local model should not be the planner</h2>
+<p>The core rule of <code>lad</code> is conservative delegation.</p>
+<p>The supervising agent decides what needs to happen. It finds the files. It chooses the context. It decides whether a local delegation is appropriate. It checks the answer. If the local answer is vague, wrong, or suspicious, the supervisor ignores it and inspects the source material itself.</p>
+<p>The local model should not be asked to:</p>
+<ul>
+<li>design the architecture;</li>
+<li>make security-sensitive decisions;</li>
+<li>perform cross-file refactors;</li>
+<li>change public APIs;</li>
+<li>decide whether a test failure is acceptable;</li>
+<li>plan the main task.</li>
+</ul>
+<p>Those are not leaf tasks. Those are judgment tasks.</p>
+<p>For version one, I am interested in tasks that are bounded, easy to verify, and useful even when the answer is imperfect.</p>
+<p>For example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>lad summarize --file src/example.py --max-tokens <span style="color:#ae81ff">600</span>
+</span></span></code></pre></div><p>The supervisor can ask the local model to summarise one large file. If the summary says something surprising, the supervisor can open the file and check. The answer does not need to be trusted blindly.</p>
+<p>Another example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>lad classify <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --prompt <span style="color:#e6db74">&#34;Which service owns checkout?&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --candidate booking <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>  --candidate payments
+</span></span></code></pre></div><p>This is intentionally narrow. The local model is not inventing a plan. It is choosing from a short list.</p>
+<p>Or:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>lad draft commit --diff-file changes.diff
+</span></span></code></pre></div><p>Commit messages are a good target because the cost of a mediocre first draft is low. The supervising agent, or the human, can edit it immediately.</p>
+<h2 id="this-is-not-multi-agent-magic">This is not &ldquo;multi-agent&rdquo; magic</h2>
+<p>I am slightly allergic to agent diagrams where every box is another tiny employee with a grand title.</p>
+<p><code>lad</code> is not trying to create a team of autonomous local agents. I do not want a local &ldquo;architect agent&rdquo;, &ldquo;reviewer agent&rdquo;, &ldquo;security agent&rdquo;, and &ldquo;product manager agent&rdquo; arguing with each other on my laptop while I wait for my battery to disappear.</p>
+<p>The model behind <code>lad</code> is much more boring.</p>
+<p>There is one supervisor. There is one local worker. The worker receives a bounded prompt and returns text. The supervisor remains responsible.</p>
+<p>This distinction matters because it changes the failure mode. If the local model is treated as an independent agent, then its mistakes can become part of the plan. If it is treated as a disposable helper, then its mistakes are just another signal to verify.</p>
+<p>That is the level of trust I am comfortable with.</p>
+<h2 id="the-openai-compatible-layer-is-the-trick">The OpenAI-compatible layer is the trick</h2>
+<p>The CLI talks to a local OpenAI-compatible server. In my current setup, that is served locally on <code>localhost:8080</code>, backed by an MLX/oMLX model.</p>
+<p>The configuration is deliberately plain:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>export LAD_BASE_URL<span style="color:#f92672">=</span>http://localhost:8080/v1
+</span></span><span style="display:flex;"><span>export LAD_MODEL<span style="color:#f92672">=</span>qwen-local
+</span></span><span style="display:flex;"><span>export LAD_API_KEY<span style="color:#f92672">=</span>optional-token
+</span></span></code></pre></div><p>That means the CLI does not need to care too much about the backend. It could be oMLX, LM Studio, Ollama if exposed through a compatible endpoint, or some other local server.</p>
+<p>This is important because the local inference ecosystem is moving quickly. I do not want the agent-facing interface to be coupled to one runtime. The supervisor should only need a small set of task commands. The local backend can change underneath.</p>
+<p>The current commands are intentionally limited:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>lad summarize --file src/example.py --max-tokens <span style="color:#ae81ff">600</span>
+</span></span><span style="display:flex;"><span>lad summarize --prompt <span style="color:#e6db74">&#34;Long text to summarize&#34;</span>
+</span></span><span style="display:flex;"><span>lad classify --prompt <span style="color:#e6db74">&#34;Which service owns checkout?&#34;</span> --candidate booking --candidate payments
+</span></span><span style="display:flex;"><span>lad draft commit --diff-file changes.diff
+</span></span><span style="display:flex;"><span>lad inspect repo --question <span style="color:#e6db74">&#34;Where is cancellation handled?&#34;</span> --context-file search-results.txt
+</span></span><span style="display:flex;"><span>lad stats
+</span></span></code></pre></div><p>There is also a kill switch:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>export LAD_DISABLED<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><p>If that is set, delegation refuses to call the backend. I want local delegation to be explicitly opt-in, not something an agent starts doing because it found a tool lying around.</p>
+<h2 id="what-i-used-it-for-while-drafting-this">What I used it for while drafting this</h2>
+<p>I used <code>lad</code> while writing this post, but only in the way I would want a cloud agent to use it: as a bounded helper.</p>
+<p>I asked the local model to summarise the project README and suggest angles. It returned a useful high-level shape, but it also hallucinated a few details. That was actually a good reminder of why the design is conservative.</p>
+<p>The local model was helpful enough to accelerate a small part of the work, but not reliable enough to be the source of truth.</p>
+<p>That is the point.</p>
+<p>The correct workflow is not:</p>
+<ol>
+<li>ask local model;</li>
+<li>believe local model;</li>
+<li>ship answer.</li>
+</ol>
+<p>The workflow is:</p>
+<ol>
+<li>supervisor chooses a bounded task;</li>
+<li>local model returns a draft or summary;</li>
+<li>supervisor verifies against the source;</li>
+<li>supervisor uses, edits, or discards the result.</li>
+</ol>
+<p>This sounds less exciting than &ldquo;autonomous local agents&rdquo;, but it is much closer to something I would actually trust.</p>
+<h2 id="the-economics-of-attention">The economics of attention</h2>
+<p>The obvious benefits of local delegation are cost, privacy, and offline access.</p>
+<p>Those matter, but I think the more interesting benefit is context management.</p>
+<p>Cloud agents are powerful, but their attention is still finite. The more irrelevant text you stuff into the context window, the more you dilute the parts that matter. A large file might need to be read, but not every line of that file needs to sit in the supervisor&rsquo;s working memory forever.</p>
+<p>A local model can act as a lossy compression step.</p>
+<p>That sounds dangerous, because it is. Summaries lose information. Summaries can hide edge cases. Summaries can lie.</p>
+<p>But used carefully, this can still be useful. The supervisor can ask for a first-pass summary of a file, use it to decide where to inspect next, and then open the exact sections that matter. The local model does not replace source inspection. It helps route attention.</p>
+<p>That is the part I want to measure.</p>
+<p>Does delegation reduce the amount of context a cloud agent needs to consume? Does it make the agent faster? Does it make it cheaper? Does it preserve quality when the supervisor verifies the answer?</p>
+<p>If the answer is no, then the experiment is not worth much. If the answer is yes, even for a narrow class of tasks, then there is something here.</p>
+<h2 id="the-guardrails-are-the-product">The guardrails are the product</h2>
+<p>The most important part of this project is not the CLI command syntax. It is the delegation policy.</p>
+<p>The agent instructions are strict:</p>
+<ul>
+<li>use <code>lad</code> only when explicitly asked;</li>
+<li>delegate only one bounded task at a time;</li>
+<li>do not delegate planning or judgment;</li>
+<li>do not treat local output as final truth;</li>
+<li>prefer dry runs when inspecting what would be sent;</li>
+<li>keep write operations out of scope unless there is a verification and rollback path.</li>
+</ul>
+<p>This is why the current version does not attempt code edits. A future version might support verified mechanical edits, but only if the loop is extremely constrained: make the edit, run the verification command, and roll back if it fails.</p>
+<p>Until then, read-only and draft-only tasks are enough.</p>
+<p>I would rather have a boring tool that is safe to use often than an impressive demo that I do not trust.</p>
+<h2 id="what-comes-next">What comes next</h2>
+<p>The next step is not to make <code>lad</code> smarter. It is to make it more measurable.</p>
+<p>I want to track which delegated tasks are actually useful. Summaries may help. Classifications may help. Commit-message drafts probably help. Repository inspection might help if the context is bounded tightly enough.</p>
+<p>I also want better stats:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>lad stats
+</span></span></code></pre></div><p>Right now, usage logging is mostly there to prove that calls happened. Eventually I want it to answer better questions:</p>
+<ul>
+<li>Which tasks save the most cloud-agent context?</li>
+<li>Which tasks get discarded most often?</li>
+<li>Which local models are good enough for which task types?</li>
+<li>When does delegation slow the workflow down instead of speeding it up?</li>
+</ul>
+<p>That last question matters. Local inference is not free just because the API bill is zero. It uses battery, memory, and time. A local model that produces a weak answer after thirty seconds may be worse than no delegation at all.</p>
+<h2 id="small-models-small-jobs">Small models, small jobs</h2>
+<p>The mistake I keep seeing around local LLMs is expecting them to behave like the best frontier models, just smaller and cheaper.</p>
+<p>That framing makes them disappointing.</p>
+<p>I think they become more interesting when they are treated as small models for small jobs. Not worse versions of the cloud agent, but local utilities with a narrow contract.</p>
+<p><code>lad</code> is my attempt to explore that contract.</p>
+<p>A strong cloud agent should stay responsible for the work. The local model should help with bounded, auditable tasks. The human should still be able to understand what happened.</p>
+<p>That is less glamorous than a fully autonomous local coding team.</p>
+<p>It is also much more likely to survive contact with real work.</p>
+
+</div>
+
+
+    </main>
+
+    
+  </body>
+</html>
