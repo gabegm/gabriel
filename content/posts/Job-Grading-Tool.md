@@ -131,55 +131,55 @@ Salary bands are fully configurable. You can upload your own bands or use the de
 
 ### Company Setup
 
-![Company Setup](/images/screenshots/company-setup.png)
+![Company Setup](/images/company-setup.png)
 
 Set up your company with four questions to establish the grading ceiling.
 
 ### Company Setup (Filled)
 
-![Company Setup Filled](/images/screenshots/company-setup-filled.png)
+![Company Setup Filled](/images/company-setup-filled.png)
 
 After entering company details, the ceiling grade is calculated and displayed.
 
 ### Import Roles
 
-![Import Roles](/images/screenshots/import-roles.png)
+![Import Roles](/images/import-roles.png)
 
 Import existing roles via CSV or add them manually.
 
 ### Review Panel
 
-![Review Panel](/images/screenshots/review-panel.png)
+![Review Panel](/images/review-panel.png)
 
 View all graded roles with grade distribution and salary estimates.
 
 ### Settings: Factor Weightings
 
-![Settings: Weightings](/images/screenshots/settings-weightings.png)
+![Settings: Weightings](/images/settings-weightings.png)
 
 Adjust how much each factor matters for IC vs Manager tracks with visual sliders.
 
 ### Settings: Questionnaire
 
-![Settings: Questionnaire](/images/screenshots/settings-questionnaire.png)
+![Settings: Questionnaire](/images/settings-questionnaire.png)
 
 Edit the 7 evaluation factors, their questions, and answer options.
 
 ### Settings: Salary
 
-![Settings: Salary](/images/screenshots/settings-salary.png)
+![Settings: Salary](/images/settings-salary.png)
 
 Configure salary bands, location multipliers, and job family market adjustments.
 
 ### Settings: Career Bands
 
-![Settings: Career Bands](/images/screenshots/settings-bands.png)
+![Settings: Career Bands](/images/settings-bands.png)
 
 Define career bands with custom names and grade ranges.
 
 ### Settings: Gate Questions
 
-![Settings: Gates](/images/screenshots/settings-gates.png)
+![Settings: Gates](/images/settings-gates.png)
 
 Define gate questions that check whether a role has sufficient authority to reach higher grades.
 
