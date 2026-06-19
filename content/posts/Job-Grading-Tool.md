@@ -1,6 +1,5 @@
 ---
 draft: false
-unlisted: true
 author: Gabriel Gauci Maistre
 title: "Why 'Senior Engineer' Means Something Different At Every Company"
 description: Sales managers demand higher pay than support. Executives overpay favorites. Titles get inflated. After acquisitions, people do the same work but earn different amounts. This tool implements the Point-Factor Method to grade every role with an explicit rubric. Free, open-source, runs in the browser.
