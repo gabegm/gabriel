@@ -135,12 +135,6 @@ Salary bands are fully configurable. You can upload your own bands or use the de
 
 Set up your company with four questions to establish the grading ceiling.
 
-### Company Setup (Filled)
-
-![Company Setup Filled](/images/screenshots/company-setup-filled.png)
-
-After entering company details, the ceiling grade is calculated and displayed.
-
 ### Import Roles
 
 ![Import Roles](/images/screenshots/import-roles.png)
