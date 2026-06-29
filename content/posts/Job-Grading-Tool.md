@@ -1,8 +1,7 @@
 ---
 draft: false
-unlisted: true
 author: Gabriel Gauci Maistre
-title: "Job Grader: a tool for companies that don't have one"
+title: "Why 'Senior Engineer' Means Something Different At Every Company"
 description: Sales managers demand higher pay than support. Executives overpay favorites. Titles get inflated. After acquisitions, people do the same work but earn different amounts. This tool implements the Point-Factor Method to grade every role with an explicit rubric. Free, open-source, runs in the browser.
 summary: Sales managers demand higher pay than support. Executives overpay favorites. Titles get inflated. After acquisitions, people do the same work but earn different amounts. This tool implements the Point-Factor Method to grade every role with an explicit rubric. Free, open-source, runs in the browser.
 images:
@@ -29,17 +28,18 @@ You can try it live at [gabegm.github.io/job-grader](https://gabegm.github.io/jo
 
 ## The problem
 
-If you have ever been involved in hiring at a company of any size, you have probably seen this pattern:
+If you have ever been involved in hiring, promotions, or compensation planning at a company of any size, you have probably seen this pattern:
 
-1. A hiring manager says a role is a "Level 5".
-2. Another hiring manager says the same role is a "Level 6".
-3. HR says "what does Level 5 even mean?"
-4. The candidate gets confused.
-5. Everyone loses.
+1. A manager argues that their team's role should be graded higher because the work is "more strategic".
+2. Another manager says the same thing about their team.
+3. HR has to explain why two roles with different business context may still carry the same organizational value.
+4. Finance has to approve salary bands without understanding the distinction.
+5. Employees see inconsistent titles and promotion decisions.
+6. Trust erodes.
 
 The root problem is that grade numbers are meaningless without a rubric. "Senior Engineer" means something different at every company. Some companies use 1–10. Some use 1–25. Some use L5, L6, L7. Some use "Staff", "Principal", "Distinguished". Without a shared framework, these labels are just words.
 
-When two hiring managers give opposite grades for the same role, it is rarely because they are being dishonest. It is because there is no shared language for what the grade was supposed to measure. The result is inconsistent compensation, frustrated candidates, and hiring managers who stop trusting the grading system altogether.
+When two managers give opposite grades for similar roles, it is rarely because they are being dishonest. It is because there is no shared language for what the grade was supposed to measure. The result is inconsistent compensation, frustrated employees, and managers who stop trusting the grading system altogether.
 
 ## The Point-Factor Method
 
@@ -131,49 +131,49 @@ Salary bands are fully configurable. You can upload your own bands or use the de
 
 ### Company Setup
 
-![Company Setup](/images/screenshots/company-setup.png)
+![Company Setup](/images/company-setup.png)
 
 Set up your company with four questions to establish the grading ceiling.
 
 ### Import Roles
 
-![Import Roles](/images/screenshots/import-roles.png)
+![Import Roles](/images/import-roles.png)
 
 Import existing roles via CSV or add them manually.
 
 ### Review Panel
 
-![Review Panel](/images/screenshots/review-panel.png)
+![Review Panel](/images/review-panel.png)
 
 View all graded roles with grade distribution and salary estimates.
 
 ### Settings: Factor Weightings
 
-![Settings: Weightings](/images/screenshots/settings-weightings.png)
+![Settings: Weightings](/images/settings-weightings.png)
 
 Adjust how much each factor matters for IC vs Manager tracks with visual sliders.
 
 ### Settings: Questionnaire
 
-![Settings: Questionnaire](/images/screenshots/settings-questionnaire.png)
+![Settings: Questionnaire](/images/settings-questionnaire.png)
 
 Edit the 7 evaluation factors, their questions, and answer options.
 
 ### Settings: Salary
 
-![Settings: Salary](/images/screenshots/settings-salary.png)
+![Settings: Salary](/images/settings-salary.png)
 
 Configure salary bands, location multipliers, and job family market adjustments.
 
 ### Settings: Career Bands
 
-![Settings: Career Bands](/images/screenshots/settings-bands.png)
+![Settings: Career Bands](/images/settings-bands.png)
 
 Define career bands with custom names and grade ranges.
 
 ### Settings: Gate Questions
 
-![Settings: Gates](/images/screenshots/settings-gates.png)
+![Settings: Gates](/images/settings-gates.png)
 
 Define gate questions that check whether a role has sufficient authority to reach higher grades.
 

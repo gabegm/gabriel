@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Job Grader: a tool for companies that don&#39;t have one &middot; Gabe</title>
+  <title>Why &#39;Senior Engineer&#39; Means Something Different At Every Company &middot; Gabe</title>
   <meta name="description" content="Sales managers demand higher pay than support. Executives overpay favorites. Titles get inflated. After acquisitions, people do the same work but earn different amounts. This tool implements the Point-Factor Method to grade every role with an explicit rubric. Free, open-source, runs in the browser." />
 
   
@@ -25,9 +25,9 @@
 
   
   
-  <meta property="og:url" content="https://gabriel.gaucimaistre.com/2026/06/job-grader-a-tool-for-companies-that-dont-have-one/">
+  <meta property="og:url" content="https://gabriel.gaucimaistre.com/2026/06/why-senior-engineer-means-something-different-at-every-company/">
 	<meta property="og:site_name" content="Gabe">
-	<meta property="og:title" content="Job Grader: a tool for companies that don&#39;t have one">
+	<meta property="og:title" content="Why &#39;Senior Engineer&#39; Means Something Different At Every Company">
 	<meta property="og:description" content="Sales managers demand higher pay than support. Executives overpay favorites. Titles get inflated. After acquisitions, people do the same work but earn different amounts. This tool implements the Point-Factor Method to grade every role with an explicit rubric. Free, open-source, runs in the browser.">
 	<meta property="og:locale" content="en_us">
 	<meta property="og:type" content="article">
@@ -44,7 +44,7 @@
   
 	<meta name="twitter:card" content="summary_large_image">
 	<meta name="twitter:image" content="https://gabriel.gaucimaistre.com/images/explaining-job-roles.png">
-	<meta name="twitter:title" content="Job Grader: a tool for companies that don&#39;t have one">
+	<meta name="twitter:title" content="Why &#39;Senior Engineer&#39; Means Something Different At Every Company">
 	<meta name="twitter:description" content="Sales managers demand higher pay than support. Executives overpay favorites. Titles get inflated. After acquisitions, people do the same work but earn different amounts. This tool implements the Point-Factor Method to grade every role with an explicit rubric. Free, open-source, runs in the browser.">
 
 
@@ -77,7 +77,7 @@
 
     <main class="content container" role="main" aria-label="Main content">
     <div class="post">
-  <h1>Job Grader: a tool for companies that don&#39;t have one</h1>
+  <h1>Why &#39;Senior Engineer&#39; Means Something Different At Every Company</h1>
   <time datetime=2026-06-16T10:00:00Z class="post-date">Tue, Jun 16, 2026</time>
   
   <p class="tags">
@@ -91,16 +91,17 @@
 <p>It is a pure frontend application. No backend. No database. No authentication. State is stored in JSON files that you import and export. It runs entirely in the browser and can be deployed to GitHub Pages for free.</p>
 <p>You can try it live at <a href="https://gabegm.github.io/job-grader/">gabegm.github.io/job-grader</a>.</p>
 <h2 id="the-problem">The problem</h2>
-<p>If you have ever been involved in hiring at a company of any size, you have probably seen this pattern:</p>
+<p>If you have ever been involved in hiring, promotions, or compensation planning at a company of any size, you have probably seen this pattern:</p>
 <ol>
-<li>A hiring manager says a role is a &ldquo;Level 5&rdquo;.</li>
-<li>Another hiring manager says the same role is a &ldquo;Level 6&rdquo;.</li>
-<li>HR says &ldquo;what does Level 5 even mean?&rdquo;</li>
-<li>The candidate gets confused.</li>
-<li>Everyone loses.</li>
+<li>A manager argues that their team&rsquo;s role should be graded higher because the work is &ldquo;more strategic&rdquo;.</li>
+<li>Another manager says the same thing about their team.</li>
+<li>HR has to explain why two roles with different business context may still carry the same organizational value.</li>
+<li>Finance has to approve salary bands without understanding the distinction.</li>
+<li>Employees see inconsistent titles and promotion decisions.</li>
+<li>Trust erodes.</li>
 </ol>
 <p>The root problem is that grade numbers are meaningless without a rubric. &ldquo;Senior Engineer&rdquo; means something different at every company. Some companies use 1–10. Some use 1–25. Some use L5, L6, L7. Some use &ldquo;Staff&rdquo;, &ldquo;Principal&rdquo;, &ldquo;Distinguished&rdquo;. Without a shared framework, these labels are just words.</p>
-<p>When two hiring managers give opposite grades for the same role, it is rarely because they are being dishonest. It is because there is no shared language for what the grade was supposed to measure. The result is inconsistent compensation, frustrated candidates, and hiring managers who stop trusting the grading system altogether.</p>
+<p>When two managers give opposite grades for similar roles, it is rarely because they are being dishonest. It is because there is no shared language for what the grade was supposed to measure. The result is inconsistent compensation, frustrated employees, and managers who stop trusting the grading system altogether.</p>
 <h2 id="the-point-factor-method">The Point-Factor Method</h2>
 <p>In this tool, the method has two stages.</p>
 <h3 id="stage-1-company-ceiling">Stage 1: Company Ceiling<a href="#f1">[1]</a></h3>
@@ -208,31 +209,31 @@
 <p>Salary bands are fully configurable. You can upload your own bands or use the defaults. The core engine outputs grades; salaries are a separate overlay.</p>
 <h2 id="what-it-looks-like">What it looks like</h2>
 <h3 id="company-setup">Company Setup</h3>
-<p><img src="/images/screenshots/company-setup.png" alt="Company Setup"></p>
+<p><img src="/images/company-setup.png" alt="Company Setup"></p>
 <p>Set up your company with four questions to establish the grading ceiling.</p>
 <h3 id="company-setup-filled">Company Setup (Filled)</h3>
-<p><img src="/images/screenshots/company-setup-filled.png" alt="Company Setup Filled"></p>
+<p><img src="/images/company-setup-filled.png" alt="Company Setup Filled"></p>
 <p>After entering company details, the ceiling grade is calculated and displayed.</p>
 <h3 id="import-roles">Import Roles</h3>
-<p><img src="/images/screenshots/import-roles.png" alt="Import Roles"></p>
+<p><img src="/images/import-roles.png" alt="Import Roles"></p>
 <p>Import existing roles via CSV or add them manually.</p>
 <h3 id="review-panel">Review Panel</h3>
-<p><img src="/images/screenshots/review-panel.png" alt="Review Panel"></p>
+<p><img src="/images/review-panel.png" alt="Review Panel"></p>
 <p>View all graded roles with grade distribution and salary estimates.</p>
 <h3 id="settings-factor-weightings">Settings: Factor Weightings</h3>
-<p><img src="/images/screenshots/settings-weightings.png" alt="Settings: Weightings"></p>
+<p><img src="/images/settings-weightings.png" alt="Settings: Weightings"></p>
 <p>Adjust how much each factor matters for IC vs Manager tracks with visual sliders.</p>
 <h3 id="settings-questionnaire">Settings: Questionnaire</h3>
-<p><img src="/images/screenshots/settings-questionnaire.png" alt="Settings: Questionnaire"></p>
+<p><img src="/images/settings-questionnaire.png" alt="Settings: Questionnaire"></p>
 <p>Edit the 7 evaluation factors, their questions, and answer options.</p>
 <h3 id="settings-salary">Settings: Salary</h3>
-<p><img src="/images/screenshots/settings-salary.png" alt="Settings: Salary"></p>
+<p><img src="/images/settings-salary.png" alt="Settings: Salary"></p>
 <p>Configure salary bands, location multipliers, and job family market adjustments.</p>
 <h3 id="settings-career-bands">Settings: Career Bands</h3>
-<p><img src="/images/screenshots/settings-bands.png" alt="Settings: Career Bands"></p>
+<p><img src="/images/settings-bands.png" alt="Settings: Career Bands"></p>
 <p>Define career bands with custom names and grade ranges.</p>
 <h3 id="settings-gate-questions">Settings: Gate Questions</h3>
-<p><img src="/images/screenshots/settings-gates.png" alt="Settings: Gates"></p>
+<p><img src="/images/settings-gates.png" alt="Settings: Gates"></p>
 <p>Define gate questions that check whether a role has sufficient authority to reach higher grades.</p>
 <h2 id="tech-stack">Tech stack</h2>
 <ul>
