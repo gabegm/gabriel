@@ -16,7 +16,7 @@ date: 2026-06-16 10:00:00 +0000
 
 ![alt text](/images/explaining-job-roles.png "Trying to explain how Data Scientist Differs from Data Analyst but not from Data Engineer")
 
-A Sales Manager insists their team is the backbone of the company and demands higher titles and pay than Customer Support. An executive hires a charismatic Senior Engineer and agrees to pay them 40% above market because they really like them. To keep people from quitting, the company hands out 'Director' titles to employees who only manage themselves. After an acquisition, Company A's 'Account Managers' do the exact same work as Company B's 'Client Executives' but earn 20% less.
+A Sales Manager insists their team is the backbone of the company and demands higher titles and pay than Customer Support. An executive hires a charismatic Senior Engineer and agrees to pay them well above the range because they really like them. To keep people from quitting, the company hands out 'Director' titles to employees who only manage themselves. After an acquisition, Company A's 'Account Managers' do the exact same work as Company B's 'Client Executives' but earn less.
 
 This happens at companies of every size. It is not a people problem. It is a system problem.
 
