@@ -1,5 +1,5 @@
 baseURL = "https://gabriel.gaucimaistre.com/"
-languageCode = "en-us"
+locale = "en-us"
 theme = "hyde"
 title = "Gabe"
 summary = "Gabriel Gauci Maistre"
