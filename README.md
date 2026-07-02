@@ -4,7 +4,7 @@ A personal tech blog built with [Hugo](https://gohugo.io/) using a heavily custo
 
 ## Prerequisites
 
-- [Hugo](https://gohugo.io/installation/) v0.138.0 or later
+- [Hugo](https://gohugo.io/installation/) v0.162.1 or later
 - Git (for theme submodule)
 
 ## Local Development
