@@ -1,0 +1,138 @@
+{{ define "main" -}}
+{{ $r := hugo.Data.resume -}}
+{{ $b := $r.basics -}}
+<article class="cv">
+
+  <header class="cv-head">
+    <h1 class="cv-name">{{ $b.name }}</h1>
+    <p class="cv-contact">
+      {{- $parts := slice -}}
+      {{- with $b.location.address }}{{ $parts = $parts | append (. | htmlEscape) }}{{ end -}}
+      {{- with $b.email }}{{ $parts = $parts | append (printf `<a href="mailto:%s">%s</a>` (. | htmlEscape) (. | htmlEscape)) }}{{ end -}}
+      {{- with $b.phone }}{{ $phoneHref := replaceRE `[^0-9+]` "" . }}{{ $parts = $parts | append (printf `<a href="tel:%s">%s</a>` $phoneHref (. | htmlEscape)) }}{{ end -}}
+      {{- with $b.website }}{{ $parts = $parts | append (printf `<a href="%s">%s</a>` (. | safeURL) (. | htmlEscape)) }}{{ end -}}
+      {{- range $index, $part := $parts }}{{ if $index }} · {{ end }}{{ $part | safeHTML }}{{ end }}
+    </p>
+    {{ with $b.summary }}<p class="cv-summary">{{ . }}</p>{{ end }}
+    <a class="cv-download no-print" href="/resume.pdf">Download PDF</a>
+  </header>
+
+  {{ with $r.work }}
+  <section>
+    <h2 class="cv-sec">Experience</h2>
+    {{ $previousCompany := "" }}
+    {{ range . }}
+    <div class="cv-entry">
+      {{ if ne .company $previousCompany }}<div class="cv-line"><span class="cv-org">{{ .company }}</span><span class="cv-right">{{ .location }}</span></div>{{ end }}
+      <div class="cv-line"><span class="cv-role">{{ .position }}</span><span class="cv-right">{{ .startDate }}{{ with .endDate }} - {{ . }}{{ end }}</span></div>
+      {{ with .highlights }}<ul>{{ range . }}<li>{{ . }}</li>{{ end }}</ul>{{ end }}
+    </div>
+    {{ $previousCompany = .company }}
+    {{ end }}
+  </section>
+  {{ end }}
+
+  {{ with $r.education }}
+  <section>
+    <h2 class="cv-sec">{{ with $r.headings.education }}{{ . }}{{ else }}Education{{ end }}</h2>
+    {{ range . }}
+    <div class="cv-entry">
+      <div class="cv-line"><span class="cv-org">{{ .institution }}</span><span class="cv-right">{{ .location }}</span></div>
+      <div class="cv-line"><span>{{ .studyType }}{{ with .area }} {{ . }}{{ end }}</span><span class="cv-right">{{ .startDate }}{{ with .endDate }} - {{ . }}{{ end }}</span></div>
+    </div>
+    {{ end }}
+  </section>
+  {{ end }}
+
+  {{ with $r.skills }}
+  <section>
+    <h2 class="cv-sec">Skills</h2>
+    <table class="cv-skills">
+      {{ range . }}<tr><td class="cv-skill-name">{{ .name }}:</td><td>{{ delimit .keywords ", " }}</td></tr>{{ end }}
+    </table>
+  </section>
+  {{ end }}
+
+  {{ with $r.projects }}
+  <section>
+    <h2 class="cv-sec">Projects</h2>
+    {{ range . }}
+    <div class="cv-entry cv-proj">
+      <div class="cv-proj-head cv-line"><span><span class="cv-org">{{ .name }}</span>{{ with .keywords }} <span class="cv-kw">{{ delimit . ", " }}</span>{{ end }}</span>{{ with .url }}<a class="cv-right cv-url" href="{{ . | safeURL }}">{{ . }}</a>{{ end }}</div>
+      {{ with .description }}<div>{{ . }}</div>{{ end }}
+    </div>
+    {{ end }}
+  </section>
+  {{ end }}
+
+</article>
+
+<style>
+@import url('https://cdn.jsdelivr.net/gh/aaaakshat/cm-web-fonts@latest/fonts.css');
+
+.cv {
+  --serif: "Computer Modern Serif", "Latin Modern Roman", Georgia, "Times New Roman", serif;
+  font-family: var(--serif);
+  max-width: 7.3in;
+  margin: 0 auto;
+  color: #000;
+  line-height: 1.2;
+  font-size: 11pt;
+}
+.cv * { font-family: var(--serif); }
+
+.cv-head { text-align: center; margin-bottom: .85em; }
+.cv-name {
+  font-variant: small-caps; font-weight: 400;
+  font-size: 2.49em; letter-spacing: .03em; line-height: 1.05;
+  margin: 0 0 .1em;
+}
+.cv-contact { font-size: .92em; margin: 0; }
+.cv-summary { max-width: 6.85in; margin: .55em auto 0; text-align: left; }
+.cv-contact a, .cv a { color: #000; text-decoration: none; }
+.cv-download {
+  display: inline-block; margin-top: .6em; font-size: .8em;
+  padding: .25em .7em; border: 1px solid #888; border-radius: 4px;
+}
+
+.cv-sec {
+  font-variant: small-caps; font-weight: 400; font-size: 1.05em;
+  letter-spacing: .05em; border-bottom: 1px solid #000;
+  padding-bottom: 1px; margin: .7em 0 .35em;
+}
+
+.cv-entry { margin-bottom: .45em; page-break-inside: avoid; }
+.cv-line { display: flex; justify-content: space-between; gap: 1em; align-items: baseline; }
+.cv-org { font-weight: 700; }
+.cv-role { font-style: italic; }
+.cv-right { white-space: nowrap; }
+
+.cv ul { margin: .15em 0 0; padding-left: 1.5em; }
+.cv li { margin-bottom: .06em; padding-left: .1em; }
+
+.cv-skills { border-collapse: collapse; margin-top: .1em; width: auto; }
+.cv-skills, .cv-skills tr, .cv-skills td {
+  border: 0 !important; background: transparent !important;
+}
+.cv-skills td { vertical-align: top; padding: .05em 0; }
+.cv-skill-name { padding-right: 1.2em !important; white-space: nowrap; }
+
+.cv-proj { margin-bottom: .4em; }
+.cv-kw { font-style: italic; }
+.cv-url { font-size: .9em; }
+
+@media print {
+  html, body { height: auto !important; }
+  .no-print { display: none !important; }
+  main.content, .content, .container {
+    display: block !important;
+    padding-top: 0 !important; padding-bottom: 0 !important; margin-top: 0 !important;
+  }
+  .cv { max-width: none; margin: 0; font-size: 10pt; }
+  .cv section:last-child, .cv section:last-child .cv-entry:last-child {
+    margin-bottom: 0 !important;
+  }
+  @page { margin: 0.55in 0.8in; }
+}
+</style>
+{{- end }}

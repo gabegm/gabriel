@@ -1,0 +1,58 @@
+name: resume pdf
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'data/resume.json'
+      - 'layouts/_default/resume.html'
+      - 'content/resume.md'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: resume-pdf
+  cancel-in-progress: true
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive  # Fetch Hugo themes
+          fetch-depth: 0
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.162.1'
+
+      - name: Setup Chrome
+        id: chrome
+        uses: browser-actions/setup-chrome@v1
+
+      - name: Render resume PDF
+        run: |
+          set -euo pipefail
+          PORT=8799
+          hugo --gc --minify --baseURL "http://localhost:${PORT}/"
+          python3 -m http.server "$PORT" --directory public >/dev/null 2>&1 &
+          SRV=$!
+          trap 'kill "$SRV" 2>/dev/null || true' EXIT
+          sleep 2
+          "${{ steps.chrome.outputs.chrome-path }}" \
+            --headless=new --disable-gpu --no-sandbox --no-pdf-header-footer \
+            --run-all-compositor-stages-before-draw --virtual-time-budget=8000 \
+            --print-to-pdf=static/resume.pdf \
+            "http://localhost:${PORT}/resume/"
+          test -s static/resume.pdf
+
+      - name: Commit updated PDF
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'chore: regenerate resume.pdf from resume.json'
+          file_pattern: static/resume.pdf

@@ -1,0 +1,163 @@
+{
+  "selectedTemplate": 1,
+  "headings": {
+    "education": "Education"
+  },
+  "basics": {
+    "name": "Gabriel Gauci Maistre",
+    "email": "gabriel@gaucimaistre.com",
+    "phone": "(+49) 1573 3719048",
+    "website": "https://gabriel.gaucimaistre.com",
+    "summary": "Senior software engineer with nine years of experience building cloud-native backend, pricing, geospatial and machine-learning systems. Combines production Java and AWS expertise with a data-science background, taking complex systems from modelling and architecture through delivery and operational ownership.",
+    "location": {
+      "address": "Munich, Germany"
+    }
+  },
+  "education": [
+    {
+      "location": "Malta",
+      "area": "Software Development",
+      "startDate": "Sep 2014",
+      "endDate": "Jun 2017",
+      "institution": "Malta College of Arts, Science, and Technology",
+      "studyType": "B.Sc. (Hons)"
+    }
+  ],
+  "work": [
+    {
+      "highlights": [
+        "Led end-to-end delivery of SIXT Share's dynamic pricing engine across seven cities in two countries, combining H3 geospatial modelling with production demand forecasting",
+        "Built a walk-forward backtesting framework, selected the strongest demand-forecasting model and productionised it within the dynamic pricing platform",
+        "Led backend delivery of kilometre-based pricing and quote APIs, expanding customer pricing options through cross-team coordination with mobile engineers",
+        "Built reusable AI agents for designing and analysing Statsig A/B tests and refining backend tickets, published internally and adopted by engineers across multiple teams",
+        "Owned pricing and billing reliability, resolving high-impact authorisation, regression and data-integrity incidents and strengthening production safeguards"
+      ],
+      "company": "SIXT",
+      "position": "Senior Software Engineer",
+      "location": "Munich, Germany",
+      "startDate": "2025",
+      "endDate": "Present"
+    },
+    {
+      "highlights": [
+        "Built and operated Java and Go microservices on AWS supporting SIXT's mobility platform, with responsibility spanning implementation, deployment and production behaviour",
+        "Led migrations of legacy Java and Go services to Spring Boot and Go Micro, reducing the legacy footprint and improving maintainability and operational consistency"
+      ],
+      "company": "SIXT",
+      "position": "Software Engineer",
+      "location": "Munich, Germany",
+      "startDate": "2022",
+      "endDate": "2025"
+    },
+    {
+      "highlights": [
+        "Architected geospatial data pipelines (Uber H3, OSMnx) and optimisation models (Integer Linear Programs) for real-time competitor tracking and fleet assignment"
+      ],
+      "company": "SIXT",
+      "position": "Senior Data Scientist",
+      "location": "Munich, Germany",
+      "startDate": "2020",
+      "endDate": "2022"
+    },
+    {
+      "company": "Tipico",
+      "position": "Data Scientist",
+      "startDate": "2017",
+      "endDate": "2020",
+      "highlights": [
+        "Built machine learning models (scoring, recommenders) and BI pipelines to drive data-driven retail decisions"
+      ],
+      "location": "St. Julian's, Malta"
+    }
+  ],
+  "skills": [
+    {
+      "keywords": [
+        "Java",
+        "Spring Boot",
+        "Python",
+        "Go",
+        "SQL",
+        "Gradle"
+      ],
+      "name": "Languages & Frameworks"
+    },
+    {
+      "keywords": [
+        "AWS",
+        "Kubernetes",
+        "Docker",
+        "Kafka",
+        "gRPC",
+        "REST",
+        "Jenkins"
+      ],
+      "name": "Cloud & Distributed Systems"
+    },
+    {
+      "keywords": [
+        "PostgreSQL",
+        "Redshift",
+        "H3 geospatial",
+        "Grafana"
+      ],
+      "name": "Data & Observability"
+    },
+    {
+      "keywords": [
+        "LLM agents",
+        "MCP",
+        "Statsig",
+        "A/B testing"
+      ],
+      "name": "Applied AI & Experimentation"
+    },
+    {
+      "keywords": [
+        "English (C2)",
+        "Maltese (C2)",
+        "Italian (B2)",
+        "German (B1)"
+      ],
+      "name": "Languages"
+    }
+  ],
+  "projects": [
+    {
+      "name": "Shopping Cart",
+      "url": "https://github.com/gabegm/shopping-cart",
+      "keywords": [
+        "Spring Boot",
+        "React",
+        "PostgreSQL"
+      ],
+      "description": "Full-stack e-commerce platform built with Java 21, Spring Boot, React and PostgreSQL, featuring JWT security, audit logging, CI and end-to-end tests"
+    },
+    {
+      "name": "Gatekeeping",
+      "url": "https://github.com/gabegm/gatekeeping",
+      "keywords": [
+        "Java",
+        "Spring Boot"
+      ],
+      "description": "Enterprise headcount-planning and approval system migrated from Flask and SQLite to Spring Boot and PostgreSQL"
+    },
+    {
+      "name": "Job Grader",
+      "url": "https://github.com/gabegm/job-grader",
+      "keywords": [
+        "Svelte",
+        "TypeScript"
+      ],
+      "description": "Job role grading tool that scores and levels roles using the point-factor method"
+    }
+  ],
+  "sections": [
+    "templates",
+    "profile",
+    "work",
+    "education",
+    "skills",
+    "projects"
+  ]
+}
