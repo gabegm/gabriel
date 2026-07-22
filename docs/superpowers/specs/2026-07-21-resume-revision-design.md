@@ -58,6 +58,7 @@ Retain Job Grader if the generated PDF remains a readable single page; otherwise
 
 - Render the professional summary below the contact header.
 - Group consecutive SIXT roles visually under a single company heading.
+- Render job titles in bold to make career progression easier to scan.
 - Preserve clear role titles and dates for ATS parsing.
 - Generate the PDF with `scripts/build-resume-pdf.sh`.
 - Verify valid JSON, a successful Hugo build, readable output, and a one-page PDF.
