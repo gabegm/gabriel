@@ -10,7 +10,7 @@
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
             <title><xsl:value-of select="rss/channel/title"/> (RSS)</title>
-            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700"/>
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Abril+Fatface&amp;family=PT+Sans:ital,wght@0,400;0,700;1,400&amp;display=swap"/>
             <link rel="stylesheet" href="/css/rss.css"/>
         </head>
         <body>
