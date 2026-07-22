@@ -8,6 +8,10 @@
     "email": "gabriel@gaucimaistre.com",
     "phone": "(+49) 1573 3719048",
     "website": "https://gabriel.gaucimaistre.com",
+    "linkedin": {
+      "url": "https://www.linkedin.com/in/gabegm/",
+      "label": "linkedin.com/in/gabegm"
+    },
     "summary": "Senior software engineer with nine years of experience building cloud-native backend, pricing, geospatial and machine-learning systems. Combines production Java and AWS expertise with a data-science background, taking complex systems from modelling and architecture through delivery and operational ownership.",
     "location": {
       "address": "Munich, Germany"

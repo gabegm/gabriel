@@ -10,7 +10,8 @@
       {{- with $b.location.address }}{{ $parts = $parts | append (. | htmlEscape) }}{{ end -}}
       {{- with $b.email }}{{ $parts = $parts | append (printf `<a href="mailto:%s">%s</a>` (. | htmlEscape) (. | htmlEscape)) }}{{ end -}}
       {{- with $b.phone }}{{ $phoneHref := replaceRE `[^0-9+]` "" . }}{{ $parts = $parts | append (printf `<a href="tel:%s">%s</a>` $phoneHref (. | htmlEscape)) }}{{ end -}}
-      {{- with $b.website }}{{ $parts = $parts | append (printf `<a href="%s">%s</a>` (. | safeURL) (. | htmlEscape)) }}{{ end -}}
+      {{- with $b.website }}{{ $websiteLabel := replaceRE `^https?://` "" . }}{{ $parts = $parts | append (printf `<a href="%s">%s</a>` (. | safeURL) ($websiteLabel | htmlEscape)) }}{{ end -}}
+      {{- with $b.linkedin }}{{ $parts = $parts | append (printf `<a href="%s">%s</a>` (.url | safeURL) (.label | htmlEscape)) }}{{ end -}}
       {{- range $index, $part := $parts }}{{ if $index }} · {{ end }}{{ $part | safeHTML }}{{ end }}
     </p>
     {{ with $b.summary }}<p class="cv-summary">{{ . }}</p>{{ end }}
@@ -87,7 +88,7 @@
   font-size: 2.49em; letter-spacing: .03em; line-height: 1.05;
   margin: 0 0 .1em;
 }
-.cv-contact { font-size: .92em; margin: 0; }
+.cv-contact { font-size: .84em; margin: 0; }
 .cv-summary { max-width: 6.85in; margin: .55em auto 0; text-align: left; }
 .cv-contact a, .cv a { color: #000; text-decoration: none; }
 .cv-download {

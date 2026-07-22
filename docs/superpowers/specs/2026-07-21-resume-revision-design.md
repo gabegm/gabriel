@@ -51,6 +51,7 @@ Retain Job Grader if the generated PDF remains a readable single page; otherwise
 - Organise skills as Languages & Frameworks, Cloud & Distributed Systems, Data & Observability, Applied AI & Experimentation, and Languages.
 - Remove redundant agent terminology where practical.
 - Use `https://gabriel.gaucimaistre.com` for the website.
+- Include a clickable LinkedIn profile link in the contact header.
 - Remove empty fields and the empty awards section.
 - Preserve British English throughout.
 
